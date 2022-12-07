@@ -24,7 +24,7 @@ export const HomeContent = () => {
           </Box>
 
           <Box h={"100%"} display={"flex"} justifyContent={"center"} alignItems={"center"}>
-            <Image src={"/Me.jpg"} alt={"kashif-Rezwi"} w={"200px"} borderRadius={"50%"} />
+            <Image src={"https://avatars.githubusercontent.com/u/34582831?v=4"} alt={"kashif-Rezwi"} w={"200px"} borderRadius={"50%"} />
           </Box>
 
         </Grid>
@@ -42,7 +42,7 @@ export const HomeContent = () => {
           </VStack>
 
           <Box h={"100%"} display={"flex"} justifyContent={"center"} alignItems={"center"}>
-            <Image src={"/Me.jpg"} alt={"kashif-Rezwi"} w={"200px"} borderRadius={"50%"} />
+            <Image src={"https://avatars.githubusercontent.com/u/34582831?v=4"} alt={"kashif-Rezwi"} w={"200px"} borderRadius={"50%"} />
           </Box>
 
         </Box>
