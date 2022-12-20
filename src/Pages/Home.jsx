@@ -1,14 +1,20 @@
 import { Box } from "@chakra-ui/react"
 import { HomeContent } from "../Components/HomeContent"
-import { Navbar } from "../Components/Navbar"
-import { NavbarBottom } from "../Components/NavbarBottom"
+import { Navbar } from "../Components/Navbar/Navbar"
+import { About } from "./About"
+import { Contact } from "./Contact"
+import { Project } from "./Project"
+import { Skills } from "./Skills"
 
 export const Home = () => {
     return(
-        <Box boxSizing={"border-box"} h={"100vh"} w={{base:"100%", md:"90%", lg:"90%"}} m={"auto"} p={{base:"0", md:"0px 10px", lg:"0px 20px"}}>
-            <Navbar />
+        <Box name={"home"} boxSizing={"border-box"} h={"100vh"} w={"100%"} m={"auto"}>
+            <Navbar/>
             <HomeContent />
-            <NavbarBottom />
+            <About/>
+            <Skills/>
+            <Project/>
+            <Contact/>
         </Box>
     )
 }

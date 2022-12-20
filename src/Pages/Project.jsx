@@ -1,5 +1,7 @@
+import { Box } from "@chakra-ui/react"
+
 export const Project = () => {
     return(
-        <div>Project</div>
+        <Box name={"projects"} border={"1px solid red"} h={"100vh"}>Project</Box>
     )
 }

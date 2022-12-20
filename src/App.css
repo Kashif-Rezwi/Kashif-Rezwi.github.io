@@ -3,27 +3,10 @@
   margin: 0;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto+Condensed&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto+Condensed&display=swap'); */
 
 .App {
   box-sizing: border-box;
   text-align: center;
   font-family: 'Inter', sans-serif;
-}
-
-/* Navbar */
-
-.BottomNavbar{
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  border-radius: 5px;
-}
-
-.TopNavbar{
-  color: #524f47;
-}
-
-.TopNavbar:hover{
-  color: #252325;
-  font-weight: 500;
-  cursor: pointer;
 }
