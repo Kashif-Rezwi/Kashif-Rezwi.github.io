@@ -1,104 +1,87 @@
 import { UilEstate, UilUser, UilFileAlt, UilBriefcaseAlt, UilScenery, UilMessage, UilTimes, UilPalette, UilApps } from '@iconscout/react-unicons'
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, UnorderedList } from '@chakra-ui/react'
 import { Link } from 'react-scroll'
 import "./style.css"
+import { useState } from 'react'
 
 export const Navbar = () => {
 
-    /*=============== SHOW MENU ===============*/
-    const navMenu = document.getElementById('nav-menu'),
-        navToggle = document.getElementById('nav-toggle'),
-        navClose = document.getElementById('nav-close')
-
-    /*===== MENU SHOW =====*/
-    /* Validate If Constant Exists */
-    if (navToggle) {
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.add('show-menu')
-        })
-    }
-
-    /*===== MENU HIDDEN =====*/
-    /* Validate If Constant Exists */
-    if (navClose) {
-        navClose.addEventListener('click', () => {
-            navMenu.classList.remove('show-menu')
-        })
-    }
-
-
-    if (navMenu) {
-        navMenu.addEventListener('click', () => {
-            navMenu.classList.remove('show-menu')
-        })
-    }
+    const [show, setShow] = useState(false)
 
     return (
-        <header className="header" id="header">
+        <Box className="header" p={{base:"0px", sm:"0px", md:"0px", lg:"0px 5px"}}>
             <nav className="nav container">
-                <Link to="home" smooth={true} duration={500}  className="nav__logo">Kashif Rezwi</Link>
 
-                <div className="nav__menu" id="nav-menu">
+            <UnorderedList m={"0"} display={{ base: "none", sm: "none", md: "block", lg: "block" }}>
+
+                <Link to="home" smooth={true} duration={500} className="nav__logo">Kashif Rezwi</Link>
+
+            </UnorderedList>
+
+            <UnorderedList m={"0"} display={{ base: "block", sm: "block", md: "none", lg: "none" }}>
+
+                <Link to="home" smooth={true} duration={500} className="nav__logo">Rezwi</Link>
+                
+            </UnorderedList>
+
+                <div onClick={() => setShow(!show)} className={show ? "nav__menu show-menu" : "nav__menu"}> 
+
                     <ul className="nav__list">
                         <li className="nav__item">
-                            <Link to="home" smooth={true} duration={500} className="nav__link">
-                                <Text className="uil uil-estate nav__icon">
+                            <Link to="home" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                                <Text className="nav__icon">
                                     <UilEstate />
                                 </Text> Home
                             </Link>
                         </li>
                         <li className="nav__item">
-                            <Link to="about" smooth={true} duration={500} className="nav__link">
-                                <Text className="uil uil-user nav__icon">
+                            <Link to="about" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                                <Text className="nav__icon">
                                     <UilUser />
                                 </Text> About Me
                             </Link>
                         </li>
                         <li className="nav__item">
-                            <Link to="skills" smooth={true} duration={500} className="nav__link">
-                                <Text className="uil uil-file-alt nav__icon">
+                            <Link to="skills" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                                <Text className="nav__icon">
                                     <UilFileAlt />
                                 </Text> Skills
                             </Link>
                         </li>
                         <li className="nav__item">
-                            <Link to="projects" smooth={true} duration={500} className="nav__link">
-                                <Text className="uil uil-scenery nav__icon">
+                            <Link to="projects" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                                <Text className="nav__icon">
                                     <UilScenery />
                                 </Text> Projects
                             </Link>
                         </li>
                         <li className="nav__item">
-                            <Link to="contact" smooth={true} duration={500} className="nav__link">
-                                <Text className="uil uil-message nav__icon">
+                            <Link to="contact" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                                <Text className="nav__icon">
                                     <UilMessage />
                                 </Text> Contact
                             </Link>
                         </li>
                         <li className="nav__item">
-                            <Link to="resume" smooth={true} duration={500} className="nav__link">
-                                <Text className="uil uil-message nav__icon">
+                            <Link to="resume" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                                <Text className="nav__icon">
                                     <UilMessage />
                                 </Text> Resume
                             </Link>
                         </li>
                     </ul>
-                    <Text className="uil uil-times nav__close" id="nav-close">
+                    <Text onClick={() => setShow(!show)} className="nav__close">
                         <UilTimes />
                     </Text>
                 </div>
 
-                <div className="nav__btns">
-
-                    <div className="nav__toggle nav__btns" id="nav-toggle">
-                        <Text className="uil uil-apps">
-                            <UilApps />
-                        </Text>
-                    </div>
-
+                <div onClick={() => setShow(!show)} className="nav__toggle">
+                    <Text>
+                        <UilApps />
+                    </Text>
                 </div>
 
             </nav>
-        </header>
+        </Box>
     )
 }

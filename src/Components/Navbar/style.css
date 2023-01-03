@@ -6,10 +6,6 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-}
-
 ul {
     list-style: none;
 }
@@ -44,7 +40,7 @@ ul {
 }
 
 .nav__logo:hover {
-    color: hsl(0, 69%, 61%);
+    color: cornflowerblue;
 }
 
 .nav__btns {
@@ -61,7 +57,7 @@ ul {
 
 .nav__toggle:hover,
 .theme-customization:hover {
-    color: hsl(0, 69%, 61%);
+    color: cornflowerblue;
 }
 
 .nav__toggle {
@@ -93,7 +89,7 @@ ul {
     gap: 2rem;
 }
 
-.nav__link {
+.nav-link {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -102,8 +98,8 @@ ul {
     font-weight: 500;
 }
 
-.nav__link:hover {
-    color: hsl(0, 69%, 61%);
+.nav-link:hover {
+    color: cornflowerblue;
 }
 
 .nav__icon {

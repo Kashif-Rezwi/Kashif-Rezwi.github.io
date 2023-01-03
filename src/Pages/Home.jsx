@@ -8,7 +8,7 @@ import { Skills } from "./Skills"
 
 export const Home = () => {
     return(
-        <Box name={"home"} boxSizing={"border-box"} h={"100vh"} w={"100%"} m={"auto"}>
+        <Box bg={"#f8f7fd"} name={"home"} boxSizing={"border-box"} w={"100%"} m={"auto"}>
             <Navbar/>
             <HomeContent />
             <About/>

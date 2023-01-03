@@ -4,16 +4,16 @@ import { UilLinkedinAlt, UilGithubAlt, UilBasketball, UilArrow } from '@iconscou
 export const HomeContent = () => {
   return (
     <>
-      <UnorderedList boxSizing={"border-box"} w={"100%"} h={"100%"} bg={"#f8f7fd"} m={"auto"} display={{ base: "none", sm: "none", md: "none", lg: "block" }}>
+      <UnorderedList boxSizing={"border-box"} w={"100%"} h={{base:"95vh", sm:"95vh", md:"100vh", lg:"100vh"}} bg={"#f8f7fd"} m={"auto"} display={{ base: "none", sm: "none", md: "none", lg: "block" }} border={"1px solid red"}>
 
         <Grid maxW={"968px"} minWidth={"767px"} h={"100%"} templateColumns={"repeat(2,70% 30%)"} m={"auto"}>
 
           <Stack w={"100%"} justify={"center"} align={"center"} position={"relative"}>
 
             <VStack justify={"space-around"} position={"absolute"} left={"0"} h={"200px"}>
-              <Link to={""}><UilLinkedinAlt /></Link>
-              <Link to={""}><UilBasketball /></Link>
-              <Link to={""}><UilGithubAlt /></Link>
+              <Link _hover={{color:"cornflowerblue"}} to={""}><UilLinkedinAlt /></Link>
+              <Link _hover={{color:"cornflowerblue"}} to={""}><UilBasketball /></Link>
+              <Link _hover={{color:"cornflowerblue"}} to={""}><UilGithubAlt /></Link>
             </VStack>
 
             <Box w={"80%"} align={"left"} pl={"20px"}>
@@ -27,14 +27,14 @@ export const HomeContent = () => {
           </Stack>
 
           <Box w={"100%"} display={"flex"} justifyContent={"center"} alignItems={"center"}>
-            <Image src={"https://avatars.githubusercontent.com/u/34582831?v=4"} alt={"kashif-Rezwi"} w={"85%"} borderRadius={"50%"} />
+          <Image m={"auto"} border={"5px solid cornflowerblue"} src={"https://avatars.githubusercontent.com/u/34582831?v=4"} alt={"kashif-Rezwi"} w={"85%"} borderRadius={"50%"} />
           </Box>
 
         </Grid>
 
       </UnorderedList>
 
-      <UnorderedList boxSizing={"border-box"} w={"100%"} h={"100%"} bg={"#f8f7fd"} m={"0"} pt={"50px"} display={{ base: "block", sm: "block", md: "block", lg: "none" }} position={"relative"}>
+      <UnorderedList boxSizing={"border-box"} w={"100%"} h={{base:"95vh", sm:"95vh", md:"100vh", lg:"100vh"}} bg={"#f8f7fd"} m={"0"} pt={"50px"} display={{ base: "block", sm: "block", md: "block", lg: "none" }} position={"relative"}>
 
         <Stack w={"95%"} h={"100%"} justify={"center"} align={"center"} m={"auto"}>
 
@@ -45,9 +45,9 @@ export const HomeContent = () => {
               <Stack w={"100%"} h={"100%"} justify={"center"} align={"center"} >
 
                 <VStack justify={"space-around"} position={"absolute"} left={"0"} h={"200px"}>
-                  <Link to={""}><UilLinkedinAlt /></Link>
-                  <Link to={""}><UilBasketball /></Link>
-                  <Link to={""}><UilGithubAlt /></Link>
+                  <Link _hover={{color:"cornflowerblue"}} to={""}><UilLinkedinAlt /></Link>
+                  <Link _hover={{color:"cornflowerblue"}} to={""}><UilBasketball /></Link>
+                  <Link _hover={{color:"cornflowerblue"}} to={""}><UilGithubAlt /></Link>
                 </VStack>
 
                 <Box maxW={"300px"} m={"auto"}>
@@ -58,7 +58,7 @@ export const HomeContent = () => {
 
             </Box>
 
-            <Box m={"50px 0px 0px 15px"} w={"100%"} p={"30px 0px"} align={"left"}>
+            <Box w={"100%"} p={"30px 0px"} align={"left"}>
               <Heading color={"#505050"} as={"h1"} size={"2xl"}>Hi I'm Kashif Rezwi.</Heading>
               <Heading color={"cornflowerblue"} as={"h2"} size={"xl"}>Full Stack Web Developer</Heading>
               <Text w={"90%"} textAlign={"justify"} m={"10px 0px"} fontSize={"14px"}>I'm a creative frontend designer based on react development. I'm very passionate and dedicated to my work</Text>
