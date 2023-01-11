@@ -37,6 +37,7 @@ ul {
 .nav__toggle {
     color: hsl(250, 8%, 15%);
     font-weight: 700;
+    cursor: pointer;
 }
 
 .nav__logo:hover {
@@ -96,6 +97,7 @@ ul {
     font-size: 1rem;
     color: hsl(250, 8%, 15%);
     font-weight: 500;
+    cursor: pointer;
 }
 
 .nav-link:hover {

@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom"
-import { About } from "../Pages/About"
-import { Contact } from "../Pages/Contact"
-import { Home } from "../Pages/Home"
-import { Project } from "../Pages/Project"
-import { Resume } from "../Pages/Resume"
-import { Skills } from "../Pages/Skills"
+import { About } from "../../Pages/About"
+import { Contact } from "../../Pages/Contact"
+import { Github } from "../../Pages/Github"
+import { Home } from "../../Pages/Home"
+import { Project } from "../../Pages/Project"
+import { Skills } from "../../Pages/Skills"
 export const AllRoutes = () => {
     return(
         <Routes>
@@ -14,7 +14,7 @@ export const AllRoutes = () => {
             <Route path="/skills" element={<Skills/>}></Route>
             <Route path="/project" element={<Project/>}></Route>
             <Route path="/contact" element={<Contact/>}></Route>
-            <Route path="/resume" element={<Resume/>}></Route>
+            <Route path="/resume" element={<Github/>}></Route>
 
         </Routes>
     )

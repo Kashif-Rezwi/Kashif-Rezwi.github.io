@@ -1,6 +1,7 @@
-import { UilEstate, UilUser, UilFileAlt, UilBriefcaseAlt, UilScenery, UilMessage, UilTimes, UilPalette, UilApps } from '@iconscout/react-unicons'
-import { Box, Text, UnorderedList } from '@chakra-ui/react'
-import { Link } from 'react-scroll'
+import { UilEstate, UilUser, UilLayerGroup , UilCommentsAlt , UilTelegramAlt ,  UilTimes, UilRocket , UilApps, UilBracketsCurly } from '@iconscout/react-unicons'
+import { Box, Text, UnorderedList} from '@chakra-ui/react'
+import { Link as ChakraLink} from '@chakra-ui/react'
+import { Link as ScrollLink } from 'react-scroll'
 import "./style.css"
 import { useState } from 'react'
 
@@ -14,13 +15,13 @@ export const Navbar = () => {
 
             <UnorderedList m={"0"} display={{ base: "none", sm: "none", md: "block", lg: "block" }}>
 
-                <Link to="home" smooth={true} duration={500} className="nav__logo">Kashif Rezwi</Link>
+                <ScrollLink to="home" smooth={true} duration={500} className="nav__logo">Kashif Rezwi</ScrollLink>
 
             </UnorderedList>
 
             <UnorderedList m={"0"} display={{ base: "block", sm: "block", md: "none", lg: "none" }}>
 
-                <Link to="home" smooth={true} duration={500} className="nav__logo">Rezwi</Link>
+                <ScrollLink to="home" smooth={true} duration={500} className="nav__logo">Rezwi</ScrollLink>
                 
             </UnorderedList>
 
@@ -28,46 +29,46 @@ export const Navbar = () => {
 
                     <ul className="nav__list">
                         <li className="nav__item">
-                            <Link to="home" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                            <ScrollLink to="home" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
                                 <Text className="nav__icon">
                                     <UilEstate />
                                 </Text> Home
-                            </Link>
+                            </ScrollLink>
                         </li>
                         <li className="nav__item">
-                            <Link to="about" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                            <ScrollLink to="about" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
                                 <Text className="nav__icon">
                                     <UilUser />
                                 </Text> About Me
-                            </Link>
+                            </ScrollLink>
                         </li>
                         <li className="nav__item">
-                            <Link to="skills" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                            <ScrollLink to="skills" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
                                 <Text className="nav__icon">
-                                    <UilFileAlt />
+                                    <UilLayerGroup  />
                                 </Text> Skills
-                            </Link>
+                            </ScrollLink>
                         </li>
                         <li className="nav__item">
-                            <Link to="projects" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                            <ScrollLink to="projects" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
                                 <Text className="nav__icon">
-                                    <UilScenery />
+                                    <UilBracketsCurly  />
                                 </Text> Projects
-                            </Link>
+                            </ScrollLink>
                         </li>
                         <li className="nav__item">
-                            <Link to="contact" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                            <ScrollLink to="contact" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
                                 <Text className="nav__icon">
-                                    <UilMessage />
+                                    <UilCommentsAlt/>
                                 </Text> Contact
-                            </Link>
+                            </ScrollLink>
                         </li>
                         <li className="nav__item">
-                            <Link to="resume" smooth={true} duration={500} className="nav-link" onClick={() => setShow(!show)}>
+                            <ChakraLink href={"Kashif-Rezwi-Resume.pdf"} _hover={{textDecor:"none"}} attributes-list="true" download className="nav-link" onClick={() => setShow(!show)}>
                                 <Text className="nav__icon">
-                                    <UilMessage />
+                                    <UilTelegramAlt  />
                                 </Text> Resume
-                            </Link>
+                            </ChakraLink>
                         </li>
                     </ul>
                     <Text onClick={() => setShow(!show)} className="nav__close">

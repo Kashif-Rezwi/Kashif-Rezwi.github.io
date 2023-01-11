@@ -16,7 +16,7 @@ export const About = () => {
 
                         <Stack w={"100%"} justify={"center"} align={"flex-end"}>
 
-                            <Text color={"cornflowerblue"} w={"90%"} fontSize={"30px"} fontWeight={"bolder"} textAlign={"right"} p={"0px 5px"}>
+                            <Text color={"cornflowerblue"} w={"90%"} fontSize={{base:"none", sm:"none", md:"30px", lg:"32px"}} fontWeight={"bolder"} textAlign={"right"} p={"0px 5px"}>
                                 Hello there👋 I'm a Aspiring Full Stack Web Developer. Please have a look around to know more about me.
                             </Text>
 
@@ -24,8 +24,8 @@ export const About = () => {
 
                         <Stack w={"100%"} justify={"center"} align={"flex-start"}>
 
-                            <Text w={"90%"} fontSize={"20px"} fontWeight={"500"} textAlign={"left"} p={"0px 5px"}>
-                                A dedicated full-stack web developer with 2000+ hours of coding, strong in design and integration with intuitive problem-solving skills. Proficient in JavaScript, React, Express, Node, and MongoDB. Passionate about implementing and launching new projects. Looking to start my career as an entry-level full-stack web developer with a reputed firm driven by technology.
+                            <Text w={"90%"} fontSize={"17px"} fontWeight={"500"} textAlign={"left"} p={"0px 5px"}>
+                                A dedicated full-stack web developer with 2000+ hours of coding, strong in design and integration with intuitive problem-solving skills. Proficient in JavaScript, React, Express, Node, and MongoDB. Passionate for implementing and launching new projects. Looking to start my career as an entry-level full-stack web developer with a reputed firm driven by technology.
                             </Text>
 
                         </Stack>
