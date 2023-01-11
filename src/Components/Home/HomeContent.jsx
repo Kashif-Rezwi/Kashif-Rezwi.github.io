@@ -53,7 +53,7 @@ export const HomeContent = () => {
           </Stack>
 
           <Box w={"100%"} display={"flex"} justifyContent={"center"} alignItems={"center"}>
-            <Image m={"auto"} border={"5px solid cornflowerblue"} src={"/ME.jpg"} alt={"kashif-Rezwi"} w={"85%"} borderRadius={"50%"} />
+            <Image m={"auto"} border={"5px solid cornflowerblue"} src={"/profile/ME.jpg"} alt={"kashif-Rezwi"} w={"85%"} borderRadius={"50%"} />
           </Box>
 
         </Grid>
@@ -77,7 +77,7 @@ export const HomeContent = () => {
                 </VStack>
 
                 <Box maxW={"300px"} m={"auto"}>
-                  <Image m={"auto"} border={"5px solid cornflowerblue"} src={"/ME.JPG"} alt={"kashif-Rezwi"} w={"85%"} borderRadius={"50%"} />
+                  <Image m={"auto"} border={"5px solid cornflowerblue"} src={"/profile/ME.jpg"} alt={"kashif-Rezwi"} w={"85%"} borderRadius={"50%"} />
                 </Box>
 
               </Stack>
