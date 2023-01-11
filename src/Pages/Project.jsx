@@ -4,10 +4,9 @@ import GitHubCalendar from "react-github-calendar";
 
 export const Project = () => {
     return (
-        <Stack justify={"flex-start"} pt={"70px"} align={"center"} w={"100%"} name={"projects"} h={{ base: "95vh", sm: "95vh", md: "100vh", lg: "100vh" }}>
-            {/* pt={{base: "200px", sm: "100px", md: "70px", lg: "70px"}} */}
+        <Stack justify={"center"} align={"center"} w={"100%"} name={"projects"} minH={{base: "80vh", sm: "100vh", md: "100vh", lg: "100vh"}}>
 
-            <Heading mb={"30px"} as={"h1"}>Projects</Heading>
+            <Heading mt={{base:"30px", sm:"65px", md:"65px", lg:"65px"}} mb={"20px"} as={"h1"}>Projects</Heading>
 
             <ProjectStackTab />
 

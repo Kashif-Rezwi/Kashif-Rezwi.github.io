@@ -1,7 +1,7 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Grid } from '@chakra-ui/react'
 import { FaReact, FaNpm, FaGithub, FaGitAlt } from 'react-icons/fa';
 import { DiNodejs } from 'react-icons/di';
-import { SiHtml5, SiCss3, SiReactrouter, SiVercel, SiNetlify, SiRedux, SiJest, SiCypress, SiJavascript, SiChakraui, SiMaterialui, SiNextdotjs, SiVisualstudiocode, SiExpress, SiMongodb, SiFirebase } from 'react-icons/si';
+import { SiHtml5, SiCss3, SiTypescript, SiReactrouter, SiVercel, SiNetlify, SiRedux, SiJest, SiCypress, SiJavascript, SiChakraui, SiMaterialui, SiNextdotjs, SiVisualstudiocode, SiExpress, SiMongodb, SiFirebase } from 'react-icons/si';
 import { Icons } from './Icons';
 
 const reactIcons = [
@@ -10,10 +10,11 @@ const reactIcons = [
     { icon: <SiCss3 />, name: "Css", category: "frontend" },
     { icon: <SiJavascript />, name: "Javascript", category: "frontend" },
     { icon: <FaReact />, name: "React", category: "frontend" },
-    { icon: <SiNextdotjs />, name: "Next js", category: "frontend" },
+    { icon: <SiTypescript />, name: "Typescript", category: "others" },
     { icon: <DiNodejs />, name: "Node", category: "backend" },
     { icon: <SiExpress />, name: "Express", category: "backend" },
     { icon: <SiMongodb />, name: "Mongodb", category: "backend" },
+    { icon: <SiNextdotjs />, name: "Next js", category: "frontend" },
     { icon: <SiFirebase />, name: "Firebase", category: "backend" },
     { icon: <FaGitAlt />, name: "Git", category: "others" },
     { icon: <SiRedux />, name: "Redux", category: "frontend" },
@@ -33,7 +34,7 @@ export const TechStackTab = () => {
 
     return (
         <Tabs variant='soft-rounded' m={"auto"} maxW={"968px"}>
-            <TabList justifyContent={"space-around"} transition={"1s"} w={"100%"} mb={"10px"}>
+            <TabList justifyContent={"space-around"} transition={"1s"} w={"100%"} >
                 <Tab _selected={{ color: 'white', bg: 'cornflowerblue' }} bg={"whiteAlpha.700"} borderRadius={"8px"}>All</Tab>
                 <Tab _selected={{ color: 'white', bg: 'cornflowerblue' }} bg={"whiteAlpha.700"} borderRadius={"8px"}>Frontend</Tab>
                 <Tab _selected={{ color: 'white', bg: 'cornflowerblue' }} bg={"whiteAlpha.700"} borderRadius={"8px"}>Backend</Tab>

@@ -1,5 +1,6 @@
 import { Box, Button, Grid, Heading, HStack, Image, Link, Stack, Text, UnorderedList, useToast, VStack } from "@chakra-ui/react"
 import { UilLinkedinAlt, UilGithubAlt, UilAt, UilTelegramAlt } from '@iconscout/react-unicons'
+import resume from './Kashif-Rezwi-Resume.pdf'
 
 export const HomeContent = () => {
 
@@ -41,11 +42,11 @@ export const HomeContent = () => {
               <Link _hover={{ color: "cornflowerblue" }} href={"https://github.com/Kashif-Rezwi"} isExternal><UilGithubAlt /></Link>
             </VStack>
 
-            <Box w={"80%"} align={"left"} pl={"20px"}>
-              <Heading color={"#505050"} as={"h1"} size={"2xl"}>Hi I'm Kashif Rezwi.</Heading>
-              <Heading color={"cornflowerblue"} as={"h2"} size={"xl"}>Full Stack Web Developer</Heading>
+            <Box w={"90%"} align={"left"} pl={"20px"}>
+              <Heading color={"#505050"} as={"h1"} size={"xl"}>Hi I'm Kashif Rezwi.</Heading>
+              <Heading color={"cornflowerblue"} as={"h2"} size={"2xl"}>Full Stack Web Developer</Heading>
               <Text w={"80%"} textAlign={"justify"} m={"10px 0px 20px 0px"} fontSize={"14px"}>I'm a creative aspiring full stack web developer based on react development. I'm very passionate and dedicated to my work.</Text>
-              <Link href={"Kashif-Rezwi-Resume.pdf"} attributes-list="true" download mt={"20px"} _hover={{ bg: "#4c87f1" }} _active={{ bg: "#033b9f" }} color={"#f8f7fd"} bg={"#3e75d7"} p={"10px 20px"} borderRadius={"5px"}>
+              <Link href={resume} download mt={"20px"} _hover={{ bg: "#4c87f1" }} _active={{ bg: "#033b9f" }} color={"#f8f7fd"} bg={"#3e75d7"} p={"10px 20px"} borderRadius={"5px"}>
                 Resume
               </Link>
             </Box>
@@ -71,7 +72,7 @@ export const HomeContent = () => {
 
                 <VStack justify={"space-around"} position={"absolute"} left={"0"} h={"200px"}>
                   <Link _hover={{ color: "cornflowerblue" }} href={"https://www.linkedin.com/in/kashif-rezwi/"} isExternal><UilLinkedinAlt /></Link>
-                  <Link _hover={{ color: "cornflowerblue" }} to={""} onClick={debounce(copyEmail, 500)}><UilAt /></Link>
+                  <Link _hover={{ color: "cornflowerblue" }} onClick={debounce(copyEmail, 500)}><UilAt /></Link>
                   <Link _hover={{ color: "cornflowerblue" }} href={"https://github.com/Kashif-Rezwi"} isExternal><UilGithubAlt /></Link>
                 </VStack>
 
@@ -84,11 +85,11 @@ export const HomeContent = () => {
             </Box>
 
             <Box w={"100%"} p={"30px 0px"} align={"left"}>
-              <Heading color={"#505050"} as={"h1"} size={"2xl"}>Hi I'm Kashif Rezwi.</Heading>
-              <Heading color={"cornflowerblue"} as={"h2"} size={"xl"}>Full Stack Web Developer</Heading>
+              <Heading color={"#505050"} as={"h1"} size={"xl"}>Hi I'm Kashif Rezwi.</Heading>
+              <Heading color={"cornflowerblue"} as={"h2"} size={{base:"xl", sm:"xl", md:"2xl", lg:"2xl"}}>Full Stack Web Developer</Heading>
               <Text w={"90%"} textAlign={"justify"} m={"10px 0px 20px 0px"} fontSize={"14px"}>I'm a creative aspiring full stack web developer based on react development. I'm very passionate and dedicated to my work.</Text>
-              
-              <Link href={"Kashif-Rezwi-Resume.pdf"} attributes-list="true" download mt={"10px"} _hover={{ bg: "#4c87f1" }} _active={{ bg: "#033b9f" }} color={"#f8f7fd"} bg={"#3e75d7"} p={"10px 20px"} borderRadius={"5px"}>
+
+              <Link href={resume} download mt={"10px"} _hover={{ bg: "#4c87f1" }} _active={{ bg: "#033b9f" }} color={"#f8f7fd"} bg={"#3e75d7"} p={"10px 20px"} borderRadius={"5px"}>
                 Resume
               </Link>
             </Box>

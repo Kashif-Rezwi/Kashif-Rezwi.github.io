@@ -5,7 +5,7 @@ export const Skills = () => {
     return (
         <Stack justify={"center"} align={"center"} w={"100%"} name={"skills"} h={{ base: "95vh", sm: "95vh", md: "100vh", lg: "100vh" }}>
 
-            <Heading mb={"35px"} as={"h1"}>Techstack Skills</Heading>
+            <Heading m={"20px auto"} as={"h1"}>Techstack Skills</Heading>
 
            <TechStackTab />
 

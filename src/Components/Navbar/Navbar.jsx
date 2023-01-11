@@ -4,6 +4,7 @@ import { Link as ChakraLink} from '@chakra-ui/react'
 import { Link as ScrollLink } from 'react-scroll'
 import "./style.css"
 import { useState } from 'react'
+import resume from '../Home/Kashif-Rezwi-Resume.pdf'
 
 export const Navbar = () => {
 
@@ -64,7 +65,7 @@ export const Navbar = () => {
                             </ScrollLink>
                         </li>
                         <li className="nav__item">
-                            <ChakraLink href={"Kashif-Rezwi-Resume.pdf"} _hover={{textDecor:"none"}} attributes-list="true" download className="nav-link" onClick={() => setShow(!show)}>
+                            <ChakraLink href={resume} _hover={{textDecor:"none"}} download className="nav-link" onClick={() => setShow(!show)}>
                                 <Text className="nav__icon">
                                     <UilTelegramAlt  />
                                 </Text> Resume

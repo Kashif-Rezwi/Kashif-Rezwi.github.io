@@ -20,6 +20,7 @@ import {
 } from 'react-icons/md';
 
 import { HiDocumentText } from 'react-icons/hi';
+import resume from '../Components/Home/Kashif-Rezwi-Resume.pdf'
 
 export const Contact = () => {
     return (
@@ -31,7 +32,7 @@ export const Contact = () => {
 
                 <UnorderedList w={"100%"} display={{ base: "none", sm: "none", md: "block", lg: "block" }} m={"auto"} pr={{base:"0px", sm:"0px", md:"20px", lg:"50px"}}>
 
-                    <Box m={"auto"} maxW={"350px"}>
+                    <Box m={"auto"} maxW={"400px"}>
 
                         <Link transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"}
                             href="tel:9883909187" boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
@@ -80,7 +81,7 @@ export const Contact = () => {
 
                 <Stack w={"100%"} pl={{base:"0px", sm:"0px", md:"20px", lg:"50px"}}>
 
-                    <Stack m={"auto"} maxW={"350px"} p={"40px 20px"} borderRadius={"10px"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px" }} transition={"0.5s"}>
+                    <Stack m={"auto"} maxW={"400px"} p={"40px 20px"} borderRadius={"10px"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px" }} transition={"0.5s"}>
 
                         <FormControl mb={"10px"}>
                             <FormLabel>Your Name</FormLabel>
@@ -136,7 +137,7 @@ export const Contact = () => {
                             <Link href={"https://www.linkedin.com/in/kashif-rezwi/"} isExternal><Text cursor={"pointer"} textAlign={"center"} _hover={{ fontSize: "30px" }} fontSize={"25px"} transition={"0.3s"}><FaLinkedin /></Text></Link>
                         </Stack>
                         <Stack justify={"center"} align={"center"}>
-                            <Link href={"Kashif-Rezwi-Resume.pdf"} attributes-list="true" download><Text cursor={"pointer"} textAlign={"center"} _hover={{ fontSize: "30px" }} fontSize={"25px"} transition={"0.3s"} ><HiDocumentText /></Text></Link>
+                            <Link href={resume} download><Text cursor={"pointer"} textAlign={"center"} _hover={{ fontSize: "30px" }} fontSize={"25px"} transition={"0.3s"} ><HiDocumentText /></Text></Link>
                         </Stack>
                     </HStack>
 
@@ -148,7 +149,7 @@ export const Contact = () => {
             <UnorderedList w={"100%"} display={{ base: "none", sm: "none", md: "block", lg: "block" }}>
 
                 <Stack pt={"10px"} justify={"center"} align={"center"} bg={"cornflowerblue"} color={"white"} w={"100%"} position={"absolute"} bottom={"0px"} p={"5px"}>
-                    <Text fontSize={"14px"}>Kashif-Rezwi.github.io <span>&#169;</span></Text>
+                    <Text fontSize={"12px"}>Kashif-Rezwi.github.io <span>&#169;</span></Text>
                 </Stack>
 
             </UnorderedList>
