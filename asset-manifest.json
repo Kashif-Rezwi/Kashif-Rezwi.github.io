@@ -1,19 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.15e54534.css",
-    "main.js": "/static/js/main.47cc27a9.js",
+    "main.css": "/static/css/main.153b6b79.css",
+    "main.js": "/static/js/main.ebc680ea.js",
     "static/js/787.128fc6e9.chunk.js": "/static/js/787.128fc6e9.chunk.js",
-    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
-    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
-    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
-    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "static/media/Kashif-Rezwi-Resume.pdf": "/static/media/Kashif-Rezwi-Resume.61243d1a2daabd4481fc.pdf",
     "index.html": "/index.html",
-    "main.15e54534.css.map": "/static/css/main.15e54534.css.map",
-    "main.47cc27a9.js.map": "/static/js/main.47cc27a9.js.map",
+    "main.153b6b79.css.map": "/static/css/main.153b6b79.css.map",
+    "main.ebc680ea.js.map": "/static/js/main.ebc680ea.js.map",
     "787.128fc6e9.chunk.js.map": "/static/js/787.128fc6e9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.15e54534.css",
-    "static/js/main.47cc27a9.js"
+    "static/css/main.153b6b79.css",
+    "static/js/main.ebc680ea.js"
   ]
 }
