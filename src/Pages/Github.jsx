@@ -24,7 +24,7 @@ export const Github = () => {
                     <Box maxW={"380px"} m={"20px auto"}>
                         <Image
                             src="https://github-readme-streak-stats.herokuapp.com/?user=kashif-rezwi"
-                            alt=""
+                            alt="github stats"
                         />
                     </Box>
 
