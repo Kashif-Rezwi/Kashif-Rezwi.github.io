@@ -42,34 +42,34 @@ export const Contact = () => {
 
                             </Link>
 
-                            <Link transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
+                            <Link href="mailto:kashifrezwi850@gmail.com" transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
                                 <MdEmail size="25px" />
                                 <Text ml={"5px"}>kashifrezwi850@gmail.com</Text>
 
                             </Link>
 
-                            <Link transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
+                            <Link href={"https://goo.gl/maps/KXPijYNRofykEkeP7"} isExternal transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
 
                                 <MdLocationOn size="25px" />
                                 <Text ml={"5px"}>Kolkata, India</Text>
 
                             </Link>
 
-                            <Link transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
+                            <Link href={"https://www.linkedin.com/in/kashif-rezwi/"} isExternal transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
 
                                 <FaLinkedin size="25px" />
                                 <Text ml={"5px"}>Kashif Rezwi</Text>
 
                             </Link>
 
-                            <Link transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
+                            <Link href={"https://github.com/Kashif-Rezwi"} isExternal transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
 
                                 <FaGithub size="25px" />
                                 <Text ml={"5px"}>Kashif-Rezwi</Text>
 
                             </Link>
 
-                            <Link transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
+                            <Link href={resume} download transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
 
                                 <FaFilePdf size="25px" />
                                 <Text ml={"5px"}>Download Resume</Text>
