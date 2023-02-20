@@ -64,8 +64,8 @@ export const Navbar = () => {
                                 </Text> Contact
                             </ScrollLink>
                         </li>
-                        <li className="nav__item">
-                            <ChakraLink href={resume} _hover={{textDecor:"none"}} download className="nav-link" onClick={() => setShow(!show)}>
+                        <li className="nav__item" onClick={() => setShow(!show)}>
+                            <ChakraLink href={resume} _hover={{textDecor:"none"}} download className="nav-link" onClick={() => window.open('https://drive.google.com/file/d/1x_dWmE-vlZi17mONRhmqm6M9Xrl_7hXc/view?usp=share_link')}>
                                 <Text className="nav__icon">
                                     <UilTelegramAlt  />
                                 </Text> Resume

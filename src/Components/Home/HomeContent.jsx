@@ -46,7 +46,7 @@ export const HomeContent = () => {
               <Heading color={"#505050"} as={"h1"} size={"xl"}>Hi I'm Kashif Rezwi.</Heading>
               <Heading color={"cornflowerblue"} as={"h2"} size={"2xl"}>Full Stack Web Developer</Heading>
               <Text w={"80%"} textAlign={"justify"} m={"10px 0px 20px 0px"} fontSize={"14px"}>I'm a creative aspiring full stack web developer based on react development. I'm very passionate and dedicated to my work.</Text>
-              <Link href={resume} download mt={"20px"} _hover={{ bg: "#4c87f1" }} _active={{ bg: "#033b9f" }} color={"#f8f7fd"} bg={"#3e75d7"} p={"10px 20px"} borderRadius={"5px"}>
+              <Link href={resume} download mt={"20px"} _hover={{ bg: "#4c87f1" }} _active={{ bg: "#033b9f" }} color={"#f8f7fd"} bg={"#3e75d7"} p={"10px 20px"} borderRadius={"5px"} onClick={() => window.open('https://drive.google.com/file/d/1x_dWmE-vlZi17mONRhmqm6M9Xrl_7hXc/view?usp=share_link')}>
                 Resume
               </Link>
             </Box>
@@ -89,7 +89,7 @@ export const HomeContent = () => {
               <Heading color={"cornflowerblue"} as={"h2"} size={{base:"xl", sm:"xl", md:"2xl", lg:"2xl"}}>Full Stack Web Developer</Heading>
               <Text w={"90%"} textAlign={"justify"} m={"10px 0px 20px 0px"} fontSize={"14px"}>I'm a creative aspiring full stack web developer based on react development. I'm very passionate and dedicated to my work.</Text>
 
-              <Link href={resume} download mt={"10px"} _hover={{ bg: "#4c87f1" }} _active={{ bg: "#033b9f" }} color={"#f8f7fd"} bg={"#3e75d7"} p={"10px 20px"} borderRadius={"5px"}>
+              <Link href={resume} download mt={"10px"} _hover={{ bg: "#4c87f1" }} _active={{ bg: "#033b9f" }} color={"#f8f7fd"} bg={"#3e75d7"} p={"10px 20px"} borderRadius={"5px"} onClick={() => window.open('https://drive.google.com/file/d/1x_dWmE-vlZi17mONRhmqm6M9Xrl_7hXc/view?usp=share_link')}>
                 Resume
               </Link>
             </Box>

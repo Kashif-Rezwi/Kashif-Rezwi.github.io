@@ -69,7 +69,7 @@ export const Contact = () => {
 
                             </Link>
 
-                            <Link href={resume} download transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
+                            <Link onClick={() => window.open('https://drive.google.com/file/d/1x_dWmE-vlZi17mONRhmqm6M9Xrl_7hXc/view?usp=share_link')} href={resume} download transition={"0.5s"} p={"15px 10px"} borderRadius={"8px"} m={"15px"} display={"flex"} flexDir={"row"} justifyContent={"flex-start"} alignItems={"center"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" _hover={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", color: "cornflowerblue", textDecoration: "none" }}>
 
                                 <FaFilePdf size="25px" />
                                 <Text ml={"5px"}>Download Resume</Text>
@@ -140,7 +140,7 @@ export const Contact = () => {
                             <Link href={"https://www.linkedin.com/in/kashif-rezwi/"} isExternal><Text cursor={"pointer"} textAlign={"center"} _hover={{ fontSize: "30px" }} fontSize={"25px"} transition={"0.3s"}><FaLinkedin /></Text></Link>
                         </Stack>
                         <Stack justify={"center"} align={"center"}>
-                            <Link href={resume} download><Text cursor={"pointer"} textAlign={"center"} _hover={{ fontSize: "30px" }} fontSize={"25px"} transition={"0.3s"} ><FaFilePdf /></Text></Link>
+                            <Link href={resume} download><Text cursor={"pointer"} textAlign={"center"} _hover={{ fontSize: "30px" }} fontSize={"25px"} transition={"0.3s"} onClick={() => window.open('https://drive.google.com/file/d/1x_dWmE-vlZi17mONRhmqm6M9Xrl_7hXc/view?usp=share_link')}><FaFilePdf /></Text></Link>
                         </Stack>
                     </HStack>
 
