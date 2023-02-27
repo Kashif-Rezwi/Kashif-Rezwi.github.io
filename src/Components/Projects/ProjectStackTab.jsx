@@ -6,6 +6,8 @@ import {
   TabPanel,
   Stack,
   Grid,
+  HStack,
+  Text,
 } from "@chakra-ui/react";
 import {
   SiCss3,
@@ -18,6 +20,9 @@ import {
   SiFirebase,
 } from "react-icons/si";
 import { ProjectInfo } from "./ProjectInfo";
+import { BiCodeCurly } from "react-icons/bi";
+import { HiUserGroup } from "react-icons/hi";
+import { BsFillPersonFill } from "react-icons/bs";
 
 const gitRepos = [
   {
@@ -120,21 +125,42 @@ export const ProjectStackTab = () => {
           bg={"whiteAlpha.700"}
           borderRadius={"8px"}
         >
-          All
+          <HStack
+            fontSize={{ base: "13px", sm: "14px", md: "15px", lg: "16px" }}
+          >
+            <Text fontWeight={"700"}>All</Text>
+            <Text fontWeight={"700"}>
+              <BiCodeCurly />
+            </Text>
+          </HStack>
         </Tab>
         <Tab
           _selected={{ color: "white", bg: "cornflowerblue" }}
           bg={"whiteAlpha.700"}
           borderRadius={"8px"}
         >
-          Group
+          <HStack
+            fontSize={{ base: "13px", sm: "14px", md: "15px", lg: "16px" }}
+          >
+            <Text fontWeight={"700"}>Group</Text>
+            <Text fontWeight={"700"}>
+              <HiUserGroup />
+            </Text>
+          </HStack>
         </Tab>
         <Tab
           _selected={{ color: "white", bg: "cornflowerblue" }}
           bg={"whiteAlpha.700"}
           borderRadius={"8px"}
         >
-          Individual
+          <HStack
+            fontSize={{ base: "13px", sm: "14px", md: "15px", lg: "16px" }}
+          >
+            <Text fontWeight={"700"}>Individual</Text>
+            <Text fontWeight={"700"}>
+              <BsFillPersonFill />
+            </Text>
+          </HStack>
         </Tab>
       </TabList>
 
