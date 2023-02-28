@@ -18,11 +18,15 @@ import {
   SiChakraui,
   SiRedux,
   SiFirebase,
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
 } from "react-icons/si";
 import { ProjectInfo } from "./ProjectInfo";
 import { BiCodeCurly } from "react-icons/bi";
 import { HiUserGroup } from "react-icons/hi";
 import { BsFillPersonFill } from "react-icons/bs";
+import { FaNode } from "react-icons/fa";
 
 const gitRepos = [
   {
@@ -61,6 +65,7 @@ const gitRepos = [
     doneBy: "group",
     techstack: [
       <SiHtml5 />,
+      <SiCss3 />,
       <SiJavascript />,
       <SiReact />,
       <SiChakraui />,
@@ -98,12 +103,36 @@ const gitRepos = [
     doneBy: "group",
     techstack: [
       <SiHtml5 />,
+      <SiCss3 />,
       <SiJavascript />,
       <SiReact />,
       <SiChakraui />,
       <SiRedux />,
       <SiFirebase />,
       <SiReactrouter />,
+    ],
+  },
+  {
+    id: 4,
+    name: "trendsy.com",
+    github: "https://github.com/Shalini1908/prickly-expert-9128",
+    netlify: "https://trendsy.vercel.app/",
+    template: "./templates/myntra2.png",
+    description:
+      "Trendsy is a ecommerce website where users can purchase lifestyle products. In this project we use our own backend using node, express and mongodb.",
+    video: [false, ""],
+    doneBy: "group",
+    techstack: [
+      <SiHtml5 />,
+      <SiCss3 />,
+      <SiJavascript />,
+      <SiReact />,
+      <SiChakraui />,
+      <SiRedux />,
+      <SiReactrouter />,
+      <FaNode />,
+      <SiExpress />,
+      <SiMongodb />,
     ],
   },
 ];

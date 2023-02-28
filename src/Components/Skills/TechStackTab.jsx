@@ -28,6 +28,7 @@ import {
   SiExpress,
   SiMongodb,
   SiFirebase,
+  SiPostman,
 } from "react-icons/si";
 import { Icons } from "./Icons";
 import { RxCodesandboxLogo } from "react-icons/rx";
@@ -57,6 +58,7 @@ const reactIcons = [
   { icon: <SiVercel />, name: "Vercel", category: "tools" },
   { icon: <SiNetlify />, name: "Netlify", category: "tools" },
   { icon: <SiVisualstudiocode />, name: "Vs code", category: "tools" },
+  { icon: <SiPostman />, name: "Postman", category: "tools" },
 ];
 
 export const TechStackTab = () => {

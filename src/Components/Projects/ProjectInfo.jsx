@@ -98,7 +98,13 @@ export const ProjectInfo = ({
         </Text>
       </Box>
 
-      <HStack w={"100%"}>
+      <Box
+        w={"100%"}
+        flexWrap={"wrap"}
+        display={"flex"}
+        justifyContent={"flex-start"}
+        alignItems={"center"}
+      >
         <Button
           w={"150px"}
           mr={"5px"}
@@ -108,14 +114,12 @@ export const ProjectInfo = ({
         >
           Techstack
         </Button>
-        <HStack justify={"space-around"} w={"100%"}>
-          {techstack?.map((el, i) => (
-            <Text cursor={"pointer"} key={i} fontSize={"20px"}>
-              {el}
-            </Text>
-          ))}
-        </HStack>
-      </HStack>
+        {techstack?.map((el, i) => (
+          <Text m={"5px 10px"} cursor={"pointer"} key={i} fontSize={"20px"}>
+            {el}
+          </Text>
+        ))}
+      </Box>
     </Stack>
   </Stack>
 );
