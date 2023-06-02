@@ -47,6 +47,7 @@ const reactIcons = [
   { icon: <SiMongodb />, name: "Mongodb", category: "backend" },
   { icon: <SiNextdotjs />, name: "Next js", category: "frontend" },
   { icon: <SiFirebase />, name: "Firebase", category: "backend" },
+  { icon: <SiSocketdotio />, name: "WebSocket", category: "backend" },
   { icon: <FaGitAlt />, name: "Git", category: "tools" },
   { icon: <SiRedux />, name: "Redux", category: "frontend" },
   { icon: <SiReactrouter />, name: "React router", category: "frontend" },
