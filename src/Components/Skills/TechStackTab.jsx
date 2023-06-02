@@ -29,6 +29,7 @@ import {
   SiMongodb,
   SiFirebase,
   SiPostman,
+  SiSocketdotio,
 } from "react-icons/si";
 import { Icons } from "./Icons";
 import { RxCodesandboxLogo } from "react-icons/rx";
