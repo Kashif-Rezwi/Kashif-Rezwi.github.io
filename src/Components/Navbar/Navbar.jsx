@@ -14,7 +14,7 @@ import { Link as ChakraLink } from "@chakra-ui/react";
 import { Link as ScrollLink } from "react-scroll";
 import "./style.css";
 import { useState } from "react";
-import resume from "../Home/Kashif-Rezwi-Resume.pdf";
+import resume from "../Home/resume/Kashif-Rezwi-Resume.pdf";
 
 export const Navbar = () => {
   const [show, setShow] = useState(false);

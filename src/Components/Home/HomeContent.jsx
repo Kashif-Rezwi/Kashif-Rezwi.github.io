@@ -18,7 +18,7 @@ import {
   UilAt,
   UilTelegramAlt,
 } from "@iconscout/react-unicons";
-import resume from "./Kashif-Rezwi-Resume.pdf";
+import resume from "../Home/resume/Kashif-Rezwi-Resume.pdf";
 
 export const HomeContent = () => {
   const toast = useToast();
