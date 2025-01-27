@@ -20,7 +20,7 @@ import { FaGithub, FaLinkedin, FaFilePdf } from "react-icons/fa";
 import { MdPhone, MdEmail, MdLocationOn } from "react-icons/md";
 
 import { HiDocumentText } from "react-icons/hi";
-import resume from "../Components/Home/fp04_011-Kashif-Rezwi-Resume.pdf";
+import resume from "../Components/Home/Kashif-Rezwi-Resume.pdf";
 
 export const Contact = () => {
   return (
