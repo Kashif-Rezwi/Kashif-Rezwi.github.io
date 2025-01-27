@@ -18,17 +18,41 @@ import {
   SiChakraui,
   SiRedux,
   SiFirebase,
-  SiNodedotjs,
   SiExpress,
   SiMongodb,
 } from "react-icons/si";
 import { ProjectInfo } from "./ProjectInfo";
 import { BiCodeCurly } from "react-icons/bi";
 import { HiUserGroup } from "react-icons/hi";
-import { BsFillPersonFill } from "react-icons/bs";
-import { FaNode } from "react-icons/fa";
+import { BsFillPersonFill, BsTextareaResize, BsGrid } from "react-icons/bs";
+import { FaNode, FaIcons } from "react-icons/fa";
 
 const gitRepos = [
+  {
+    id: 0,
+    name: "automa.com",
+    github: "https://github.com/Kashif-Rezwi/Automa-Clone-App",
+    netlify: "https://automa-clone.netlify.app/",
+    template: "./templates/automa.png",
+    description:
+      "Automa is a browser extension for browser automation. From auto-fill forms, doing a repetitive task, taking a screenshot, to scraping data of the website, it's up to user what they want to do with this extension.",
+    video: [
+      false,
+      "",
+    ],
+    doneBy: "individual",
+    techstack: [
+      <SiCss3 />,
+      <SiHtml5 />,
+      <SiJavascript />,
+      <SiReact />,
+      <BsGrid />,
+      <SiChakraui />,
+      <BsTextareaResize />,
+      <FaIcons />,
+    ],
+  },
+
   {
     id: 1,
     name: "codeair.com",
@@ -113,7 +137,7 @@ const gitRepos = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     name: "trendsy.com",
     github: "https://github.com/Shalini1908/prickly-expert-9128",
     netlify: "https://trendsy.vercel.app/",

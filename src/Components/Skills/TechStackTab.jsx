@@ -7,6 +7,7 @@ import {
   Grid,
   Text,
   HStack,
+  // Tooltip,
 } from "@chakra-ui/react";
 import { FaReact, FaNpm, FaGithub, FaGitAlt } from "react-icons/fa";
 import { DiNodejs } from "react-icons/di";
@@ -34,8 +35,9 @@ import {
 import { Icons } from "./Icons";
 import { RxCodesandboxLogo } from "react-icons/rx";
 import { HiOutlineServerStack } from "react-icons/hi2";
-import { BsStack } from "react-icons/bs";
+import { BsStack, BsGrid } from "react-icons/bs";
 import { RiToolsFill } from "react-icons/ri";
+import { IconAi, IconBrandRadixUi } from "@tabler/icons-react";
 
 const reactIcons = [
   { icon: <SiHtml5 />, name: "Html", category: "frontend" },
@@ -51,10 +53,13 @@ const reactIcons = [
   { icon: <FaGitAlt />, name: "Git", category: "tools" },
   { icon: <SiRedux />, name: "Redux", category: "frontend" },
   { icon: <SiReactrouter />, name: "React router", category: "frontend" },
+  { icon: <BsGrid />, name: "React Flow", category: "frontend" },
   { icon: <SiChakraui />, name: "Chakra ui", category: "frontend" },
+  { icon: <IconBrandRadixUi size={44} />, name: "Radix ui", category: "frontend" },
   { icon: <SiMaterialui />, name: "Material ui", category: "frontend" },
   { icon: <SiSocketdotio />, name: "WebSocket", category: "backend" },
   { icon: <FaGithub />, name: "Github", category: "tools" },
+  { icon: <IconAi size={48} />, name: "Postman", category: "tools" },
   { icon: <SiJest />, name: "Jest", category: "tools" },
   { icon: <SiCypress />, name: "Cypress", category: "tools" },
   { icon: <SiVercel />, name: "Vercel", category: "tools" },
@@ -137,7 +142,13 @@ export const TechStackTab = () => {
             }}
           >
             {reactIcons.map((el, i) => (
-              <Icons key={i} {...el} />
+              // <Tooltip 
+              //   hasArrow
+              //   label={el.name}
+              //   placement="top"
+              // >
+                <Icons key={i} {...el} />
+              // </Tooltip>
             ))}
           </Grid>
         </TabPanel>
