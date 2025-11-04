@@ -20,19 +20,50 @@ import {
   SiFirebase,
   SiExpress,
   SiMongodb,
+  SiTailwindcss,
+  SiTypescript,
+  SiNestjs,
+  SiPostgresql,
 } from "react-icons/si";
 import { ProjectInfo } from "./ProjectInfo";
 import { BiCodeCurly } from "react-icons/bi";
 import { HiUserGroup } from "react-icons/hi";
 import { BsFillPersonFill, BsTextareaResize, BsGrid } from "react-icons/bs";
 import { FaNode, FaIcons } from "react-icons/fa";
+import { IconBrandRadixUi } from "@tabler/icons-react";
+import { DiNodejs } from "react-icons/di";
 
 const gitRepos = [
   {
     id: 0,
+    name: "better.dev",
+    github: "https://github.com/Kashif-Rezwi/better-dev-ui",
+    live: "https://nebula-ui-two.vercel.app",
+    template: "./templates/betterDev.png",
+    description:
+      "Better DEV UI is a modern chat interface for AI conversations. Built with the latest web technologies, it provides a seamless, real-time experience with streaming responses, tool visibility, and conversation management.",
+    video: [
+      false,
+      "",
+    ],
+    doneBy: "individual",
+    techstack: [
+      <SiTypescript />,
+      <SiReact />,
+      <SiReactrouter />,
+      <SiTailwindcss />,
+      <IconBrandRadixUi />,
+      <DiNodejs />,
+      <SiNestjs />,
+      <SiPostgresql />,
+    ],
+  },
+
+  {
+    id: 1,
     name: "automa.com",
     github: "https://github.com/Kashif-Rezwi/Automa-Clone-App",
-    netlify: "https://automa-clone.netlify.app/",
+    live: "https://automa-clone.netlify.app/",
     template: "./templates/automa.png",
     description:
       "Automa is a browser extension for browser automation. From auto-fill forms, doing a repetitive task, taking a screenshot, to scraping data of the website, it's up to user what they want to do with this extension.",
@@ -49,15 +80,15 @@ const gitRepos = [
       <BsGrid />,
       <SiChakraui />,
       <BsTextareaResize />,
-      <FaIcons />,
+      <FaIcons />
     ],
   },
 
   {
-    id: 1,
+    id: 2,
     name: "codeair.com",
     github: "https://github.com/Kashif-Rezwi/glistening-cook-4365",
-    netlify: "https://codeair.netlify.app/",
+    live: "https://codeair.netlify.app/",
     template: "./templates/codeair.jpg",
     description:
       "Airtable is a online platform where people can create and share the relational databases to build powerful custom applications.",
@@ -78,10 +109,10 @@ const gitRepos = [
   },
 
   {
-    id: 2,
+    id: 3,
     name: "nordstrom.com",
     github: "https://github.com/Kashif-Rezwi/Nordstrom",
-    netlify: "https://nord-ecommerce-website.netlify.app/",
+    live: "https://nord-ecommerce-website.netlify.app/",
     template: "./templates/nordstrom.PNG",
     description:
       "Complete responsive ecommerce website with all desired features such as add-to-cart, authentication, filter, sort checkout etc.",
@@ -100,10 +131,10 @@ const gitRepos = [
   },
 
   {
-    id: 3,
+    id: 4,
     name: "myntra.com",
     github: "https://github.com/Kashif-Rezwi/Myntra",
-    netlify: "https://grand-tarsier-842e30.netlify.app/homepage",
+    live: "https://grand-tarsier-842e30.netlify.app/homepage",
     template: "./templates/myntra.PNG",
     description:
       "Myntra is a popular online fashion store. We have implemented the Login/Signup, home page, navbar, products page, sorting and filtering of the products, view product, cart and dummy payment features.",
@@ -116,10 +147,10 @@ const gitRepos = [
   },
 
   {
-    id: 4,
+    id: 5,
     name: "herebuy.com",
     github: "https://github.com/arpit2444/grieving-driving-625-NearBuy",
-    netlify: "https://soft-custard-9f29c0.netlify.app/",
+    live: "https://soft-custard-9f29c0.netlify.app/",
     template: "./templates/herebuy.png",
     description:
       "Herebuy is a clone of nearbuy.com which is India's first hyper-local online platform that enables customers and local merchants to discover and engage with each other.",
@@ -137,10 +168,10 @@ const gitRepos = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     name: "trendsy.com",
     github: "https://github.com/Shalini1908/prickly-expert-9128",
-    netlify: "https://trendsy.vercel.app/",
+    live: "https://trendsy.vercel.app/",
     template: "./templates/myntra2.png",
     description:
       "Trendsy is a ecommerce website where users can purchase lifestyle products. In this project we use our own backend using node, express and mongodb.",

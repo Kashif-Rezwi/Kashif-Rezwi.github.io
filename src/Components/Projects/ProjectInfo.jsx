@@ -20,7 +20,7 @@ export const ProjectInfo = ({
   name,
   description,
   github,
-  netlify,
+  live,
   video,
   techstack,
 }) => (
@@ -69,7 +69,7 @@ export const ProjectInfo = ({
         </Button>
       </Link>
 
-      <Link _hover={{ textDecor: "none" }} href={netlify} isExternal>
+      <Link _hover={{ textDecor: "none" }} href={live} isExternal>
         <Button leftIcon={<SiNetlify />} fontSize={"14px"} h={"30px"}>
           Live
         </Button>
