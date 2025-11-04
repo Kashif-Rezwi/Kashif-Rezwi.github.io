@@ -171,7 +171,7 @@ export const Contact = () => {
               <Link
                 onClick={() =>
                   window.open(
-                    "https://drive.google.com/file/d/1x_dWmE-vlZi17mONRhmqm6M9Xrl_7hXc/view?usp=share_link"
+                    "https://drive.google.com/file/d/13lXkje4gkeewEEel2amsvXtRmjPLmUEG/view?usp=sharing"
                   )
                 }
                 href={resume}
@@ -349,7 +349,7 @@ export const Contact = () => {
                   transition={"0.3s"}
                   onClick={() =>
                     window.open(
-                      "https://drive.google.com/file/d/1x_dWmE-vlZi17mONRhmqm6M9Xrl_7hXc/view?usp=share_link"
+                      "https://drive.google.com/file/d/13lXkje4gkeewEEel2amsvXtRmjPLmUEG/view?usp=sharing"
                     )
                   }
                 >
