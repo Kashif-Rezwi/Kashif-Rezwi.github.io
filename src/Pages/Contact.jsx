@@ -74,7 +74,8 @@ export const Contact = () => {
                 }}
               >
                 <MdPhone size="25px" />
-                <Text ml={"5px"}>+91-9883909187</Text>
+                {/* <Text ml={"5px"}>+91-9883909187</Text> */}
+                <Text ml={"5px"}>+966-575074791</Text>
               </Link>
 
               <Link
@@ -100,7 +101,8 @@ export const Contact = () => {
               </Link>
 
               <Link
-                href={"https://goo.gl/maps/KXPijYNRofykEkeP7"}
+                // href={"https://goo.gl/maps/KXPijYNRofykEkeP7"}
+                href="https://maps.app.goo.gl/Kw5Qr7LupzJMWpdZ8"
                 isExternal
                 transition={"0.5s"}
                 p={"15px 10px"}
@@ -119,7 +121,8 @@ export const Contact = () => {
                 }}
               >
                 <MdLocationOn size="25px" />
-                <Text ml={"5px"}>Kolkata, India</Text>
+                {/* <Text ml={"5px"}>Kolkata, India</Text> */}
+                <Text ml={"5px"}>Riyadh, Saudi Arabia</Text>
               </Link>
 
               <Link
@@ -214,18 +217,18 @@ export const Contact = () => {
             >
               <FormControl mb={"10px"}>
                 <FormLabel>Your Name</FormLabel>
-                <Input type="text" />
+                <Input type="text" placeholder="Enter your name." />
 
                 <FormLabel mt={"10px"}>Email</FormLabel>
                 <Input
                   type="email"
-                  placeholder="We'll never share your email."
+                  placeholder="Enter your email."
                 />
 
-                <FormLabel mt={"10px"}>Feedback</FormLabel>
+                <FormLabel mt={"10px"}>Message</FormLabel>
                 <Textarea
                   maxH={"200px"}
-                  placeholder="Write your valueable feeback here..."
+                  placeholder="Write your message here..."
                 />
               </FormControl>
 
@@ -234,6 +237,8 @@ export const Contact = () => {
                 _active={{ bg: "#033b9f" }}
                 color={"#f8f7fd"}
                 bg={"#3e75d7"}
+                disabled
+                cursor={"not-allowed"}
               >
                 Send
               </Button>
@@ -282,11 +287,13 @@ export const Contact = () => {
               flexDir={"row"}
               justifyContent={"flex-start"}
               alignItems={"center"}
-              href="tel:9883909187"
+              // href="tel:9883909187"
+              href="tel:966575074791"
               _hover={{ textDecoration: "none" }}
             >
               <MdPhone size="25px" />
-              <Text ml={"5px"}>+91-9883909187</Text>
+              {/* <Text ml={"5px"}>+91-9883909187</Text> */}
+              <Text ml={"5px"}>+966-575074791</Text>
             </Link>
 
             <Link
@@ -296,11 +303,13 @@ export const Contact = () => {
               justifyContent={"flex-start"}
               alignItems={"center"}
               _hover={{ textDecoration: "none" }}
-              href={"https://goo.gl/maps/KXPijYNRofykEkeP7"}
+              // href={"https://goo.gl/maps/KXPijYNRofykEkeP7"}
+              href="https://maps.app.goo.gl/Kw5Qr7LupzJMWpdZ8"
               isExternal
             >
               <MdLocationOn size="25px" />
-              <Text ml={"5px"}>Kolkata, India</Text>
+              {/* <Text ml={"5px"}>Kolkata, India</Text> */}
+              <Text ml={"5px"}>Riyadh, Saudi Arabia</Text>
             </Link>
           </HStack>
 

@@ -17,7 +17,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"center"} align={"flex-end"}>
 
                             <Text color={"cornflowerblue"} w={"90%"} fontSize={{base:"none", sm:"none", md:"30px", lg:"32px"}} fontWeight={"bolder"} textAlign={"right"} p={"0px 5px"}>
-                                Hello there👋 I'm a Aspiring Full Stack Web Developer. Please have a look around to know more about me.
+                                Hello there 👋 I'm a Aspiring Full Stack Web Developer. Please have a look around to know more about me.
                             </Text>
 
                         </Stack>
@@ -47,7 +47,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"flex-end"} align={"center"}>
 
                             <Text color={"cornflowerblue"} w={"100%"} fontSize={"30px"} fontWeight={"bolder"} textAlign={"justify"} p={"0px 10px"}>
-                            Hello there👋 I'm a Aspiring Full Stack Web Developer. Please have a look around to know more about me.
+                            Hello there 👋 I'm a Aspiring Full Stack Web Developer. Please have a look around to know more about me.
                             </Text>
 
                         </Stack>
