@@ -109,7 +109,7 @@ export const HomeContent = () => {
                 m={"10px 0px 20px 0px"}
                 fontSize={"14px"}
               >
-                I'm a Full Stack Developer with 2+ years of experience crafting production-grade web applications and AI-powered solutions. I specialize in React.js, TypeScript, and Node.js, with a passion for building scalable architectures and delivering exceptional user experiences.
+                I'm a Full Stack Web Developer with 2+ years of experience crafting production-grade web applications and AI-powered solutions. I specialize in React.js, TypeScript, and Node.js, with a passion for building scalable architectures and delivering exceptional user experiences.
               </Text>
               <Link
                 href={resume}
@@ -228,7 +228,7 @@ export const HomeContent = () => {
                 m={"10px 0px 20px 0px"}
                 fontSize={"14px"}
               >
-                I'm a Full Stack Developer with 2+ years of experience crafting production-grade web applications and AI-powered solutions. I specialize in React.js, TypeScript, and Node.js, with a passion for building scalable architectures and delivering exceptional user experiences.
+                I'm a Full Stack Web Developer with 2+ years of experience crafting production-grade web applications and AI-powered solutions. I specialize in React.js, TypeScript, and Node.js, with a passion for building scalable architectures and delivering exceptional user experiences.
               </Text>
 
               <Link

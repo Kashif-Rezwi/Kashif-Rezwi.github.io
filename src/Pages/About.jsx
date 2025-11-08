@@ -25,7 +25,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"center"} align={"flex-start"}>
 
                             <Text w={"90%"} fontSize={"17px"} fontWeight={"500"} textAlign={"left"} p={"0px 5px"}>
-                                A Full Stack Developer with 2+ years of experience delivering production-grade web applications and complex business logic. Proven track record with CRM platforms, workflow automation, and scalable architectures. Expert in the MERN stack, with a strong grasp of software design patterns, clean code principles, and production deployment.
+                                A Full Stack Web Developer with 2+ years of experience delivering production-grade web applications and complex business logic. Proven track record with CRM platforms, workflow automation, and scalable architectures. Expert in the MERN stack, with a strong grasp of software design patterns, clean code principles, and production deployment.
                             </Text>
 
                         </Stack>
