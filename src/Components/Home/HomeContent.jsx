@@ -101,7 +101,7 @@ export const HomeContent = () => {
                 Hi I'm Kashif Rezwi.
               </Heading>
               <Heading color={"cornflowerblue"} as={"h2"} size={"2xl"}>
-                Full Stack Web Developer
+                Software Developer
               </Heading>
               <Text
                 w={"100%"}
@@ -109,7 +109,7 @@ export const HomeContent = () => {
                 m={"10px 0px 20px 0px"}
                 fontSize={"14px"}
               >
-                I'm a Full Stack Web Developer with 2+ years of experience crafting production-grade web applications and AI-powered solutions. I specialize in React.js, TypeScript, and Node.js, with a passion for building scalable architectures and delivering exceptional user experiences.
+                I'm a Software Developer with 2+ years of experience crafting production-grade web applications and AI-powered solutions. I specialize in MERN stack, passionate for building scalable architectures and delivering exceptional user experiences.
               </Text>
               <Link
                 href={resume}
@@ -220,7 +220,7 @@ export const HomeContent = () => {
                 as={"h2"}
                 size={{ base: "xl", sm: "xl", md: "2xl", lg: "2xl" }}
               >
-                Full Stack Web Developer
+                Software Developer
               </Heading>
               <Text
                 w={"90%"}
@@ -228,7 +228,7 @@ export const HomeContent = () => {
                 m={"10px 0px 20px 0px"}
                 fontSize={"14px"}
               >
-                I'm a Full Stack Web Developer with 2+ years of experience crafting production-grade web applications and AI-powered solutions. I specialize in React.js, TypeScript, and Node.js, with a passion for building scalable architectures and delivering exceptional user experiences.
+                I'm a Software Developer with 2+ years of experience crafting production-grade web applications and AI-powered solutions. I specialize in MERN stack, passionate for building scalable architectures and delivering exceptional user experiences.
               </Text>
 
               <Link

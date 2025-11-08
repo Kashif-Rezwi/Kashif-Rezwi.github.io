@@ -17,7 +17,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"center"} align={"flex-end"}>
 
                             <Text color={"cornflowerblue"} w={"90%"} fontSize={{base:"none", sm:"none", md:"30px", lg:"32px"}} fontWeight={"bolder"} textAlign={"right"} p={"0px 5px"}>
-                                Hello there 👋 I'm a Aspiring Full Stack Web Developer. Please have a look around to know more about me.
+                                Hello there 👋 I'm Software Developer. Please have a look around to know more about me.
                             </Text>
 
                         </Stack>
@@ -25,7 +25,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"center"} align={"flex-start"}>
 
                             <Text w={"90%"} fontSize={"17px"} fontWeight={"500"} textAlign={"left"} p={"0px 5px"}>
-                                A Full Stack Web Developer with 2+ years of experience delivering production-grade web applications and complex business logic. Proven track record with CRM platforms, workflow automation, and scalable architectures. Expert in the MERN stack, with a strong grasp of software design patterns, clean code principles, and production deployment.
+                                A Software Developer with 2+ years of experience delivering production-grade web applications and complex business logic. Proven track record with CRM platforms, workflow automation, and scalable architectures. Expert in the MERN stack, with a strong grasp of software design patterns, clean code principles, and production deployment.
                             </Text>
 
                         </Stack>
@@ -47,7 +47,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"flex-end"} align={"center"}>
 
                             <Text color={"cornflowerblue"} w={"100%"} fontSize={"30px"} fontWeight={"bolder"} textAlign={"justify"} p={"0px 10px"}>
-                            Hello there 👋 I'm a Aspiring Full Stack Web Developer. Please have a look around to know more about me.
+                            Hello there 👋 I'm a skilled Software Developer. Please have a look around to know more about me.
                             </Text>
 
                         </Stack>
