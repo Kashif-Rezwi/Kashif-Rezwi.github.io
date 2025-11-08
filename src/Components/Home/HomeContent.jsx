@@ -51,7 +51,6 @@ export const HomeContent = () => {
         boxSizing={"border-box"}
         w={"100%"}
         h={{ base: "95vh", sm: "95vh", md: "100vh", lg: "100vh" }}
-        bg={"#f8f7fd"}
         m={"auto"}
         display={{ base: "none", sm: "none", md: "none", lg: "block" }}
       >
@@ -143,7 +142,7 @@ export const HomeContent = () => {
             <Image
               m={"auto"}
               border={"5px solid cornflowerblue"}
-              src={"/profile/ME.jpg"}
+              src={"/profile/ME.png"}
               alt={"kashif-Rezwi"}
               w={"85%"}
               borderRadius={"50%"}
@@ -156,7 +155,6 @@ export const HomeContent = () => {
         boxSizing={"border-box"}
         w={"100%"}
         h={{ base: "95vh", sm: "95vh", md: "100vh", lg: "100vh" }}
-        bg={"#f8f7fd"}
         m={"0"}
         pt={"50px"}
         display={{ base: "block", sm: "block", md: "block", lg: "none" }}
@@ -204,7 +202,7 @@ export const HomeContent = () => {
                   <Image
                     m={"auto"}
                     border={"5px solid cornflowerblue"}
-                    src={"/profile/ME.jpg"}
+                    src={"/profile/ME.png"}
                     alt={"kashif-Rezwi"}
                     w={"85%"}
                     borderRadius={"50%"}

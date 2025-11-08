@@ -54,7 +54,7 @@ export const Contact = () => {
             m={"auto"}
             pr={{ base: "0px", sm: "0px", md: "20px", lg: "50px" }}
           >
-            <Box m={"auto"} w={"350px"}>
+            <Box m={"auto"} w={"350px"} bg={"#f5f5f5"}>
               <Link
                 transition={"0.5s"}
                 p={"15px 10px"}
@@ -202,6 +202,7 @@ export const Contact = () => {
             <Stack
               m={"auto"}
               w={"350px"}
+              bg={"#f5f5f5"}
               p={"40px 20px"}
               borderRadius={"10px"}
               boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"

@@ -10,7 +10,6 @@ import { Skills } from "./Skills";
 export const Home = () => {
   return (
     <Box
-      bg={"#f8f7fd"}
       name={"home"}
       boxSizing={"border-box"}
       w={"100%"}

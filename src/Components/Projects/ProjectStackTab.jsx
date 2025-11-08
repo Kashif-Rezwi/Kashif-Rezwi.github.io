@@ -259,6 +259,7 @@ export const ProjectStackTab = () => {
             }}
             maxW={"989px"}
             m={"auto"}
+            bg={"#f5f5f5"}
           >
             {/* <Carousel projects={gitRepos} /> */}
             {gitRepos?.map((repo) => (
@@ -277,6 +278,7 @@ export const ProjectStackTab = () => {
             }}
             maxW={"989px"}
             m={"auto"}
+            bg={"#f5f5f5"}
           >
             {/* <Carousel projects={group} /> */}
             {group?.map((repo) => (
@@ -295,6 +297,7 @@ export const ProjectStackTab = () => {
             }}
             maxW={"989px"}
             m={"auto"}
+            bg={"#f5f5f5"}
           >
             {/* <Carousel projects={individual} /> */}
             {individual?.map((repo) => (

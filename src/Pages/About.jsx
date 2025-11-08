@@ -6,7 +6,7 @@ export const About = () => {
 
         <Box w={"100%"} h={{base:"95vh", sm:"95vh", md:"100vh", lg:"100vh"}} name={"about"}>
 
-            <UnorderedList  w={"100%"} m={"0"} bg={"#f8f7fd"} h={"100%"} display={{ base: "none", sm: "none", md: "block", lg: "block" }}>
+            <UnorderedList  w={"100%"} m={"0"} h={"100%"} display={{ base: "none", sm: "none", md: "block", lg: "block" }}>
 
                 <Stack h={"100%"} justify={"center"} align={"center"}>
 
@@ -36,7 +36,7 @@ export const About = () => {
 
             </UnorderedList>
 
-            <UnorderedList w={"100%"} m={"0"} bg={"#f8f7fd"} h={"100%"} display={{ base: "block", sm: "block", md: "none", lg: "none" }}>
+            <UnorderedList w={"100%"} m={"0"} h={"100%"} display={{ base: "block", sm: "block", md: "none", lg: "none" }}>
 
                 <Stack h={"100%"} justify={"center"} align={"center"}>
 
