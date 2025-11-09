@@ -49,7 +49,7 @@ export const Navbar = () => {
             duration={500}
             className="nav__logo"
           >
-            Rezwi
+            K Rezwi
           </ScrollLink>
         </UnorderedList>
 

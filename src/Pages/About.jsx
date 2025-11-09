@@ -17,7 +17,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"center"} align={"flex-end"}>
 
                             <Text color={"cornflowerblue"} w={"90%"} fontSize={{base:"none", sm:"none", md:"30px", lg:"32px"}} fontWeight={"bolder"} textAlign={"right"} p={"0px 5px"}>
-                                Hello there 👋 I'm a Software Developer. Please have a look around to know more about my professional journey.
+                                Hey there! 👋 I'm a Software Developer. Please have a look around to know more about my professional journey.
                             </Text>
 
                         </Stack>
@@ -25,7 +25,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"center"} align={"flex-start"}>
 
                             <Text w={"90%"} fontSize={"17px"} fontWeight={"500"} textAlign={"left"} p={"0px 5px"}>
-                                A Software Developer with 2+ years of experience in a fast-paced startup environment, delivering production-grade web applications and AI-powered solutions. Proven track record with CRM platforms, workflow automation, and scalable architectures. Expert in the MERN stack, with a strong understanding of software design patterns, clean code principles, and production deployment.
+                                With 2+ years of experience in a fast-paced startup environment, delivering production-grade web applications and AI-powered solutions. Proven track record with CRM platforms, workflow automation, and scalable architectures. Proficient in MERN stack, with a strong understanding of software design patterns, clean code principles, and production deployment. Experienced in collaborating with cross-functional teams to deliver key product features within project timelines.
                             </Text>
 
                         </Stack>
@@ -47,7 +47,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"flex-end"} align={"center"}>
 
                             <Text color={"cornflowerblue"} w={"100%"} fontSize={"30px"} fontWeight={"bolder"} textAlign={"justify"} p={"0px 10px"}>
-                            Hello there 👋 I'm a Software Developer. Please have a look around to know more about my professional journey.
+                            Hey there! 👋 I'm a Software Developer. Please have a look around to know more about my professional journey.
                             </Text>
 
                         </Stack>
@@ -55,7 +55,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"flex-start"} align={"center"}>
 
                             <Text w={"100%"} fontSize={"20px"} fontWeight={"500"} textAlign={"justify"} p={"0px 10px"}>
-                                A Software Developer with 2+ years of experience in a fast-paced startup environment, delivering production-grade web applications and AI-powered solutions. Proven track record with CRM platforms, workflow automation, and scalable architectures. Expert in the MERN stack, with a strong understanding of software design patterns, clean code principles, and production deployment.
+                                With 2+ years of experience in a fast-paced startup environment, delivering production-grade web applications and AI-powered solutions. Proven track record with CRM platforms, workflow automation, and scalable architectures. Proficient in MERN stack, with a strong understanding of software design patterns, clean code principles, and production deployment. Experienced in collaborating with cross-functional teams to deliver key product features within project timelines.
                             </Text>
 
                         </Stack>
