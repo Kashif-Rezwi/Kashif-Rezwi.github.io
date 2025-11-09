@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.d42c0c7b.css",
-    "main.js": "/static/js/main.e095f193.js",
+    "main.js": "/static/js/main.b9671026.js",
     "static/js/787.128fc6e9.chunk.js": "/static/js/787.128fc6e9.chunk.js",
-    "static/media/Kashif-Rezwi-Resume.pdf": "/static/media/Kashif-Rezwi-Resume.af416a5987c8a0d617ac.pdf",
+    "static/media/Kashif-Rezwi-Resume.pdf": "/static/media/Kashif-Rezwi-Resume.6af187af8f033768e577.pdf",
     "index.html": "/index.html",
     "main.d42c0c7b.css.map": "/static/css/main.d42c0c7b.css.map",
-    "main.e095f193.js.map": "/static/js/main.e095f193.js.map",
+    "main.b9671026.js.map": "/static/js/main.b9671026.js.map",
     "787.128fc6e9.chunk.js.map": "/static/js/787.128fc6e9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d42c0c7b.css",
-    "static/js/main.e095f193.js"
+    "static/js/main.b9671026.js"
   ]
 }
