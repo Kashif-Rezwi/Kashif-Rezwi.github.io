@@ -96,7 +96,7 @@ export const HomeContent = () => {
               </Link>
             </VStack>
 
-            <Box w={"90%"} align={"left"} pl={"20px"}>
+            <Box w={"94%"} align={"left"} pl={"20px"}>
               <Heading color={"#505050"} as={"h1"} size={"xl"}>
                 Hi I'm Kashif Rezwi.
               </Heading>
@@ -109,7 +109,7 @@ export const HomeContent = () => {
                 m={"10px 0px 20px 0px"}
                 fontSize={"14px"}
               >
-                I'm a Software Developer with 2+ years of experience crafting production-grade web applications and AI-powered solutions. I specialize in MERN stack, passionate for building scalable architectures and delivering exceptional user experiences.
+                I'm a Software Developer with 2+ years of experience in a fast-paced startup environment, crafting production-grade web applications and AI-powered solutions. I specialize in MERN stack, passionate for building scalable architectures and delivering seamless user experiences.
               </Text>
               <Link
                 href={resume}
@@ -228,7 +228,7 @@ export const HomeContent = () => {
                 m={"10px 0px 20px 0px"}
                 fontSize={"14px"}
               >
-                I'm a Software Developer with 2+ years of experience crafting production-grade web applications and AI-powered solutions. I specialize in MERN stack, passionate for building scalable architectures and delivering exceptional user experiences.
+                I'm a Software Developer with a fast-paced startup environment, crafting production-grade web applications and AI-powered solutions. I specialize in MERN stack, passionate for building scalable architectures and delivering seamless user experiences.
               </Text>
 
               <Link
