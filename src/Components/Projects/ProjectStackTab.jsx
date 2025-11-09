@@ -41,7 +41,7 @@ const gitRepos = [
     live: "https://nebula-ui-two.vercel.app",
     template: "./templates/betterDev.png",
     description:
-      "Better DEV UI is a modern chat interface for AI conversations. Built with the latest web technologies, it provides a seamless, real-time experience with streaming responses, tool visibility, and conversation management.",
+      "Better DEV is a modern chat interface for AI conversations. Built with the latest web technologies, it provides a seamless, real-time experience with streaming responses, tool visibility, and conversation management.",
     video: [
       false,
       "",
