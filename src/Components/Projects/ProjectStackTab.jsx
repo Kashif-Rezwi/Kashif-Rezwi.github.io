@@ -38,7 +38,7 @@ const gitRepos = [
     id: 0,
     name: "better.dev",
     github: "https://github.com/Kashif-Rezwi/better-dev-ui",
-    live: "https://nebula-ui-two.vercel.app",
+    live: "https://www.betterdev.in",
     template: "./templates/betterDev.png",
     description:
       "Better DEV is a modern chat interface for AI conversations. Built with the latest web technologies, it provides a seamless, real-time experience with streaming responses, tool visibility, and conversation management.",
