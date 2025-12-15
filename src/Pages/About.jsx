@@ -17,7 +17,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"center"} align={"flex-end"}>
 
                             <Text color={"cornflowerblue"} w={"90%"} fontSize={{base:"none", sm:"none", md:"30px", lg:"32px"}} fontWeight={"bolder"} textAlign={"right"} p={"0px 5px"}>
-                                Hey there! 👋 I'm a Software Developer. Please have a look around to know more about my professional journey.
+                                Hey there! 👋 I'm a Software Engineer. Please have a look around to know more about my professional journey.
                             </Text>
 
                         </Stack>
@@ -47,7 +47,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"flex-end"} align={"center"}>
 
                             <Text color={"cornflowerblue"} w={"100%"} fontSize={"30px"} fontWeight={"bolder"} textAlign={"justify"} p={"0px 10px"}>
-                            Hey there! 👋 I'm a Software Developer. Please have a look around to know more about my professional journey.
+                            Hey there! 👋 I'm a Software Engineer. Please have a look around to know more about my professional journey.
                             </Text>
 
                         </Stack>
