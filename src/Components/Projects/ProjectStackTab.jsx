@@ -36,7 +36,7 @@ import { DiNodejs } from "react-icons/di";
 const gitRepos = [
   {
     id: 0,
-    name: "better.dev",
+    name: "betterdev.in",
     github: "https://github.com/Kashif-Rezwi/better-dev-ui",
     live: "https://www.betterdev.in",
     template: "./templates/betterDev.png",

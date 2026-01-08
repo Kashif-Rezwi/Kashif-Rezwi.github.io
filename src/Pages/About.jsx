@@ -25,7 +25,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"center"} align={"flex-start"}>
 
                             <Text w={"90%"} fontSize={"17px"} fontWeight={"500"} textAlign={"left"} p={"0px 5px"}>
-                                With 2+ years of experience in a fast-paced startup environment, delivering production-grade web applications and AI-powered solutions. Proven track record with CRM platforms, workflow automation, and scalable architectures. Proficient in MERN stack, with a strong understanding of software design patterns, clean code principles, and production deployment. Experienced in collaborating with cross-functional teams to deliver key product features within project timelines.
+                                Experienced in fast-paced startup environments, delivering production-grade &nbsp;&nbsp;&nbsp; full-stack web apps and AI-powered solutions. Proven track record in building CRM platforms, workflow automation systems, and scalable architectures. Proficient in the MERN stack, with a strong understanding of software design patterns, clean code principles, and production deployments. Experienced in collaborating with cross-functional teams to deliver high-impact product features.
                             </Text>
 
                         </Stack>
@@ -55,7 +55,7 @@ export const About = () => {
                         <Stack w={"100%"} justify={"flex-start"} align={"center"}>
 
                             <Text w={"100%"} fontSize={"20px"} fontWeight={"500"} textAlign={"justify"} p={"0px 10px"}>
-                                With 2+ years of experience in a fast-paced startup environment, delivering production-grade web applications and AI-powered solutions. Proven track record with CRM platforms, workflow automation, and scalable architectures. Proficient in MERN stack, with a strong understanding of software design patterns, clean code principles, and production deployment. Experienced in collaborating with cross-functional teams to deliver key product features within project timelines.
+                                Experienced in fast-paced startup environments, delivering production-grade full-stack web apps and AI-powered solutions. Proven track record in building CRM platforms, workflow automation systems, and scalable architectures. Proficient in the MERN stack, with a strong understanding of software design patterns, clean code principles, and production deployments. Experienced in collaborating with cross-functional teams to deliver high-impact product features.
                             </Text>
 
                         </Stack>
