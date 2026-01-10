@@ -108,7 +108,7 @@ export const HomeContent = () => {
                 textAlign={"justify"}
                 m={"10px 0px 20px 0px"}
               >
-                I'm a Software Engineer with 2+ years of experience in a fast-paced startup environment, crafting production-grade web applications and AI-powered solutions. I specialize in MERN stack, passionate for building scalable architectures and delivering seamless user experiences.
+                I'm a Software Engineer with 2+ years of experience in fast-paced startup environments, crafting production-grade full-stack web apps and AI-powered solutions. I specialize in MERN stack, passionate for building scalable architectures and delivering seamless user experiences.
               </Text>
               <Link
                 href={resume}

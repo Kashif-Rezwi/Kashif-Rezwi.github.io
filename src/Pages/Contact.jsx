@@ -65,6 +65,7 @@ export const Contact = () => {
                 justifyContent={"flex-start"}
                 alignItems={"center"}
                 href="tel:9883909187"
+                // href="tel:966575074791"
                 boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
                 _hover={{
                   boxShadow:
@@ -74,8 +75,8 @@ export const Contact = () => {
                 }}
               >
                 <MdPhone size="25px" />
-                {/* <Text ml={"5px"}>+91-9883909187</Text> */}
-                <Text ml={"5px"}>+966-575074791</Text>
+                <Text ml={"5px"}>+91-9883909187</Text>
+                {/* <Text ml={"5px"}>+966-575074791</Text> */}
               </Link>
 
               <Link
@@ -101,8 +102,8 @@ export const Contact = () => {
               </Link>
 
               <Link
-                // href={"https://goo.gl/maps/KXPijYNRofykEkeP7"}
-                href="https://maps.app.goo.gl/Kw5Qr7LupzJMWpdZ8"
+                href={"https://goo.gl/maps/KXPijYNRofykEkeP7"}
+                // href="https://maps.app.goo.gl/Kw5Qr7LupzJMWpdZ8"
                 isExternal
                 transition={"0.5s"}
                 p={"15px 10px"}
@@ -121,8 +122,8 @@ export const Contact = () => {
                 }}
               >
                 <MdLocationOn size="25px" />
-                {/* <Text ml={"5px"}>Kolkata, India</Text> */}
-                <Text ml={"5px"}>Riyadh, Saudi Arabia</Text>
+                <Text ml={"5px"}>Kolkata, India</Text>
+                {/* <Text ml={"5px"}>Riyadh, Saudi Arabia</Text> */}
               </Link>
 
               <Link
@@ -287,13 +288,13 @@ export const Contact = () => {
               flexDir={"row"}
               justifyContent={"flex-start"}
               alignItems={"center"}
-              // href="tel:9883909187"
-              href="tel:966575074791"
+              href="tel:9883909187"
+              // href="tel:966575074791"
               _hover={{ textDecoration: "none" }}
             >
               <MdPhone size="25px" />
-              {/* <Text ml={"5px"}>+91-9883909187</Text> */}
-              <Text ml={"5px"}>+966-575074791</Text>
+              <Text ml={"5px"}>+91-9883909187</Text>
+              {/* <Text ml={"5px"}>+966-575074791</Text> */}
             </Link>
 
             <Link
@@ -303,13 +304,13 @@ export const Contact = () => {
               justifyContent={"flex-start"}
               alignItems={"center"}
               _hover={{ textDecoration: "none" }}
-              // href={"https://goo.gl/maps/KXPijYNRofykEkeP7"}
-              href="https://maps.app.goo.gl/Kw5Qr7LupzJMWpdZ8"
+              href={"https://goo.gl/maps/KXPijYNRofykEkeP7"}
+              // href="https://maps.app.goo.gl/Kw5Qr7LupzJMWpdZ8"
               isExternal
             >
               <MdLocationOn size="25px" />
-              {/* <Text ml={"5px"}>Kolkata, India</Text> */}
-              <Text ml={"5px"}>Riyadh, Saudi Arabia</Text>
+              <Text ml={"5px"}>Kolkata, India</Text>
+              {/* <Text ml={"5px"}>Riyadh, Saudi Arabia</Text> */}
             </Link>
           </HStack>
 
