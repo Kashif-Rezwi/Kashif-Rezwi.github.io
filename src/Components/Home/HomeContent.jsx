@@ -105,10 +105,12 @@ export const HomeContent = () => {
               </Heading>
               <Text
                 w={"100%"}
+                color={"#505050"}
+                fontWeight={"bold"}
                 textAlign={"justify"}
                 m={"10px 0px 20px 0px"}
               >
-                I build production-grade web applications, AI-powered features, and workflow automation tools. Focused on AI agents, scalable architectures, system design, and shipping reliable software that solves real product problems.
+                I build production-grade web applications, AI-powered features, and workflow automation tools. Focused on AI agents, scalable architectures, system design, and shipping reliable production-ready software that solves real product problems.
               </Text>
               <Link
                 href={resume}
@@ -223,10 +225,12 @@ export const HomeContent = () => {
               </Heading>
               <Text
                 w={"90%"}
+                color={"#505050"}
+                fontWeight={"bold"}
                 textAlign={"justify"}
                 m={"10px 0px 20px 0px"}
               >
-                I build production-grade web applications, AI-powered features, and workflow automation tools. Focused on AI agents, scalable architectures, system design, and shipping reliable software that solves real product problems.
+                I build production-grade web applications, AI-powered features, and workflow automation tools. Focused on AI agents, scalable architectures, system design, and shipping reliable production-ready software that solves real product problems.
               </Text>
 
               <Link

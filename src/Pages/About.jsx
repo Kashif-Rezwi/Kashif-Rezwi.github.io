@@ -24,8 +24,8 @@ export const About = () => {
 
                             <Stack w={"100%"} justify={"center"} align={"flex-start"}>
 
-                                <Text w={"85%"} fontSize={"17px"} fontWeight={"500"} textAlign={"left"} p={"0px 5px"}>
-                                    I’m a Full Stack Engineer with 2+ years of experience in fast-paced startup environments, building production-grade web applications and AI-powered products. I’ve worked on CRM platforms, workflow automation systems, and scalable architectures, with a strong focus on system design, clean code, and maintainable software. I enjoy collaborating with cross-functional teams to deliver reliable, high-impact product features.
+                                <Text w={"85%"} color={"#505050"} fontSize={"18px"} fontWeight={"bold"} textAlign={"left"} p={"0px 5px"}>
+                                    I’m a Full Stack Engineer with 2+ years of experience in fast-paced startup environments, building production-grade web applications and AI-powered products. Worked on CRM platforms, workflow automation systems, and scalable architectures, with a strong focus on system design, clean code, and maintainable software. I enjoy collaborating with cross-functional teams to deliver reliable, impactful features.
                                 </Text>
 
                             </Stack>
@@ -54,7 +54,7 @@ export const About = () => {
 
                             <Stack w={"100%"} justify={"flex-start"} align={"center"}>
 
-                                <Text w={"100%"} fontSize={"20px"} fontWeight={"500"} textAlign={"justify"} p={"0px 10px"}>
+                                <Text w={"100%"} color={"#505050"} fontSize={"20px"} fontWeight={"bold"} textAlign={"justify"} p={"0px 10px"}>
                                     I’m a Full Stack Engineer with 2+ years of experience in fast-paced startup environments, building production-grade web applications and AI-powered products. I’ve worked on CRM platforms, workflow automation systems, and scalable architectures, with a strong focus on system design, clean code, and maintainable software. I enjoy collaborating with cross-functional teams to deliver reliable, high-impact product features.
                                 </Text>
 
