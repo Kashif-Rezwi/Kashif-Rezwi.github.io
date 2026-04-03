@@ -24,6 +24,12 @@ import {
   SiTypescript,
   SiNestjs,
   SiPostgresql,
+  SiRedis,
+  SiNextdotjs,
+  SiVercel,
+  SiDocker,
+  SiOpenai,
+  SiAuth0,
 } from "react-icons/si";
 import { ProjectInfo } from "./ProjectInfo";
 import { BiCodeCurly } from "react-icons/bi";
@@ -35,8 +41,30 @@ import { DiNodejs } from "react-icons/di";
 
 const gitRepos = [
   {
-    id: 0,
-    name: "betterdev.in",
+    id: 8,
+    name: "code-review-agent",
+    github: "https://github.com/Kashif-Rezwi/code-review-agent",
+    live: "https://code-review-agent-client.vercel.app",
+    template: "./templates/code-review-agent.png",
+    description: "code-review-agent is an AI-powered code review assistant that automates code analysis and generates structured, actionable feedback to help developers identify issues and improve code quality.",
+    video: [false, ""],
+    doneBy: "individual",
+    techstack: [
+      <SiTypescript />,
+      <SiNextdotjs />,
+      <SiTailwindcss />,
+      <FaNode />,
+      <SiExpress />,
+      <SiNestjs />,
+      <SiOpenai />,
+      <SiPostgresql />,
+      <SiRedis />,
+      <SiDocker />
+    ],
+  },
+  {
+    id: 1,
+    name: "betterdev",
     github: "https://github.com/Kashif-Rezwi/better-dev-ui",
     live: "https://www.betterdev.in",
     template: "./templates/betterDev.png",
@@ -56,12 +84,13 @@ const gitRepos = [
       <DiNodejs />,
       <SiNestjs />,
       <SiPostgresql />,
+      <SiDocker />
     ],
   },
 
   {
-    id: 1,
-    name: "automa.com",
+    id: 2,
+    name: "automa",
     github: "https://github.com/Kashif-Rezwi/Automa-Clone-App",
     live: "https://automa-clone.netlify.app/",
     template: "./templates/automa.png",
@@ -85,8 +114,8 @@ const gitRepos = [
   },
 
   {
-    id: 2,
-    name: "codeair.com",
+    id: 3,
+    name: "codeair",
     github: "https://github.com/Kashif-Rezwi/glistening-cook-4365",
     live: "https://codeair.netlify.app/",
     template: "./templates/codeair.jpg",
@@ -109,8 +138,8 @@ const gitRepos = [
   },
 
   {
-    id: 3,
-    name: "nordstrom.com",
+    id: 4,
+    name: "nordstrom",
     github: "https://github.com/Kashif-Rezwi/Nordstrom",
     live: "https://nord-ecommerce-website.netlify.app/",
     template: "./templates/nordstrom.PNG",
@@ -131,8 +160,8 @@ const gitRepos = [
   },
 
   {
-    id: 4,
-    name: "myntra.com",
+    id: 5,
+    name: "myntra",
     github: "https://github.com/Kashif-Rezwi/Myntra",
     live: "https://grand-tarsier-842e30.netlify.app/homepage",
     template: "./templates/myntra.PNG",
@@ -147,8 +176,8 @@ const gitRepos = [
   },
 
   {
-    id: 5,
-    name: "herebuy.com",
+    id: 6,
+    name: "herebuy",
     github: "https://github.com/arpit2444/grieving-driving-625-NearBuy",
     live: "https://soft-custard-9f29c0.netlify.app/",
     template: "./templates/herebuy.png",
@@ -168,8 +197,8 @@ const gitRepos = [
     ],
   },
   {
-    id: 6,
-    name: "trendsy.com",
+    id: 7,
+    name: "trendsy",
     github: "https://github.com/Shalini1908/prickly-expert-9128",
     live: "https://trendsy.vercel.app/",
     template: "./templates/myntra2.png",

@@ -112,7 +112,7 @@ export const ProjectInfo = ({
           fontSize={"14px"}
           leftIcon={<BsStack />}
         >
-          Techstack
+          Tech Stack
         </Button>
         {techstack?.map((el, i) => (
           <Text m={"5px 10px"} cursor={"pointer"} key={i} fontSize={"20px"}>
