@@ -101,14 +101,14 @@ export const HomeContent = () => {
                 Hi I'm Kashif Rezwi.
               </Heading>
               <Heading color={"cornflowerblue"} as={"h2"} size={"2xl"}>
-                Software Engineer
+                Full Stack Engineer
               </Heading>
               <Text
                 w={"100%"}
                 textAlign={"justify"}
                 m={"10px 0px 20px 0px"}
               >
-                I'm a Software Engineer with 2+ years of experience in fast-paced startup environments, crafting production-grade full-stack web apps and AI-powered solutions. I specialize in MERN stack, passionate for building scalable architectures and delivering seamless user experiences.
+                I build production-grade web applications, AI-powered features, and workflow automation tools. Focused on AI agents, scalable architectures, system design, and shipping reliable software that solves real product problems.
               </Text>
               <Link
                 href={resume}
@@ -219,14 +219,14 @@ export const HomeContent = () => {
                 as={"h2"}
                 size={{ base: "xl", sm: "xl", md: "2xl", lg: "2xl" }}
               >
-                Software Engineer
+                Full Stack Engineer
               </Heading>
               <Text
                 w={"90%"}
                 textAlign={"justify"}
                 m={"10px 0px 20px 0px"}
               >
-                I'm a Software Engineer with a fast-paced startup environment, crafting production-grade web applications and AI-powered solutions. I specialize in MERN stack, passionate for building scalable architectures and delivering seamless user experiences.
+                I build production-grade web applications, AI-powered features, and workflow automation tools. Focused on AI agents, scalable architectures, system design, and shipping reliable software that solves real product problems.
               </Text>
 
               <Link
