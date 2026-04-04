@@ -1,9 +1,7 @@
 import {
   Box,
-  Button,
   Grid,
   Heading,
-  HStack,
   Image,
   Link,
   Stack,
@@ -16,8 +14,8 @@ import {
   UilLinkedinAlt,
   UilGithubAlt,
   UilAt,
-  UilTelegramAlt,
 } from "@iconscout/react-unicons";
+import { PiDevToLogo } from "react-icons/pi";
 import resume from "../Home/resume/Kashif-Rezwi-Resume.pdf";
 
 export const HomeContent = () => {
@@ -79,20 +77,23 @@ export const HomeContent = () => {
                 href={"https://www.linkedin.com/in/kashif-rezwi/"}
                 isExternal
               >
-                <UilLinkedinAlt />
+                <UilLinkedinAlt size={26} />
               </Link>
+
               <Link
                 _hover={{ color: "cornflowerblue" }}
-                onClick={debounce(copyEmail, 500)}
+                href={"https://dev.to/kashifrezwi"}
+                isExternal
               >
-                <UilAt />
+                <PiDevToLogo size={28} />
               </Link>
+
               <Link
                 _hover={{ color: "cornflowerblue" }}
                 href={"https://github.com/Kashif-Rezwi"}
                 isExternal
               >
-                <UilGithubAlt />
+                <UilGithubAlt size={26} />
               </Link>
             </VStack>
 
