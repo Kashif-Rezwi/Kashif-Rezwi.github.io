@@ -183,20 +183,23 @@ export const HomeContent = () => {
                     href={"https://www.linkedin.com/in/kashif-rezwi/"}
                     isExternal
                   >
-                    <UilLinkedinAlt />
+                    <UilLinkedinAlt size={26} />
                   </Link>
+
                   <Link
                     _hover={{ color: "cornflowerblue" }}
-                    onClick={debounce(copyEmail, 500)}
+                    href={"https://dev.to/kashifrezwi"}
+                    isExternal
                   >
-                    <UilAt />
+                    <PiDevToLogo size={28} />
                   </Link>
+
                   <Link
                     _hover={{ color: "cornflowerblue" }}
                     href={"https://github.com/Kashif-Rezwi"}
                     isExternal
                   >
-                    <UilGithubAlt />
+                    <UilGithubAlt size={26} />
                   </Link>
                 </VStack>
 
@@ -225,7 +228,7 @@ export const HomeContent = () => {
                 Full Stack Engineer
               </Heading>
               <Text
-                w={"90%"}
+                w={"100%"}
                 color={"#505050"}
                 fontWeight={"bold"}
                 textAlign={"justify"}

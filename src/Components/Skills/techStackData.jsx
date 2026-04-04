@@ -26,7 +26,7 @@ export const techStackData = [
   { icon: <SiNextdotjs />, name: "Next js", category: "frontend" },
   { icon: <SiTailwindcss />, name: "Tailwindcss", category: "frontend" },
   { icon: <SiRedux />, name: "Redux", category: "frontend" },
-  { icon: <SiReactquery />, name: "React query", category: "frontend" },
+  { icon: <SiReactquery />, name: "Tanstack query", category: "frontend" },
   { icon: <SiReactrouter />, name: "React router", category: "frontend" },
 
   { icon: <FaNodeJs />, name: "Node", category: "backend" },

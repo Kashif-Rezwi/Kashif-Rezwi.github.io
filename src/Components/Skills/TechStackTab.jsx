@@ -43,7 +43,10 @@ export const TechStackTab = () => {
             >
               {cat.label}
             </Heading>
-            <TechStackGrid icons={filteredIcons} />
+            <TechStackGrid
+              icons={filteredIcons}
+              justify={isEven ? "flex-start" : "flex-end"}
+            />
           </Box>
         );
       })}

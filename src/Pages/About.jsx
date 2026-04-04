@@ -42,11 +42,11 @@ export const About = () => {
 
                         <Heading as={"h1"}>About Me</Heading>
 
-                        <Grid templateColumns={"repeat(1, 1fr)"}>
+                        <Grid templateColumns={"repeat(1, 1fr)"} gap={2}>
 
                             <Stack w={"100%"} justify={"flex-end"} align={"center"}>
 
-                                <Text color={"cornflowerblue"} w={"100%"} fontSize={"30px"} fontWeight={"bolder"} textAlign={"justify"} p={"0px 10px"}>
+                                <Text color={"cornflowerblue"} w={"100%"} fontSize={{ base: "24px", sm: "26px", md: "none", lg: "none" }} fontWeight={"bolder"} textAlign={"justify"} p={"0px 10px"}>
                                     Hey there! 👋 I’m a Full Stack Engineer. Take a look around to explore my work in full-stack development, AI agents, and product engineering.
                                 </Text>
 
@@ -54,7 +54,7 @@ export const About = () => {
 
                             <Stack w={"100%"} justify={"flex-start"} align={"center"}>
 
-                                <Text w={"100%"} color={"#505050"} fontSize={"20px"} fontWeight={"bold"} textAlign={"justify"} p={"0px 10px"}>
+                                <Text w={"100%"} color={"#505050"} fontSize={{ base: "18px", sm: "20px", md: "none", lg: "none" }} fontWeight={"bold"} textAlign={"justify"} p={"0px 10px"}>
                                     I’m a Full Stack Engineer with 2+ years of experience in fast-paced startup environments, building production-grade web applications and AI-powered products. I’ve worked on CRM platforms, workflow automation systems, and scalable architectures, with a strong focus on system design, clean code, and maintainable software. I enjoy collaborating with cross-functional teams to deliver reliable, high-impact product features.
                                 </Text>
 
