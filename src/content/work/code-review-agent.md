@@ -6,7 +6,7 @@ status: 'Live demo'
 summary: 'AI code review with streamed structured feedback, multi-agent PR analysis, ESLint tooling, and RAG over team coding standards.'
 repo: 'https://github.com/Kashif-Rezwi/code-review-agent'
 demo: 'https://code-review-agent-client.vercel.app'
-tech: ['Next.js', 'NestJS', 'PostgreSQL']
+tech: ['Next.js', 'NestJS', 'TypeScript', 'Vercel AI SDK', 'PostgreSQL', 'pgvector', 'Prisma', 'BullMQ', 'Redis', 'SSE', 'GitHub OAuth']
 order: 1
 draft: false
 cover: 'code-review-agent.png'

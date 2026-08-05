@@ -6,7 +6,7 @@ status: 'Live demo'
 summary: 'Cited AI answer engine — web-grounded answers with citations and threaded follow-ups, with an honest single-user V2 scope.'
 repo: 'https://github.com/Kashif-Rezwi/perplexity'
 demo: 'https://perplexity-lilac.vercel.app'
-tech: ['Next.js', 'NestJS', 'Prisma']
+tech: ['Next.js', 'NestJS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Tavily', 'Groq / OpenAI', 'Vercel']
 order: 2
 draft: false
 cover: 'perplexity.png'

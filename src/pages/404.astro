@@ -2,18 +2,67 @@
 import Base from '../layouts/Base.astro';
 import { withBase } from '../lib/paths';
 ---
-<Base
-  title="404 — Not found · Kashif Rezwi"
-  description="That page doesn't exist."
->
-  <div class="container-site py-24 text-center">
-    <p class="section-label">404</p>
-    <h1 class="mt-4 text-3xl font-semibold tracking-tight">Page not found</h1>
-    <p class="mt-4 max-w-[68ch] mx-auto text-body text-ink-muted">
-      That page doesn't exist. Try the home page or the selected work.
-    </p>
-    <p class="mt-8">
-      <a href={withBase('')} class="btn">Home</a>
-    </p>
+
+<Base title="404 — Not found · Kashif Rezwi" description="That page doesn't exist.">
+  <div class="not-found-page container-site">
+    <div class="not-found-inner animate-fade-up">
+      <p class="not-found-code section-label">404</p>
+      <h1 class="not-found-title">
+        Page <span class="gradient-text">not found</span>
+      </h1>
+      <p class="not-found-desc">
+        That URL doesn't exist. Head back home or check the selected work.
+      </p>
+      <div class="not-found-actions">
+        <a href={withBase('')} class="btn">← Back home</a>
+        <a href={withBase('#work')} class="btn-outline">View work</a>
+      </div>
+    </div>
   </div>
 </Base>
+
+<style>
+  .not-found-page {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: 4rem;
+  }
+
+  .not-found-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 480px;
+  }
+
+  .not-found-code {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+  }
+
+  .not-found-title {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .not-found-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-ink-muted);
+    margin: 0;
+  }
+
+  .not-found-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+</style>

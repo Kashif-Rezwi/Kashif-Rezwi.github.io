@@ -10,18 +10,63 @@ const pdfHref = withBase('resume/Kashif-Rezwi-Resume.pdf');
   title="Resume — Kashif Rezwi"
   description="Resume of Kashif Rezwi, Frontend-focused Full Stack Engineer (PDF)."
 >
-  <div class="container-site py-16 md:py-24">
+  <div class="resume-page container-site animate-fade-up">
     <p class="section-label">Resume</p>
-    <h1 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
-      Kashif Rezwi — Resume
+    <h1 class="resume-title">
+      Kashif Rezwi — <span class="gradient-text">Resume</span>
     </h1>
-    <p class="mt-6 max-w-[68ch] text-body">
-      This PDF is the single source of truth for my experience, skills, and
-      education; the experience section on the home page mirrors it.
+    <p class="resume-desc">
+      Single source of truth for my experience, skills, and education.
+      The experience section on the home page mirrors it.
     </p>
-    <p class="mt-8 flex flex-wrap gap-4">
-      <a href={pdfHref} target="_blank" rel="noopener" class="btn">Open PDF</a>
-      <a href={pdfHref} download class="btn-secondary">Download</a>
-    </p>
+    <div class="resume-actions">
+      <a href={pdfHref} target="_blank" rel="noopener" class="btn">Open PDF →</a>
+      <a href={pdfHref} download class="btn-outline">Download</a>
+      <a href={withBase('')} class="resume-back">← Back home</a>
+    </div>
   </div>
 </Base>
+
+<style>
+  .resume-page {
+    padding-block: 4rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .resume-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin: 0.25rem 0 0;
+    color: var(--color-ink);
+  }
+
+  .resume-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-ink-muted);
+    max-width: 56ch;
+    margin: 0;
+  }
+
+  .resume-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .resume-back {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-ink-dim);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .resume-back:hover {
+    color: var(--color-accent-light);
+  }
+</style>

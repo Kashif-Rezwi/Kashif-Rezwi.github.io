@@ -7,12 +7,9 @@
    cold blue-black), single cornflowerblue accent dialed up with glow effects,
    JetBrains Mono for code labels, Inter for body. Motion is purposeful and
    respectful of prefers-reduced-motion.
+   
+   Fonts loaded via <link> in Base.astro (Inter + JetBrains Mono).
    =========================================================================== */
-
-/* ---------------------------------------------------------------------------
-   Font imports (Inter + JetBrains Mono via Google Fonts)
---------------------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ---------------------------------------------------------------------------
    Design tokens — dual light/dark via light-dark() (CSS Color 4)
