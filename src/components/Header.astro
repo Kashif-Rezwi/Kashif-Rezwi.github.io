@@ -48,8 +48,8 @@ const resumeHref = withBase('resume/');
     </button>
   </nav>
 
-  <!-- Mobile nav drawer -->
-  <div id="mobile-nav" class="mobile-nav" aria-hidden="true">
+  <!-- Mobile nav drawer — `inert` when closed so links are not focusable/tab-reachable -->
+  <div id="mobile-nav" class="mobile-nav" inert>
     <ul role="list">
       {
         links.map((link) => (
@@ -174,11 +174,13 @@ const resumeHref = withBase('resume/');
     display: none;
     overflow: hidden;
     max-height: 0;
+    visibility: hidden;
     transition: max-height 0.3s ease;
     border-top: 1px solid var(--color-border);
   }
   .mobile-nav.is-open {
     max-height: 300px;
+    visibility: visible;
   }
   .mobile-nav ul {
     list-style: none;
@@ -239,9 +241,10 @@ const resumeHref = withBase('resume/');
   const btn = document.getElementById('mobile-menu-btn');
   const nav = document.getElementById('mobile-nav');
   btn?.addEventListener('click', () => {
-    const isOpen = nav?.classList.toggle('is-open');
+    const isOpen = nav?.classList.toggle('is-open') ?? false;
     btn.setAttribute('aria-expanded', String(isOpen));
-    nav?.setAttribute('aria-hidden', String(!isOpen));
+    // `inert` while collapsed so links are not focusable or exposed to AT
+    if (nav) nav.inert = !isOpen;
   });
 
   // Close mobile menu on link click
@@ -249,7 +252,7 @@ const resumeHref = withBase('resume/');
     link.addEventListener('click', () => {
       nav.classList.remove('is-open');
       btn?.setAttribute('aria-expanded', 'false');
-      nav.setAttribute('aria-hidden', 'true');
+      nav.inert = true;
     });
   });
 </script>

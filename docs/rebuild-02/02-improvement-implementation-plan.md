@@ -391,8 +391,8 @@ R3-B, R3-C, and R3-D may be developed separately after R3-A, but each remains ow
 - [x] Fix and verify no-JS reveal baseline (R3-0).
 - [x] Test matrix performance and reduced motion (R3-B QA).
 - [x] Run responsive/theme/input matrix.
-- [ ] Run axe, Lighthouse, contrast, and link checks.
-- [ ] Update QA report, status, decision log, and rollback instructions.
+- [x] Run axe, Lighthouse, contrast, and link checks. (R3-F — DL-029)
+- [x] Update QA report, status, decision log, and rollback instructions. (R3-F — DL-029)
 
 ## 8. Risks and mitigations
 

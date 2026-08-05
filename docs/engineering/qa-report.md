@@ -1,9 +1,9 @@
-# QA Report — Phase 1.3
+# QA Report
 
-- **Purpose:** The Phase 1.3 deliverable (roadmap 1.3): measured metrics, audit results, and residual risks → owner go/no-go for the Phase 1.4 launch.
-- **Authority:** Phase 1.3 build, 2026-08-05. Metrics measured locally against the acceptance criteria in `docs/engineering/architecture-and-quality.md`.
-- **Last updated:** 2026-08-05
-- **Related:** [architecture-and-quality.md](./architecture-and-quality.md) · [branching-and-deploys.md](./branching-and-deploys.md) · [implementation-roadmap.md](./implementation-roadmap.md)
+- **Purpose:** QA evidence across phases. Phase 1.3/1.4 measured Phase 1 acceptance criteria and post-launch smoke tests. The **R3-F (production QA)** section below proves the content/accessibility rebuild is ready for the owner's R3-G launch go/no-go.
+- **Authority:** Phase 1.3 build (2026-08-05); R3-F QA pass (2026-08-06) against `docs/rebuild-02/02-improvement-implementation-plan.md` §R3-F and `docs/engineering/architecture-and-quality.md`.
+- **Last updated:** 2026-08-06
+- **Related:** [architecture-and-quality.md](./architecture-and-quality.md) · [branching-and-deploys.md](./branching-and-deploys.md) · [implementation-roadmap.md](./implementation-roadmap.md) · `docs/rebuild-02/02-improvement-implementation-plan.md`
 
 ## 1. Acceptance criteria vs measured
 
@@ -108,4 +108,81 @@ Smoke test against `https://kashif-rezwi.github.io/` (production Base URL, no pr
 | 404 | 200 | `/404.html` → 200 ✅ |
 | Preview repo | archived | `Kashif-Rezwi/portfolio-preview` archived ✅ |
 
-**Production is live with the Astro build. All acceptance criteria verified post-launch. Phase 1 complete.**
+**Production is live with the Astro build. All Phase 1 acceptance criteria verified post-launch. Phase 1 complete.**
+
+---
+
+# R3-F — Production QA (rebuild)
+
+**Objective:** Prove the revised (R3-0 → R3-E) portfolio is ready to launch. Measured 2026-08-06 against `docs/rebuild-02/02-improvement-implementation-plan.md` §R3-F. Built with `npx astro build`, previewed on **`http://127.0.0.1:4325`** (project-local `./node_modules/.bin/astro preview`).
+
+## F1. Quality targets vs measured
+
+| Target | Target value | Measured | Pass |
+|---|---|---|---|
+| Lighthouse (home + one case study) | ≥ 95 all categories | **100 / 100 / 100 / 100** on home (mobile+desktop, light+dark) and lingo-agent (mobile dark) | ✅ |
+| axe | zero critical/serious | **0 violations** on all routes, both themes (was 1 moderate pre-fix) | ✅ |
+| WCAG 2.2 AA contrast + focus | pass | `scripts/check-contrast.mjs`, **16/16 pairs pass**; `:focus-visible` outline = accent (`global.css`) | ✅ |
+| Initial client JS (compressed) | ≤ 35 KB | **~4.2 KB inline** (no external bundles) | ✅ |
+| Render-blocking third-party font | none | system font stack; **no web-font/external request** | ✅ |
+| CLS | ≤ 0.05 | **0** (Lighthouse) | ✅ |
+| Links | internal + external | internal **11/11 resolve**; external all **200** (LinkedIn 999 authwall expected; OQ-06) | ✅ |
+| Content in raw HTML, visible without JS | yes | all content present with JS disabled; reveal/hero only gated on runtime-added classes | ✅ |
+| Console errors | none | **none** on home, all case studies, resume, 404 | ✅ |
+
+## F2. Lighthouse matrix (local, headless Chrome)
+
+| Page | Preset | Theme | Perf | A11y | BP | SEO | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|---|---|---|
+| **/** home | mobile | dark | 100 | 100 | 100 | 100 | 1.1 s | 0 | 0 ms |
+| **/** home | mobile | light | 100 | 100 | 100 | 100 | — | 0 | 0 ms |
+| **/** home | desktop | dark | 100 | 100 | 100 | 100 | 0.3 s | 0 | 0 ms |
+| **/** home | desktop | light | 100 | 100 | 100 | 100 | — | 0 | 0 ms |
+| **/work/lingo-agent/** | mobile | dark | 100 | 100 | 100 | 100 | — | 0 | 0 ms |
+
+Initial JS ≈ 4.2 KB inline far below the 35 KB target; no external script/font requests.
+
+## F3. axe (axe-core 4.10.2, jsdelivr)
+
+`axe.run(document)` on the hash-rendered DOM (with the showcase's requestAnimationFrame-animated canvas). **Zero violations found (`[]`) on every route in both themes:**
+
+- `/` (dark + light)
+- `/work/code-review-agent/` (dark+light)
+- `/work/lingo-agent/` (dark+light)
+- `/work/perplexity/` (dark+light)
+- `/resume/`
+- `/404/`
+
+**Fix applied mid-pass:** case-study `<aside class="case-sidebar">` nested inside `<main>` tripped `landmark-complementary-is-top-level` (moderate) on case-study pages. Changed to `role="region"` + `aria-label="Project details"` in `src/pages/work/[slug].astro`. Re-ran: **`[]` everywhere.**
+
+## F4. Responsive / theme / input matrix
+
+| Dimension | Method | Result |
+|---|---|---|
+| Widths 320 / 390 / 768 / 1024 / 1440 | `set viewport` on home **and** a case study | **0 horizontal overflow** on all (dsw = innerWidth) |
+| Themes light / dark / system | `set media` + `?theme=` hook | system default = no `data-theme` (CSS auto-matches OS; `?theme=light|dark` forces override) — all render |
+| `?theme=` QA hook | `Base.astro` initializer | forces light/dark; both re-ran pass |
+| Motion normal / reduced | `set media … reduced-motion` | `prefers-reduced-motion:reduced` matches; reveal forced to `opacity:1, transform:none`; hero matrix static/disabled |
+| Input keyboard / mouse / coarse | code audit; coarse `pointer:coarse` branch in hero | no conflict; no soft-keyboard breakage detected in console |
+| Execution normal JS | default | all pass |
+| Blocked JS | Chrome `--disable-javascript` dump | all content + reveal visible (serve/gate classes only applied at runtime) |
+| Slow network | local server (no remote assets) | zero network dependence for fonts/JS |
+| Canvas unavailable | hero `if (context)` guard (HeroDotMatrix.astro:64-67) | no-op → `.hero-dot-fallback` static dots remain (matrix-ready never added) |
+| Routes | sitemap/robots/manifest/OG/404 | `/sitemap-index.xml` `robots.txt` `manifest.webmanifest` `og.png` all **200**; unknown + nested miss → **404** custom |
+
+## F5. Manual accessibility audit (re-verify after R3-E)
+
+- Landmarks, skip-link→`#main`, one `h1`, ordered headings, `lang="en"`, labeled icon links, `rel="noopener"` on new-tab links — all retained (Phase 1.3 §3). ✅
+- Focus: `:focus-visible` outline now uses **accent** (`--color-accent-text`) for visible-on-both-themes focus. ✅
+- Contrast: `--color-ink-dim` re-paletted (`#808080` dark-space, `#707070` light-space); `.section-label` / `.btn-outline` border use accent; light-theme `.btn` override added (white on accent). Applied via `npm run check-contrast`. ✅
+
+## F6. Residual risks for the gate
+
+1. **LinkedIn click-through** — LinkedIn returns HTTP 401/999 (authwall); must be owner-verified manually (OQ-06). Not a defect.
+2. **Resume PDF** — exists (200); content not diff-checked here (implements the owner-approved R3-E resume edits).
+3. **Visual spot-check** — 320/1440 rendering verified structurally (no overflow); pixel captures at those widths remain an owner view.
+4. **GitHub activity** — the no-JS/blocked-JS path relies on build-time static HTML (R3-D decision DL-026) which was not part of the R3-F runtime test; the module degraded without erroring console.
+
+## F7. R3-F conclusion
+
+Every quality target is met or exceeded across the full matrix. **Recommend GO for launch under the owner's explicit R3-G go/no-go.**

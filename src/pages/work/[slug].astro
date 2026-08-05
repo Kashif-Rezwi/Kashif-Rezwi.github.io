@@ -110,8 +110,8 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
         </div>
       </div>
 
-      <!-- Sidebar -->
-      <aside class="case-sidebar">
+      <!-- Sidebar (labelled region — avoids nesting a complementary `<aside>` inside <main>) -->
+      <div class="case-sidebar" role="region" aria-label="Project details">
         <!-- Tech stack -->
         <div class="case-sidebar-card reveal">
           <h2 class="case-sidebar-label">Tech stack</h2>
@@ -140,7 +140,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
             )}
           </ul>
         </div>
-      </aside>
+      </div>
     </div>
 
     <!-- =========================================================

@@ -34,7 +34,7 @@
   /* Ink */
   --color-ink: #f0f0f0;            /* primary text — near white */
   --color-ink-muted: #888888;      /* secondary text — medium gray */
-  --color-ink-dim: #444444;        /* tertiary — timestamps, meta */
+  --color-ink-dim: #808080;        /* tertiary — dim meta text, AA-safe on canvas (#0f0f0f) */
 
   /* Accent — cornflowerblue family */
   --color-accent: #6495ed;          /* cornflowerblue core */
@@ -74,7 +74,7 @@
   --color-border: #dfdfdf;
   --color-ink: #111111;
   --color-ink-muted: #555555;
-  --color-ink-dim: #777777;
+  --color-ink-dim: #707070;
   --color-accent: #6495ed;
   --color-accent-light: #4b74d3;
   --color-accent-text: #2f57ad;
@@ -96,7 +96,7 @@
     --color-border: #dfdfdf;
     --color-ink: #111111;
     --color-ink-muted: #555555;
-    --color-ink-dim: #777777;
+    --color-ink-dim: #707070;
     --color-accent: #6495ed;
     --color-accent-light: #4b74d3;
     --color-accent-text: #2f57ad;
@@ -148,9 +148,11 @@
     color: var(--color-accent-light);
   }
 
-  /* Focus affordances — WCAG 2.4.11 */
+  /* Focus affordances — WCAG 2.4.11. Use the accessible accent tint so the
+     focus ring keeps ≥3:1 against canvas in both themes (accent alone fails
+     the light theme). */
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-accent-text);
     outline-offset: 3px;
     border-radius: var(--radius-control);
   }
@@ -194,7 +196,7 @@
     font-size: 0.6875rem; /* 11px */
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--color-accent-text); /* readable accent tint — accent alone fails AA in light theme */
     font-weight: 500;
   }
 
@@ -241,6 +243,28 @@
     transform: translateY(0);
   }
 
+  /* Light theme: cornflower accent fill is only 2.80:1 against white (fails
+     WCAG 1.4.11 non-text 3:1). Use the readable accent tint + white text so
+     the button boundary and label both pass AA. */
+  :root[data-theme='light'] .btn {
+    background: var(--color-accent-text);
+    color: #ffffff;
+  }
+  :root[data-theme='light'] .btn:hover {
+    background: var(--color-accent-light);
+    color: #ffffff;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) .btn {
+      background: var(--color-accent-text);
+      color: #ffffff;
+    }
+    :root:not([data-theme]) .btn:hover {
+      background: var(--color-accent-light);
+      color: #ffffff;
+    }
+  }
+
   .btn-outline {
     display: inline-flex;
     align-items: center;
@@ -252,7 +276,7 @@
     font-size: 0.8125rem;
     font-weight: 500;
     border-radius: var(--radius-control);
-    border: 1px solid var(--color-border-focus);
+    border: 1px solid var(--color-accent-text); /* readable accent — border alone fails non-text AA on light */
     cursor: pointer;
     transition: background 0.15s ease, transform 0.1s ease;
     text-decoration: none;

@@ -25,7 +25,11 @@ const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
     <!-- Apply an explicit saved preference before styles paint; system has no attribute. -->
     <script is:inline>
       try {
-        const theme = localStorage.getItem('portfolio-theme');
+        const urlTheme = new URLSearchParams(location.search).get('theme');
+        const theme =
+          urlTheme === 'light' || urlTheme === 'dark'
+            ? urlTheme
+            : localStorage.getItem('portfolio-theme');
         if (theme === 'light' || theme === 'dark') {
           document.documentElement.dataset.theme = theme;
           document.documentElement.style.colorScheme = theme;

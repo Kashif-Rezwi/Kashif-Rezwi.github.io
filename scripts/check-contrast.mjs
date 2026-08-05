@@ -1,33 +1,36 @@
 /**
- * WCAG 2.x contrast verification for the Phase 1.0 design tokens
- * (docs/strategy/product-and-design-brief.md + architecture acceptance criteria).
+ * WCAG 2.x contrast verification for the rebuild-03 design tokens
+ * (src/styles/global.css). Enforces the current dark + light palettes so CI
+ * blocks AA regressions on canvas and surface for all three ink tiers.
  *
  * Keep this script in sync with src/styles/global.css (@theme block).
  * Run: npm run check:contrast
  */
 
-const PAPER = '#f5f5f5';
-const SURFACE = '#ffffff';
+const DARK = { canvas: '#0f0f0f', surface: '#161616' };
+const LIGHT = { canvas: '#f8f8f8', surface: '#ffffff' };
 
 /** [label, foreground, background, minimum ratio, hard requirement?] */
 const checks = [
-  // Body text — must be >= 4.5:1 (acceptance criterion)
-  ['ink on paper', '#1f1f1f', PAPER, 4.5, true],
-  ['ink on surface', '#1f1f1f', SURFACE, 4.5, true],
-  ['ink-muted on paper', '#4f4f4f', PAPER, 4.5, true],
-  ['ink-muted on surface', '#4f4f4f', SURFACE, 4.5, true],
-  // Link text (accent-ink) — >= 4.5:1
-  ['accent-ink on paper', '#3862c0', PAPER, 4.5, true],
-  ['accent-ink on surface', '#3862c0', SURFACE, 4.5, true],
-  ['accent-ink on accent-soft (tags)', '#3862c0', '#e8eefa', 4.5, true],
-  // Reversed text (skip link, selection, buttons)
-  ['white on accent-ink', '#ffffff', '#3862c0', 4.5, true],
-  ['paper on ink', PAPER, '#1f1f1f', 4.5, true],
-  // Non-text (focus ring / UI) — >= 3:1 (WCAG 1.4.11); focus rings use accent-ink
-  ['accent-ink non-text on paper', '#3862c0', PAPER, 3.0, true],
-  // Informational — decorative, not asserted
-  ['accent on paper (decorative)', '#6495ed', PAPER, 3.0, false],
-  ['hairline on paper (decorative)', '#d9d9d9', PAPER, 1.0, false],
+  // --- Dark theme (text >= 4.5:1) ---
+  ['ink on canvas (dark)', '#f0f0f0', DARK.canvas, 4.5, true],
+  ['ink on surface (dark)', '#f0f0f0', DARK.surface, 4.5, true],
+  ['ink-muted on canvas (dark)', '#888888', DARK.canvas, 4.5, true],
+  ['ink-muted on surface (dark)', '#888888', DARK.surface, 4.5, true],
+  ['ink-dim on canvas (dark)', '#808080', DARK.canvas, 4.5, true],
+  ['ink-dim on surface (dark)', '#808080', DARK.surface, 4.5, true],
+  ['accent-text on canvas (dark)', '#a9c8ff', DARK.canvas, 4.5, true],
+  // --- Light theme (text >= 4.5:1) ---
+  ['ink on canvas (light)', '#111111', LIGHT.canvas, 4.5, true],
+  ['ink on surface (light)', '#111111', LIGHT.surface, 4.5, true],
+  ['ink-muted on canvas (light)', '#555555', LIGHT.canvas, 4.5, true],
+  ['ink-muted on surface (light)', '#555555', LIGHT.surface, 4.5, true],
+  ['ink-dim on canvas (light)', '#707070', LIGHT.canvas, 4.5, true],
+  ['ink-dim on surface (light)', '#707070', LIGHT.surface, 4.5, true],
+  ['accent-text on canvas (light)', '#2f57ad', LIGHT.canvas, 4.5, true],
+  // --- Non-text UI (>= 3:1, WCAG 1.4.11) ---
+  ['accent non-text on canvas (dark)', '#6495ed', DARK.canvas, 3.0, true],
+  ['accent-text non-text on canvas (light)', '#2f57ad', LIGHT.canvas, 3.0, true],
 ];
 
 function channel(v) {
