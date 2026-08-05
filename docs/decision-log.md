@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-05
+- **Last updated:** 2026-08-05 (DL-017)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -117,3 +117,17 @@
 - **Date:** 2026-08-05
 - **Decision:** GitHub's Pages API returned 422 ("Deactivating GitHub pages for this repository is not allowed") when attempting to delete the site, and 409 ("GitHub Pages is already enabled") when attempting to recreate as `build_type=workflow`. The Pages source therefore remains `legacy: branch=gh-pages` — production is served by pushing build output to `gh-pages`, not via `deploy.yml`. The `deploy.yml` workflow remains in-repo (filed, ready for a future owner to switch Pages source manually via the web UI if desired). This does not affect correctness or performance — production is live and verified.
 - **Approval status:** Documented as a known platform limitation (owner, 2026-08-05).
+
+## DL-016 — Rebuild-02: design direction override approved
+
+- **Date:** 2026-08-05
+- **Decision:** The Phase 1 "Calm Engineering Ledger" design brief (product-and-design-brief.md) is superseded on the `rebuild-02` branch. The new direction is "Dark Precision" — dark-first theme, Inter + JetBrains Mono custom fonts, cornflowerblue accent with glow effects, microanimations, tech stack section, and cover images for all three featured projects. Explicitly overrides the Phase 1 anti-patterns list (dark mode, custom fonts, animations, tech-tag sections were all forbidden in Phase 1).
+- **Rationale:** Owner-approved (2026-08-05): the Phase 1 result was identified as "too generic and plain — reads like a plain-text resume." The rebuild-02 goal is to impress visitors on first glance while preserving all claim-safe content, Astro architecture, SEO, accessibility, and performance standards.
+- **Approval status:** Approved (owner, implementation plan approved 2026-08-05).
+
+## DL-017 — Rebuild-02: commit strategy (phase-per-commit)
+
+- **Date:** 2026-08-05
+- **Decision:** Each rebuild-02 phase (R2-A through R2-E) is committed separately with a conventional commit message. Branch `rebuild-02` diverges from `main` and will be merged to `main`/deployed to `gh-pages` after full QA.
+- **Rationale:** Owner directive (2026-08-05): "make sure on completing each Phase update the task and commit it properly so every commit will be meaningful and separate."
+- **Approval status:** Approved (owner directive, 2026-08-05).

@@ -2,18 +2,27 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-05
+- **Last updated:** 2026-08-05 (rebuild-02 complete)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase
 
-**Phase 1.4 — Production launch: COMPLETE** (Phase 1.3 gate approved 2026-08-05, DL-013; launch executed DL-014). Production URL (`https://kashif-rezwi.github.io/`) now serves the Astro build — verified HTTP 200, zero `<script>` tags, no `noindex`, dedicated OG card, claim-safe title. CRA build output replaced on `gh-pages` (old content preserved in branch history for rollback). Preview repo `Kashif-Rezwi/portfolio-preview` archived (DL-014). Pages source remains `legacy: gh-pages` due to GitHub API limitation (DL-015) — `deploy.yml` remains filed in-repo for a future owner to activate via the web UI if desired. All Phase 1 gates approved; Phase 1 complete; repo archived for maintenance.
+**Rebuild-02 — Design Overhaul: COMPLETE** (2026-08-05, DL-016/DL-017). All 5 phases committed to `rebuild-02` branch. Awaiting owner review + deploy to `gh-pages`.
+
+| Phase | Scope | Status |
+|---|---|---|
+| R2-A — Design System | dark tokens, fonts, Header, Footer | ✅ Committed `8d754e9` |
+| R2-B — Homepage | hero, work grid, tech stack, experience, contact | ✅ Committed `628fca3` |
+| R2-C — Case Studies | [slug].astro redesign, cover images for all 3 projects | ✅ Committed `e680003` |
+| R2-D — Polish | 404, resume, CSS cleanup, enriched tech tags | ✅ Committed `4f06aab` |
+| R2-E — Docs | decision log, project-status, task tracker | ✅ This commit |
+
+**Phase 1.4 — Production launch: COMPLETE** (2026-08-05, DL-014–015). Production now serves the new Astro portfolio.
 
 **Phase 1.1 — Core home page: COMPLETE, gate approved** (2026-08-05, DL-010). All home sections built with claim-mapped copy (hero, selected work cards + compact row, experience, AI journey/now, contact incl. owner-approved phone per DL-009, footer); `/resume` route serves the PDF as the single source of truth (C-08); portrait re-encoded via Astro (AVIF 16 KB); home meta/OG including og:image. Every public sentence mapped to a CL-ID in `docs/strategy/home-copy-claim-map.md`.
 
 **Phase 1.0 — Foundation: COMPLETE, gate approved** (2026-08-05). Foundation decisions adopted as DL-008: branch model (`develop` carries Phase 1; `main`/`gh-pages` frozen until 1.4), preview mechanism (companion repo `Kashif-Rezwi/portfolio-preview`, on-demand project-site deploys, zero secrets), repo shape (Astro at root of `develop`; CRA preserved on `main`/`gh-pages` until the 1.4 merge), system font stacks, contrast-verified token palette. Operating rules in `docs/engineering/branching-and-deploys.md` (audit F-04 deliverable).
 
-**Built & verified (2026-08-05, Phase 1.4 complete):** Production now serves the Astro build (verified: HTTP 200, 14.7 KB HTML, 0 `<script>` tags, no `noindex`, dedicated OG card at `/og.png`, claim-safe title, sitemap + robots + manifest all live). `develop` branch pushed to `main` (CRA source on trunk replaced). `deploy.yml` armed but Pages source remains `legacy: gh-pages` (API limitation, DL-015); production deploys by pushing build output to `gh-pages`. Preview repo archived. Rollback: old CRA build output preserved in `gh-pages` branch history.
 
 **Phase 0 — CLOSED, owner-ratified** (2026-08-05). All open questions resolved (OQ-01…OQ-13 closed); positioning approved with the DL-004 condition applied; Phase 1 plan approved (DL-005).
 
