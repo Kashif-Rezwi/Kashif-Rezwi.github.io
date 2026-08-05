@@ -88,6 +88,11 @@
   color-scheme: light;
 }
 
+:root[data-theme='light'] .tech-item,
+:root[data-theme='light'] .tech-item:hover {
+  --brand-on-dark: var(--brand);
+}
+
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
     --color-canvas: #f8f8f8;
@@ -108,6 +113,11 @@
     --color-hairline: var(--color-border);
     --color-accent-ink: var(--color-accent);
     color-scheme: light;
+  }
+
+  .tech-item,
+  .tech-item:hover {
+    --brand-on-dark: var(--brand);
   }
 }
 

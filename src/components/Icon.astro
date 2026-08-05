@@ -17,7 +17,32 @@ interface Props {
     | 'system'
     | 'sparkles'
     | 'writing'
-    | 'learning';
+    | 'learning'
+    | 'react'
+    | 'nextjs'
+    | 'typescript'
+    | 'git'
+    | 'tailwind'
+    | 'mongodb'
+    | 'redis'
+    | 'javascript'
+    | 'python'
+    | 'redux'
+    | 'nodejs'
+    | 'express'
+    | 'nestjs'
+    | 'websocket'
+    | 'rest'
+    | 'rabbitmq'
+    | 'postgres'
+    | 'clickhouse'
+    | 'docker'
+    | 'ghactions'
+    | 'vercel'
+    | 'prisma'
+    | 'pgvector'
+    | 'bullmq'
+    | 'tanstack';
   size?: number;
   label?: string;
   class?: string;
@@ -57,4 +82,29 @@ const titleId = label ? `icon-${name}-${crypto.randomUUID()}` : undefined;
   {name === 'sparkles' && <><path d="m12 3 1.2 4.8L18 9l-4.8 1.2L12 15l-1.2-4.8L6 9l4.8-1.2Z" /><path d="m19 15 .6 2.4L22 18l-2.4.6L19 21l-.6-2.4L16 18l2.4-.6Z" /></>}
   {name === 'writing' && <><path d="m4 20 4.2-1 10-10a2.1 2.1 0 0 0-3-3l-10 10z" /><path d="m13.8 7.2 3 3" /><path d="M4 20h6" /></>}
   {name === 'learning' && <><path d="M4 5.5h6.5A2.5 2.5 0 0 1 13 8v11H6a2 2 0 0 0-2 2z" /><path d="M20 5.5h-6.5A2.5 2.5 0 0 0 11 8v11h7a2 2 0 0 1 2 2z" /></>}
+  {name === 'react' && <><circle cx="12" cy="12" r="2.1" /><ellipse cx="12" cy="12" rx="9.3" ry="3.7" /><ellipse cx="12" cy="12" rx="9.3" ry="3.7" transform="rotate(60 12 12)" /><ellipse cx="12" cy="12" rx="9.3" ry="3.7" transform="rotate(120 12 12)" /></>}
+  {name === 'nextjs' && <><circle cx="12" cy="12" r="8.4" /><path d="M7.6 16.5v-9l8.8 9" /><path d="M16.4 8v8.5" /></>}
+  {name === 'typescript' && <><rect x="4.5" y="4.5" width="15" height="15" rx="2.5" /><path d="M8.2 9v2" /><path d="M9 7h1.5" /><path d="M12 7v6" /><path d="M12 12.5c0-.5.6-1 1.7-1v1.1" /><path d="M12 15.2v.6" /><path d="M15 8v3" /><path d="M15 8h-1.5" /></>}
+  {name === 'git' && <><circle cx="6.5" cy="6" r="2.4" /><circle cx="6.5" cy="18" r="2.4" /><circle cx="17" cy="7" r="2.4" /><path d="M6.5 8.4v7.2" /><path d="M8.9 7.5c4.5 0 4.5 2 5 4.5" /></>}
+  {name === 'tailwind' && <><path d="M6 15c1.5-4 3-6 5-6s3.5 2 5 2 2-1 2-2c-1.5 4-3 6-5 6s-3.5-2-5-6c-1.5 0-2 0-2 2z" /><path d="M6 8C4.5 4 6 2 8 2s3.5 2 5 6-3.5 6-5 6-2.5-2-2-6c-.5 0-1 0-1 0z" /></>}
+  {name === 'mongodb' && <><path d="M12 4c1.2 4.5 1.5 8 0 6" /><path d="M12 10c0 8-5 10-5 10s6-1 7-15" /><path d="M12 10c0 8 5 10 5 10s-6-1-7-15" /><path d="M12 4v16" /></>}
+  {name === 'redis' && <><path d="M4 9h16" /><path d="M4 13.5h16" /><path d="M4 18h9" /><path d="m7 5 1.5 1.6L10 5" /></>}
+  {name === 'javascript' && <><rect x="4" y="4.5" width="16" height="15" rx="2" /><path d="M13 10.5c.3-1.4 1-2 2-2 1.5 0 2.5 1 2.5 2.7v5.3M8 13.3l1.2 1.2L10.5 13" /><path d="M8 15.5l1.2-1.2 1.3 1.2" /></>}
+  {name === 'python' && <><path d="M12 4c-2 0-6 .5-6 6v.5l6 2.5 6-2.5V10c0-5.5-4-6-6-6Z" /><path d="M12 20c2 0 6-.5 6-6v-.5l-6-2.5-6 2.5V14c0 5.5 4 6 6 6Z" /><circle cx="12" cy="7" r="0.5" /><circle cx="12" cy="17" r="0.5" /></>}
+  {name === 'redux' && <><path d="M12 4v16" /><path d="M12 5.5 7 3v5.5z" /><path d="M5.5 10.5c5.5 0 6.5 2.5 6.5 2.5s1-2.5 6.5-2.5" /><circle cx="18" cy="13" r="1.5" /></>}
+  {name === 'tanstack' && <><path d="M3.5 20 8 12l3 5 5-9" /><path d="M16 8h3.5v3.5" /></>}
+  {name === 'nodejs' && <><path d="M12 3 19.5 7v10L12 21 4.5 17V7z" /><path d="M12 3 19.5 7v10L12 21 4.5 17V7z" opacity="0" /><circle cx="12" cy="12" r="1" /></>}
+  {name === 'express' && <><path d="M3 12c5.5 0 6.5-8 6-8 0 8 13 8 0 8s-6-8-6-8z" /></>}
+  {name === 'nestjs' && <><path d="m12 3 3 2.5-3 3" /><path d="m12 6 4.5 1.5L4.5 14" /><path d="m12 21 3-2.5-3-3" /><path d="M4.5 5v14L4.5 5Z" /></>}
+  {name === 'websocket' && <><circle cx="8" cy="8" r="3.5" /><circle cx="16" cy="16" r="3.5" /><path d="M10.5 9.5 13.5 14.5" /></>}
+  {name === 'rest' && <><path d="M4 8h8" /><path d="M14 8l-2-2M14 8l-2 2" /><path d="M20 16h-8" /><path d="M10 16l2-2M10 16l2 2" /></>}
+  {name === 'rabbitmq' && <><path d="M3.5 20V11.5M3.5 8h3v3H3.5M6.5 8V5h2.5V11" /><path d="M6.5 11V17h7" /><path d="M6.5 8.5H9" /><path d="M13.5 17h4V11M11 17v3M20 17h1" /></>}
+  {name === 'postgres' && <><ellipse cx="12" cy="5.5" rx="7" ry="2.5" /><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13" /><path d="M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5" /></>}
+  {name === 'clickhouse' && <><path d="M6 4h2v13h-2z" /><path d="M11 8h2v9h-2z" /><path d="M16 4h2v13h-2z" /><path d="M4 20h17" /></>}
+  {name === 'docker' && <><path d="M3.5 10.5h11v4.5a3.5 3.5 0 0 1-3.5 3.5H7a3.5 3.5 0 0 1-3.5-3.5z" /><path d="M3.5 13h11" /><path d="M14.5 6h1M16.5 6h1M16.5 8h1" /></>}
+  {name === 'ghactions' && <><rect x="3.5" y="3.5" width="17" height="17" rx="3" /><circle cx="12" cy="12" r="3" /><path d="M12 9V7.5M12 16.5V15M9 12H7.5M16.5 12H15M10 10l-1-1M15 15l-1-1M14 10l1-1M10 14l-1 1" /></>}
+  {name === 'vercel' && <path d="M12 4 20.5 20h-17z" />}
+  {name === 'prisma' && <><path d="m12 3 8.5 14H3.5z" /><path d="m12 3-3.5 14 3.5 4 3.5-4z" /></>}
+  {name === 'pgvector' && <><ellipse cx="12" cy="5.5" rx="7" ry="2.5" /><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13" /><path d="M14 13.5 16 12l2 1V9.5" /></>}
+  {name === 'bullmq' && <><path d="M13 3 6 13h4l-3 8 7-9h-4l3-8z" /></>}
 </svg>
