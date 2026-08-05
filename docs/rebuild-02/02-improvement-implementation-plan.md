@@ -206,6 +206,8 @@ Each phase ends with review evidence and an owner-held gate. A later phase does 
 
 **Single card anatomy**
 
+**Execution status (2026-08-05):** Complete locally under DL-024 (R3-B gate approved; R3-C authorized); owner gate pending. `WorkCard` v2 implements the anatomy below with neutral status, a two-line summary slot, first-4 tech + `+N more`, one primary `.btn-outline` action, and icon+text secondary links; `ProjectRow` is the single secondary grammar; the case-study status badge is neutralized identically. All acceptance criteria pass (Lighthouse Performance 100 mobile; zero nested interactives; equal card heights at desktop). Full evidence: `06-r3-c-card-evidence.md`.
+
 1. fixed-ratio media frame;
 2. role/status metadata;
 3. project title;
@@ -377,8 +379,8 @@ R3-B, R3-C, and R3-D may be developed separately after R3-A, but each remains ow
 
 ### Components
 
-- [ ] Normalize `WorkCard`.
-- [ ] Add one secondary `ProjectRow`.
+- [x] Normalize `WorkCard`. (R3-C — DL-024; evidence `06-r3-c-card-evidence.md`; owner gate pending)
+- [x] Add one secondary `ProjectRow`. (R3-C — DL-024)
 - [ ] Add evidence-aware `SkillGroup`.
 - [ ] Add first-party `GitHubActivity`.
 - [ ] Simplify experience/now/contact structures.

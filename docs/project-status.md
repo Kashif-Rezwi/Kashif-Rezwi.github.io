@@ -2,12 +2,12 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-05 (R3-B complete locally; owner gate pending)
+- **Last updated:** 2026-08-05 (R3-C complete locally; owner gate pending)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase
 
-**Rebuild-03 improvement cycle — R3-B OWNER GATE** (2026-08-05, DL-018–DL-023). The bounded R3-B hero-matrix phase is complete locally: static canvas fallback, theme-attribute-aware opacity, parked-pointer settle fix, responsive/motion/performance validation (Lighthouse Performance 100 mobile + desktop; zero long tasks). The DL-021 elevation/hover corrections, the owner-confirmed ThemeControl segmented control and footer wrap, and the DL-023 cross-page elevation consistency correction (case-study hero glow removed; zero shadow/glow declarations remain under `src/`) are included. All work remains undeployed.
+**Rebuild-03 improvement cycle — R3-C OWNER GATE** (2026-08-05, DL-018–DL-024). R3-B was owner-approved (DL-024). The bounded R3-C project-card phase is complete locally: `WorkCard` v2 with the normalized anatomy (16/9 media, neutral status, two-line summary slot, first-4 tech + `+N more`, one primary action, icon+text secondary links), the new `ProjectRow` secondary grammar, and the neutralized case-study status badge — with equal desktop card heights, zero nested interactives, and Lighthouse Performance 100 mobile. Evidence: `docs/rebuild-02/06-r3-c-card-evidence.md`. All work remains undeployed.
 
 | Phase | Scope | Status |
 |---|---|---|
@@ -16,8 +16,9 @@
 | R3-B prototype | Dual-theme pointer-responsive hero dot matrix; body grid removed | ✅ Implemented and committed as `29b5218`; locally verified; undeployed |
 | R3-0 | Claim/resilience corrections and baseline | ✅ Committed as `a008e94`; evidence in `docs/rebuild-02/03-r3-0-correctness-baseline.md`; owner gate approved in DL-020 |
 | R3-A | Visual-system simplification, local icons, theme control, local typography | ✅ Approved by owner in DL-021; final elevation/hover corrections included in the R3-B transition |
-| R3-B | Hero matrix fallback, tuning, responsive/motion validation, performance evidence | ✅ Complete locally; evidence in `docs/rebuild-02/05-r3-b-matrix-evidence.md`; owner gate pending |
-| R3-C–R3-G | Remaining implementation through launch | ⏸ Planned; not authorized by this status |
+| R3-B | Hero matrix fallback, tuning, responsive/motion validation, performance evidence | ✅ Approved by owner in DL-024; evidence in `docs/rebuild-02/05-r3-b-matrix-evidence.md` |
+| R3-C | Flagship project-card system (WorkCard v2, ProjectRow, status semantics) | ✅ Complete locally; evidence in `docs/rebuild-02/06-r3-c-card-evidence.md`; owner gate pending |
+| R3-D–R3-G | Remaining implementation through launch | ⏸ Planned; not authorized by this status |
 
 **Rebuild-02 — Design Overhaul: COMPLETE** (2026-08-05, DL-016/DL-017). All five original R2 phases remain committed on `rebuild-02`; this completed state is now the base for the proposed improvement cycle.
 

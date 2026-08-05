@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-05 (DL-023)
+- **Last updated:** 2026-08-05 (DL-024)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -173,3 +173,9 @@
 - **Decision:** The owner reported residual perceived elevation on non-home pages (“shadow” behind the navbar on project pages) and directed that the main page’s flat style be consistent across the portfolio. The `.case-hero::before` radial accent glow on case-study pages (`src/pages/work/[slug].astro`) — the last decorative glow outside the hero matrix — was removed along with its now-unneeded positioning wrappers, and a repository-wide scan confirmed zero `box-shadow`, `drop-shadow`, `text-shadow`, or decorative radial-gradient declarations remain under `src/`. Verified visually on case-study and 404 pages (dark/light, desktop/mobile) and folded into the R3-B gate evidence.
 - **Rationale:** The flat cornflower system must read identically on every route; a top-of-page glow on case studies read as navbar elevation and broke the single-signature-hero direction.
 - **Approval status:** Approved (owner directive in conversation, 2026-08-05). Included in the pending R3-B owner gate; R3-C and later, merge, and production deployment remain unauthorized.
+## DL-024 — R3-B owner gate approval; R3-C authorization and card grammar
+
+- **Date:** 2026-08-05
+- **Decision:** The owner reviewed the R3-B evidence (matrix/fallback/theme/performance captures, DL-021–DL-023 corrections) and approved the gate with "great, now let's move to R3-C accordingly", authorizing R3-C. Within R3-C the card grammar is normalized: (1) fixed 16/9 media frame without the cover divider hairline; (2) status demoted to neutral dim mono text everywhere — the green success-colored pill is removed from cards and case-study heroes, since status is not a success claim; (3) summaries capped to a two-line slot so card heights align exactly; (4) tech capped to the first four entries plus a `+N more` link into the case study, which retains full lists; (5) one obvious primary action — "Read case study →" in the existing `.btn-outline` grammar — with icon+text Repo / Live demo links; (6) secondary projects move to a single `ProjectRow` component (name · claim label · description · icon+text links) with zero copy changes; (7) the card hairline border is deliberately kept for dark-mode visibility and flagged for owner review at the gate.
+- **Rationale:** Scanability with credibility — every featured card answers role, status, problem, stack, and next action in the same order; one primary action beats three co-equal links; success-colored status pills implied outcomes the evidence does not support.
+- **Approval status:** Approved by owner directive (2026-08-05). R3-C owner gate review pending; R3-D and later, merge, and production deployment remain unauthorized.

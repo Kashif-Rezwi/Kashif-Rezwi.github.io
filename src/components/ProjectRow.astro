@@ -1,0 +1,96 @@
+---
+/**
+ * Secondary project row — R3-C grammar for non-flagship projects.
+ * One line of metadata, one compact description (slot, may contain inline
+ * links), and icon+text actions. Claim labels (Personal / Hackathon / …)
+ * stay visible per the evidence ledger.
+ */
+import Icon from './Icon.astro';
+
+interface RowLink {
+  href: string;
+  label: string;
+  icon?: 'repository' | 'external';
+}
+
+interface Props {
+  name: string;
+  typeLabel: string;
+  links: RowLink[];
+}
+
+const { name, typeLabel, links } = Astro.props;
+---
+
+<li class="project-row">
+  <div class="project-row-header">
+    <span class="project-row-name">{name}</span>
+    <span class="project-row-type">{typeLabel}</span>
+  </div>
+  <p class="project-row-desc"><slot /></p>
+  <div class="project-row-links">
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class="link-accent project-row-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {link.icon && <Icon name={link.icon} size={14} />}
+          {link.label}
+        </a>
+      ))
+    }
+  </div>
+</li>
+
+<style>
+  .project-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .project-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .project-row-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .project-row-name {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+  }
+  .project-row-type {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-ink-dim);
+  }
+
+  .project-row-desc {
+    font-size: 0.9rem;
+    color: var(--color-ink-muted);
+    max-width: 72ch;
+    margin: 0;
+  }
+
+  .project-row-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+  }
+  .project-row-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+</style>

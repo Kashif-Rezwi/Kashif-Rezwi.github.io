@@ -1,8 +1,11 @@
 ---
 /**
- * Featured work card — Rebuild-02 redesign.
- * Cover image loaded via Vite glob (same pattern as [slug].astro).
+ * Featured work card — R3-C normalized anatomy.
+ * Order is contractual: media → role/status → title → summary → tech → actions.
+ * Covers load via Vite glob (same pattern as [slug].astro).
  */
+import Icon from './Icon.astro';
+
 interface Props {
   title: string;
   roleLabel: string;
@@ -24,6 +27,10 @@ const covers = import.meta.glob('../assets/work/*', {
   import: 'default',
 }) as Record<string, { src: string; width: number; height: number }>;
 const coverSrc = cover ? covers[`../assets/work/${cover}`] : undefined;
+
+const VISIBLE_TECH = 4;
+const visibleTech = tech.slice(0, VISIBLE_TECH);
+const hiddenTechCount = tech.length - visibleTech.length;
 ---
 
 <article class="work-card card">
@@ -48,20 +55,31 @@ const coverSrc = cover ? covers[`../assets/work/${cover}`] : undefined;
 
     <p class="work-card-summary">{summary}</p>
 
-    <ul class="work-card-tech" aria-label={`Technologies used in ${title}`}>
-      {tech.map((t) => <li class="tech-tag">{t}</li>)}
+    <ul class="work-card-tech" aria-label={`Key technologies in ${title}; full list in the case study`}>
+      {visibleTech.map((t) => <li class="tech-tag">{t}</li>)}
+      {
+        hiddenTechCount > 0 && (
+          <li>
+            <a class="work-card-tech-more" href={href} aria-label={`${hiddenTechCount} more technologies — see the ${title} case study`}>
+              +{hiddenTechCount} more
+            </a>
+          </li>
+        )
+      }
     </ul>
 
-    <footer class="work-card-links">
-      <a href={href} class="work-card-cta">
-        Case study <span class="arrow" aria-hidden="true">→</span>
+    <footer class="work-card-actions">
+      <a href={href} class="btn-outline work-card-primary">
+        Read case study <span class="arrow" aria-hidden="true">→</span>
       </a>
       <a
         href={repo}
         class="work-card-link link-accent"
         target="_blank"
         rel="noopener noreferrer"
-      >Repo</a>
+      >
+        <Icon name="repository" size={14} />Repo
+      </a>
       {
         demo && (
           <a
@@ -70,7 +88,7 @@ const coverSrc = cover ? covers[`../assets/work/${cover}`] : undefined;
             target="_blank"
             rel="noopener noreferrer"
           >
-            Live demo
+            <Icon name="external" size={14} />Live demo
           </a>
         )
       }
@@ -83,13 +101,13 @@ const coverSrc = cover ? covers[`../assets/work/${cover}`] : undefined;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 
   .work-card-cover {
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    border-bottom: 1px solid var(--color-border);
     background: var(--color-surface-2);
   }
   .work-card-cover img {
@@ -101,6 +119,14 @@ const coverSrc = cover ? covers[`../assets/work/${cover}`] : undefined;
   }
   .work-card:hover .work-card-cover img {
     transform: scale(1.03);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .work-card-cover img {
+      transition: none;
+    }
+    .work-card:hover .work-card-cover img {
+      transform: none;
+    }
   }
 
   .work-card-body {
@@ -124,15 +150,13 @@ const coverSrc = cover ? covers[`../assets/work/${cover}`] : undefined;
     gap: 0.75rem;
   }
 
+  /* Status is neutral metadata — never a success-colored claim. */
   .work-card-status {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    color: var(--color-success);
-    background: color-mix(in srgb, var(--color-success) 12%, transparent);
-    padding: 0.15rem 0.5rem;
-    border-radius: var(--radius-pill);
-    border: 0;
+    color: var(--color-ink-dim);
     font-weight: 500;
+    white-space: nowrap;
   }
 
   .work-card-title {
@@ -157,54 +181,66 @@ const coverSrc = cover ? covers[`../assets/work/${cover}`] : undefined;
     margin: 0;
   }
 
+  /* Consistent two-line summary slot keeps card heights aligned. */
   .work-card-summary {
     font-size: 0.9375rem;
     line-height: 1.6;
     color: var(--color-ink-muted);
     margin: 0;
-    max-width: 68ch;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: calc(2 * 1.6 * 0.9375rem);
   }
 
   .work-card-tech {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.375rem;
     list-style: none;
     margin: 0;
     padding: 0;
   }
+  .work-card-tech-more {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-ink-dim);
+    text-decoration: none;
+    border-radius: var(--radius-control);
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .work-card-tech-more:hover {
+    color: var(--color-accent-text);
+    background: var(--color-accent-soft);
+  }
 
-  .work-card-links {
+  .work-card-actions {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.75rem 1.25rem;
     margin-top: auto;
-    padding-top: 0.25rem;
+    padding-top: 0.5rem;
   }
 
-  .work-card-cta {
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-accent-light);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    transition: gap 0.2s ease, color 0.15s ease;
+  .work-card-primary {
+    padding: 0.375rem 0.875rem;
   }
-  .work-card-cta:hover {
-    gap: 0.5rem;
-  }
-  .work-card-cta .arrow {
+  .work-card-primary .arrow {
     transition: transform 0.2s ease;
   }
-  .work-card-cta:hover .arrow {
+  .work-card-primary:hover .arrow {
     transform: translateX(3px);
   }
 
   .work-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
     font-family: var(--font-mono);
     font-size: 0.8125rem;
   }

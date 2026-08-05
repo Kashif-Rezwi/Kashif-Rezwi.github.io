@@ -228,15 +228,13 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     gap: 0.75rem;
   }
 
+  /* Status is neutral metadata — never a success-colored claim (R3-C). */
   .case-status-badge {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    color: var(--color-success);
-    background: color-mix(in srgb, var(--color-success) 12%, transparent);
-    padding: 0.15rem 0.625rem;
-    border-radius: var(--radius-pill);
-    border: 0;
-    font-weight: 500;
+    font-weight: 400;
+  }
+  .case-status-badge::before {
+    content: '·';
+    margin-inline: 0.375rem;
   }
 
   .case-summary {
