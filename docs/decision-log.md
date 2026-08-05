@@ -69,3 +69,10 @@
   - (h) **Skeleton copy:** claim-safe by construction — name + "Frontend-focused Full Stack Engineer" (CL-01) and neutral section labels only.
 - **Rationale:** GitHub-native Pages preview deployments are alpha/not publicly available (verified 2026-08-05 in `actions/deploy-pages` action.yml and current GitHub Pages docs), and this repository is a user site with a single production URL — so gate rule 4 ("production URL untouched until 1.4") requires previews to live on a separate project site. Full rationale and operating rules are documented in `docs/engineering/branching-and-deploys.md`.
 - **Approval status:** Approved (owner, 2026-08-05 — plan approved in conversation; preview mechanism explicitly selected from the presented options; execution began in act mode).
+
+## DL-009 — Phase 1.0 gate approved; Phase 1.1 started (contact includes phone number)
+
+- **Date:** 2026-08-05
+- **Decision:** The owner reviewed the Phase 1.0 skeleton at the preview URL and **approved the gate** (tokens, layout, nav/footer vs the "Calm Engineering Ledger" brief). Phase 1.1 (core home page) began the same day per roadmap gate rule 1. Owner amendment to the approved 1.1 plan: the contact section **includes the phone number** (the active value already published on the live site; the commented-out alternative values recorded in conflict C-12 remain prohibited from use).
+- **Rationale:** Phase 1.0 done-when criteria were verified: preview URL renders the skeleton (HTTP 200, content in raw HTML, zero client JS, `noindex`); tokens contrast-verified and matched to the brief; production untouched (still serving the CRA bundle; Pages source still `branch: gh-pages`).
+- **Approval status:** Approved (owner, 2026-08-05).
