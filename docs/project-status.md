@@ -2,7 +2,7 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-05 (three-version review + R3 plan)
+- **Last updated:** 2026-08-05 (R3-0 complete; owner gate pending)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase
@@ -14,7 +14,7 @@
 | Review | Compare archived CRA, first Astro rebuild, and `rebuild-02` | ✅ `docs/rebuild-02/01-three-version-comparative-review.md` |
 | Plan | Claims, system, hero, projects, capability/GitHub, content, QA, launch | ✅ `docs/rebuild-02/02-improvement-implementation-plan.md` |
 | R3-B prototype | Dual-theme pointer-responsive hero dot matrix; body grid removed | 🟡 Built and locally verified; uncommitted/undeployed |
-| R3-0 | Claim/resilience corrections and baseline | ⏸ Awaiting owner gate decisions |
+| R3-0 | Claim/resilience corrections and baseline | ✅ Complete locally; evidence in `docs/rebuild-02/03-r3-0-correctness-baseline.md`; owner gate pending |
 | R3-A–R3-G | Full implementation through launch | ⏸ Planned; not authorized by this status |
 
 **Rebuild-02 — Design Overhaul: COMPLETE** (2026-08-05, DL-016/DL-017). All five original R2 phases remain committed on `rebuild-02`; this completed state is now the base for the proposed improvement cycle.
@@ -42,7 +42,7 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Blocked
 
-- R3 implementation beyond the hero prototype awaits owner review of: professional title, availability/freelance wording, preferred GitHub facts, and matrix behavior in light/dark desktop/mobile.
+- R3-A+ awaits owner review/approval of the R3-0 gate and later-scope decisions: whether availability/freelance/location wording should return, preferred GitHub facts, and matrix behavior in light/dark desktop/mobile.
 - All Phase 0 open questions remain closed.
 
 ## Phase 0 gate outcome (2026-08-05)
@@ -53,4 +53,4 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- Present the comparative findings, implementation plan, and local matrix prototype to the owner. After owner decisions, begin **R3-0 only**. No commit, merge, or production deployment is currently authorized.
+- Present the completed R3-0 corrections and evidence for owner gate approval. On approval, begin **R3-A only** (visual-system simplification, icon system, and theme control). No merge or production deployment is authorized.

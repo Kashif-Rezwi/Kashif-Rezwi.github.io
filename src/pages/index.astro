@@ -8,7 +8,7 @@ import { withBase } from '../lib/paths';
 import portrait from '../assets/portrait.jpg';
 
 const description =
-  'Full Stack Engineer with 2+ years building customer-facing SaaS in startup teams — landing-page builders, CRM, and workflow automation. Currently building AI products and developer tools.';
+  'Frontend-focused Full Stack Engineer with 2+ years building customer-facing SaaS products in startup teams — landing-page builders, CRM, and campaign & workflow automation. Currently building AI products and developer tools.';
 
 const featured = (await getCollection('work'))
   .filter((e) => e.data.order <= 3)
@@ -56,7 +56,7 @@ const techStack = [
 ---
 
 <Base
-  title="Kashif Rezwi — Full Stack Engineer"
+  title="Kashif Rezwi — Frontend-focused Full Stack Engineer"
   description={description}
 >
   <!-- ================================================================
@@ -66,14 +66,8 @@ const techStack = [
     <HeroDotMatrix />
     <div class="container-site hero-inner">
       <div class="hero-content animate-fade-up">
-        <!-- Status badge -->
-        <div class="hero-status">
-          <span class="status-dot glow-pulse" aria-hidden="true"></span>
-          <span class="status-label">Open to opportunities</span>
-        </div>
-
         <!-- Label -->
-        <p class="section-label delay-100 animate-fade-up">Full Stack Engineer · Kolkata, India</p>
+        <p class="section-label delay-100 animate-fade-up">Portfolio</p>
 
         <!-- Headline -->
         <h1 class="hero-name delay-200 animate-fade-up">
@@ -82,7 +76,7 @@ const techStack = [
 
         <!-- Sub-headline with gradient -->
         <p class="hero-role delay-300 animate-fade-up">
-          <span class="gradient-text">Building AI products</span><br />
+          <span class="gradient-text">Building toward AI product engineering</span><br />
           and developer tools
         </p>
 
@@ -90,7 +84,7 @@ const techStack = [
         <p class="hero-bio delay-400 animate-fade-up">
           2+ years building customer-facing SaaS products in startup teams —
           landing-page builders, CRM, and campaign & workflow automation.
-          Currently focused on AI-powered applications and developer tooling.
+          Currently building AI products and developer tools.
         </p>
 
         <!-- CTA row -->
@@ -339,14 +333,14 @@ const techStack = [
           <div class="now-card-icon" aria-hidden="true">⚡</div>
           <h3 class="now-card-title">Building</h3>
           <p class="now-card-desc">
-            Focused on AI product engineering and developer tools. Recent work includes a multi-agent code review system, a cited AI answer engine, and an autonomous i18n pipeline.
+            I'm building toward AI product engineering and developer tools. Recent personal projects include an AI code-review agent, a cited AI answer engine, and an autonomous i18n agent.
           </p>
         </div>
         <div class="now-card reveal delay-100">
           <div class="now-card-icon" aria-hidden="true">✍️</div>
           <h3 class="now-card-title">Writing</h3>
           <p class="now-card-desc">
-            I write about what I build. The <a href={links.devtoArticle} class="link-accent" target="_blank" rel="noopener noreferrer">LingoAgent article on dev.to</a> walks through building an autonomous i18n pipeline — AST extraction, sandboxed execution, auto PR.
+            I write about what I build. The <a href={links.devtoArticle} class="link-accent" target="_blank" rel="noopener noreferrer">LingoAgent article on dev.to</a> walks through that build.
           </p>
         </div>
         <div class="now-card reveal delay-200">
@@ -372,7 +366,7 @@ const techStack = [
           <span class="gradient-text">worth shipping.</span>
         </h2>
         <p class="contact-sub">
-          Open to full-time roles, freelance projects, and interesting conversations. Reach out any way you prefer.
+          Reach me by email or phone, or find me on GitHub, LinkedIn, and dev.to.
         </p>
         <div class="contact-ctas">
           <a href={`mailto:${links.email}`} class="btn">
@@ -430,31 +424,6 @@ const techStack = [
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
-
-  .hero-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: color-mix(in srgb, var(--color-success) 10%, transparent);
-    border: 1px solid color-mix(in srgb, var(--color-success) 25%, transparent);
-    border-radius: 999px;
-    padding: 0.25rem 0.75rem;
-    width: fit-content;
-  }
-  .status-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--color-success);
-    border-radius: 50%;
-    display: inline-block;
-  }
-  .status-label {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    color: var(--color-success);
-    font-weight: 500;
-    letter-spacing: 0.03em;
   }
 
   .hero-name {

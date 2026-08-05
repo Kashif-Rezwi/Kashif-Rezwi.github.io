@@ -128,6 +128,8 @@ Each phase ends with review evidence and an owner-held gate. A later phase does 
 
 **Gate:** owner approves positioning/availability wording and baseline.
 
+**Execution status (2026-08-05):** Complete locally. Approved positioning was restored; unsupported availability/freelance/location wording was removed; reveal behavior is enhancement-only; baseline/claim evidence is in [03-r3-0-correctness-baseline.md](./03-r3-0-correctness-baseline.md). Owner gate approval remains required before R3-A.
+
 ### R3-A — Visual-system simplification, icons, and theme control
 
 **Objective:** Make the system more modern by removing noise and creating repeatable rules.
@@ -352,12 +354,12 @@ R3-B, R3-C, and R3-D may be developed separately after R3-A, but each remains ow
 
 ### Claims and content
 
-- [ ] Restore/approve professional title.
-- [ ] Resolve availability and freelance wording.
-- [ ] Map all new home copy.
-- [ ] Label skill proficiency.
-- [ ] Verify article metadata.
-- [ ] Approve exact GitHub facts.
+- [x] Restore approved professional title and metadata (R3-0).
+- [x] Remove unapproved availability/freelance/location wording pending owner decision (R3-0).
+- [x] Map all R2/R3 home copy (R3-0).
+- [ ] Label skill proficiency (R3-D).
+- [x] Verify article wording/metadata boundary (R3-0; SRC-11 reference retained).
+- [ ] Approve exact GitHub facts (R3-D gate).
 
 ### Visual system
 
@@ -380,8 +382,8 @@ R3-B, R3-C, and R3-D may be developed separately after R3-A, but each remains ow
 
 ### Quality
 
-- [ ] Fix no-JS reveal baseline.
-- [ ] Test matrix performance and reduced motion.
+- [x] Fix and verify no-JS reveal baseline (R3-0).
+- [ ] Test matrix performance and reduced motion (R3-B QA).
 - [ ] Run responsive/theme/input matrix.
 - [ ] Run axe, Lighthouse, contrast, and link checks.
 - [ ] Update QA report, status, decision log, and rollback instructions.

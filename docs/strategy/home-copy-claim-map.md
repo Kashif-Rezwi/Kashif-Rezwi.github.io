@@ -2,14 +2,18 @@
 
 - **Purpose:** The Phase 1.1 content-review deliverable (roadmap 1.1 expected outcome). Every public sentence on the home page and `/resume` route maps to exactly one ledger claim or an explicit no-claim rationale. Worded per claim safety (AGENTS.md §3) and positioning usage rules (§4 of `positioning.md`).
 - **Authority:** Phase 1.1 build, 2026-08-05. Copy is claim-mapped against `docs/research/evidence-ledger.md` §4; nothing beyond a claim (or owner-approved fact) is stated. Owner content review is the Phase 1.1 gate.
-- **Last updated:** 2026-08-05
-- **Related:** [positioning.md](./positioning.md) · [product-and-design-brief.md](./product-and-design-brief.md) · [evidence-ledger.md](../research/evidence-ledger.md) · [open-questions.md](../open-questions.md)
+- **Last updated:** 2026-08-05 (R3-0 copy restoration)
+- **Related:** [positioning.md](./positioning.md) · [product-and-design-brief.md](./product-and-design-brief.md) · [evidence-ledger.md](../research/evidence-ledger.md) · [open-questions.md](../open-questions.md) · [R3-0 baseline](../rebuild-02/03-r3-0-correctness-baseline.md)
 
 ## Conventions
 
 - **Claim** IDs refer to the ledger's claim table (CL-01…CL-18).
 - **No claim** = identity, navigation, provenance, or factual link values that carry no career/outcome assertion.
 - `[owner]` = owner-approved fact/decision recorded in the decision log or open questions.
+
+## R3-0 restoration note (2026-08-05)
+
+`rebuild-02` temporarily changed the home title/metadata to “Full Stack Engineer,” added availability, freelance, and location statements, and used “AI-powered applications” wording. R3-0 restores the exact approved headline and hero summary below, returns the directional language to CL-18, and removes the unsupported availability/freelance/location statements rather than treating a design change as new evidence. The complete R2/R3 disposition and baseline are recorded in [`docs/rebuild-02/03-r3-0-correctness-baseline.md`](../rebuild-02/03-r3-0-correctness-baseline.md).
 
 ## Hero
 

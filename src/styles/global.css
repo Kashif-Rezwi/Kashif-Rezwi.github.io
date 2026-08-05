@@ -396,13 +396,13 @@
     animation: glow-pulse 2s ease-in-out infinite;
   }
 
-  /* Intersection-observer-driven reveal */
-  .reveal {
+  /* Intersection-observer reveal is enhancement-only: no-JS content remains visible. */
+  .js-reveal .reveal {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.55s ease, transform 0.55s ease;
   }
-  .reveal.is-visible {
+  .js-reveal .reveal.is-visible {
     opacity: 1;
     transform: translateY(0);
   }
@@ -416,5 +416,5 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  .js-reveal .reveal { opacity: 1; transform: none; }
 }

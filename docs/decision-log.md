@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-05 (DL-018)
+- **Last updated:** 2026-08-05 (DL-019)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -138,3 +138,10 @@
 - **Decision:** Use `rebuild-02` as the base for the next improvement cycle. Preserve the claim-safe professional narrative and case-study depth of the first Astro rebuild; recover the old CRA portfolio's scanability, project-card richness, recognizable technology signals, and GitHub proof concept without restoring excluded/stale projects or fragile third-party widgets. Reduce borders, normalize card anatomy, establish one accessible local icon language, and make an original dual-theme pointer-responsive hero dot matrix—publicly inspired by Google Antigravity's interaction principle—the single signature motif.
 - **Rationale:** Owner review in conversation: `rebuild-02` is preferred, but is not yet modern/creative/stylish or sufficiently organized; icons, card consistency, GitHub stats, border restraint, and a light/dark Antigravity-like hero background need improvement. Comparative source/render review confirms `rebuild-02` has the best base but currently combines a familiar dark-developer aesthetic with claim/resilience regressions. Full findings and bounded phases are in `docs/rebuild-02/01-three-version-comparative-review.md` and `02-improvement-implementation-plan.md`.
 - **Approval status:** Direction and documentation approved by owner directive (2026-08-05). Hero matrix prototype authorized and implemented in the working tree for review; no commit, merge, or production deployment authorized.
+
+## DL-019 — R3-0 correctness and resilience correction executed
+
+- **Date:** 2026-08-05
+- **Decision:** Execute R3-0 following the owner’s “let’s go with R3-0” authorization. Restore the approved “Frontend-focused Full Stack Engineer” headline and associated metadata/hero summary; remove unsupported availability, freelance, location, and “AI-powered applications” wording rather than infer approval; restore approved CL-18 directional wording; make reveal motion progressive enhancement so all content is visible without JavaScript; record the baseline and claim disposition in `docs/rebuild-02/03-r3-0-correctness-baseline.md`.
+- **Rationale:** The comparative review found verifiable copy drift and a severe resilience regression where `.reveal` content was hidden prior to JavaScript. R3-0 is corrective only: it does not authorize the planned icon system, theme toggle, card redesign, GitHub module, broader visual redesign, merge, or deployment.
+- **Approval status:** Executed under owner authorization (2026-08-05). R3-0 gate review is pending owner approval before R3-A begins.
