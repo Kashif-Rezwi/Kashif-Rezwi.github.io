@@ -78,23 +78,6 @@ const resumeHref = withBase('resume/');
     transition: background 0.3s ease;
   }
 
-  /* Bottom fade: content scrolling beneath the pinned header eases out
-     instead of abutting a hard edge. Non-interactive by design. */
-  header::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1.25rem;
-    height: 1.25rem;
-    background: linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--color-canvas) 92%, transparent),
-      transparent
-    );
-    pointer-events: none;
-  }
-
   nav {
     display: flex;
     align-items: center;
