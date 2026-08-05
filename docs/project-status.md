@@ -60,4 +60,5 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- **Owner spot-checks** (post-launch): LinkedIn click-through (OQ-06), visual captures at 320/1440, and resume-PDF review. Repository is back in maintenance mode per AGENTS.md §1: future changes are pushed to `develop`, built, then deployed to `gh-pages`.
+- **R4 improvement cycle — plan DRAFTED, awaiting owner.** `docs/rebuild-02/09-r4-improvement-plan.md` captures the owner's five R4 requests (hero single-line name + role, dot-matrix enlargement/extension, tech-stack cross-check, deeper Experience, pinned+faded navbar). Six open decisions (OQ-R4-1…6) are logged in the plan; once the owner resolves them (see §9), R4-0 → R4-6 proceeds step-by-step per AGENTS.md §7, followed by R4-7 promotion (`v2-improvement` → `develop` → `gh-pages`) only on a separate owner "go".
+- **Owner spot-checks** (post-launch): LinkedIn click-through (OQ-06), visual captures at 320/1440, and resume-PDF review. Repository is back in maintenance mode per AGENTS.md §1: future changes are pushed to the working branch, built, then deployed to `gh-pages`.
