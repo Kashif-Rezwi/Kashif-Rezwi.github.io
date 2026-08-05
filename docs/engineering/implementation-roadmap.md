@@ -15,7 +15,7 @@
 
 ## Phase 1.0 — Foundation
 
-- **Scope:** Astro + Tailwind scaffold per the architecture doc; design tokens (color/type/spacing/motion from the brief); base layout, nav, footer; content-collection schema for case studies; CI preview deployment (GitHub Actions → preview URL); update the phase marker in `AGENTS.md` (documentation-only change bundled here with gate approval).
+- **Scope:** Astro + Tailwind scaffold per the architecture doc; design tokens (color/type/spacing/motion from the brief); base layout, nav, footer; content-collection schema for case studies; CI preview deployment (GitHub Actions → preview URL); **decide and document the branch model + preview-deployment mechanism** (audit F-04: which branch carries Phase 1 work, and what triggers preview vs production deploys).
 - **Dependencies:** owner approval to begin Phase 1.
 - **Expected outcome:** empty shell site at the preview URL showing tokens/layout.
 - **Done when:** preview URL renders the skeleton; tokens match the brief; production URL untouched.
@@ -31,7 +31,7 @@
 
 ## Phase 1.2 — Featured case studies
 
-- **Scope:** three case-study pages from the template + `featured-project-research.md` (code-review-agent, perplexity, lingo-agent); compact secondary entries (Better DEV — note README placeholder fix; LoopLens — hackathon label); screenshots (owner-provided, or repo README assets with approval); personal/hackathon labels visible.
+- **Scope:** three case-study pages from the template + `featured-project-research.md` (code-review-agent, perplexity, lingo-agent); compact secondary entries (Better DEV — the `[Your Frontend URL]` README placeholder fix is an owner action on the external repo, audit F-07; LoopLens — hackathon label); screenshots (owner-provided, or repo README assets with approval); personal/hackathon labels visible.
 - **Dependencies:** 1.1 approved. OQ-10 default applies (slooze challenge not shown); OQ-09 default applies (bootcamp projects excluded) unless the owner directs otherwise before this phase.
 - **Expected outcome:** all five shortlisted projects represented at their approved depth.
 - **Done when:** owner approves each case-study page (copy + visuals).

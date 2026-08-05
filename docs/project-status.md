@@ -9,7 +9,7 @@
 
 **Phase 0 — COMPLETE** (0A Source Intake → 0B Evidence & Portfolio Research → 0C Strategy, Design Direction & Roadmap). All Phase 0 deliverables are written and awaiting owner review. **Implementation (Phase 1) cannot begin without the owner's explicit approval.**
 
-Note: the "current phase" marker inside `AGENTS.md` still reads 0A — updating `AGENTS.md` was outside the 0B/0C allowed edit lists; roadmap Phase 1.0 bundles that documentation-only update under its gate approval.
+Independent engineering audit completed 2026-08-05 (verdict: proceed after minor corrections; no blocking findings). All audit corrections applied the same day with owner approval (DL-006): README/AGENTS.md refresh, decision-log append, source-register SRC-04b amendment, and roadmap clarifications (branch model deliverable, Better DEV placeholder ownership).
 
 ## Completed (Phase 0C)
 
@@ -25,7 +25,7 @@ Note: the "current phase" marker inside `AGENTS.md` still reads 0A — updating 
 
 - Nothing blocks Phase 0 completion.
 - Open questions OQ-01…OQ-11 remain owner-owned (see `docs/open-questions.md`); the roadmap defines fallbacks where needed (OQ-06/08/09/10).
-- Two housekeeping items stayed outside the 0C allowed edit list: the `docs/source-register.md` amendment (OQ-11) and appending 0C decisions to `docs/decision-log.md` — both recorded here pending owner direction.
+- Housekeeping items previously deferred (register amendment OQ-11, decision-log append, README/AGENTS.md refresh) were applied 2026-08-05 with owner approval (DL-006).
 
 ## Next approved action
 

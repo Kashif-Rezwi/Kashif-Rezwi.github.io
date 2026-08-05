@@ -13,7 +13,7 @@
 | SRC-02 | Current portfolio codebase | https://github.com/Kashif-Rezwi/Kashif-Rezwi.github.io · local checkout: this repo root, branch `develop` | Public + Local | Review | 2026-08-05 | Available |
 | SRC-03 | GitHub profile | https://github.com/Kashif-Rezwi | Public | Yes | 2026-08-05 | Available |
 | SRC-04 | LinkedIn profile | https://www.linkedin.com/in/kashif-rezwi/ | Public | Review | 2026-08-05 (fetch blocked) | Access denied |
-| SRC-04b | LinkedIn local substitute (sources data) | temp/career-ops-workspace/data/sources.csv | Local | No | 2026-08-05 | Available |
+| SRC-04b | Job-search source-tracking data — *registered in 0A as "LinkedIn local substitute"; corrected 2026-08-05 per OQ-11: this file is application-source tracking, not LinkedIn content* | temp/career-ops-workspace/data/sources.csv | Local | No | 2026-08-05 | Available |
 | SRC-05 | Current resume(s) | temp/career-ops-workspace/resumes/ | Local | No | 2026-08-05 | Available |
 | SRC-06 | Core professional profile notes | temp/ExportBlock-b09de94d-5604-4a51-96e6-58447c858e4d-Part-1/ | Local | No | 2026-08-05 | Available |
 | SRC-07 | Career positioning notes | temp/career-ops-workspace/profile/career-positioning.md | Local | No | 2026-08-05 | Available |

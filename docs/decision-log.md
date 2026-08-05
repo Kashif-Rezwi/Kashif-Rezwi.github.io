@@ -32,3 +32,18 @@
 - **Decision:** Propose the draft statement recorded in `docs/research/evidence-ledger.md` §3 ("Frontend-focused Full Stack Engineer with 2+ years building customer-facing SaaS products in startup teams…"). Every clause maps to ledger claims CL-01…CL-18.
 - **Rationale:** 0B definition of done — the positioning statement must be evidence-checked, not assumed.
 - **Approval status:** Proposed — pending owner approval.
+- **Note (2026-08-05, independent audit):** carried into the Phase 0 gate approval request; status remains Proposed until the owner ratifies the statement.
+
+## DL-005 — Phase 0C strategy decisions adopted
+
+- **Date:** 2026-08-05
+- **Decision:** Adopt the Phase 0C synthesis as the single plan for Phase 1: (a) site headline "Frontend-focused Full Stack Engineer" — resolves conflict C-09; (b) design direction "Calm Engineering Ledger" (evolves the audited identity; one accent, one motif); (c) information architecture — narrative home + 3 case studies + `/resume`, skills/stats pages removed; (d) stack — Astro + Markdown content + Tailwind, zero-JS default, GitHub Pages via GitHub Actions; (e) five-phase roadmap (1.0–1.4) with owner-held gates.
+- **Rationale:** Phase 0C definition of done — one design direction, one IA, one technical direction, all traceable to Phase 0B research.
+- **Approval status:** Adopted in Phase 0C; final ratification requested at the Phase 0 gate.
+
+## DL-006 — Audit corrections bundle applied
+
+- **Date:** 2026-08-05
+- **Decision:** Apply the independent audit's minor corrections immediately: refresh README.md (phase + document links), update AGENTS.md phase markers and canonical document map, amend source-register SRC-04b (resolves OQ-11), append 0C decisions to this log, and clarify the roadmap (branch model + preview mechanism as an explicit Phase 1.0 deliverable; Better DEV README placeholder is an owner action on the external repo).
+- **Rationale:** Audit findings F-01…F-07; keeps the canonical documents consistent before Phase 1 handoff.
+- **Approval status:** Approved (owner directive in conversation, 2026-08-05)
