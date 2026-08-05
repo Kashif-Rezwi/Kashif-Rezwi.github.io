@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-05 (DL-022)
+- **Last updated:** 2026-08-05 (DL-023)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -166,3 +166,10 @@
 - **Decision:** (a) The owner confirmed in conversation that the ThemeControl segmented System/Light/Dark radio control and the footer social-link wrapping present in the R3-B working tree were owner-requested and belong to this phase. (b) During R3-B validation, two matrix defects were found and fixed under the authorized tuning scope: matrix/fallback opacity now follows the explicit `data-theme` preference as well as the system color scheme, and the render loop now settles while a pointer is parked over the hero (previously it redrew indefinitely). R3-B implementation is complete locally; evidence in `docs/rebuild-02/05-r3-b-matrix-evidence.md`.
 - **Rationale:** Keeps the decision record accurate about phase scope, and records the validation-driven corrections so later phases can trust the matrix behavior contract (settles when idle, pauses off-screen, static under reduced motion, correct opacity in every theme combination).
 - **Approval status:** Scope confirmation by owner directive (2026-08-05). R3-B owner gate review pending; R3-C and later, merge, and production deployment remain unauthorized.
+
+## DL-023 — Cross-page elevation consistency correction
+
+- **Date:** 2026-08-05
+- **Decision:** The owner reported residual perceived elevation on non-home pages (“shadow” behind the navbar on project pages) and directed that the main page’s flat style be consistent across the portfolio. The `.case-hero::before` radial accent glow on case-study pages (`src/pages/work/[slug].astro`) — the last decorative glow outside the hero matrix — was removed along with its now-unneeded positioning wrappers, and a repository-wide scan confirmed zero `box-shadow`, `drop-shadow`, `text-shadow`, or decorative radial-gradient declarations remain under `src/`. Verified visually on case-study and 404 pages (dark/light, desktop/mobile) and folded into the R3-B gate evidence.
+- **Rationale:** The flat cornflower system must read identically on every route; a top-of-page glow on case studies read as navbar elevation and broke the single-signature-hero direction.
+- **Approval status:** Approved (owner directive in conversation, 2026-08-05). Included in the pending R3-B owner gate; R3-C and later, merge, and production deployment remain unauthorized.

@@ -7,7 +7,7 @@
 
 ## Current phase
 
-**Rebuild-03 improvement cycle — R3-B OWNER GATE** (2026-08-05, DL-018–DL-022). The bounded R3-B hero-matrix phase is complete locally: static canvas fallback, theme-attribute-aware opacity, parked-pointer settle fix, responsive/motion/performance validation (Lighthouse Performance 100 mobile + desktop; zero long tasks). The DL-021 elevation/hover corrections and the owner-confirmed ThemeControl segmented control and footer wrap are included. All work remains undeployed.
+**Rebuild-03 improvement cycle — R3-B OWNER GATE** (2026-08-05, DL-018–DL-023). The bounded R3-B hero-matrix phase is complete locally: static canvas fallback, theme-attribute-aware opacity, parked-pointer settle fix, responsive/motion/performance validation (Lighthouse Performance 100 mobile + desktop; zero long tasks). The DL-021 elevation/hover corrections, the owner-confirmed ThemeControl segmented control and footer wrap, and the DL-023 cross-page elevation consistency correction (case-study hero glow removed; zero shadow/glow declarations remain under `src/`) are included. All work remains undeployed.
 
 | Phase | Scope | Status |
 |---|---|---|

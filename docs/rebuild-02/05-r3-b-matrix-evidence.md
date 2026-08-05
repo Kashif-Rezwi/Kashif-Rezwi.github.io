@@ -17,6 +17,7 @@
 | Fallback density match | Implemented locally | Fallback grid 27 px under 640 px to match the canvas spacing. |
 | ThemeControl segmented control | Implemented locally (owner-confirmed scope, DL-022) | System/Light/Dark radio group replaces the select; named radios, legend group label, focus-visible outline, arrow-key operation, localStorage persistence, try/catch storage guards. |
 | Footer socials wrap | Implemented locally (owner-confirmed scope, DL-022) | Social row wraps with bounded gaps; no horizontal overflow at 320/390 px. |
+| Cross-page elevation consistency | Implemented locally (owner directive, DL-023) | `.case-hero::before` radial accent glow removed from case-study pages — the last decorative glow outside the hero matrix. Repo scan: zero `box-shadow`/`drop-shadow`/`text-shadow`/decorative `radial-gradient` under `src/`. Verified on case-study + 404 routes, dark/light, desktop/mobile (`/tmp/r3b3-case-after-{dark,light}-1440.png`, `/tmp/r3b3-case-after-dark-390.png`, `/tmp/r3b3-404-dark.png`). |
 | Project-card / GitHub module work | Deferred | Reserved for R3-C / R3-D; untouched. |
 
 ## Acceptance criteria
