@@ -56,8 +56,13 @@
     let isSettled = true;
     const pointer = { x: 0, y: 0, active: false };
 
+    const isLightTheme = () => {
+      const preference = document.documentElement.dataset.theme;
+      return preference === 'light' || (preference !== 'dark' && colorScheme.matches);
+    };
+
     const palette = () =>
-      colorScheme.matches
+      isLightTheme()
         ? ['#3862c0', '#6495ed', '#7c3aed']
         : ['#6495ed', '#89b4ff', '#a78bfa'];
 
@@ -185,6 +190,7 @@
     hero.addEventListener('pointermove', onPointerMove, { passive: true });
     hero.addEventListener('pointerleave', onPointerLeave, { passive: true });
     colorScheme.addEventListener('change', requestRender);
+    window.addEventListener('portfolio-theme-change', requestRender);
     reducedMotion.addEventListener('change', requestRender);
     coarsePointer.addEventListener('change', requestRender);
     resize();

@@ -1,0 +1,81 @@
+---
+import Icon from './Icon.astro';
+---
+
+<label class="theme-control">
+  <span class="theme-control-icon" aria-hidden="true"><Icon name="system" size={16} /></span>
+  <span class="sr-only">Color theme</span>
+  <select id="theme-select" aria-label="Color theme">
+    <option value="system">System theme</option>
+    <option value="light">Light theme</option>
+    <option value="dark">Dark theme</option>
+  </select>
+</label>
+
+<style>
+  .theme-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 2rem;
+    color: var(--color-ink-muted);
+  }
+
+  .theme-control-icon {
+    display: inline-flex;
+    color: var(--color-accent);
+  }
+
+  select {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1;
+    padding: 0.25rem;
+  }
+
+  select:focus-visible {
+    outline-offset: 2px;
+  }
+
+  option {
+    background: var(--color-surface);
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 640px) {
+    .theme-control {
+      margin-left: auto;
+    }
+  }
+</style>
+
+<script>
+  const key = 'portfolio-theme';
+  const select = document.querySelector<HTMLSelectElement>('#theme-select');
+  const root = document.documentElement;
+
+  const applyTheme = (theme: string) => {
+    if (theme === 'light' || theme === 'dark') {
+      root.dataset.theme = theme;
+      root.style.colorScheme = theme;
+    } else {
+      delete root.dataset.theme;
+      root.style.colorScheme = 'light dark';
+    }
+    window.dispatchEvent(new CustomEvent('portfolio-theme-change', { detail: theme }));
+  };
+
+  const saved = localStorage.getItem(key) ?? 'system';
+  if (select) select.value = saved;
+
+  select?.addEventListener('change', () => {
+    const theme = select.value;
+    localStorage.setItem(key, theme);
+    applyTheme(theme);
+  });
+</script>

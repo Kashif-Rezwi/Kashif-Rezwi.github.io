@@ -2,7 +2,7 @@
 
 - **Purpose:** The Phase 1.1 content-review deliverable (roadmap 1.1 expected outcome). Every public sentence on the home page and `/resume` route maps to exactly one ledger claim or an explicit no-claim rationale. Worded per claim safety (AGENTS.md §3) and positioning usage rules (§4 of `positioning.md`).
 - **Authority:** Phase 1.1 build, 2026-08-05. Copy is claim-mapped against `docs/research/evidence-ledger.md` §4; nothing beyond a claim (or owner-approved fact) is stated. Owner content review is the Phase 1.1 gate.
-- **Last updated:** 2026-08-05 (R3-0 copy restoration)
+- **Last updated:** 2026-08-05 (R3-A owner-approved contact facts)
 - **Related:** [positioning.md](./positioning.md) · [product-and-design-brief.md](./product-and-design-brief.md) · [evidence-ledger.md](../research/evidence-ledger.md) · [open-questions.md](../open-questions.md) · [R3-0 baseline](../rebuild-02/03-r3-0-correctness-baseline.md)
 
 ## Conventions
@@ -14,6 +14,10 @@
 ## R3-0 restoration note (2026-08-05)
 
 `rebuild-02` temporarily changed the home title/metadata to “Full Stack Engineer,” added availability, freelance, and location statements, and used “AI-powered applications” wording. R3-0 restores the exact approved headline and hero summary below, returns the directional language to CL-18, and removes the unsupported availability/freelance/location statements rather than treating a design change as new evidence. The complete R2/R3 disposition and baseline are recorded in [`docs/rebuild-02/03-r3-0-correctness-baseline.md`](../rebuild-02/03-r3-0-correctness-baseline.md).
+
+## R3-A owner-approved contact update (2026-08-05)
+
+The owner subsequently approved a freelance-project invitation and public `Kolkata, India` location display (DL-020). General availability remains intentionally omitted because the owner marked it undecided. The GitHub contribution view and project-link proof are approved direction for R3-D only and are not yet public.
 
 ## Hero
 
@@ -64,10 +68,11 @@
 
 | Sentence | Claim | Notes |
 |---|---|---|
-| Reach me by email or phone, or find me on GitHub, LinkedIn, and dev.to. | No claim | Neutral intro |
+| For freelance projects and conversations, reach me by email or phone, or find me on GitHub, LinkedIn, and dev.to. | `[owner, DL-020]` | Owner-approved invitation; it does **not** state generalized availability |
 | Email `kashifrezwi850@gmail.com` | No claim | `[owner]`-confirmed active value (also on live site + dev.to profile) |
 | Phone `9883909187` | No claim | `[owner, DL-009]` — owner requested inclusion; commented-out alternatives (C-12) never used |
 | GitHub / LinkedIn / dev.to | No claim | LinkedIn canonical `[OQ-06]` |
+| Kolkata, India | `[owner, DL-020]` | Owner-approved public location display |
 
 ## Footer / Resume page
 

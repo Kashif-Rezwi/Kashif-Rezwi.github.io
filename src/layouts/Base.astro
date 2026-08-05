@@ -21,8 +21,17 @@ const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- MANDATORY: Declare theme support before rendering to prevent FOUC -->
     <meta name="color-scheme" content="dark light" />
+    <!-- Apply an explicit saved preference before styles paint; system has no attribute. -->
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem('portfolio-theme');
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        }
+      } catch {}
+    </script>
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {isPreview && <meta name="robots" content="noindex" />}
@@ -39,13 +48,6 @@ const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
     <meta name="twitter:title" content={title} />
     {description && <meta name="twitter:description" content={description} />}
     <meta name="twitter:image" content={ogImageUrl} />
-    <!-- Google Fonts — Inter + JetBrains Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

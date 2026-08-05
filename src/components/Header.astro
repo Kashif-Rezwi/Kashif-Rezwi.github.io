@@ -1,5 +1,6 @@
 ---
 import { base, withBase } from '../lib/paths';
+import ThemeControl from './ThemeControl.astro';
 
 const links = [
   { href: withBase('#work'), label: 'Work' },
@@ -28,7 +29,10 @@ const resumeHref = withBase('resume/');
       }
     </ul>
 
-    <a href={resumeHref} class="btn-outline nav-resume">Resume</a>
+    <div class="nav-tools">
+      <ThemeControl />
+      <a href={resumeHref} class="btn-outline nav-resume">Resume</a>
+    </div>
 
     <!-- Mobile hamburger -->
     <button
@@ -72,11 +76,7 @@ const resumeHref = withBase('resume/');
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  header.scrolled {
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    transition: background 0.3s ease;
   }
 
   nav {
@@ -137,8 +137,14 @@ const resumeHref = withBase('resume/');
     width: 100%;
   }
 
-  .nav-resume {
+  .nav-tools {
     margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+
+  .nav-resume {
     padding: 0.375rem 0.875rem;
     font-size: 0.8125rem;
   }
@@ -160,7 +166,7 @@ const resumeHref = withBase('resume/');
     width: 22px;
     height: 2px;
     background: var(--color-ink);
-    border-radius: 2px;
+    border-radius: var(--radius-control);
     transition: transform 0.25s ease, opacity 0.25s ease;
   }
 
@@ -217,6 +223,9 @@ const resumeHref = withBase('resume/');
     .nav-resume {
       display: none;
     }
+    .nav-tools {
+      margin-left: auto;
+    }
     .mobile-menu-btn {
       display: flex;
     }
@@ -227,12 +236,6 @@ const resumeHref = withBase('resume/');
 </style>
 
 <script>
-  // Scrolled class for elevated shadow
-  const header = document.getElementById('site-header');
-  window.addEventListener('scroll', () => {
-    header?.classList.toggle('scrolled', window.scrollY > 20);
-  }, { passive: true });
-
   // Mobile menu toggle
   const btn = document.getElementById('mobile-menu-btn');
   const nav = document.getElementById('mobile-nav');

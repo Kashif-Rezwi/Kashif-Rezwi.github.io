@@ -1,11 +1,13 @@
 ---
+import Icon from './Icon.astro';
+
 const year = new Date().getFullYear();
 const repoUrl = 'https://github.com/Kashif-Rezwi/Kashif-Rezwi.github.io';
 const socials = [
-  { label: 'GitHub', href: 'https://github.com/Kashif-Rezwi' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/kashif-rezwi-149372216/' },
-  { label: 'dev.to', href: 'https://dev.to/kashifrezwi' },
-  { label: 'Email', href: 'mailto:kashifrezwi850@gmail.com' },
+  { label: 'GitHub', href: 'https://github.com/Kashif-Rezwi', icon: 'github' as const },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/kashif-rezwi-149372216/', icon: 'linkedin' as const },
+  { label: 'dev.to', href: 'https://dev.to/kashifrezwi', icon: 'devto' as const },
+  { label: 'Email', href: 'mailto:kashifrezwi850@gmail.com', icon: 'mail' as const },
 ];
 ---
 
@@ -30,6 +32,7 @@ const socials = [
         {socials.map((s) => (
           <li>
             <a href={s.href} class="footer-social-link" target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+              <Icon name={s.icon} size={14} />
               {s.label}
             </a>
           </li>
@@ -107,6 +110,9 @@ const socials = [
   }
 
   .footer-social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
     font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--color-ink-dim);
@@ -114,6 +120,6 @@ const socials = [
     transition: color 0.15s ease;
   }
   .footer-social-link:hover {
-    color: var(--color-accent-light);
+    color: var(--color-accent-text);
   }
 </style>

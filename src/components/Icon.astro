@@ -1,0 +1,60 @@
+---
+/** Local, dependency-free icon registry. Icons are decorative when a visible label
+ * is adjacent; use `label` only for standalone meaningful icon controls. */
+interface Props {
+  name:
+    | 'github'
+    | 'linkedin'
+    | 'devto'
+    | 'mail'
+    | 'phone'
+    | 'resume'
+    | 'location'
+    | 'external'
+    | 'repository'
+    | 'sun'
+    | 'moon'
+    | 'system'
+    | 'sparkles'
+    | 'writing'
+    | 'learning';
+  size?: number;
+  label?: string;
+  class?: string;
+}
+
+const { name, size = 18, label, class: className } = Astro.props;
+const titleId = label ? `icon-${name}-${crypto.randomUUID()}` : undefined;
+---
+
+<svg
+  class={className}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden={label ? undefined : 'true'}
+  aria-labelledby={titleId}
+  focusable="false"
+>
+  {label && <title id={titleId}>{label}</title>}
+  {name === 'github' && <path d="M15 22v-3.9c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6.2 0-1.4-.5-2.5-1.3-3.4.1-.3.6-1.7-.1-3.4 0 0-1.1-.4-3.5 1.3a12.2 12.2 0 0 0-6.3 0C6.4 2.7 5.3 3.1 5.3 3.1c-.7 1.7-.2 3.1-.1 3.4A4.8 4.8 0 0 0 3.9 10c0 4.8 2.7 5.9 5.5 6.2-.4.4-.6.9-.6 1.8V22M9 19c-2.5.8-3-1.2-4-1.5" />}
+  {name === 'linkedin' && <><path d="M6.5 9.5V18" /><path d="M6.5 6.5v.01" /><path d="M10.5 18v-5c0-2 1.2-3.5 3.2-3.5s3.3 1.5 3.3 3.5v5" /><path d="M10.5 12.3V9.5" /></>}
+  {name === 'devto' && <><path d="M3.5 5.5h17v13h-17z" /><path d="M7 9v5" /><path d="M10 9.5h1.1a2.5 2.5 0 0 1 0 5H10z" /><path d="M15 9.5h3" /><path d="M15 12h2.5" /><path d="M15 14.5h3" /></>}
+  {name === 'mail' && <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>}
+  {name === 'phone' && <path d="M5 4.5 8 4l1.6 4-1.9 1.5a14 14 0 0 0 6.8 6.8l1.5-1.9 4 1.6-.5 3c-.2 1.2-1.3 2-2.5 1.8C9.5 19.5 4.5 14.5 3.2 7c-.2-1.2.6-2.3 1.8-2.5Z" />}
+  {name === 'resume' && <><path d="M7 3.5h7l3 3V20.5H7z" /><path d="M14 3.5v3h3" /><path d="M10 11h4" /><path d="M10 14.5h4" /></>}
+  {name === 'location' && <><path d="M20 10.5c0 5-8 10-8 10s-8-5-8-10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10.5" r="2.5" /></>}
+  {name === 'external' && <><path d="M14 4h6v6" /><path d="m20 4-9 9" /><path d="M18 13v6.5H4.5V6H11" /></>}
+  {name === 'repository' && <><path d="M4 5.5h6l1.5 2H20v11H4z" /><path d="M4 9.5h16" /></>}
+  {name === 'sun' && <><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></>}
+  {name === 'moon' && <path d="M20.5 15.3A8.5 8.5 0 0 1 8.7 3.5 8.5 8.5 0 1 0 20.5 15.3Z" />}
+  {name === 'system' && <><rect x="3" y="4" width="18" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></>}
+  {name === 'sparkles' && <><path d="m12 3 1.2 4.8L18 9l-4.8 1.2L12 15l-1.2-4.8L6 9l4.8-1.2Z" /><path d="m19 15 .6 2.4L22 18l-2.4.6L19 21l-.6-2.4L16 18l2.4-.6Z" /></>}
+  {name === 'writing' && <><path d="m4 20 4.2-1 10-10a2.1 2.1 0 0 0-3-3l-10 10z" /><path d="m13.8 7.2 3 3" /><path d="M4 20h6" /></>}
+  {name === 'learning' && <><path d="M4 5.5h6.5A2.5 2.5 0 0 1 13 8v11H6a2 2 0 0 0-2 2z" /><path d="M20 5.5h-6.5A2.5 2.5 0 0 0 11 8v11h7a2 2 0 0 1 2 2z" /></>}
+</svg>

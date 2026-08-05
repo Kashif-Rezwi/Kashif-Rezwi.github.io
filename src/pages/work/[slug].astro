@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
 import { withBase } from '../../lib/paths';
 
 // Case studies — one-to-one with the brief template (product-and-design-brief.md Part 2).
@@ -125,14 +126,14 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
           <ul class="case-sidebar-links">
             <li>
               <a href={repo} class="case-sidebar-link" target="_blank" rel="noopener noreferrer">
-                <span class="case-sidebar-link-icon" aria-hidden="true">⟨⟩</span>
+                <span class="case-sidebar-link-icon"><Icon name="repository" size={16} /></span>
                 Repository
               </a>
             </li>
             {demo && (
               <li>
                 <a href={demo} class="case-sidebar-link" target="_blank" rel="noopener noreferrer">
-                  <span class="case-sidebar-link-icon" aria-hidden="true">↗</span>
+                  <span class="case-sidebar-link-icon"><Icon name="external" size={16} /></span>
                   Live demo
                 </a>
               </li>
@@ -178,7 +179,6 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
   ---------------------------------------------------------------- */
   .case-hero {
     padding-block: 4rem 2.5rem;
-    border-bottom: 1px solid var(--color-border);
     position: relative;
     overflow: hidden;
   }
@@ -245,8 +245,8 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     color: var(--color-success);
     background: color-mix(in srgb, var(--color-success) 12%, transparent);
     padding: 0.15rem 0.625rem;
-    border-radius: 999px;
-    border: 1px solid color-mix(in srgb, var(--color-success) 25%, transparent);
+    border-radius: var(--radius-pill);
+    border: 0;
     font-weight: 500;
   }
 
@@ -270,9 +270,9 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
   ---------------------------------------------------------------- */
   .case-cover {
     margin-top: 2rem;
-    border-radius: 10px;
+    border-radius: var(--radius-card);
     overflow: hidden;
-    border: 1px solid var(--color-border);
+    border: 0;
     background: var(--color-surface);
   }
   .case-cover-img {
@@ -307,8 +307,8 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
 
   .case-sidebar-card {
     background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
+    border: 0;
+    border-radius: var(--radius-card);
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
@@ -357,8 +357,8 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     color: var(--color-accent-light);
   }
   .case-sidebar-link-icon {
-    font-size: 0.75rem;
-    opacity: 0.5;
+    display: inline-flex;
+    color: var(--color-accent-text);
   }
 
   /* ----------------------------------------------------------------
@@ -387,7 +387,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     gap: 0.25rem;
     text-decoration: none;
     padding: 0.75rem;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     border: 1px solid var(--color-border);
     transition: border-color 0.2s ease, background 0.2s ease;
     min-width: 160px;

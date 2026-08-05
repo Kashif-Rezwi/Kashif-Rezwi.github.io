@@ -1,23 +1,20 @@
 @import 'tailwindcss';
 
 /* ===========================================================================
-   REBUILD-02: "Dark Precision" Design System
-   
-   Design philosophy: Dark-first, engineered aesthetic. Warm dark tones (not
-   cold blue-black), single cornflowerblue accent dialed up with glow effects,
-   JetBrains Mono for code labels, Inter for body. Motion is purposeful and
-   respectful of prefers-reduced-motion.
-   
-   Fonts loaded via <link> in Base.astro (Inter + JetBrains Mono).
+   REBUILD-03: "Responsive Engineering Field"
+
+   The hero matrix is the one expressive visual signature. Below it, the system
+   is deliberately quiet: local system typography, a single cornflower accent,
+   three radii, and surfaces differentiated primarily through spacing.
    =========================================================================== */
 
 /* ---------------------------------------------------------------------------
    Design tokens — dual light/dark via light-dark() (CSS Color 4)
 --------------------------------------------------------------------------- */
 @theme {
-  /* Sans + mono families */
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* Local system stacks: no third-party font request is required to render. */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Type scale */
   --text-body: 1.0625rem;         /* 17px */
@@ -41,13 +38,14 @@
 
   /* Accent — cornflowerblue family */
   --color-accent: #6495ed;          /* cornflowerblue core */
-  --color-accent-light: #89b4ff;    /* lighter tint (hover states) */
-  --color-accent-glow: #6495ed33;   /* transparent glow (20% opacity) */
-  --color-accent-soft: #6495ed1a;   /* very subtle tint (tag backgrounds) */
+  --color-accent-light: #89b4ff;    /* hover/decorative tint */
+  --color-accent-text: #a9c8ff;     /* accessible text/link tint on dark */
+  --color-accent-glow: #6495ed26;   /* sparse matrix / focus halo only */
+  --color-accent-soft: #6495ed14;   /* restrained tag background */
 
-  /* Gradient accent — cornflowerblue → indigo */
-  --gradient-accent: linear-gradient(135deg, #6495ed 0%, #818cf8 100%);
-  --gradient-accent-text: linear-gradient(135deg, #89b4ff 0%, #c4b5fd 100%);
+  /* Kept as aliases for existing components; intentionally flat, not gradients. */
+  --gradient-accent: var(--color-accent);
+  --gradient-accent-text: var(--color-accent-text);
 
   /* Status colors */
   --color-success: #4ade80;
@@ -60,27 +58,61 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Light mode overrides — system-respecting
+   Theme tokens — system is the default; explicit user preference wins.
 --------------------------------------------------------------------------- */
+:root {
+  --radius-control: 0.375rem;
+  --radius-card: 0.75rem;
+  --radius-pill: 999px;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --color-canvas: #f8f8f8;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0f0f0;
+  --color-border: #dfdfdf;
+  --color-ink: #111111;
+  --color-ink-muted: #555555;
+  --color-ink-dim: #777777;
+  --color-accent: #6495ed;
+  --color-accent-light: #4b74d3;
+  --color-accent-text: #2f57ad;
+  --color-accent-glow: #3862c018;
+  --color-accent-soft: #3862c010;
+  --gradient-accent: var(--color-accent);
+  --gradient-accent-text: var(--color-accent-text);
+  --color-paper: var(--color-canvas);
+  --color-hairline: var(--color-border);
+  --color-accent-ink: var(--color-accent);
+  color-scheme: light;
+}
+
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme]) {
     --color-canvas: #f8f8f8;
     --color-surface: #ffffff;
     --color-surface-2: #f0f0f0;
-    --color-border: #e2e2e2;
+    --color-border: #dfdfdf;
     --color-ink: #111111;
     --color-ink-muted: #555555;
-    --color-ink-dim: #aaaaaa;
-    --color-accent: #3862c0;
-    --color-accent-light: #6495ed;
-    --color-accent-glow: #3862c020;
-    --color-accent-soft: #6495ed18;
-    --gradient-accent: linear-gradient(135deg, #3862c0 0%, #6366f1 100%);
-    --gradient-accent-text: linear-gradient(135deg, #3862c0 0%, #818cf8 100%);
+    --color-ink-dim: #777777;
+    --color-accent: #6495ed;
+    --color-accent-light: #4b74d3;
+    --color-accent-text: #2f57ad;
+    --color-accent-glow: #3862c018;
+    --color-accent-soft: #3862c010;
+    --gradient-accent: var(--color-accent);
+    --gradient-accent-text: var(--color-accent-text);
     --color-paper: var(--color-canvas);
     --color-hairline: var(--color-border);
     --color-accent-ink: var(--color-accent);
+    color-scheme: light;
   }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
 }
 
 /* ---------------------------------------------------------------------------
@@ -88,9 +120,7 @@
 --------------------------------------------------------------------------- */
 @layer base {
   :root {
-    /* Opt both schemes in — browser themes native UI accordingly */
-    color-scheme: dark light;
-    /* Smooth scrollbar colors for dark mode */
+    /* Smooth scrollbar colors for the active theme */
     scrollbar-color: var(--color-border) transparent;
     scrollbar-width: thin;
     /* Accent color for native controls */
@@ -122,7 +152,7 @@
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
-    border-radius: 3px;
+    border-radius: var(--radius-control);
   }
 }
 
@@ -142,7 +172,7 @@
     background: var(--color-ink);
     color: var(--color-canvas);
     padding: 0.5rem 0.75rem;
-    border-radius: 4px;
+    border-radius: var(--radius-control);
     font-family: var(--font-mono);
     font-size: 0.8125rem;
   }
@@ -170,24 +200,20 @@
 
   /* --- Gradient text utility --- */
   .gradient-text {
-    background: var(--gradient-accent-text);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    color: var(--color-accent-text);
   }
 
   /* --- Links --- */
   .link-accent {
-    color: var(--color-accent-light);
+    color: var(--color-accent-text);
     text-decoration: underline;
     text-decoration-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
     text-underline-offset: 4px;
     transition: color 0.15s ease, text-decoration-color 0.15s ease;
   }
   .link-accent:hover {
-    color: var(--color-accent-light);
-    text-decoration-color: var(--color-accent-light);
+    color: var(--color-accent-text);
+    text-decoration-color: var(--color-accent-text);
   }
 
   /* --- Buttons --- */
@@ -196,21 +222,19 @@
     align-items: center;
     gap: 0.375rem;
     padding: 0.5rem 1.125rem;
-    background: var(--gradient-accent);
-    color: #ffffff;
+    background: var(--color-accent);
+    color: #0b1220;
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     font-weight: 500;
-    border-radius: 6px;
+    border-radius: var(--radius-control);
     border: none;
     cursor: pointer;
-    transition: opacity 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
-    box-shadow: 0 0 0 0 var(--color-accent-glow);
+    transition: background 0.15s ease, transform 0.1s ease;
     text-decoration: none;
   }
   .btn:hover {
-    opacity: 0.9;
-    box-shadow: 0 0 16px 0 var(--color-accent-glow), 0 4px 12px rgba(100, 149, 237, 0.25);
+    background: var(--color-accent-light);
     transform: translateY(-1px);
   }
   .btn:active {
@@ -223,19 +247,18 @@
     gap: 0.375rem;
     padding: 0.5rem 1.125rem;
     background: transparent;
-    color: var(--color-accent-light);
+    color: var(--color-accent-text);
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     font-weight: 500;
-    border-radius: 6px;
+    border-radius: var(--radius-control);
     border: 1px solid var(--color-border-focus);
     cursor: pointer;
-    transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    transition: background 0.15s ease, transform 0.1s ease;
     text-decoration: none;
   }
   .btn-outline:hover {
     background: var(--color-accent-soft);
-    box-shadow: 0 0 12px 0 var(--color-accent-glow);
     transform: translateY(-1px);
   }
 
@@ -243,12 +266,11 @@
   .card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 10px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    border-radius: var(--radius-card);
+    transition: border-color 0.2s ease, transform 0.2s ease;
   }
   .card:hover {
-    border-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-border));
-    box-shadow: 0 0 0 1px var(--color-accent-glow), 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
     transform: translateY(-2px);
   }
 
@@ -257,11 +279,11 @@
     display: inline-block;
     padding: 0.2rem 0.55rem;
     background: var(--color-accent-soft);
-    color: var(--color-accent-light);
+    color: var(--color-accent-text);
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    border-radius: 4px;
-    border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+    border-radius: var(--radius-control);
+    border: 0;
     font-weight: 500;
     letter-spacing: 0.01em;
   }
@@ -308,7 +330,7 @@
     font-family: var(--font-mono);
     font-size: 0.875em;
     padding: 0.125rem 0.35rem;
-    border-radius: 4px;
+    border-radius: var(--radius-control);
     border: 1px solid color-mix(in srgb, var(--color-accent) 15%, transparent);
   }
   .markdown blockquote {
@@ -356,19 +378,6 @@
   @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
-  }
-
-  /* Gradient shift (for animated accent elements) */
-  @keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Glow pulse (status badge) */
-  @keyframes glow-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(100, 149, 237, 0.4); }
-    50% { box-shadow: 0 0 0 6px rgba(100, 149, 237, 0); }
   }
 
   /* Blink cursor (terminal effect) */

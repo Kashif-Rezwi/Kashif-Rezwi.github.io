@@ -2,7 +2,7 @@
 
 - **Purpose:** Convert the three-version review into a bounded, approval-gated implementation plan for the preferred `rebuild-02` direction.
 - **Authority:** Owner directives in conversation (2026-08-05), constrained by `AGENTS.md`, the evidence ledger, and the comparative review. This plan authorizes no deployment by itself.
-- **Last updated:** 2026-08-05
+- **Last updated:** 2026-08-05 (R3-A authorization and implementation notes)
 - **Related:** [01-three-version-comparative-review.md](./01-three-version-comparative-review.md) · [00-full-audit.md](./00-full-audit.md) · [home-copy-claim-map.md](../strategy/home-copy-claim-map.md) · [architecture-and-quality.md](../engineering/architecture-and-quality.md) · [project-status.md](../project-status.md)
 
 ## 1. Outcome
@@ -159,6 +159,8 @@ Each phase ends with review evidence and an owner-held gate. A later phase does 
 - theme selection supports system, light, and dark and persists locally.
 
 **Gate:** owner approves the simplified system before all sections are restyled.
+
+**Execution status (2026-08-05):** Complete locally under DL-020; owner gate pending. Owner confirmed that the site may invite freelance-project conversations and display `Kolkata, India`; a generalized availability statement remains omitted. The later R3-D direction is a dated public GitHub contribution view plus project links. R3-A does not implement that proof module or redesign project cards.
 
 ### R3-B — Hero signature: interactive dot matrix
 
