@@ -7,19 +7,19 @@
 
 ## 1. Final positioning statement
 
-> Frontend-focused Full Stack Engineer with 2+ years building customer-facing SaaS products in startup teams — landing-page builders, CRM, and campaign & workflow automation. Currently building AI products and developer tools: an AI code-review agent with multi-agent analysis and RAG-based coding standards, a cited AI answer engine, and an autonomous i18n agent.
+> Frontend-focused Full Stack Engineer with 2+ years building customer-facing SaaS products in startup teams — landing-page builders, CRM, and campaign & workflow automation. Currently building AI products and developer tools: an AI code-review agent with multi-agent analysis and RAG-based coding standards, and a cited AI answer engine.
 
-Adopted unchanged from the DL-004 draft (2026-08-05). Clause-by-clause evidence mapping:
+Approved by the owner 2026-08-05 (DL-004 condition applied): the "autonomous i18n agent" clause was removed — the owner ruled it unsupported by the knowledge base. LingoAgent remains a personal-project case study only; it must never be framed as verified work experience. Clause-by-clause evidence mapping:
 
 | Clause | Ledger claim | Label |
 |---|---|---|
 | "Frontend-focused Full Stack Engineer" | CL-01 | VERIFIED |
 | "2+ years building customer-facing SaaS products in startup teams" | CL-02 (with §1 boundary note — approved wording, never amplified) | VERIFIED |
 | "landing-page builders, CRM, and campaign & workflow automation" | CL-03, CL-04, CL-05 | VERIFIED |
-| "Currently building AI products and developer tools" | CL-18 (direction) + CL-13/14/15 | VERIFIED |
+| "Currently building AI products and developer tools" | CL-18 (direction) + CL-13/14 | VERIFIED |
 | "AI code-review agent with multi-agent analysis and RAG-based coding standards" | CL-14 | VERIFIED |
 | "a cited AI answer engine" | CL-13 | VERIFIED |
-| "an autonomous i18n agent" | CL-15 | VERIFIED |
+| ~~"an autonomous i18n agent"~~ | CL-15 | Removed from positioning (owner decision 2026-08-05, DL-004 condition) — remains a personal-project case study only; never verified work experience |
 
 ## 2. Headline (conflict C-09 resolved)
 
@@ -47,8 +47,10 @@ Rationale (source hierarchy): the owner-validated candidate positioning (tier 1)
 3. `DO NOT USE PUBLICLY` items (CL-20; ledger §7 categories) never appear.
 4. The statement may be shortened per section (hero/about variants) but never amplified.
 
-## 5. Open items affecting positioning
+## 5. Owner decisions affecting positioning (2026-08-05)
 
-- OQ-01/OQ-06 — LinkedIn content & canonical URL: the profile may be **linked** (URL flagged for verification in Phase 1.3 QA); LinkedIn content may not be quoted.
-- OQ-07 — handled per hierarchy as above.
-- OQ-09/OQ-10 — triage defaults (bootcamp projects and the application challenge excluded) apply until the owner directs otherwise.
+- OQ-01 — LinkedIn is unverified: **link only, never quote**.
+- OQ-06 — canonical LinkedIn URL: **`in/kashif-rezwi-149372216`**; manual click-through checkpoint in Phase 1.3 QA.
+- OQ-02 — X/Twitter excluded from the site.
+- OQ-07 — confirmed: no ML-research/model-training framing anywhere in site copy.
+- OQ-09/OQ-10 — owner decisions: bootcamp group projects removed entirely; the application-challenge repo not featured.

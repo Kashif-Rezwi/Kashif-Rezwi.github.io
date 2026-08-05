@@ -7,7 +7,7 @@
 
 ## Current phase
 
-**Phase 0 — COMPLETE** (0A Source Intake → 0B Evidence & Portfolio Research → 0C Strategy, Design Direction & Roadmap). All Phase 0 deliverables are written and awaiting owner review. **Implementation (Phase 1) cannot begin without the owner's explicit approval.**
+**Phase 0 — CLOSED, owner-ratified** (2026-08-05). All open questions resolved (OQ-01…OQ-13 closed); positioning approved with the DL-004 condition applied; Phase 1 plan approved (DL-005). **Phase 1.0 Foundation is authorized but NOT started — it begins only on the owner's explicit go.**
 
 Independent engineering audit completed 2026-08-05 (verdict: proceed after minor corrections; no blocking findings). All audit corrections applied the same day with owner approval (DL-006): README/AGENTS.md refresh, decision-log append, source-register SRC-04b amendment, and roadmap clarifications (branch model deliverable, Better DEV placeholder ownership).
 
@@ -23,12 +23,15 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Blocked
 
-- Nothing blocks Phase 0 completion.
-- Open questions OQ-01…OQ-11 remain owner-owned (see `docs/open-questions.md`); the roadmap defines fallbacks where needed (OQ-06/08/09/10).
-- Housekeeping items previously deferred (register amendment OQ-11, decision-log append, README/AGENTS.md refresh) were applied 2026-08-05 with owner approval (DL-006).
+- Nothing. All Phase 0 open questions are closed (owner decisions, 2026-08-05).
+
+## Phase 0 gate outcome (2026-08-05)
+
+- OQ-01…OQ-13 closed with owner answers (see `docs/open-questions.md`). Key decisions: canonical LinkedIn URL `in/kashif-rezwi-149372216` (QA click-through in 1.3); LinkedIn link-only/never quoted; X excluded; resume served at `/resume` as the single source of truth (Google Drive fork dropped — resolves C-08); experience section = resume-equivalent text + approved feature names, no screenshots; bootcamp projects and the application-challenge repo off the site; no ML-research framing confirmed.
+- DL-004 approved **with condition** — "autonomous i18n agent" clause removed from the positioning statement (must never ship as verified work experience); DL-005 approved.
+- Owner directive: `temp/career-ops-workspace` is the **temporary knowledge base for Phase 0 only** — its extracted markdown (profile, strategy, evidence, resume content) is the input Phase 1 consumes; it is not a live authority going forward (DL-007).
 
 ## Next approved action
 
-- **Owner review of the Phase 0C deliverables, then explicit approval to begin Phase 1 (implementation).**
-- Phase 1 starts at roadmap Phase 1.0 (Foundation) and proceeds gate by gate; the production URL is untouched until Phase 1.4 approval.
-- Until then: no code, no dependencies, no deployment.
+- **Phase 1.0 — Foundation: authorized, NOT started.** Begins only on the owner's explicit go.
+- After the go: proceed gate-by-gate per `docs/engineering/implementation-roadmap.md`; the production URL remains untouched until Phase 1.4 approval.

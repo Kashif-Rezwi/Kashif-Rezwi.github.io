@@ -24,7 +24,7 @@
 ## Phase 1.1 — Core home page
 
 - **Scope:** all home sections per the brief with claim-mapped copy (hero, selected work cards, experience, AI journey/now, contact, footer); `/resume` route serving the PDF as the single source of truth (conflict C-08); optimized portrait; home meta/OG.
-- **Dependencies:** 1.0 approved. Owner answers to OQ-06 (LinkedIn URL) and OQ-08 (experience disclosure) requested before this phase; fallbacks if unanswered: use the GitHub-profile-consistent LinkedIn URL flagged for QA, and keep experience text to resume-equivalent claims.
+- **Dependencies:** 1.0 approved. OQ-06 and OQ-08 resolved by the owner 2026-08-05: canonical LinkedIn URL `in/kashif-rezwi-149372216` (manual click-through in 1.3 QA); experience copy = resume-equivalent text + approved feature names (Swipe Genie, Workflow Builder, Template Library, CRM/campaigns, workflow UX redesign, AI workflow generation), no screenshots.
 - **Expected outcome:** complete home page at the preview URL; copy-to-claim mapping table delivered for review.
 - **Done when:** owner content review passes.
 - **Gate:** owner content approval → approval to start 1.2.
@@ -32,14 +32,14 @@
 ## Phase 1.2 — Featured case studies
 
 - **Scope:** three case-study pages from the template + `featured-project-research.md` (code-review-agent, perplexity, lingo-agent); compact secondary entries (Better DEV — the `[Your Frontend URL]` README placeholder fix is an owner action on the external repo, audit F-07; LoopLens — hackathon label); screenshots (owner-provided, or repo README assets with approval); personal/hackathon labels visible.
-- **Dependencies:** 1.1 approved. OQ-10 default applies (slooze challenge not shown); OQ-09 default applies (bootcamp projects excluded) unless the owner directs otherwise before this phase.
+- **Dependencies:** 1.1 approved. Owner decisions apply: the slooze challenge is not shown (OQ-10); bootcamp projects are excluded entirely (OQ-09).
 - **Expected outcome:** all five shortlisted projects represented at their approved depth.
 - **Done when:** owner approves each case-study page (copy + visuals).
 - **Gate:** per-page approvals → approval to start 1.3.
 
 ## Phase 1.3 — Polish & QA
 
-- **Scope:** accessibility audit (axe + keyboard pass) and fixes; Lighthouse runs against the acceptance criteria; SEO/meta/OG/sitemap/robots; full link check (demos, repos, socials — includes the OQ-06 LinkedIn flag); responsive pass at 360/768/1024/1440; reduced-motion verification; 404 page; favicon/manifest.
+- **Scope:** accessibility audit (axe + keyboard pass) and fixes; Lighthouse runs against the acceptance criteria; SEO/meta/OG/sitemap/robots; full link check (demos, repos, socials — includes a manual click-through of the canonical LinkedIn URL `in/kashif-rezwi-149372216`); responsive pass at 360/768/1024/1440; reduced-motion verification; 404 page; favicon/manifest.
 - **Dependencies:** 1.2 approved.
 - **Expected outcome:** QA report — metrics, screenshots, residual risks.
 - **Done when:** all acceptance criteria met, or exceptions explicitly owner-accepted.

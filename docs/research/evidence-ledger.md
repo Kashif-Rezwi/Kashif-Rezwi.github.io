@@ -57,6 +57,8 @@ From SRC-07 (positioning), SRC-08 (proof-points), SRC-10 (experience-evidence), 
 
 Every clause maps to the claim table below (CL-01…CL-20).
 
+**Update (2026-08-05):** the owner approved this statement with one change — the closing "and an autonomous i18n agent" clause (CL-15) was removed per the DL-004 condition. The final authoritative wording lives in `docs/strategy/positioning.md` §1.
+
 ## 4. Claim table (proposed public claims)
 
 | ID | Proposed public claim | Sources | Confidence | Label | Safe public wording |
@@ -75,7 +77,7 @@ Every clause maps to the claim table below (CL-01…CL-20).
 | CL-12 | Nexus internship: responsive React UI (hooks + Redux), WebSocket real-time features, UBMe product, refactoring | SRC-08 EXP-NEXUS-01..04; SRC-10 | High | VERIFIED | Internship framing; no quantified performance claims |
 | CL-13 | Perplexity Clone — personal full-stack AI answer engine: web-context retrieval, cited answers, threaded follow-ups; V2 single-user scope | SRC-13 PROJECT-SEARCH-01; SRC-09 README | High | VERIFIED | projects.md safe claim verbatim; no production/commercial claims |
 | CL-14 | Code Review Agent — personal full-stack AI code review: streamed structured feedback, multi-agent PR analysis, ESLint tooling, RAG coding standards | SRC-13 PROJECT-CODE-REVIEW-01; SRC-09 README | High | VERIFIED | projects.md safe claim verbatim; no production/commercial claims |
-| CL-15 | LingoAgent — autonomous i18n agent: Babel AST extraction, E2B sandbox execution, auto PR + Vercel preview; published dev.to article | SRC-09 README; SRC-11 | High | VERIFIED | Personal project; keep documented limitations honest |
+| CL-15 | LingoAgent — autonomous i18n agent: Babel AST extraction, E2B sandbox execution, auto PR + Vercel preview; published dev.to article | SRC-09 README; SRC-11 | High | VERIFIED | Personal project; keep documented limitations honest. **Owner directive (2026-08-05, DL-004 condition): excluded from the positioning statement; must never ship as verified work experience** |
 | CL-16 | Better DEV — personal AI chat platform: streaming UI with tool visibility; NestJS API with JWT auth, tool-calling, Groq models | SRC-09 READMEs | High | VERIFIED | Describe features only; never "production-ready/commercial" |
 | CL-17 | LoopLens — proof-of-work dashboard for AI coding loops (TestSprite Hackathon Season 3) | SRC-09 README | High | VERIFIED | Hackathon label mandatory; no placement claims |
 | CL-18 | Direction: "building toward AI product engineering and developer tools" | SRC-07 | High | VERIFIED as direction | Directional language only; no ML-research implication |
@@ -88,14 +90,14 @@ All conflicts between sources are recorded here — none are silently resolved.
 
 | ID | Conflict | Sources | Handling / resolution |
 |---|---|---|---|
-| C-01 | LinkedIn URL: `in/kashif-rezwi` (portfolio + GitHub profile) vs `in/kashif-rezwi-149372216` (resume + PROFILE.md) | SRC-02/03 vs SRC-05/13 | Neither URL verifiable without login | OPEN → OQ-06 |
+| C-01 | LinkedIn URL: `in/kashif-rezwi` (portfolio + GitHub profile) vs `in/kashif-rezwi-149372216` (resume + PROFILE.md) | SRC-02/03 vs SRC-05/13 | Neither URL verifiable without login | Resolved (owner, 2026-08-05, OQ-06): canonical = `in/kashif-rezwi-149372216`; manual click-through in Phase 1.3 QA |
 | C-02 | GitHub profile README: "long-term direction toward AI labs, model training, research workflows" vs approved claim boundaries (no ML-research implication) | SRC-03 (tier 6) vs SRC-07 (tier 3) | Source hierarchy: approved evidence wins; ML-research direction stays out of the portfolio | Resolved by hierarchy; OQ-07 confirms intent |
 | C-03 | Portfolio hero: "scalable architectures, system design" focus vs skills evidence (product UI / full-stack delivery; avoid specialist positioning) | SRC-02 vs SRC-13 | Treat as `INFERRED` (CL-19); needs claim-safe rewrite | OPEN — owner review |
 | C-04 | About page: "AI-powered products" (professional) vs evidence wording "AI-assisted features/experiences"; Swipe One itself is described as "AI-powered CRM platform" in PROFILE.md | SRC-02 vs SRC-10/13 | Partially supported; use "AI-assisted features" for professional feature work | OPEN — wording review in 0C |
 | C-05 | Homepage features 2023 bootcamp clones; verified current direction is 2026 AI/dev-tools work | SRC-02 vs SRC-09 | Rebuild around the triage shortlist | Resolved by triage (shortlist pending owner confirmation) |
 | C-06 | codeair card: stale repo link (`glistening-cook-4365` → 301 → `Airtable`) + description describes the Airtable product, not his contribution | SRC-02 vs SRC-09 (verified 2026-08-05) | Replace or remove the card | OPEN until rebuild |
 | C-07 | herebuy/trendsy cards link to teammates' repos (`arpit2444/…`, `Shalini1908/…`) | SRC-02 | Attribution/hosting risk; remove or explicitly relabel as group learning work | OPEN until rebuild |
-| C-08 | Resume button: `download` of local PDF + `window.open` of Google Drive link — conflicting behavior | SRC-02 (Navbar.jsx, HomeContent.jsx) | One resume source of truth | OPEN until rebuild; ties OQ-05 |
+| C-08 | Resume button: `download` of local PDF + `window.open` of Google Drive link — conflicting behavior | SRC-02 (Navbar.jsx, HomeContent.jsx) | One resume source of truth — owner decision (OQ-05, 2026-08-05): serve the resume at `/resume`, drop the Google Drive fork | Implement in Phase 1.1 |
 | C-09 | Title variance: "Full Stack Engineer" (site, GitHub) vs "Product Engineer" (2026-08 master resume) | SRC-02/03 vs SRC-05 | Both verified in their sources; owner's title choice belongs to 0C | OPEN — owner decision |
 | C-10 | "2+ years" counting boundary (~22 months full-time-only) | SRC-05 | Keep the approved wording; never amplify | Resolved — boundary documented (§1) |
 | C-11 | Register row SRC-04b labeled "LinkedIn local substitute", but `data/sources.csv` is job-source tracking, not LinkedIn content | docs/source-register.md vs file inspection | Register correction needed — outside Phase 0B's allowed edit list | OPEN → OQ-11 |
@@ -104,7 +106,7 @@ All conflicts between sources are recorded here — none are silently resolved.
 
 ## 6. Open items
 
-Carried in [open-questions.md](../open-questions.md): OQ-01 (LinkedIn content), OQ-02 (X profile), OQ-06 (canonical LinkedIn URL), OQ-07 (AI-lab aspiration excluded from positioning), OQ-08 (employer-product disclosure), OQ-09 (bootcamp project handling), OQ-10 (application-challenge permission), OQ-11 (SRC-04b register correction).
+All open questions were answered and closed by owner decision on 2026-08-05 — see [open-questions.md](../open-questions.md). Key outcomes: LinkedIn link-only/never quoted with canonical URL `in/kashif-rezwi-149372216` (QA click-through at 1.3); X excluded; resume served at `/resume` as the single source of truth (Google Drive fork removed); experience copy = resume-equivalent text + approved feature names, no screenshots; bootcamp projects and the application challenge excluded; no ML-research framing confirmed.
 
 ## 7. DO NOT USE PUBLICLY
 

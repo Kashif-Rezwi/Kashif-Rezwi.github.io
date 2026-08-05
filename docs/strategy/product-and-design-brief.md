@@ -81,9 +81,9 @@ Skills bars or percentage skills · tech-logo walls · GitHub stats/calendar wid
 ### Homepage sections, in order
 
 1. **Header/nav** — Home · Work · Experience · Contact + Resume link. *Reason: persistent orientation; resume CTA always reachable.*
-2. **Hero** — name, headline ("Frontend-focused Full Stack Engineer"), short positioning variant, optimized portrait, links: GitHub, dev.to, LinkedIn (canonical URL pending OQ-06 — QA checkpoint), email. *Reason: positioning in the first viewport (CL-01/02/18).*
+2. **Hero** — name, headline ("Frontend-focused Full Stack Engineer"), short positioning variant, optimized portrait, links: GitHub, dev.to, LinkedIn (canonical `in/kashif-rezwi-149372216` — owner decision 2026-08-05; manual click-through in 1.3 QA), email. *Reason: positioning in the first viewport (CL-01/02/18).*
 3. **Selected work** — three featured case-study cards (name, one-line problem, 2–3 tech tags, links: case study · repo · demo), then a compact row: Better DEV, LoopLens (hackathon label), learning-in-public repos (ai-playground, language-playground), and a "full archive on GitHub" link. *Reason: strongest evidence for the validated direction (triage); bootcamp clones and teammate-hosted repos explicitly excluded (C-05/C-06/C-07).*
-4. **Experience** — Brand Exponents Creatives (Oct 2023 – Aug 2025) with 3–4 claim-safe bullets (CL-03…CL-11, collaborative wording); Nexus Software Solutions internship (Jun–Aug 2023, CL-12); education line (Masai School bootcamp 2022; BCA Amity, in progress). Text only — **no employer screenshots until OQ-08 is approved**. *Reason: the current site's largest content gap (audit).*
+4. **Experience** — Brand Exponents Creatives (Oct 2023 – Aug 2025) with 3–4 claim-safe bullets (CL-03…CL-11, collaborative wording); Nexus Software Solutions internship (Jun–Aug 2023, CL-12); education line (Masai School bootcamp 2022; BCA Amity, in progress). Text only — **owner decision OQ-08 (2026-08-05): resume-equivalent text + approved feature names (Swipe Genie, Workflow Builder, Template Library, CRM/campaigns, workflow UX redesign, AI workflow generation); no screenshots**. *Reason: the current site's largest content gap (audit).*
 5. **AI journey / now** — 3–4 sentences: building AI products and developer tools; link to the dev.to article; learning-in-public repos. Directional language only (CL-18); no ML-research framing (C-02). *Reason: shows direction without unverifiable claims.*
 6. **Contact** — mailto link + GitHub/LinkedIn/dev.to links; **no form in v1** (current form has no submit handler — audit). *Reason: working contact with zero backend/maintenance.*
 7. **Footer** — colophon, repository link, last-updated note. *Reason: provenance and trust.*
@@ -103,7 +103,7 @@ Skills bars or percentage skills · tech-logo walls · GitHub stats/calendar wid
 
 - **Short on home:** hero statement, experience bullets, AI-journey paragraph, contact.
 - **Expandable:** the three featured case studies (dedicated pages). No other subpages in v1.
-- **Not on the site:** skills page, GitHub stats, bootcamp projects, application-challenge repo (OQ-09/OQ-10 defaults).
+- **Not on the site:** skills page, GitHub stats, bootcamp projects, application-challenge repo (OQ-09/OQ-10 owner decisions, 2026-08-05).
 
 ## Part 3 — Content plan & copy direction
 
@@ -119,7 +119,7 @@ Skills bars or percentage skills · tech-logo walls · GitHub stats/calendar wid
 ### Owner assets needed (before/during Phase 1)
 
 1. Screenshots for code-review-agent, perplexity, lingo-agent, Better DEV — or approval to reuse repo README assets.
-2. Canonical LinkedIn URL (OQ-06) — until answered, the GitHub-profile-consistent URL is used and flagged in QA.
-3. OQ-08 disclosure answers before any employer-product detail beyond resume-equivalent text.
+2. LinkedIn URL — resolved (OQ-06, 2026-08-05): canonical = `in/kashif-rezwi-149372216`; manual click-through checkpoint in Phase 1.3 QA.
+3. Employer disclosure — resolved (OQ-08, 2026-08-05): resume-equivalent text + approved feature names; **no screenshots**.
 4. Portrait: the existing `ME.jpg` (378 KB) is reusable once resized/re-encoded (performance criteria); a fresh photo is optional.
 5. Resume PDF decision (OQ-05): brief default — keep a repo-served PDF at `/resume`, remove the Google Drive fork (C-08).

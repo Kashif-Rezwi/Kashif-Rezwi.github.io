@@ -63,6 +63,6 @@
 
 1. No user/scale/adoption metrics exist for any personal project — none may be invented (claim safety).
 2. Fresh screenshots recommended for code-review-agent (login-gated flows), perplexity, and better-dev (owner action).
-3. Professional work (Swipe Pages / Swipe One) is deliberately NOT a "featured project" here — it belongs to experience content, and any public disclosure of employer-product details/screenshots requires OQ-08 approval.
+3. Professional work (Swipe Pages / Swipe One) is deliberately NOT a "featured project" here — it belongs to experience content. Owner decision OQ-08 (2026-08-05): resume-equivalent text + approved feature names are allowed; **no screenshots**.
 4. `slooze-ai-agent-challenge` remains excluded pending OQ-10.
 5. Demos run on Vercel/Render free tiers and can sleep or break — re-verify all links at launch (Phase 1+).

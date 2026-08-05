@@ -31,8 +31,8 @@
 - **Date:** 2026-08-05
 - **Decision:** Propose the draft statement recorded in `docs/research/evidence-ledger.md` §3 ("Frontend-focused Full Stack Engineer with 2+ years building customer-facing SaaS products in startup teams…"). Every clause maps to ledger claims CL-01…CL-18.
 - **Rationale:** 0B definition of done — the positioning statement must be evidence-checked, not assumed.
-- **Approval status:** Proposed — pending owner approval.
-- **Note (2026-08-05, independent audit):** carried into the Phase 0 gate approval request; status remains Proposed until the owner ratifies the statement.
+- **Approval status:** Approved with condition (owner, 2026-08-05): the "autonomous i18n agent" clause is removed — the owner ruled it unsupported by the knowledge base; it must never ship as verified work experience. Final approved wording lives in `docs/strategy/positioning.md` §1.
+- **Note (2026-08-05, independent audit):** carried into the Phase 0 gate approval request; the owner ruling is recorded above.
 
 ## DL-005 — Phase 0C strategy decisions adopted
 
@@ -47,3 +47,10 @@
 - **Decision:** Apply the independent audit's minor corrections immediately: refresh README.md (phase + document links), update AGENTS.md phase markers and canonical document map, amend source-register SRC-04b (resolves OQ-11), append 0C decisions to this log, and clarify the roadmap (branch model + preview mechanism as an explicit Phase 1.0 deliverable; Better DEV README placeholder is an owner action on the external repo).
 - **Rationale:** Audit findings F-01…F-07; keeps the canonical documents consistent before Phase 1 handoff.
 - **Approval status:** Approved (owner directive in conversation, 2026-08-05)
+
+## DL-007 — Phase 0 gate closed: owner answers recorded; Phase 1 authorized (not started)
+
+- **Date:** 2026-08-05
+- **Decision:** Record the owner's Phase 0 gate answers: all 13 open questions closed (OQ-01…OQ-13) with the decisions captured in `docs/open-questions.md`. Notably: OQ-06 canonical LinkedIn URL = `in/kashif-rezwi-149372216` (manual click-through in Phase 1.3 QA); OQ-08 experience disclosure = resume-equivalent text + approved feature names, no screenshots; OQ-05 resume served at `/resume` with the Google Drive fork dropped (resolves C-08); OQ-09/OQ-10 bootcamp projects and the application-challenge repo stay off the site; OQ-13 commit rule ratified (commits within approved Phase 1 sub-phases; no production deploys until 1.4). Owner directive: `temp/career-ops-workspace` is the **temporary knowledge base for Phase 0 only** — the markdown extracted from it (profile, strategy, evidence, resume content) is the input Phase 1 consumes; it is not a live authority going forward.
+- **Rationale:** Completes the Phase 0 definition of done — every claim is evidence-mapped or owner-resolved; nothing silently assumed.
+- **Approval status:** Approved (owner directive, 2026-08-05). Phase 1.0 Foundation awaits the owner's explicit go; no Phase 1 work has started.
