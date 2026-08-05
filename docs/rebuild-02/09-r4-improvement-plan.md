@@ -171,10 +171,10 @@ Recommend adding **1, 4, 5, 2** as the "few more points," and **sharpen 3**; **6
 - Preserve collaborative wording: "helped build / contributed / collaborated."
 - Never claim sole ownership or "core team / key role" without owner-confirmed evidence.
 
-### 7.4 Open choices (owner)
+### 7.4 Open choices (owner) — RESOLVED (2026-08-06)
 
-- Confirm the bullets to add (recommend 1, 4, 5, 2; sharpen 3).
-- Keep the current 4-group Brand Exponents layout or expand to a 5th group (e.g. "Platform & delivery").
+- Bullets added: **Template Library** (kept present), **drag-and-drop builder**, **workflow-builder refactor/analytics**, **two AppSumo launch periods**, **AI workflow auto-config + email-node auto-draft**, plus **shared page-builder systems** (typography, colour systems, responsive video). Nexus internet expanded to three bullets. Keep the current grouped layout (5 Brand Exponents groups: Integrations / CRM / AI-assisted / Workflow builder & analytics / Platform, launches & reliability).
+- "six providers" → **"several providers"** (owner correction — worked on several, not six).
 
 ## 8. Design decision 5 — Navbar pinned
 
@@ -193,14 +193,16 @@ Recommend adding **1, 4, 5, 2** as the "few more points," and **sharpen 3**; **6
 
 ## 9. Open decisions (owner) — record in `docs/open-questions.md`
 
-| # | Question | Options | Recommendation |
-|---|---|---|---|
-| OQ-R4-1 | Hero layout | A role-only / B role + direction | B (if not crowded) |
-| OQ-R4-2 | Tech groups (flat vs tiered) | Flat-corrected / tiered Core+Working+AI | Tiered (b) |
-| OQ-R4-3 | AI & Tools items (Vercel AI SDK, LangChain, BullMQ, Prisma, pgvector) — keep vs label vs drop | Keep as headline / label "AI · building" / move to projects note / drop | Label as "AI · building" with a caveat, or drop from headline |
-| OQ-R4-4 | Which Experience bullets to add | All / subset | 1, 2, 4, 5 (sharpen 3) |
-| OQ-R4-5 | Dot extension mode | B1 static site-wide / B2 interactive repeat | B1 |
-| OQ-R4-6 | Header pin | fixed at top while scrolling | keep frosted-glass blur |
+| # | Question | Options | Recommendation | Resolution |
+|---|---|---|---|---|
+| OQ-R4-1 | Hero layout | A role-only / B role + direction | B (if not crowded) | **B — resolved:** name → canonical role line → direction → bio (DL-033) |
+| OQ-R4-2 | Tech groups (flat vs tiered) | Flat-corrected / tiered Core+Working+AI | Tiered (b) | **Flat + corrected — owner pick** (icon registry, LangChain dropped, ClickHouse/RabbitMQ added) |
+| OQ-R4-3 | AI & Tools items (Vercel AI SDK, LangChain, BullMQ, Prisma, pgvector) | Keep / label / drop | Label or drop | **LangChain dropped; Vercel AI SDK, Prisma, pgvector, BullMQ retained** (project-derived) |
+| OQ-R4-4 | Which Experience bullets to add | All / subset | 1, 2, 4, 5 (sharpen 3) | **Resolved** — workflow-builder/analytics, AI workflow auto-config/auto-draft, two AppSumo launch periods; Nexus expanded |
+| OQ-R4-5 | Dot extension mode | B1 static site-wide / B2 interactive repeat | B1 | **B2 — interactive repeat (hero + contact)**; dot enlargement dropped |
+| OQ-R4-6 | Header pin | fixed at top while scrolling | keep frosted-glass blur | **Resolved** — `position: fixed`; **bottom fade dropped** per owner |
+
+Each open decision is gated: owner picks → implement. Above reflects the owner's resolved picks (2026-08-06).
 
 Each open decision is gated: owner picks → implement.
 
@@ -208,16 +210,16 @@ Each open decision is gated: owner picks → implement.
 
 Per AGENTS.md §7, each step is the smallest useful action, verified, recorded; no deploy without separate go.
 
-| Step | Scope | Expected evidence | Gate |
-|---|---|---|---|
-| R4-0 | Decide OQ-R4-1..6 | Open questions closed | owner |
-| R4-1 | Hero — single-line name + role line | Build passes; role legible at all widths | owner spot-check + LinkedIn cross-check |
-| R4-2 | Dot matrix extension (B1/B2) | Motif extended; reduced-motion/no-JS fallback | Lighthouse + axe + visual |
-| R4-3 | Tech-stack correctness (+ regroup if tiered) | Updated groups; each item source-tagged | owner |
-| R4-4 | Experience additions | Added bullets (claim-safe wording); source map | owner |
-| R4-5 | Navbar pinned | Pinned at top across scroll on all pages | owner |
-| R4-6 | QA + record | Lighthouse, axe, contrast, links, no-JS; evidence in a 10-r4-* doc | owner gate → R4-7 |
-| R4-7 | (Deploy) branch promotion | `v2-improvement` → `develop` → `gh-pages` | owner only ("go") |
+| Step | Scope | Expected evidence | Gate | Status |
+|---|---|---|---|---|
+| R4-0 | Decide OQ-R4-1..6 | Open questions closed | owner | ✅ Resolved |
+| R4-1 | Hero — single-line name + role line | Build passes; role legible at all widths | owner spot-check | ✅ DL-033 |
+| R4-2 | Dot matrix extension (B1/B2) | Motif extended; reduced-motion/no-JS fallback | Lighthouse + axe + visual | ✅ B2 (hero + contact); enlargement dropped |
+| R4-3 | Tech-stack correctness (+ regroup if tiered) | Corrected groups; items source-tagged | owner | ✅ flat + corrected |
+| R4-4 | Experience additions | Added claim-safe bullets; source map | owner | ✅ workflow/analytics + AI workflow + AppSumo + Nexus |
+| R4-5 | Navbar pinned | Pinned at top across scroll on all pages | owner | ✅ `position: fixed`; fade dropped |
+| R4-6 | QA + record | Lighthouse, axe, contrast, links, no-JS; evidence in a 10-r4-* doc | owner gate → R4-7 | **Pending** |
+| R4-7 | (Deploy) branch promotion | `v2-improvement` → `develop` → `gh-pages` | owner only ("go") | **Pending** |
 
 ## 11. Approval
 
@@ -225,5 +227,5 @@ This document is a **plan for owner review** — brainstorming + decision artifa
 
 ---
 
-- **Status:** DRAFT (plan, no code, no deploy).
+- **Status:** IN PROGRESS — owner decisions resolved (OQ-R4-1..6); R4-1..R4-5 + resume swap implemented and verified locally on `v2-improvement`. **R4-6 QA + R4-7 deploy still owner-gated.**
 - **Owner gate:** required before R4-0 execution.

@@ -235,3 +235,27 @@
 - **Decision:** Implement R4-1 (hero identity) in `src/pages/index.astro`. The name `Kashif Rezwi` is now a single `<h1>` line (removed the `Kashif<br />Rezwi` split). The old gradient direction line ("Building toward AI product engineering and developer tools") was replaced with the canonical, consistent role line **"Frontend-focused Full Stack Engineer"** — the exact string already used in the page `<title>`, meta description, and approved positioning. The bio's direction ("Currently building AI products and developer tools") is retained in the bio copy, so no direction signal was lost. `npx astro build` passes; the rendered `dist/index.html` confirms both `Kashif Rezwi` and the role string present and the old split line absent.
 - **Rationale:** Resolves the "two-line name feels odd" + "no consistent role line" feedback; satisfies the AGENTS.md §2/§3 requirement that the public role be one consistent, claim-safe string across every surface.
 - **Approval status:** Implemented locally per the approved R4 cycle, R4-1 step. Not deployed; no branch merge. Next: R4-2 (dot matrix). [Marked by owner to proceed one step at a time.]
+
+## DL-034 — R4-2/3/4 backfilled: dot-matrix multi-instance, tech-stack correction, first Experience additions
+
+- **Date:** 2026-08-06
+- **Decision:** Backfill the `v2-improvement` commits that implemented R4-2, R4-3, and part of R4-4: **R4-2** — `HeroDotMatrix.astro` refactored (`888a8ef`) to drive every `.hero-dot-matrix` canvas on the page, so the interactive motif repeats across hero and contact. **R4-3** — `TechIcon.astro`/`Icon.astro` add an SVG icon registry (`db07f82`); `REST APIs` reordered (`19a7157`); membership corrected with flat groups kept, LangChain dropped, ClickHouse/RabbitMQ added. **R4-4 (partial)** — Brand Exponents bullets deepened (Template Library "contributed to", reusable infinite-pagination "four product surfaces", production-stability wording).
+- **Rationale:** Brings the log in line with the actual `v2-improvement` tip; stays within the R4 content/interaction/styling scope and AGENTS.md §3 claim safety (collaborative wording, no metrics).
+- **Approval status:** Recorded post-hoc; consistent with the owner-approved R4 direction. Not deployed; no branch merge.
+
+## DL-035 — R4-5 implemented: navbar pinned (fixed); dot enlargement + fade dropped per owner
+
+- **Date:** 2026-08-06
+- **Decision:** Complete R4-5 in `src/components/Header.astro`: `position: fixed; top/left/right: 0` so the navbar stays pinned at the top at all times; kept the frosted-glass translucent + blur background; removed the bottom-fade `::after` approach. Added `body { padding-top: 65px; }` + `scroll-padding-top: 5rem` in `src/styles/global.css` to prevent the fixed header covering content and anchors (matches the hero's existing `100svh - 65px`). Separately, per owner commentary, **dot enlargement was dropped** (R4-2 keeps the current ~1.05–1.7px dots and only extends the motif) and the **navbar bottom fade was removed from the plan**.
+- **Rationale:** Reliable, absolute pinning with the theme's frosted glass intact and no hard-click/sticky-issue; the offset keeps content clear of the fixed bar. `npx astro build` passes.
+- **Approval status:** Implemented locally. Not deployed; no branch merge. A previous R4-5 fade attempt had been reverted; the owner's now-confirmed scope is pinning only.
+
+## DL-036 — R4-4 completed: Experience fill-out (Brand Exponents + Nexus), "several providers" correction, resume swap
+
+- **Date:** 2026-08-06
+- **Decision:**
+  1. **Brand Exponents** (`index.astro`): added/aware of a **Workflow builder & analytics** group (workflow dashboards + reusable templates on Swipe Pages; Swipe One workflow-templates dashboard and analytics from an early stage; shared page-builder systems — global responsive typography, named solid/gradient colour systems, responsive video module); expanded **AI-assisted** to include the workflow AI assistant that auto-configures workflow nodes and auto-drafts email nodes from the user's profile context; expanded **Platform, launches & reliability** to two AppSumo launch periods (resolving customer queries, fixing live issues, shipping hotfixes, iterating across Discord/Facebook/AppSumo). Changed **"six providers" → "several providers"** per the owner (they worked on several, not six).
+  2. **Nexus** — single summary line split into three bullets: event-management product (original content), features & integration (API via Axios/Fetch, CRUD, reusable components/UI libraries with designers/senior engineers), code quality (refactored frontend code).
+  3. **Resume** — the site's `/resume` PDF was replaced with the rendered **Full-stack master** (`kashif-rezwi-master-full-stack-developer-2026-07.pdf`) so the served resume matches the site identity ("Frontend-focused Full Stack Engineer") and the expanded experience section.
+- **Rationale:** Adds verified depth from the experience-evidence + master resumes; preserves all existing points; collaborative wording; no measured metrics, no "revenue" or "instant-messaging chat" unverified claims introduced. Resume selection aligned with the site's canonical role string.
+- **Approval status:** Implemented locally (owner directed the additions and the resume swap). R4-6 QA and R4-7 deploy remain owner-gated. No branch merge, no deploy.
