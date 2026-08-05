@@ -61,7 +61,7 @@ const hiddenTechCount = tech.length - visibleTech.length;
       {
         hiddenTechCount > 0 && (
           <li>
-            <a class="work-card-tech-more" href={href} aria-label={`${hiddenTechCount} more technologies — see the ${title} case study`}>
+            <a class="work-card-tech-more" href={href} aria-label={`${hiddenTechCount} more technologies, see the ${title} case study`}>
               +{hiddenTechCount} more
             </a>
           </li>
@@ -89,7 +89,7 @@ const hiddenTechCount = tech.length - visibleTech.length;
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon name="external" size={14} />Live demo
+            <Icon name="external" size={14} />Live
           </a>
         )
       }

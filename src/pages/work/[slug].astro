@@ -40,7 +40,7 @@ const prev = currentIndex > 0 ? allEntries[currentIndex - 1] : null;
 const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1] : null;
 ---
 
-<Base title={`${title} — Kashif Rezwi`} description={summary}>
+<Base title={`${title} · Kashif Rezwi`} description={summary}>
   <article class="case-study">
 
     <!-- =========================================================
@@ -86,7 +86,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
           <figure class="case-cover animate-fade-up delay-200">
             <Image
               src={coverSrc as Parameters<typeof Image>[0]['src']}
-              alt={`${title} — project screenshot`}
+              alt={`${title} project screenshot`}
               width={1200}
               format="avif"
               quality={75}
