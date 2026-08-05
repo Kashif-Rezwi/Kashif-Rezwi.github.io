@@ -12,9 +12,11 @@
  */
 import snapshot from '../data/github-contributions.json';
 
-const CELL = 10; // px square
-const GAP = 3; // px gap
-const R = 2; // corner radius
+const CELL = 13;
+const GAP = 3;
+const R = 2.5;
+const PITCH = CELL + GAP;
+const MONTH_LABEL_H = 18;
 
 interface Day {
   date: string;
@@ -31,7 +33,6 @@ const refreshedLabel = fetchedAt
   ? fetchedAt.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
   : null;
 
-// Contribution level → opacity step on the accent square.
 const levelClass: Record<Day['level'], string> = {
   NONE: 'gh-l0',
   FIRST_QUARTILE: 'gh-l1',
@@ -40,81 +41,113 @@ const levelClass: Record<Day['level'], string> = {
   FOURTH_QUARTILE: 'gh-l4',
 };
 
-const width = weeks.length * (CELL + GAP);
-const height = 7 * (CELL + GAP);
+// Month labels: when the month of a week's first day differs from the previous
+// week's, emit a label at that column.
+const monthFmt = new Intl.DateTimeFormat('en-US', { month: 'short' });
+const monthLabels: { x: number; label: string }[] = [];
+let prevMonth = -1;
+weeks.forEach((week, wi) => {
+  const first = week.days[0];
+  if (!first) return;
+  const m = new Date(first.date + 'T00:00:00').getMonth();
+  if (m !== prevMonth) {
+    monthLabels.push({ x: wi * PITCH, label: monthFmt.format(new Date(first.date + 'T00:00:00')) });
+    prevMonth = m;
+  }
+});
+
+const width = weeks.length * PITCH - GAP;
+const height = MONTH_LABEL_H + 7 * PITCH - GAP;
 const username = (snapshot as any)?.username ?? 'Kashif-Rezwi';
 ---
 
 <div class="gh-contrib reveal">
-  <div class="gh-contrib-head">
-    <p class="gh-contrib-label">Public GitHub activity</p>
+  <div class="gh-contrib-card">
+    <div class="gh-contrib-head">
+      <p class="gh-contrib-label">Public GitHub activity</p>
+      {
+        ok && refreshedLabel && (
+          <p class="gh-contrib-meta">
+            <strong>{total.toLocaleString()}</strong> contributions in the last year · Last refreshed {refreshedLabel}
+          </p>
+        )
+      }
+    </div>
     {
-      ok && refreshedLabel && (
-        <p class="gh-contrib-meta">
-          {total.toLocaleString()} contributions in the last year · Last refreshed {refreshedLabel}
+      ok ? (
+        <div class="gh-contrib-body">
+          <div class="gh-contrib-scroll">
+            <svg
+              class="gh-contrib-svg"
+              viewBox={`0 0 ${width} ${height}`}
+              preserveAspectRatio="xMinYMid meet"
+              role="img"
+              aria-label={`GitHub contribution calendar, ${total} contributions in the last year`}
+            >
+              {monthLabels.map((m) => (
+                <text class="gh-month" x={m.x} y={10}>{m.label}</text>
+              ))}
+              {weeks.map((week, wi) =>
+                week.days.map((day) => (
+                  <rect
+                    class={levelClass[day.level] ?? 'gh-l0'}
+                    x={wi * PITCH}
+                    y={MONTH_LABEL_H + day.weekday * PITCH}
+                    width={CELL}
+                    height={CELL}
+                    rx={R}
+                  >
+                    <title>{day.count} contribution{day.count === 1 ? '' : 's'} on {day.date}</title>
+                  </rect>
+                )),
+              )}
+            </svg>
+          </div>
+          <div class="gh-contrib-foot">
+            <a href={`https://github.com/${username}`} target="_blank" rel="noopener noreferrer" class="gh-contrib-profile link-accent">@{username} on GitHub →</a>
+            <div class="gh-contrib-legend" aria-hidden="true">
+              <span>Less</span>
+              <span class="gh-sq gh-l0" /><span class="gh-sq gh-l1" /><span class="gh-sq gh-l2" /><span class="gh-sq gh-l3" /><span class="gh-sq gh-l4" />
+              <span>More</span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <p class="gh-contrib-fallback">
+          Contribution data isn't available right now.{' '}
+          <a href={`https://github.com/${username}`} target="_blank" rel="noopener noreferrer" class="link-accent">View the activity graph on GitHub →</a>
         </p>
       )
     }
   </div>
-
-  {
-    ok ? (
-      <div class="gh-contrib-scroll">
-        <svg
-          class="gh-contrib-svg"
-          viewBox={`0 0 ${width} ${height}`}
-          width={width}
-          height={height}
-          role="img"
-          aria-label={`GitHub contribution calendar, ${total} contributions in the last year`}
-        >
-          {weeks.map((week, wi) =>
-            week.days.map((day) => (
-              <rect
-                class={levelClass[day.level] ?? 'gh-l0'}
-                x={wi * (CELL + GAP)}
-                y={day.weekday * (CELL + GAP)}
-                width={CELL}
-                height={CELL}
-                rx={R}
-              >
-                <title>
-                  {day.count} contribution{day.count === 1 ? '' : 's'} on {day.date}
-                </title>
-              </rect>
-            )),
-          )}
-        </svg>
-        <div class="gh-contrib-legend" aria-hidden="true">
-          <span>Less</span>
-          <span class="gh-sq gh-l0" /><span class="gh-sq gh-l1" /><span class="gh-sq gh-l2" /><span class="gh-sq gh-l3" /><span class="gh-sq gh-l4" />
-          <span>More</span>
-        </div>
-      </div>
-    ) : (
-      <p class="gh-contrib-fallback">
-        Contribution data isn't available right now.{' '}
-        <a href={`https://github.com/${username}`} target="_blank" rel="noopener noreferrer" class="link-accent">
-          View the activity graph on GitHub →
-        </a>
-      </p>
-    )
-  }
 </div>
+
+<script>
+  // On small screens the calendar scrolls horizontally; start at the most
+  // recent end so the current activity is visible instead of the oldest.
+  document.querySelectorAll('.gh-contrib-scroll').forEach((el) => {
+    if (el.scrollWidth > el.clientWidth) el.scrollLeft = el.scrollWidth;
+  });
+</script>
 
 <style>
   .gh-contrib {
-    border-top: 1px solid var(--color-border);
-    padding-top: 1.5rem;
     margin-top: 2.5rem;
   }
+  .gh-contrib-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card, 0.75rem);
+    padding: 1.5rem 1.5rem 1.25rem;
+  }
+
   .gh-contrib-head {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0.25rem 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
   }
   .gh-contrib-label {
     font-family: var(--font-mono);
@@ -126,39 +159,79 @@ const username = (snapshot as any)?.username ?? 'Kashif-Rezwi';
   }
   .gh-contrib-meta {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     color: var(--color-ink-dim);
     margin: 0;
   }
-
-  .gh-contrib-scroll {
-    overflow-x: auto;
-    padding-bottom: 0.25rem;
+  .gh-contrib-meta strong {
+    color: var(--color-ink);
+    font-weight: 600;
   }
+
   .gh-contrib-svg {
     display: block;
-    max-width: none;
+    width: 100%;
+    height: auto;
+    /* Keep squares legible: never below ~7px cells (52 weeks * ~12px). */
+    min-width: 620px;
+  }
+  .gh-contrib-scroll {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    /* Calendar scrolls to the most recent end on small screens, so fade the
+       clipped LEFT edge to hint that earlier months are behind. */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 28px);
+    mask-image: linear-gradient(to right, transparent, black 28px);
+  }
+  @media (min-width: 700px) {
+    .gh-contrib-svg { min-width: 0; }
+    .gh-contrib-scroll { -webkit-mask-image: none; mask-image: none; }
   }
 
-  /* Level scale: empty = faint surface; filled = cornflower at rising opacity. */
-  .gh-l0 { fill: var(--color-surface-2); }
-  .gh-l1 { fill: color-mix(in srgb, var(--color-accent) 32%, transparent); }
-  .gh-l2 { fill: color-mix(in srgb, var(--color-accent) 55%, transparent); }
-  .gh-l3 { fill: color-mix(in srgb, var(--color-accent) 78%, transparent); }
+  .gh-month {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    fill: var(--color-ink-dim);
+  }
+
+  /* Level scale: empty = visible neutral tint; filled = cornflower at rising opacity. */
+  .gh-l0 { fill: color-mix(in srgb, var(--color-ink) 7%, transparent); }
+  .gh-l1 { fill: color-mix(in srgb, var(--color-accent) 36%, transparent); }
+  .gh-l2 { fill: color-mix(in srgb, var(--color-accent) 60%, transparent); }
+  .gh-l3 { fill: color-mix(in srgb, var(--color-accent) 84%, transparent); }
   .gh-l4 { fill: var(--color-accent); }
+
+  .gh-contrib-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: 1.125rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .gh-contrib-profile {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-decoration: none;
+  }
+  .gh-contrib-profile:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
 
   .gh-contrib-legend {
     display: flex;
     align-items: center;
-    gap: 3px;
-    margin-top: 0.5rem;
+    gap: 4px;
     font-family: var(--font-mono);
     font-size: 0.625rem;
     color: var(--color-ink-dim);
   }
   .gh-contrib-legend .gh-sq {
-    width: 9px;
-    height: 9px;
+    width: 10px;
+    height: 10px;
     border-radius: 2px;
     display: inline-block;
   }
