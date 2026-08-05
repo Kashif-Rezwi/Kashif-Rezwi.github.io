@@ -1,7 +1,7 @@
 ---
 /**
- * Featured work card — Phase 1.1 (brief Part 2, section 3).
- * Case-study link wired to the /work/<slug> route in Phase 1.2.
+ * Featured work card — Rebuild-02 redesign.
+ * Cover image loaded via Vite glob (same pattern as [slug].astro).
  */
 interface Props {
   title: string;
@@ -13,38 +13,199 @@ interface Props {
   demo?: string;
   tech: string[];
   href: string;
+  cover?: string; // filename inside src/assets/work/
 }
 
-const { title, roleLabel, period, status, summary, repo, demo, tech, href } =
+const { title, roleLabel, period, status, summary, repo, demo, tech, href, cover } =
   Astro.props;
+
+const covers = import.meta.glob('../assets/work/*', {
+  eager: true,
+  import: 'default',
+}) as Record<string, { src: string; width: number; height: number }>;
+const coverSrc = cover ? covers[`../assets/work/${cover}`] : undefined;
 ---
 
-<article
-  class="rounded-md border border-hairline bg-surface p-6 transition-shadow duration-150 hover:shadow-md"
->
-  <header class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-    <h3 class="text-lg font-semibold tracking-tight">
-      <a href={href} class="underline-offset-4 hover:underline hover:decoration-accent-ink">
-        {title}
+<article class="work-card card">
+  {
+    coverSrc && (
+      <div class="work-card-cover">
+        <img src={coverSrc.src} alt={`${title} screenshot`} loading="lazy" width={coverSrc.width} height={coverSrc.height} />
+      </div>
+    )
+  }
+  <div class="work-card-body">
+    <header class="work-card-header">
+      <div class="work-card-meta-row">
+        <span class="section-label">{roleLabel}</span>
+        <span class="work-card-status">{status}</span>
+      </div>
+      <h3 class="work-card-title">
+        <a href={href}>{title}</a>
+      </h3>
+      <p class="work-card-period">{period}</p>
+    </header>
+
+    <p class="work-card-summary">{summary}</p>
+
+    <ul class="work-card-tech" aria-label={`Technologies used in ${title}`}>
+      {tech.map((t) => <li class="tech-tag">{t}</li>)}
+    </ul>
+
+    <footer class="work-card-links">
+      <a href={href} class="work-card-cta">
+        Case study <span class="arrow" aria-hidden="true">→</span>
       </a>
-    </h3>
-    <p class="font-mono text-xs text-ink-muted">
-      {roleLabel} · {period} · {status}
-    </p>
-  </header>
-  <p class="mt-3 max-w-[68ch] text-body">{summary}</p>
-  <ul class="mt-4 flex flex-wrap gap-2" aria-label={`Technologies used in ${title}`}>
-    {
-      tech.map((t) => (
-        <li class="rounded bg-accent-soft px-2 py-0.5 font-mono text-xs text-accent-ink">
-          {t}
-        </li>
-      ))
-    }
-  </ul>
-  <p class="mt-4 flex flex-wrap gap-x-5 gap-y-1 font-mono text-sm">
-    <a href={href} class="link-accent">Case study →</a>
-    <a href={repo} class="link-accent">Repository</a>
-    {demo && <a href={demo} class="link-accent">Live demo</a>}
-  </p>
+      <a
+        href={repo}
+        class="work-card-link link-accent"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Repo</a>
+      {
+        demo && (
+          <a
+            href={demo}
+            class="work-card-link link-accent"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Live demo
+          </a>
+        )
+      }
+    </footer>
+  </div>
 </article>
+
+<style>
+  .work-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .work-card-cover {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface-2);
+  }
+  .work-card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s ease;
+  }
+  .work-card:hover .work-card-cover img {
+    transform: scale(1.03);
+  }
+
+  .work-card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    flex: 1;
+  }
+
+  .work-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .work-card-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .work-card-status {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-success);
+    background: color-mix(in srgb, var(--color-success) 12%, transparent);
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-success) 25%, transparent);
+    font-weight: 500;
+  }
+
+  .work-card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .work-card-title a {
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .work-card-title a:hover {
+    color: var(--color-accent-light);
+  }
+
+  .work-card-period {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-ink-dim);
+    margin: 0;
+  }
+
+  .work-card-summary {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-ink-muted);
+    margin: 0;
+    max-width: 68ch;
+  }
+
+  .work-card-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .work-card-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
+  }
+
+  .work-card-cta {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-accent-light);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: gap 0.2s ease, color 0.15s ease;
+  }
+  .work-card-cta:hover {
+    gap: 0.5rem;
+  }
+  .work-card-cta .arrow {
+    transition: transform 0.2s ease;
+  }
+  .work-card-cta:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  .work-card-link {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+</style>

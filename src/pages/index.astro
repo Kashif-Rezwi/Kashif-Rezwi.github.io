@@ -6,9 +6,8 @@ import WorkCard from '../components/WorkCard.astro';
 import { withBase } from '../lib/paths';
 import portrait from '../assets/portrait.jpg';
 
-// Claim mapping lives in docs/strategy/home-copy-claim-map.md (Phase 1.1 gate artifact).
 const description =
-  'Frontend-focused Full Stack Engineer with 2+ years building customer-facing SaaS in startup teams — landing-page builders, CRM, and workflow automation. Currently building AI products and developer tools.';
+  'Full Stack Engineer with 2+ years building customer-facing SaaS in startup teams — landing-page builders, CRM, and workflow automation. Currently building AI products and developer tools.';
 
 const featured = (await getCollection('work'))
   .filter((e) => e.data.order <= 3)
@@ -16,12 +15,10 @@ const featured = (await getCollection('work'))
 
 const links = {
   email: 'kashifrezwi850@gmail.com',
-  phone: '9883909187',
   github: 'https://github.com/Kashif-Rezwi',
   linkedin: 'https://www.linkedin.com/in/kashif-rezwi-149372216/',
   devto: 'https://dev.to/kashifrezwi',
-  devtoArticle:
-    'https://dev.to/kashifrezwi/i-built-an-ai-agent-that-makes-any-nextjs-app-multilingual-in-3-minutes-4bdm',
+  devtoArticle: 'https://dev.to/kashifrezwi/i-built-an-ai-agent-that-makes-any-nextjs-app-multilingual-in-3-minutes-4bdm',
   archive: 'https://github.com/Kashif-Rezwi?tab=repositories',
   betterDevUi: 'https://github.com/Kashif-Rezwi/better-dev-ui',
   betterDevApi: 'https://github.com/Kashif-Rezwi/better-dev-api',
@@ -31,60 +28,117 @@ const links = {
   aiPlayground: 'https://github.com/Kashif-Rezwi/ai-playground',
   languagePlayground: 'https://github.com/Kashif-Rezwi/language-playground',
 };
+
+// Tech stack data (from skills-inventory.md)
+const techStack = [
+  {
+    category: 'Languages',
+    items: ['JavaScript', 'TypeScript', 'Python'],
+  },
+  {
+    category: 'Frontend',
+    items: ['React', 'Next.js', 'Tailwind CSS', 'Redux', 'TanStack Query'],
+  },
+  {
+    category: 'Backend',
+    items: ['Node.js', 'Express', 'NestJS', 'WebSockets', 'REST APIs'],
+  },
+  {
+    category: 'Databases & Infra',
+    items: ['PostgreSQL', 'MongoDB', 'Redis', 'Docker', 'GitHub Actions'],
+  },
+  {
+    category: 'AI & Tools',
+    items: ['Vercel AI SDK', 'LangChain', 'BullMQ', 'Prisma', 'pgvector'],
+  },
+];
 ---
 
 <Base
-  title="Kashif Rezwi — Frontend-focused Full Stack Engineer"
+  title="Kashif Rezwi — Full Stack Engineer"
   description={description}
 >
-  <div class="container-site">
-    <!-- Hero — CL-01/CL-02/CL-18; short variant of the approved positioning statement (DL-004), never amplified -->
-    <section class="py-16 md:py-24">
-      <div class="flex flex-col-reverse items-start gap-10 md:flex-row md:items-center">
-        <div class="max-w-2xl">
-          <p class="section-label">Portfolio</p>
-          <h1 class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
-            Kashif Rezwi
-          </h1>
-          <p class="mt-3 text-xl text-ink-muted md:text-2xl">
-            Frontend-focused Full Stack Engineer
-          </p>
-          <p class="mt-6 max-w-[68ch] text-body">
-            2+ years building customer-facing SaaS products in startup teams —
-            landing-page builders, CRM, and campaign & workflow automation.
-            Currently building AI products and developer tools.
-          </p>
-          <p class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
-            <a href={withBase('resume/')} class="btn">Resume</a>
-            <a href={`mailto:${links.email}`} class="link-accent font-mono text-sm">Email</a>
-            <a href={links.github} class="link-accent font-mono text-sm">GitHub</a>
-            <a href={links.linkedin} class="link-accent font-mono text-sm">LinkedIn</a>
-            <a href={links.devto} class="link-accent font-mono text-sm">dev.to</a>
-          </p>
+  <!-- ================================================================
+       HERO
+  ================================================================ -->
+  <section class="hero-section">
+    <div class="container-site hero-inner">
+      <div class="hero-content animate-fade-up">
+        <!-- Status badge -->
+        <div class="hero-status">
+          <span class="status-dot glow-pulse" aria-hidden="true"></span>
+          <span class="status-label">Open to opportunities</span>
         </div>
-        <Image
-          src={portrait}
-          alt="Portrait of Kashif Rezwi"
-          width={512}
-          height={512}
-          format="avif"
-          quality={65}
-          loading="eager"
-          fetchpriority="high"
-          class="h-40 w-40 shrink-0 rounded-full border border-hairline object-cover md:h-56 md:w-56"
-        />
-      </div>
-    </section>
 
-    <!-- Selected work — CL-13/14/15 (featured), CL-16/17 (compact row) -->
-    <section id="work" class="scroll-mt-4 border-t border-hairline/80 py-16">
-      <h2 class="text-2xl font-semibold tracking-tight">Selected work</h2>
-      <p class="mt-2 max-w-[68ch] text-body text-ink-muted">
-        Featured personal projects in AI products and developer tools.
-      </p>
-      <div class="mt-8 grid gap-6">
-        {
-          featured.map((entry) => (
+        <!-- Label -->
+        <p class="section-label delay-100 animate-fade-up">Full Stack Engineer · Kolkata, India</p>
+
+        <!-- Headline -->
+        <h1 class="hero-name delay-200 animate-fade-up">
+          Kashif<br />Rezwi
+        </h1>
+
+        <!-- Sub-headline with gradient -->
+        <p class="hero-role delay-300 animate-fade-up">
+          <span class="gradient-text">Building AI products</span><br />
+          and developer tools
+        </p>
+
+        <!-- Bio -->
+        <p class="hero-bio delay-400 animate-fade-up">
+          2+ years building customer-facing SaaS products in startup teams —
+          landing-page builders, CRM, and campaign & workflow automation.
+          Currently focused on AI-powered applications and developer tooling.
+        </p>
+
+        <!-- CTA row -->
+        <div class="hero-ctas delay-500 animate-fade-up">
+          <a href={withBase('resume/')} class="btn">View Resume</a>
+          <a href={`mailto:${links.email}`} class="btn-outline">Email me</a>
+          <div class="hero-social-links">
+            <a href={links.github} class="hero-social" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+            <a href={links.linkedin} class="hero-social" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+            <a href={links.devto} class="hero-social" target="_blank" rel="noopener noreferrer" aria-label="dev.to">dev.to</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Portrait -->
+      <div class="hero-portrait delay-300 animate-fade-up">
+        <div class="portrait-wrapper">
+          <div class="portrait-glow" aria-hidden="true"></div>
+          <Image
+            src={portrait}
+            alt="Portrait of Kashif Rezwi"
+            width={320}
+            height={320}
+            format="avif"
+            quality={70}
+            loading="eager"
+            fetchpriority="high"
+            class="portrait-img"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SELECTED WORK
+  ================================================================ -->
+  <section id="work" class="section-block">
+    <div class="container-site">
+      <div class="section-header reveal">
+        <p class="section-label">Selected work</p>
+        <h2 class="section-title">Things I've built</h2>
+        <p class="section-subtitle">
+          AI products and developer tools — personal projects with live demos.
+        </p>
+      </div>
+
+      <div class="work-grid">
+        {featured.map((entry, i) => (
+          <div class={`reveal delay-${(i + 1) * 100}`}>
             <WorkCard
               title={entry.data.title}
               roleLabel={entry.data.roleLabel}
@@ -95,154 +149,815 @@ const links = {
               demo={entry.data.demo}
               tech={entry.data.tech}
               href={withBase(`work/${entry.id}/`)}
+              cover={entry.data.cover}
             />
-          ))
-        }
+          </div>
+        ))}
       </div>
 
-      <h3 class="mt-12 font-mono text-sm text-ink-muted">More</h3>
-      <ul class="mt-4 space-y-3">
-        <li class="max-w-[72ch]">
-          <span class="font-semibold">Better DEV</span>
-          <span class="font-mono text-xs text-ink-muted"> · Personal project</span>
-          <span class="text-body">
-            — AI chat platform with a streaming UI that shows the model's tool
-            calls, backed by a NestJS API with JWT auth and web search.
-          </span>
-          <span class="font-mono text-sm">
-            <a href={links.betterDevUi} class="link-accent">UI repo</a> ·
-            <a href={links.betterDevApi} class="link-accent"> API repo</a> ·
-            <a href={links.betterDevDemo} class="link-accent"> live</a>
-          </span>
-        </li>
-        <li class="max-w-[72ch]">
-          <span class="font-semibold">LoopLens</span>
-          <span class="font-mono text-xs text-ink-muted"> · Hackathon project (TestSprite Hackathon Season 3)</span>
-          <span class="text-body">
-            — proof-of-work dashboard that turns AI-coding-loop evidence into a
-            shareable engineering timeline.
-          </span>
-          <span class="font-mono text-sm">
-            <a href={links.looplens} class="link-accent">repo</a> ·
-            <a href={links.looplensDemo} class="link-accent"> live</a>
-          </span>
-        </li>
-        <li class="max-w-[72ch]">
-          <span class="text-body">
-            Learning in public:
-            <a href={links.aiPlayground} class="link-accent">ai-playground</a> and
-            <a href={links.languagePlayground} class="link-accent">language-playground</a>
-            — open repos of experiments. ·
-          </span>
-          <a href={links.archive} class="link-accent font-mono text-sm">
-            Full archive on GitHub
+      <!-- More projects compact list -->
+      <div class="more-projects reveal">
+        <h3 class="more-projects-label">More projects</h3>
+        <ul class="more-projects-list">
+          <li class="more-project-item">
+            <div class="more-project-header">
+              <span class="more-project-name">Better DEV</span>
+              <span class="more-project-type">Personal</span>
+            </div>
+            <p class="more-project-desc">
+              AI chat platform with streaming UI, visible tool calls, NestJS API with JWT auth and web search integration.
+            </p>
+            <div class="more-project-links">
+              <a href={links.betterDevUi} class="link-accent" target="_blank" rel="noopener noreferrer">UI repo</a>
+              <a href={links.betterDevApi} class="link-accent" target="_blank" rel="noopener noreferrer">API repo</a>
+              <a href={links.betterDevDemo} class="link-accent" target="_blank" rel="noopener noreferrer">Live</a>
+            </div>
+          </li>
+          <li class="more-project-item">
+            <div class="more-project-header">
+              <span class="more-project-name">LoopLens</span>
+              <span class="more-project-type">Hackathon · TestSprite S3</span>
+            </div>
+            <p class="more-project-desc">
+              Proof-of-work dashboard that turns AI-coding-loop evidence into a shareable engineering timeline.
+            </p>
+            <div class="more-project-links">
+              <a href={links.looplens} class="link-accent" target="_blank" rel="noopener noreferrer">Repo</a>
+              <a href={links.looplensDemo} class="link-accent" target="_blank" rel="noopener noreferrer">Live</a>
+            </div>
+          </li>
+          <li class="more-project-item">
+            <div class="more-project-header">
+              <span class="more-project-name">Learning in public</span>
+              <span class="more-project-type">Open repos</span>
+            </div>
+            <p class="more-project-desc">
+              <a href={links.aiPlayground} class="link-accent" target="_blank" rel="noopener noreferrer">ai-playground</a> and{' '}
+              <a href={links.languagePlayground} class="link-accent" target="_blank" rel="noopener noreferrer">language-playground</a>
+              — open experiments and notes.
+            </p>
+            <div class="more-project-links">
+              <a href={links.archive} class="link-accent" target="_blank" rel="noopener noreferrer">Full archive →</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       TECH STACK
+  ================================================================ -->
+  <section id="skills" class="section-block section-alt">
+    <div class="container-site">
+      <div class="section-header reveal">
+        <p class="section-label">Tech stack</p>
+        <h2 class="section-title">What I work with</h2>
+      </div>
+      <div class="tech-grid">
+        {techStack.map((group, i) => (
+          <div class={`tech-group reveal delay-${(i + 1) * 100}`}>
+            <h3 class="tech-group-label">{group.category}</h3>
+            <ul class="tech-group-items" role="list">
+              {group.items.map((item) => (
+                <li class="tech-item">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       EXPERIENCE
+  ================================================================ -->
+  <section id="experience" class="section-block">
+    <div class="container-site">
+      <div class="section-header reveal">
+        <p class="section-label">Experience</p>
+        <h2 class="section-title">Where I've worked</h2>
+      </div>
+
+      <div class="experience-list">
+        <!-- Brand Exponents -->
+        <article class="exp-item reveal">
+          <div class="exp-timeline-marker" aria-hidden="true"></div>
+          <div class="exp-content">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-title">Full Stack Developer</h3>
+                <p class="exp-company">
+                  Brand Exponents Creatives Pvt Ltd
+                  <span class="exp-badge">Swipe Pages · Swipe One</span>
+                </p>
+              </div>
+              <p class="exp-period">Oct 2023 – Aug 2025</p>
+            </div>
+            <ul class="exp-bullets">
+              <li>
+                Contributed to the Workflow Builder's integration layer on Swipe Pages — shared configuration, property selection, field-mapping, and auto-matching patterns reused across six providers: SendFox, ActiveCampaign, AWeber, Moosend, Salesflare, and EngageBay.
+              </li>
+              <li>
+                Helped build Swipe One's CRM features — contacts, leads, contact properties, and email & WhatsApp campaigns — and contributed to redesigning the workflow builder from blank-canvas drag-and-drop into a guided, template-led flow.
+              </li>
+              <li>
+                Contributed to AI-assisted features including natural-language workflow generation and the original Swipe Genie guided page-generation experience.
+              </li>
+              <li>
+                Worked with background jobs, queues, and webhooks; contributed to the shared Template Library; built a reusable infinite-pagination system used across four product surfaces; helped keep production stable through launches and debugging.
+              </li>
+            </ul>
+            <div class="exp-tech">
+              {['React', 'Next.js', 'TypeScript', 'Node.js', 'NestJS', 'PostgreSQL', 'Redis'].map((t) => (
+                <span class="tech-tag">{t}</span>
+              ))}
+            </div>
+          </div>
+        </article>
+
+        <!-- Nexus -->
+        <article class="exp-item reveal delay-100">
+          <div class="exp-timeline-marker" aria-hidden="true"></div>
+          <div class="exp-content">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-title">Frontend Developer Intern</h3>
+                <p class="exp-company">
+                  Nexus Software Solutions
+                  <span class="exp-badge">UBMe</span>
+                </p>
+              </div>
+              <p class="exp-period">Jun 2023 – Aug 2023</p>
+            </div>
+            <p class="exp-summary">
+              Contributed responsive React UI (hooks + Redux) and WebSocket real-time features for UBMe, an event-management product.
+            </p>
+            <div class="exp-tech">
+              {['React', 'Redux', 'WebSocket', 'JavaScript'].map((t) => (
+                <span class="tech-tag">{t}</span>
+              ))}
+            </div>
+          </div>
+        </article>
+
+        <!-- Education -->
+        <article class="exp-item reveal delay-200">
+          <div class="exp-timeline-marker edu" aria-hidden="true"></div>
+          <div class="exp-content">
+            <h3 class="exp-title">Education</h3>
+            <ul class="exp-edu-list">
+              <li>
+                <span class="exp-edu-name">Masai School</span>
+                <span class="exp-edu-detail">Full Stack Web Development Bootcamp · 2022</span>
+              </li>
+              <li>
+                <span class="exp-edu-name">Amity University</span>
+                <span class="exp-edu-detail">BCA (Bachelor of Computer Applications) · 2025 – present</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       AI JOURNEY / NOW
+  ================================================================ -->
+  <section id="now" class="section-block section-alt">
+    <div class="container-site">
+      <div class="section-header reveal">
+        <p class="section-label">Now</p>
+        <h2 class="section-title">AI journey</h2>
+      </div>
+
+      <div class="now-grid">
+        <div class="now-card reveal">
+          <div class="now-card-icon" aria-hidden="true">⚡</div>
+          <h3 class="now-card-title">Building</h3>
+          <p class="now-card-desc">
+            Focused on AI product engineering and developer tools. Recent work includes a multi-agent code review system, a cited AI answer engine, and an autonomous i18n pipeline.
+          </p>
+        </div>
+        <div class="now-card reveal delay-100">
+          <div class="now-card-icon" aria-hidden="true">✍️</div>
+          <h3 class="now-card-title">Writing</h3>
+          <p class="now-card-desc">
+            I write about what I build. The <a href={links.devtoArticle} class="link-accent" target="_blank" rel="noopener noreferrer">LingoAgent article on dev.to</a> walks through building an autonomous i18n pipeline — AST extraction, sandboxed execution, auto PR.
+          </p>
+        </div>
+        <div class="now-card reveal delay-200">
+          <div class="now-card-icon" aria-hidden="true">📚</div>
+          <h3 class="now-card-title">Learning in public</h3>
+          <p class="now-card-desc">
+            <a href={links.aiPlayground} class="link-accent" target="_blank" rel="noopener noreferrer">ai-playground</a> and <a href={links.languagePlayground} class="link-accent" target="_blank" rel="noopener noreferrer">language-playground</a> — open repos of experiments, notes, and rough edges.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       CONTACT
+  ================================================================ -->
+  <section id="contact" class="section-block contact-section">
+    <div class="container-site">
+      <div class="contact-inner reveal">
+        <p class="section-label">Contact</p>
+        <h2 class="contact-heading">
+          Let's build something<br />
+          <span class="gradient-text">worth shipping.</span>
+        </h2>
+        <p class="contact-sub">
+          Open to full-time roles, freelance projects, and interesting conversations. Reach out any way you prefer.
+        </p>
+        <div class="contact-ctas">
+          <a href={`mailto:${links.email}`} class="btn">
+            Send an email →
           </a>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Experience — CL-03…CL-12; resume-equivalent text, no screenshots (OQ-08) -->
-    <section id="experience" class="scroll-mt-4 border-t border-hairline/80 py-16">
-      <h2 class="text-2xl font-semibold tracking-tight">Experience</h2>
-
-      <div class="mt-8 space-y-10">
-        <article>
-          <h3 class="text-lg font-semibold tracking-tight">
-            Full Stack Developer · Brand Exponents Creatives Pvt Ltd
-          </h3>
-          <p class="mt-1 font-mono text-xs text-ink-muted">Oct 2023 – Aug 2025</p>
-          <p class="mt-3 max-w-[72ch] text-body text-ink-muted">
-            Swipe Pages — a no-code landing-page and workflow-automation SaaS — and
-            Swipe One, a CRM with AI-assisted features.
-          </p>
-          <ul class="mt-4 max-w-[72ch] list-disc space-y-2 pl-5 text-body">
-            <li>
-              Contributed to the Workflow Builder's integration layer on Swipe Pages —
-              shared configuration, property selection, field-mapping, and auto-matching
-              patterns reused across six providers: SendFox, ActiveCampaign, AWeber,
-              Moosend, Salesflare, and EngageBay.
-            </li>
-            <li>
-              Helped build Swipe One's CRM features — contacts, leads, contact
-              properties, and email & WhatsApp campaigns — and contributed to
-              redesigning the workflow builder from a blank-canvas drag-and-drop into a
-              guided, template-led flow.
-            </li>
-            <li>
-              Contributed to AI-assisted features, including natural-language workflow
-              generation and the original Swipe Genie guided page-generation
-              experience.
-            </li>
-            <li>
-              Worked with background jobs, queues, and webhooks; contributed end to end
-              to the shared Template Library; built a reusable infinite-pagination
-              system used across four product surfaces; and helped keep production
-              stable through launches, debugging, and customer-facing issues.
-            </li>
-          </ul>
-        </article>
-
-        <article>
-          <h3 class="text-lg font-semibold tracking-tight">
-            Frontend Developer Intern · Nexus Software Solutions
-          </h3>
-          <p class="mt-1 font-mono text-xs text-ink-muted">Jun 2023 – Aug 2023</p>
-          <p class="mt-3 max-w-[72ch] text-body">
-            Contributed responsive React UI (hooks + Redux) and WebSocket real-time
-            features for UBMe, an event-management product.
-          </p>
-        </article>
-
-        <article>
-          <h3 class="font-mono text-sm text-ink-muted">Education</h3>
-          <p class="mt-2 max-w-[72ch] text-body">
-            Masai School — full-stack web development bootcamp (2022) · BCA, Amity
-            University (in progress)
-          </p>
-        </article>
+          <span class="contact-email-plain">
+            {links.email}
+          </span>
+        </div>
+        <div class="contact-links">
+          <a href={links.github} class="contact-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href={links.linkedin} class="contact-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href={links.devto} class="contact-link" target="_blank" rel="noopener noreferrer">dev.to</a>
+          <a href={`tel:9883909187`} class="contact-link">+91 98839 09187</a>
+        </div>
       </div>
-    </section>
-
-    <!-- AI journey / now — CL-18 (directional only), SRC-11 -->
-    <section id="journey" class="scroll-mt-4 border-t border-hairline/80 py-16">
-      <h2 class="text-2xl font-semibold tracking-tight">AI journey / now</h2>
-      <div class="mt-4 max-w-[72ch] space-y-3 text-body">
-        <p>I'm building toward AI product engineering and developer tools.</p>
-        <p>
-          Recent personal projects include an AI code-review agent, a cited AI answer
-          engine, and an autonomous i18n agent.
-        </p>
-        <p>
-          I write about what I build — the
-          <a href={links.devtoArticle} class="link-accent">LingoAgent article on dev.to</a>
-          walks through that build.
-        </p>
-        <p>
-          Two more repos track my learning in public:
-          <a href={links.aiPlayground} class="link-accent">ai-playground</a> and
-          <a href={links.languagePlayground} class="link-accent">language-playground</a>.
-        </p>
-      </div>
-    </section>
-
-    <!-- Contact — brief: mailto + links, no form; phone included per owner directive (DL-009) -->
-    <section id="contact" class="scroll-mt-4 border-t border-hairline/80 py-16">
-      <h2 class="text-2xl font-semibold tracking-tight">Contact</h2>
-      <p class="mt-4 max-w-[68ch] text-body">
-        Reach me by email or phone, or find me on GitHub, LinkedIn, and dev.to.
-      </p>
-      <ul class="mt-6 flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm">
-        <li>
-          <a href={`mailto:${links.email}`} class="link-accent">{links.email}</a>
-        </li>
-        <li>
-          <a href={`tel:${links.phone}`} class="link-accent">{links.phone}</a>
-        </li>
-        <li><a href={links.github} class="link-accent">GitHub</a></li>
-        <li><a href={links.linkedin} class="link-accent">LinkedIn</a></li>
-        <li><a href={links.devto} class="link-accent">dev.to</a></li>
-      </ul>
-    </section>
-
-  </div>
+    </div>
+  </section>
 </Base>
+
+<style>
+  /* ----------------------------------------------------------------
+     Hero
+  ---------------------------------------------------------------- */
+  .hero-section {
+    padding-block: 5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-section::before {
+    /* Subtle radial glow behind content */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, var(--color-accent-glow), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: color-mix(in srgb, var(--color-success) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-success) 25%, transparent);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    width: fit-content;
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-success);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .status-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-success);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+
+  .hero-name {
+    font-size: clamp(2.75rem, 7vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .hero-role {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--color-ink-muted);
+    margin: 0;
+  }
+
+  .hero-bio {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-ink-muted);
+    max-width: 58ch;
+    margin: 0;
+  }
+
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .hero-social-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: 0.25rem;
+  }
+  .hero-social {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-ink-dim);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .hero-social:hover {
+    color: var(--color-accent-light);
+  }
+
+  /* Portrait */
+  .hero-portrait {
+    flex-shrink: 0;
+  }
+  .portrait-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+  }
+  .portrait-glow {
+    position: absolute;
+    inset: -12px;
+    background: var(--gradient-accent);
+    border-radius: 50%;
+    opacity: 0.25;
+    filter: blur(20px);
+    z-index: 0;
+  }
+  .portrait-img {
+    position: relative;
+    z-index: 1;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-border);
+  }
+
+  /* ----------------------------------------------------------------
+     Section scaffolding
+  ---------------------------------------------------------------- */
+  .section-block {
+    padding-block: 4rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-alt {
+    background: color-mix(in srgb, var(--color-surface) 40%, transparent);
+  }
+
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0.375rem 0 0;
+    color: var(--color-ink);
+  }
+
+  .section-subtitle {
+    margin: 0.5rem 0 0;
+    font-size: 0.9375rem;
+    color: var(--color-ink-muted);
+    max-width: 56ch;
+  }
+
+  /* ----------------------------------------------------------------
+     Work grid
+  ---------------------------------------------------------------- */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ----------------------------------------------------------------
+     More projects
+  ---------------------------------------------------------------- */
+  .more-projects {
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+  }
+  .more-projects-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .more-projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .more-project-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .more-project-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .more-project-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .more-project-name {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+  }
+  .more-project-type {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-ink-dim);
+  }
+  .more-project-desc {
+    font-size: 0.9rem;
+    color: var(--color-ink-muted);
+    max-width: 72ch;
+    margin: 0;
+  }
+  .more-project-links {
+    display: flex;
+    gap: 0.875rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+
+  /* ----------------------------------------------------------------
+     Tech stack
+  ---------------------------------------------------------------- */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  .tech-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .tech-group-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    font-weight: 500;
+    margin: 0;
+  }
+  .tech-group-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .tech-item {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-ink-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.25rem 0.625rem;
+    border-radius: 5px;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    cursor: default;
+  }
+  .tech-item:hover {
+    color: var(--color-accent-light);
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+    background: var(--color-accent-soft);
+  }
+
+  /* ----------------------------------------------------------------
+     Experience
+  ---------------------------------------------------------------- */
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 2px 1fr;
+    gap: 0 1.5rem;
+    position: relative;
+    padding-bottom: 2.5rem;
+  }
+  .exp-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .exp-timeline-marker {
+    position: relative;
+    background: var(--color-border);
+  }
+  .exp-timeline-marker::before {
+    content: '';
+    position: absolute;
+    top: 0.375rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--color-canvas), 0 0 0 4px var(--color-accent-glow);
+  }
+  .exp-timeline-marker.edu::before {
+    background: var(--color-ink-dim);
+    box-shadow: 0 0 0 3px var(--color-canvas);
+  }
+
+  .exp-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .exp-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0 0 0.2rem;
+    letter-spacing: -0.015em;
+  }
+
+  .exp-company {
+    font-size: 0.9rem;
+    color: var(--color-ink-muted);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .exp-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-light);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+  }
+
+  .exp-period {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-dim);
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .exp-bullets li {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--color-ink-muted);
+    padding-left: 1.25rem;
+    position: relative;
+    max-width: 70ch;
+  }
+  .exp-bullets li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+    line-height: inherit;
+  }
+
+  .exp-summary {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--color-ink-muted);
+    max-width: 70ch;
+    margin: 0;
+  }
+
+  .exp-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .exp-edu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .exp-edu-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .exp-edu-name {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+  }
+  .exp-edu-detail {
+    font-size: 0.875rem;
+    color: var(--color-ink-muted);
+    font-family: var(--font-mono);
+  }
+
+  /* ----------------------------------------------------------------
+     Now / AI Journey
+  ---------------------------------------------------------------- */
+  .now-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 1.25rem;
+  }
+  .now-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .now-card:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+    transform: translateY(-2px);
+  }
+  .now-card-icon {
+    font-size: 1.375rem;
+    line-height: 1;
+  }
+  .now-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0;
+  }
+  .now-card-desc {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--color-ink-muted);
+    margin: 0;
+  }
+
+  /* ----------------------------------------------------------------
+     Contact
+  ---------------------------------------------------------------- */
+  .contact-section {
+    padding-block: 5rem;
+  }
+  .contact-inner {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .contact-heading {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--color-ink);
+  }
+  .contact-sub {
+    font-size: 0.9375rem;
+    color: var(--color-ink-muted);
+    max-width: 52ch;
+    margin: 0;
+    line-height: 1.65;
+  }
+  .contact-ctas {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .contact-email-plain {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-ink-dim);
+  }
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .contact-link {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .contact-link:hover {
+    color: var(--color-accent-light);
+  }
+
+  /* ----------------------------------------------------------------
+     Responsive
+  ---------------------------------------------------------------- */
+  @media (max-width: 768px) {
+    .hero-inner {
+      flex-direction: column-reverse;
+      gap: 2rem;
+    }
+    .portrait-wrapper {
+      width: 160px;
+      height: 160px;
+    }
+    .portrait-img {
+      width: 160px;
+      height: 160px;
+    }
+    .hero-section {
+      padding-block: 3rem 2.5rem;
+    }
+    .exp-item {
+      grid-template-columns: 1fr;
+    }
+    .exp-timeline-marker {
+      display: none;
+    }
+    .exp-item {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .exp-item:last-child {
+      border-bottom: none;
+    }
+  }
+</style>
