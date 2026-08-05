@@ -87,3 +87,25 @@ Run against the production-base build served locally (`astro preview`):
 ## 8. Go/no-go recommendation
 
 All measured acceptance criteria are met or exceeded (Lighthouse 100/100/100/100; zero JS; LCP 1.4s). **Recommend: GO for Phase 1.4 launch**, pending the owner's manual LinkedIn click-through and visual spot-checks at the gate.
+
+## 9. Post-launch production verification (2026-08-05, after Phase 1.4)
+
+Smoke test against `https://kashif-rezwi.github.io/` (production Base URL, no preview prefix):
+
+| Check | Expected | Result |
+|---|---|---|
+| Home `/` | HTTP 200, Astro build | 200, 14,673 bytes ✅ |
+| `create-react-app` reference | absent | 0 occurrences ✅ |
+| `<script>` tags (all pages) | 0 | 0 on `/`, `/work/*/`, `/resume/`, `/404.html` ✅ |
+| `<meta name="robots" content="noindex">` | absent (production) | absent ✅ |
+| `<title>` | claim-safe | "Kashif Rezwi — Frontend-focused Full Stack Engineer" ✅ |
+| `og:image` | dedicated card | `https://kashif-rezwi.github.io/og.png` ✅ |
+| Sitemap | live | `/sitemap-index.xml` → 200 ✅ |
+| Robots | live | `/robots.txt` → 200 ✅ |
+| Manifest | live | `/manifest.webmanifest` → 200 ✅ |
+| Case study pages | all 200 | `/work/code-review-agent/` → 200; `/work/perplexity/` → 200; `/work/lingo-agent/` → 200 ✅ |
+| Resume page | 200 | `/resume/` → 200 ✅ |
+| 404 | 200 | `/404.html` → 200 ✅ |
+| Preview repo | archived | `Kashif-Rezwi/portfolio-preview` archived ✅ |
+
+**Production is live with the Astro build. All acceptance criteria verified post-launch. Phase 1 complete.**

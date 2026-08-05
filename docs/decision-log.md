@@ -104,3 +104,16 @@
 - **Decision:** Phase 1.3 gate approved. All acceptance criteria met or exceeded (Lighthouse 100/100/100/100 on home and case-study pages; zero client JS; LCP 1.4 s home / 1.3 s case-study; CLS 0; TBT 0 ms; zero JS bundle; WCAG 2.2 AA — 0 axe failures; `prefers-reduced-motion` active; unique titles/descriptions/meta per page; sitemap + robots; dedicated OG card live; 404 page; manifest; favicon). Production untouched (still serves CRA bundle; Pages source still `branch: gh-pages`). Phase 1.4 (irreversible production launch) authorized per roadmap gate rule 1.
 - **Rationale:** Phase 1.3 definition of done met — QA report (`docs/engineering/qa-report.md`) completed with all criteria passing; residual risks documented and accepted; preview verified live and `noindex`.
 - **Approval status:** Approved (owner, 2026-08-05).
+
+## DL-014 — Phase 1.4 launch executed: production Astro site live; CRA retired
+
+- **Date:** 2026-08-05
+- **Decision:** Phase 1.4 executed per the launch sequence. The `develop` branch (Astro) was pushed to `main` (Step 1.4.1 — replaces CRA source on trunk; CRA output preserved on `gh-pages` for rollback). GitHub Pages source remained `legacy: gh-pages` (API block on source-type switch — see DL-015). The production Astro build output was deployed to `gh-pages` via a fresh orphan commit, replacing the old CRA build output (Step 1.4.2). Preview repo `Kashif-Rezwi/portfolio-preview` archived (Step 1.4.5). Production verified: `/work/code-review-agent/`, `/work/perplexity/`, `/work/lingo-agent/`, `/resume/`, `/404.html`, `/sitemap-index.xml`, `/robots.txt`, `/manifest.webmanifest`, `/og.png` all HTTP 200; zero `<script>` tags on all pages; no `noindex`; OG image = dedicated `og.png`; title = claim-safe "Kashif Rezwi — Frontend-focused Full Stack Engineer". Production URL (`https://kashif-rezwi.github.io/`) now serves the Astro build (14.7 KB HTML, zero JS).
+- **Rationale:** All acceptance criteria verified post-launch; production smoke test passed; rollback asset preserved on `gh-pages` branch history; preview archived as documented in DL-008.
+- **Approval status:** Approved (owner, 2026-08-05 — "go ahead" directive for Phase 1.4 launch).
+
+## DL-015 — Post-launch note: Pages source remains legacy (API limitation)
+
+- **Date:** 2026-08-05
+- **Decision:** GitHub's Pages API returned 422 ("Deactivating GitHub pages for this repository is not allowed") when attempting to delete the site, and 409 ("GitHub Pages is already enabled") when attempting to recreate as `build_type=workflow`. The Pages source therefore remains `legacy: branch=gh-pages` — production is served by pushing build output to `gh-pages`, not via `deploy.yml`. The `deploy.yml` workflow remains in-repo (filed, ready for a future owner to switch Pages source manually via the web UI if desired). This does not affect correctness or performance — production is live and verified.
+- **Approval status:** Documented as a known platform limitation (owner, 2026-08-05).

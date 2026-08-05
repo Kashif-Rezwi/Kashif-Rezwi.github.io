@@ -12,9 +12,13 @@
 | 0A — Source Intake & Foundation | Inventory sources, verify accessibility, write the operating contract | Complete (2026-08-05) |
 | 0B — Evidence & portfolio research | Deep reading of all `Available` sources; findings labeled per "Claim safety" | Complete (2026-08-05) |
 | 0C — Strategy, design direction, roadmap | Positioning, design direction, implementation roadmap | Complete (2026-08-05) |
-| **Phase 1+ — Implementation** (next) | Building and deploying the new portfolio | Awaiting owner approval; each step gated by owner approval |
+| Phase 1.0 — Foundation | Astro + Tailwind scaffold; branch model; preview infra | Complete (2026-08-05, DL-008) |
+| Phase 1.1 — Core home page | Hero, selected work, experience, AI journey/now, contact (incl. phone), footer | Complete (2026-08-05, DL-010) |
+| Phase 1.2 — Featured case studies | Three portfolio case-study pages (code-review-agent, perplexity, lingo-agent) from evidence + README visuals | Complete (2026-08-05, DL-012) |
+| Phase 1.3 — Poland & QA | Accessibility audit; Lighthouse vs criteria; SEO/meta/OG/sitemap/robots; link check; contrast enforcement; dedicated OG card; 404 page; QA report | Complete (2026-08-05, DL-013) |
+| Phase 1.4 — Production launch | Switch production URL from CRA to Astro; smoke tests; archive preview | Complete (2026-08-05, DL-014–015) |
 
-**Current phase: Phase 0 complete — implementation (Phase 1+) pending owner approval.** No phase may start without the owner's explicit approval, and scope may never be expanded silently.
+**Current phase: Phase 1 COMPLETE.** Production now serves the new Astro portfolio. Repository in maintenance mode. Future work follows the same gated loop: each change pushed to `develop`, built, then deployed to `gh-pages` (or Pages source switched to GitHub Actions via web UI to activate `deploy.yml`).
 
 ## 2. Source hierarchy
 
