@@ -83,3 +83,10 @@
 - **Decision:** The owner approved the Phase 1.1 home-page copy (hero, selected work, experience, AI journey/now, contact incl. phone) against `docs/strategy/home-copy-claim-map.md`. Phase 1.2 (featured case studies) began the same day per roadmap gate rule 1. Scope: three case-study pages (code-review-agent, perplexity, lingo-agent) built to the brief template strictly from `docs/research/featured-project-research.md` + the evidence ledger; home cards link to their case-study pages; personal/hackathon labels stay visible. Better DEV's `[Your Frontend URL]` README placeholder remains an **owner action on the external repo** (audit F-07) and does not block its compact home entry.
 - **Rationale:** 1.1 done-when met: owner content review passed; home page live on the preview; production untouched.
 - **Approval status:** Approved (owner, 2026-08-05). Phase 1.2 page visuals (screenshots) are still owner-decided at the 1.2 gate per the brief.
+
+## DL-011 — Phase 1.2 gate approved; README-screenshot visuals adopted
+
+- **Date:** 2026-08-05
+- **Decision:** The owner approved the three case-study pages' copy and chose to use **each project's own README screenshots** as their page visuals (the brief's "repo README assets with approval" option) for code-review-agent, perplexity, and lingo-agent. Phase 1.2 copy gate closed; visuals are wired into the pages immediately after this decision; Phase 1.3 (Polish & QA) may begin once the visuals are in place per the roadmap. LoopLens and Better DEV remain compact home-row entries (links only, per triage) — README screenshots apply to the three featured pages.
+- **Rationale:** Phase 1.2 done-when met (owner approves each case-study page copy + visuals). Reusing each project's own already-public README assets requires no new capture work and keeps images honest to the build.
+- **Approval status:** Approved (owner, 2026-08-05).

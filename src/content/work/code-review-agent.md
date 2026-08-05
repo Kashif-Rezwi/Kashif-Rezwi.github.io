@@ -9,6 +9,7 @@ demo: 'https://code-review-agent-client.vercel.app'
 tech: ['Next.js', 'NestJS', 'PostgreSQL']
 order: 1
 draft: false
+cover: 'code-review-agent.png'
 ---
 
 ## Overview

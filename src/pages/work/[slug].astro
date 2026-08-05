@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import { withBase } from '../../lib/paths';
 
@@ -18,8 +19,16 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, roleLabel, period, status, summary, repo, demo, tech } =
+const { title, roleLabel, period, status, summary, repo, demo, tech, cover } =
   entry.data;
+
+// Cover image (owner-approved README screenshot, DL-011). Absent for projects whose
+// README has no real screenshot (e.g. perplexity, lingo-agent) -> no cover rendered.
+const covers = import.meta.glob('../../assets/work/*', {
+  eager: true,
+  import: 'default',
+});
+const coverSrc = cover ? covers[`../../assets/work/${cover}`] : undefined;
 ---
 
 <Base title={`${title} — Kashif Rezwi`} description={summary}>
@@ -39,6 +48,22 @@ const { title, roleLabel, period, status, summary, repo, demo, tech } =
         <a href={withBase('/#work')} class="link-accent">← Back to selected work</a>
       </p>
     </header>
+
+    {
+      coverSrc && (
+        <figure class="mt-8">
+          <Image
+            src={coverSrc}
+            alt={`${title} — screenshot from the project README`}
+            width={1200}
+            format="avif"
+            quality={70}
+            loading="lazy"
+            class="rounded-md border border-hairline bg-surface"
+          />
+        </figure>
+      )
+    }
 
     <!-- Body: Overview / What I built / Challenges / Outcomes (brief template).
          The Challenges heading appears only where the content documents it. -->

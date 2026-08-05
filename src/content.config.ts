@@ -30,6 +30,9 @@ const work = defineCollection({
     tech: z.array(z.string()).min(1),
     /** Sort order on the home page */
     order: z.number().int(),
+    /** Optional cover image filename inside src/assets/work/<slug> (README-screenshot
+        visuals, owner-approved DL-011). Absent => no cover (honest text-only page). */
+    cover: z.string().optional(),
     /** Keep an entry out of case-study listing while its copy is unfinished */
     draft: z.boolean().default(false),
   }),
