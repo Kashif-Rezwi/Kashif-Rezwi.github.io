@@ -7,24 +7,26 @@
 
 ## Current phase
 
-**0A — Source Intake** · Foundation documents written and source accessibility verified. **Awaiting owner approval to proceed to Phase 0B.**
+**0B — Evidence & Portfolio Research** · Research complete; findings documented in `docs/research/`. **Awaiting owner approval to proceed to Phase 0C.** (Phase 0A completed; 0B began with the owner's approval on 2026-08-05.)
 
-## Completed (Phase 0A)
+Note: the "current phase" marker inside `AGENTS.md` still reads 0A — updating `AGENTS.md` was outside Phase 0B's allowed edit list; update it at the next phase gate.
 
-- Preflight: target repository identified and inspected — public GitHub Pages repo, branch `develop` clean, no pre-existing root agent/docs files.
-- Privacy review: `temp/` confirmed gitignored; private evidence inventoried and excluded from repo scope; one pre-existing public resume PDF flagged (OQ-05).
-- Source intake: every register row attempted and assigned a real status (see `docs/source-register.md`) — 12 `Available`, 1 `Access denied` (LinkedIn URL), 1 `Requires confirmation` (X profile).
-- Foundation documents created: `AGENTS.md`, `README.md`, `docs/source-register.md`, `docs/project-status.md`, `docs/open-questions.md`, `docs/decision-log.md`.
-- Decision log initialized (DL-001).
-- No conclusions about career, positioning, or design were drawn in this phase.
+## Completed (Phase 0B)
+
+- Every `Available` source in the register read deeply; LinkedIn URL and X profile remain inaccessible (OQ-01/OQ-02).
+- `docs/research/evidence-ledger.md` — verified career timeline; strengths/differentiators; positioning validation + draft claim-safe statement (DL-004); 20-row claim table (sources, confidence, labels, safe wording); 13 recorded conflicts (C-01…C-13); DO-NOT-USE list.
+- `docs/research/current-portfolio-audit.md` — preserve/evolve/remove matrix across visual design, content, IA/navigation, accessibility, responsiveness, performance, SEO, and code hygiene.
+- `docs/research/github-project-triage.md` — full 55-repo inventory, stated criteria (DL-002), exactly 3 featured + 2 secondary, named exclusions.
+- `docs/research/featured-project-research.md` — deep dives on the 5 shortlisted projects incl. content gaps and approvals needed.
+- Open questions OQ-06…OQ-11 added; decision log DL-002…DL-004 appended.
+- No design direction, information architecture, or tech stack proposed — deferred to 0C per phase scope.
 
 ## Blocked
 
-- Nothing blocks Phase 0A completion.
-- LinkedIn content (SRC-04) is inaccessible to automation; carried into Phase 0B as OQ-01 — non-blocking for 0A.
+- Nothing blocks 0B completion. LinkedIn/X content gaps remain logged (OQ-01/OQ-02), non-blocking.
 
 ## Next approved action
 
-- **Phase 0B — Evidence & portfolio research: pending explicit owner approval.**
-- Owner input requested on OQ-01…OQ-05 (see `docs/open-questions.md`).
-- Changes currently exist only in the working tree; nothing has been committed or pushed (per Phase 0A constraints).
+- **Phase 0C — Strategy, design direction, roadmap: pending explicit owner approval.**
+- Owner input requested on OQ-01…OQ-11; the draft positioning statement (DL-004) and featured shortlist (DL-002) specifically need confirmation.
+- Changes exist only in the working tree; nothing committed or pushed without approval.
