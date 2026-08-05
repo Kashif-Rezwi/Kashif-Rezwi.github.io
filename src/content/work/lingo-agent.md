@@ -2,8 +2,8 @@
 title: 'LingoAgent'
 roleLabel: 'Personal project'
 period: '2026'
-status: 'Live demo'
-summary: 'Autonomous i18n agent that turns Next.js App Router apps multilingual — AST extraction, sandboxed execution, auto PR with preview deploy.'
+status: 'Live'
+summary: 'Autonomous i18n agent that turns Next.js App Router apps multilingual: AST extraction, sandboxed execution, auto PR with preview deploy.'
 repo: 'https://github.com/Kashif-Rezwi/lingo-agent'
 demo: 'https://lingo-agent.vercel.app'
 tech: ['TypeScript', 'Next.js', 'Babel AST', 'E2B Sandboxes', 'Lingo.dev', 'GitHub API', 'Vercel']
@@ -35,7 +35,7 @@ A full-stack agent pipeline (plus a companion demo app used to test injection):
 
 Known and documented limitations: App Router only (Pages Router/Vite/Remix
 unsupported) and strings inside JS logic (variables, error messages, API
-responses) are not extracted — deliberate scope constraints.
+responses) are not extracted, both deliberate scope constraints.
 
 ## Outcomes
 
@@ -43,5 +43,5 @@ Demo and API reachable; a dev.to article about this exact build is published
 (public writing as evidence). No production/commercial claims are made.
 
 > Narrative sources: `docs/research/featured-project-research.md` §3 + evidence
-> ledger CL-15. DL-004 condition: personal project only — never framed as
+> ledger CL-15. DL-004 condition: personal project only; never framed as
 > verified work experience.

@@ -2,7 +2,7 @@
 title: 'Code Review Agent'
 roleLabel: 'Personal project'
 period: '2026'
-status: 'Live demo'
+status: 'Live'
 summary: 'AI code review with streamed structured feedback, multi-agent PR analysis, ESLint tooling, and RAG over team coding standards.'
 repo: 'https://github.com/Kashif-Rezwi/code-review-agent'
 demo: 'https://code-review-agent-client.vercel.app'
@@ -21,7 +21,7 @@ plus a 1–10 quality score. Reviews persist and support follow-up chat.
 
 ## What I built
 
-A full-stack application — Next.js client and NestJS API — that treats code
+A full-stack application (Next.js client and NestJS API) that treats code
 review as a structured, streamed pipeline:
 
 - **SSE streaming with replay**, so a late-connecting client still receives the
@@ -48,4 +48,4 @@ Live demo reachable; listed on the approved master resume; pinned on GitHub.
 No user, scale, or accuracy claims are made for the tool.
 
 > Narrative sources: `docs/research/featured-project-research.md` §1 + evidence
-> ledger CL-14. Capabilities only — never framed as SaaS/commercial.
+> ledger CL-14. Capabilities only; never framed as SaaS/commercial.
