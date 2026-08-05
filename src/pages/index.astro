@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import WorkCard from '../components/WorkCard.astro';
+import HeroDotMatrix from '../components/HeroDotMatrix.astro';
 import { withBase } from '../lib/paths';
 import portrait from '../assets/portrait.jpg';
 
@@ -62,6 +63,7 @@ const techStack = [
        HERO
   ================================================================ -->
   <section class="hero-section">
+    <HeroDotMatrix />
     <div class="container-site hero-inner">
       <div class="hero-content animate-fade-up">
         <!-- Status badge -->
@@ -396,9 +398,13 @@ const techStack = [
      Hero
   ---------------------------------------------------------------- */
   .hero-section {
+    min-height: clamp(600px, calc(100svh - 65px), 860px);
     padding-block: 5rem 4rem;
     position: relative;
+    display: grid;
+    align-items: center;
     overflow: hidden;
+    isolation: isolate;
   }
   .hero-section::before {
     /* Subtle radial glow behind content */
