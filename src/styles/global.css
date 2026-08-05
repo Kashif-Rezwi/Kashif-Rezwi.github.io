@@ -1,141 +1,424 @@
 @import 'tailwindcss';
 
+/* ===========================================================================
+   REBUILD-02: "Dark Precision" Design System
+   
+   Design philosophy: Dark-first, engineered aesthetic. Warm dark tones (not
+   cold blue-black), single cornflowerblue accent dialed up with glow effects,
+   JetBrains Mono for code labels, Inter for body. Motion is purposeful and
+   respectful of prefers-reduced-motion.
+   =========================================================================== */
+
 /* ---------------------------------------------------------------------------
-   Design tokens — "Calm Engineering Ledger" (docs/strategy/product-and-design-brief.md)
-   Every color choice traces to the brief; text colors are contrast-verified
-   (run `npm run check:contrast`). Values adopted in decision DL-008.
+   Font imports (Inter + JetBrains Mono via Google Fonts)
 --------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
+/* ---------------------------------------------------------------------------
+   Design tokens — dual light/dark via light-dark() (CSS Color 4)
+--------------------------------------------------------------------------- */
 @theme {
-  /* Color — light paper theme (audit: Preserve base, Evolve ink upward for WCAG AA) */
-  --color-paper: #f5f5f5; /* base background, preserved from the current site */
-  --color-surface: #ffffff; /* cards / raised surfaces */
-  --color-ink: #1f1f1f; /* primary text — evolves #505050 upward (~13.7:1 on paper) */
-  --color-ink-muted: #4f4f4f; /* secondary text (~7.2:1 on paper) */
-  --color-hairline: #d9d9d9; /* card borders, section rules */
-  /* Cornflowerblue stays the SINGLE accent (audit: Preserve). It fails text
-     contrast on paper, so it is decoration/focus only; links use accent-ink. */
-  --color-accent: #6495ed; /* cornflowerblue — decorative highlight, hover tints */
-  --color-accent-ink: #3862c0; /* darkened cornflower for link text (>= 4.5:1 on paper, surface & accent-soft) */
-  --color-accent-soft: #e8eefa; /* tinted accent background for tags/highlights */
+  /* Sans + mono families */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
-  /* Typography — system stacks, zero font downloads (DL-008 f) */
-  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas,
-    'Liberation Mono', monospace;
-
-  /* Type scale — strong heading/body contrast, body 16–18px per the brief */
-  --text-body: 1.0625rem; /* 17px */
+  /* Type scale */
+  --text-body: 1.0625rem;         /* 17px */
   --text-body--line-height: 1.65;
+
+  /* ----------------------------------------------------------------
+     Color tokens — dark theme primary, light overrides via media query
+  ---------------------------------------------------------------- */
+
+  /* Backgrounds */
+  --color-canvas: #0f0f0f;         /* true near-black base */
+  --color-surface: #161616;        /* card / raised surface */
+  --color-surface-2: #1c1c1c;     /* slightly lighter surface */
+  --color-border: #2a2a2a;        /* subtle hairline border */
+  --color-border-focus: #6495ed;  /* cornflowerblue for focus rings */
+
+  /* Ink */
+  --color-ink: #f0f0f0;            /* primary text — near white */
+  --color-ink-muted: #888888;      /* secondary text — medium gray */
+  --color-ink-dim: #444444;        /* tertiary — timestamps, meta */
+
+  /* Accent — cornflowerblue family */
+  --color-accent: #6495ed;          /* cornflowerblue core */
+  --color-accent-light: #89b4ff;    /* lighter tint (hover states) */
+  --color-accent-glow: #6495ed33;   /* transparent glow (20% opacity) */
+  --color-accent-soft: #6495ed1a;   /* very subtle tint (tag backgrounds) */
+
+  /* Gradient accent — cornflowerblue → indigo */
+  --gradient-accent: linear-gradient(135deg, #6495ed 0%, #818cf8 100%);
+  --gradient-accent-text: linear-gradient(135deg, #89b4ff 0%, #c4b5fd 100%);
+
+  /* Status colors */
+  --color-success: #4ade80;
+  --color-warning: #fb923c;
+
+  /* Aliases used in Tailwind utilities */
+  --color-paper: var(--color-canvas);
+  --color-hairline: var(--color-border);
+  --color-accent-ink: var(--color-accent);
 }
 
+/* ---------------------------------------------------------------------------
+   Light mode overrides — system-respecting
+--------------------------------------------------------------------------- */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-canvas: #f8f8f8;
+    --color-surface: #ffffff;
+    --color-surface-2: #f0f0f0;
+    --color-border: #e2e2e2;
+    --color-ink: #111111;
+    --color-ink-muted: #555555;
+    --color-ink-dim: #aaaaaa;
+    --color-accent: #3862c0;
+    --color-accent-light: #6495ed;
+    --color-accent-glow: #3862c020;
+    --color-accent-soft: #6495ed18;
+    --gradient-accent: linear-gradient(135deg, #3862c0 0%, #6366f1 100%);
+    --gradient-accent-text: linear-gradient(135deg, #3862c0 0%, #818cf8 100%);
+    --color-paper: var(--color-canvas);
+    --color-hairline: var(--color-border);
+    --color-accent-ink: var(--color-accent);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Base layer — root-level theme + resets
+--------------------------------------------------------------------------- */
 @layer base {
+  :root {
+    /* Opt both schemes in — browser themes native UI accordingly */
+    color-scheme: dark light;
+    /* Smooth scrollbar colors for dark mode */
+    scrollbar-color: var(--color-border) transparent;
+    scrollbar-width: thin;
+    /* Accent color for native controls */
+    accent-color: var(--color-accent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Prevent layout shift from scrollbar appearance */
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Subtle grid/dot pattern for texture */
+    background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-glow);
+    color: var(--color-accent-light);
+  }
+
+  /* Focus affordances — WCAG 2.4.11 */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Component layer
+--------------------------------------------------------------------------- */
+@layer components {
+
+  /* --- Skip link (WCAG 2.4.1) --- */
+  .skip-link {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    z-index: 100;
+    transform: translateY(-200%);
+    transition: transform 0.15s ease;
+    background: var(--color-ink);
+    color: var(--color-canvas);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+
+  /* --- Site container --- */
+  .container-site {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;  /* 1152px */
+    padding-inline: 1.5rem;
+  }
+
+  /* --- Section label (overline) --- */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem; /* 11px */
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  /* --- Gradient text utility --- */
+  .gradient-text {
+    background: var(--gradient-accent-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* --- Links --- */
+  .link-accent {
+    color: var(--color-accent-light);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+    text-underline-offset: 4px;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  }
+  .link-accent:hover {
+    color: var(--color-accent-light);
+    text-decoration-color: var(--color-accent-light);
+  }
+
+  /* --- Buttons --- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1.125rem;
+    background: var(--gradient-accent);
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    box-shadow: 0 0 0 0 var(--color-accent-glow);
+    text-decoration: none;
+  }
+  .btn:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 16px 0 var(--color-accent-glow), 0 4px 12px rgba(100, 149, 237, 0.25);
+    transform: translateY(-1px);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1.125rem;
+    background: transparent;
+    color: var(--color-accent-light);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid var(--color-border-focus);
+    cursor: pointer;
+    transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    text-decoration: none;
+  }
+  .btn-outline:hover {
+    background: var(--color-accent-soft);
+    box-shadow: 0 0 12px 0 var(--color-accent-glow);
+    transform: translateY(-1px);
+  }
+
+  /* --- Cards --- */
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-border));
+    box-shadow: 0 0 0 1px var(--color-accent-glow), 0 8px 24px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* --- Tech tags --- */
+  .tech-tag {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-light);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    border-radius: 4px;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  /* --- Section divider --- */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin-block: 0;
+  }
+
+  /* --- Markdown (case studies) --- */
+  .markdown h2 {
+    margin-top: 2.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+  }
+  .markdown > :first-child { margin-top: 0; }
+  .markdown p {
+    margin-top: 0.75rem;
+    max-width: 72ch;
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    color: var(--color-ink);
+  }
+  .markdown ul, .markdown ol {
+    margin-top: 0.75rem;
+    max-width: 72ch;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+  .markdown ul { list-style-type: disc; }
+  .markdown ol { list-style-type: decimal; }
+  .markdown strong { font-weight: 600; color: var(--color-ink); }
+  .markdown code {
+    background: var(--color-accent-soft);
+    color: var(--color-accent-light);
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    padding: 0.125rem 0.35rem;
+    border-radius: 4px;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 15%, transparent);
+  }
+  .markdown blockquote {
+    margin-top: 0.75rem;
+    border-left: 2px solid var(--color-border);
+    padding-left: 1rem;
+    color: var(--color-ink-muted);
+    font-size: 0.9rem;
+    display: none; /* Hide internal evidence notes */
+  }
+  .markdown a {
+    color: var(--color-accent-light);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+    text-underline-offset: 4px;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  }
+  .markdown a:hover {
+    color: var(--color-accent-light);
+    text-decoration-color: var(--color-accent-light);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Animations (motion-safe only)
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 
-  body {
-    @apply bg-paper font-sans text-ink antialiased;
-    background-repeat: repeat;
+  /* Fade-up entrance animation */
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  ::selection {
-    background-color: var(--color-accent);
-    color: #ffffff;
+  /* Fade-in animation */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
-  /* Visible focus affordances — accent-ink passes 3:1 non-text contrast (WCAG 2.4.11) */
-  :focus-visible {
-    outline: 2px solid var(--color-accent-ink);
-    outline-offset: 2px;
-    border-radius: 2px;
+  /* Gradient shift (for animated accent elements) */
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Glow pulse (status badge) */
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(100, 149, 237, 0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(100, 149, 237, 0); }
+  }
+
+  /* Blink cursor (terminal effect) */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s ease both;
+  }
+  .animate-fade-in {
+    animation: fade-in 0.5s ease both;
+  }
+
+  /* Staggered delay utilities */
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
+  .delay-500 { animation-delay: 0.5s; }
+  .delay-600 { animation-delay: 0.6s; }
+
+  .glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  /* Intersection-observer-driven reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@layer components {
-  /* Skip link — hidden until focused (WCAG 2.4.1) */
-  .skip-link {
-    @apply absolute left-2 top-2 z-50 -translate-y-[200%] rounded bg-ink px-3 py-2 font-mono text-sm text-paper transition-transform duration-150;
-  }
-  .skip-link:focus-visible {
-    @apply translate-y-0;
-  }
-
-  .container-site {
-    @apply mx-auto w-full max-w-6xl px-6;
-  }
-
-  .section-label {
-    @apply font-mono text-xs tracking-widest text-ink-muted uppercase;
-  }
-
-  /* Text links — accent-ink passes 4.5:1 on paper, surface, and accent-soft */
-  .link-accent {
-    @apply text-accent-ink underline decoration-hairline underline-offset-4 transition-colors duration-150;
-  }
-  .link-accent:hover {
-    @apply decoration-accent-ink;
-  }
-
-  /* Buttons */
-  .btn {
-    @apply inline-block rounded bg-accent-ink px-4 py-2 font-mono text-sm text-white transition-colors duration-150;
-  }
-  .btn:hover {
-    @apply bg-ink;
-  }
-  .btn-secondary {
-    @apply inline-block rounded border border-hairline bg-surface px-4 py-2 font-mono text-sm text-accent-ink transition-colors duration-150;
-  }
-  .btn-secondary:hover {
-    @apply border-accent-ink;
-  }
-
-  /* Case-study body (rendered Markdown — Overview / What I built / Challenges / Outcomes) */
-  .markdown h2 {
-    @apply mt-10 text-xl font-semibold tracking-tight;
-  }
-  .markdown > :first-child {
-    @apply mt-0;
-  }
-  .markdown p {
-    @apply mt-3 max-w-[72ch] text-body;
-  }
-  .markdown ul {
-    @apply mt-3 max-w-[72ch] list-disc space-y-2 pl-5 text-body;
-  }
-  .markdown ol {
-    @apply mt-3 max-w-[72ch] list-decimal space-y-2 pl-5 text-body;
-  }
-  .markdown strong {
-    @apply font-semibold;
-  }
-  .markdown code {
-    @apply rounded bg-accent-soft px-1 py-0.5 font-mono text-[0.85em] text-accent-ink;
-  }
-  .markdown blockquote {
-    @apply mt-3 border-l-2 border-hairline pl-4 text-sm text-ink-muted;
-  }
-  .markdown a {
-    @apply text-accent-ink underline decoration-hairline underline-offset-4 transition-colors duration-150;
-  }
-  .markdown a:hover {
-    @apply decoration-accent-ink;
-  }
-}
-
-/* Motion — micro-transitions only; every animation honors prefers-reduced-motion
-   (hard acceptance criterion, architecture-and-quality.md) */
+/* Honor prefers-reduced-motion strictly */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .reveal { opacity: 1; transform: none; }
 }

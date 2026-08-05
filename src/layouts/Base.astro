@@ -7,14 +7,12 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
-  /** Absolute URL for og:image (optional until 1.3 finalizes site-wide meta). */
   ogImage?: string;
 }
 
 const { title, description, ogImage } = Astro.props;
 const isPreview = import.meta.env.PUBLIC_PREVIEW === '1';
 const canonical = new URL(Astro.url.pathname, Astro.site);
-// Default OG image = the dedicated card (scripts/make-og-card.mjs, DL-012).
 const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
 ---
 
@@ -23,6 +21,8 @@ const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- MANDATORY: Declare theme support before rendering to prevent FOUC -->
+    <meta name="color-scheme" content="dark light" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {isPreview && <meta name="robots" content="noindex" />}
@@ -39,16 +39,36 @@ const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
     <meta name="twitter:title" content={title} />
     {description && <meta name="twitter:description" content={description} />}
     <meta name="twitter:image" content={ogImageUrl} />
+    <!-- Google Fonts — Inter + JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body
-    class="flex min-h-dvh flex-col"
-    style={`background-image: url('${withBase('background/background-noise.webp')}');`}
-  >
+  <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
-    <main id="main" class="flex-1">
+    <main id="main">
       <slot />
     </main>
     <Footer />
+
+    <!-- Intersection Observer for scroll-reveal animations -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>

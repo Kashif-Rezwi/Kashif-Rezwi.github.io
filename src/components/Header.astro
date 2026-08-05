@@ -1,8 +1,6 @@
 ---
 import { base, withBase } from '../lib/paths';
 
-// Nav per the brief (Part 2): Home · Work · Experience · Contact + Resume link.
-// The Resume link points at the /resume route (single source of truth, C-08).
 const links = [
   { href: withBase('#work'), label: 'Work' },
   { href: withBase('#experience'), label: 'Experience' },
@@ -11,30 +9,245 @@ const links = [
 const resumeHref = withBase('resume/');
 ---
 
-<header class="border-b border-hairline/80">
-  <nav
-    aria-label="Primary"
-    class="container-site flex flex-wrap items-baseline gap-x-6 gap-y-2 py-4"
-  >
-    <a href={base} class="font-mono text-sm font-semibold tracking-tight">
+<header id="site-header">
+  <nav aria-label="Primary">
+    <a href={base} class="logo" aria-label="Kashif Rezwi — home">
       Kashif Rezwi
     </a>
-    <ul class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+
+    <!-- Desktop nav links -->
+    <ul class="nav-links" role="list">
       {
         links.map((link) => (
           <li>
-            <a
-              href={link.href}
-              class="font-mono text-sm text-ink-muted transition-colors duration-150 hover:text-accent-ink"
-            >
+            <a href={link.href} class="nav-link">
               {link.label}
             </a>
           </li>
         ))
       }
     </ul>
-    <a href={resumeHref} class="link-accent ml-auto font-mono text-sm">
-      Resume
-    </a>
+
+    <a href={resumeHref} class="btn-outline nav-resume">Resume</a>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="mobile-menu-btn"
+      class="mobile-menu-btn"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
   </nav>
+
+  <!-- Mobile nav drawer -->
+  <div id="mobile-nav" class="mobile-nav" aria-hidden="true">
+    <ul role="list">
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.href} class="mobile-nav-link">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a href={resumeHref} class="mobile-nav-link accent">Resume</a>
+      </li>
+    </ul>
+  </div>
 </header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--color-canvas) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  header.scrolled {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: 1rem 1.5rem;
+  }
+
+  .logo {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    transition: color 0.15s ease;
+    white-space: nowrap;
+  }
+  .logo:hover {
+    color: var(--color-accent-light);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-accent);
+    transition: width 0.2s ease;
+  }
+  .nav-link:hover {
+    color: var(--color-ink);
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-resume {
+    margin-left: auto;
+    padding: 0.375rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+
+  /* Mobile hamburger */
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: auto;
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-ink);
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  /* Mobile nav drawer */
+  .mobile-nav {
+    display: none;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+    border-top: 1px solid var(--color-border);
+  }
+  .mobile-nav.is-open {
+    max-height: 300px;
+  }
+  .mobile-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.75rem 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .mobile-nav-link {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+    transition: color 0.15s ease;
+  }
+  .mobile-nav-link:hover,
+  .mobile-nav-link.accent {
+    color: var(--color-accent-light);
+  }
+  .mobile-nav-link:last-child {
+    border-bottom: none;
+  }
+
+  /* Hamburger → X animation when open */
+  .mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 640px) {
+    .nav-links,
+    .nav-resume {
+      display: none;
+    }
+    .mobile-menu-btn {
+      display: flex;
+    }
+    .mobile-nav {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  // Scrolled class for elevated shadow
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header?.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // Mobile menu toggle
+  const btn = document.getElementById('mobile-menu-btn');
+  const nav = document.getElementById('mobile-nav');
+  btn?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    nav?.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Close mobile menu on link click
+  nav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('is-open');
+      btn?.setAttribute('aria-expanded', 'false');
+      nav.setAttribute('aria-hidden', 'true');
+    });
+  });
+</script>
