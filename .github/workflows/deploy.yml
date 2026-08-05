@@ -1,0 +1,58 @@
+# PRODUCTION DEPLOY — MANUAL ONLY, and INERT until Phase 1.4.
+#
+# The Pages source stays "branch: gh-pages" until the owner switches it to
+# GitHub Actions at Phase 1.4 (repo Settings -> Pages). Until then this
+# workflow can run but does not affect the live site.
+#
+# Roadmap gate rule 4: deploying to the production URL happens only in 1.4
+# with explicit owner approval. See docs/engineering/branching-and-deploys.md
+# (decision DL-008).
+
+name: Deploy production
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Design-token contrast check
+        run: npm run check:contrast
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

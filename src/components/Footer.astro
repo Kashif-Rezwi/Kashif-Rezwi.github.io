@@ -1,0 +1,24 @@
+---
+// Footer per the brief (Part 2): colophon, repository link, last-updated note.
+const year = new Date().getFullYear();
+const repoUrl = 'https://github.com/Kashif-Rezwi/Kashif-Rezwi.github.io';
+---
+
+<footer class="border-t border-hairline/80">
+  <div
+    class="container-site flex flex-col gap-2 py-6 md:flex-row md:items-baseline md:justify-between"
+  >
+    <p class="font-mono text-xs text-ink-muted">
+      © {year} Kashif Rezwi · Built with Astro + Tailwind CSS
+    </p>
+    <p class="font-mono text-xs text-ink-muted">
+      <a
+        href={repoUrl}
+        class="text-accent-ink underline decoration-hairline underline-offset-4 transition-colors duration-150 hover:decoration-accent-ink"
+      >
+        Source on GitHub
+      </a>
+      <span aria-hidden="true"> · </span>Foundation skeleton — 2026-08-05
+    </p>
+  </div>
+</footer>

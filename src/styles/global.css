@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Design tokens — "Calm Engineering Ledger" (docs/strategy/product-and-design-brief.md)
+   Every color choice traces to the brief; text colors are contrast-verified
+   (run `npm run check:contrast`). Values adopted in decision DL-008.
+--------------------------------------------------------------------------- */
+
+@theme {
+  /* Color — light paper theme (audit: Preserve base, Evolve ink upward for WCAG AA) */
+  --color-paper: #f5f5f5; /* base background, preserved from the current site */
+  --color-surface: #ffffff; /* cards / raised surfaces */
+  --color-ink: #1f1f1f; /* primary text — evolves #505050 upward (~13.7:1 on paper) */
+  --color-ink-muted: #4f4f4f; /* secondary text (~7.2:1 on paper) */
+  --color-hairline: #d9d9d9; /* card borders, section rules */
+  /* Cornflowerblue stays the SINGLE accent (audit: Preserve). It fails text
+     contrast on paper, so it is decoration/focus only; links use accent-ink. */
+  --color-accent: #6495ed; /* cornflowerblue — decorative highlight, hover tints */
+  --color-accent-ink: #3d69c8; /* darkened cornflower for link text (>= 4.5:1 on paper & surface) */
+  --color-accent-soft: #e8eefa; /* tinted accent background for tags/highlights */
+
+  /* Typography — system stacks, zero font downloads (DL-008 f) */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  /* Type scale — strong heading/body contrast, body 16–18px per the brief */
+  --text-body: 1.0625rem; /* 17px */
+  --text-body--line-height: 1.65;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    background-repeat: repeat;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  /* Visible focus affordances — accent-ink passes 3:1 non-text contrast (WCAG 2.4.11) */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-ink);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Skip link — hidden until focused (WCAG 2.4.1) */
+  .skip-link {
+    @apply absolute left-2 top-2 z-50 -translate-y-[200%] rounded bg-ink px-3 py-2 font-mono text-sm text-paper transition-transform duration-150;
+  }
+  .skip-link:focus-visible {
+    @apply translate-y-0;
+  }
+
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-6;
+  }
+
+  .section-label {
+    @apply font-mono text-xs tracking-widest text-ink-muted uppercase;
+  }
+}
+
+/* Motion — micro-transitions only; every animation honors prefers-reduced-motion
+   (hard acceptance criterion, architecture-and-quality.md) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,45 @@
+<!--
+Case-study template — content entries are written in Phase 1.2 using
+docs/research/featured-project-research.md + docs/research/evidence-ledger.md
+as the ONLY evidence sources (claim safety, AGENTS.md §3).
+
+To create an entry: copy this file to <slug>.md in src/content/work/ and remove
+the .example suffix (the content collection loads **/*.md only).
+
+Rules:
+- roleLabel is always visible; personal projects are never framed as employment,
+  production-scale, or commercial.
+- No metrics, scale, or outcome claims unless verified in the ledger.
+- Body sections follow the case-study template in
+  docs/strategy/product-and-design-brief.md: Overview / What I built /
+  Challenges (omit rather than invent) / Outcomes (verified only).
+-->
+
+---
+title: 'Project Name'
+roleLabel: 'Personal project'
+period: '2026 · Active development'
+status: 'Live demo'
+summary: 'One-line problem statement (claim-safe wording from the ledger).'
+repo: 'https://github.com/Kashif-Rezwi/example'
+demo: 'https://example.vercel.app'
+tech: ['TypeScript']
+order: 1
+draft: true
+---
+
+## Overview
+
+Problem + intended user (2–3 sentences, source-backed).
+
+## What I built
+
+Key engineering decisions — from README evidence only.
+
+## Challenges
+
+Source-backed challenges only; omit this section rather than invent content.
+
+## Outcomes
+
+Verified only: live demo, published article. No user/scale claims.

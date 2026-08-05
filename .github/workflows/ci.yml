@@ -1,0 +1,47 @@
+# Build check for the portfolio rebuild (Phase 1.0+).
+# Runs on pushes/PRs touching the site on develop. Preview deploys are separate
+# (companion repo Kashif-Rezwi/portfolio-preview — see docs/engineering/branching-and-deploys.md).
+
+name: CI
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'astro.config.mjs'
+      - 'tsconfig.json'
+      - '.nvmrc'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [develop]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Design-token contrast check
+        run: npm run check:contrast
+
+      - name: Build (production base)
+        run: npm run build

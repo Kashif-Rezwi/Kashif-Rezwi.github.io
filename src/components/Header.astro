@@ -1,0 +1,46 @@
+---
+import { base, withBase } from '../lib/paths';
+
+// Nav per the brief (Part 2): Home · Work · Experience · Contact + Resume link.
+// During the Phase 1.0 skeleton the section links point at labeled placeholder
+// sections below; real claim-mapped sections land in Phase 1.1.
+// The Resume link serves the approved PDF directly (OQ-05) until the /resume
+// route is built in Phase 1.1.
+const links = [
+  { href: withBase('#work'), label: 'Work' },
+  { href: withBase('#experience'), label: 'Experience' },
+  { href: withBase('#contact'), label: 'Contact' },
+];
+const resumeHref = withBase('resume/Kashif-Rezwi-Resume.pdf');
+---
+
+<header class="border-b border-hairline/80">
+  <nav
+    aria-label="Primary"
+    class="container-site flex flex-wrap items-baseline gap-x-6 gap-y-2 py-4"
+  >
+    <a href={base} class="font-mono text-sm font-semibold tracking-tight">
+      Kashif Rezwi
+    </a>
+    <ul class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="font-mono text-sm text-ink-muted transition-colors duration-150 hover:text-accent-ink"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a
+      href={resumeHref}
+      class="ml-auto font-mono text-sm text-accent-ink underline decoration-hairline underline-offset-4 transition-colors duration-150 hover:decoration-accent-ink"
+    >
+      Resume
+    </a>
+  </nav>
+</header>

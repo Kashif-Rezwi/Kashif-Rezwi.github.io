@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+
+const description =
+  'Kashif Rezwi — Frontend-focused Full Stack Engineer. Foundation skeleton of the rebuilt portfolio (Phase 1.0).';
+
+const swatches = [
+  { name: 'paper', class: 'bg-paper border border-hairline', note: '#f5f5f5' },
+  { name: 'surface', class: 'bg-surface border border-hairline', note: '#ffffff' },
+  { name: 'ink', class: 'bg-ink', note: '#1f1f1f' },
+  { name: 'ink-muted', class: 'bg-ink-muted', note: '#4f4f4f' },
+  { name: 'accent', class: 'bg-accent', note: '#6495ed · decor only' },
+  { name: 'accent-ink', class: 'bg-accent-ink', note: '#3d69c8 · links' },
+  { name: 'accent-soft', class: 'bg-accent-soft border border-hairline', note: '#e8eefa' },
+  { name: 'hairline', class: 'bg-hairline', note: '#d9d9d9' },
+];
+---
+
+<Base
+  title="Kashif Rezwi — Frontend-focused Full Stack Engineer"
+  description={description}
+>
+  <div class="container-site">
+    <!-- Hero — Phase 1.1 replaces this with claim-mapped copy (positioning.md).
+         Headline below is CL-01 (VERIFIED). -->
+    <section class="py-16 md:py-24">
+      <p class="section-label">Portfolio · foundation skeleton</p>
+      <h1 class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
+        Kashif Rezwi
+      </h1>
+      <p class="mt-3 text-xl text-ink-muted md:text-2xl">
+        Frontend-focused Full Stack Engineer
+      </p>
+      <p class="mt-6 max-w-[68ch] text-body text-ink-muted">
+        Phase 1.0 foundation skeleton — design tokens, layout, navigation, and
+        the case-study schema. Claim-mapped content arrives in the next phases.
+      </p>
+    </section>
+
+    <!-- Selected work — content lands in 1.1 (cards) / 1.2 (case studies) -->
+    <section id="work" class="scroll-mt-4 border-t border-hairline/80 py-16">
+      <h2 class="text-2xl font-semibold tracking-tight">Selected work</h2>
+      <div
+        class="mt-6 rounded-md border border-dashed border-hairline bg-surface/70 p-8"
+      >
+        <p class="font-mono text-sm text-ink-muted">
+          Placeholder — featured case studies land in Phase 1.2.
+        </p>
+      </div>
+    </section>
+
+    <!-- Experience — content lands in 1.1 (resume-equivalent text, OQ-08) -->
+    <section id="experience" class="scroll-mt-4 border-t border-hairline/80 py-16">
+      <h2 class="text-2xl font-semibold tracking-tight">Experience</h2>
+      <div
+        class="mt-6 rounded-md border border-dashed border-hairline bg-surface/70 p-8"
+      >
+        <p class="font-mono text-sm text-ink-muted">
+          Placeholder — experience section lands in Phase 1.1.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact — content lands in 1.1 (mailto + GitHub/LinkedIn/dev.to) -->
+    <section id="contact" class="scroll-mt-4 border-t border-hairline/80 py-16">
+      <h2 class="text-2xl font-semibold tracking-tight">Contact</h2>
+      <div
+        class="mt-6 rounded-md border border-dashed border-hairline bg-surface/70 p-8"
+      >
+        <p class="font-mono text-sm text-ink-muted">
+          Placeholder — contact links land in Phase 1.1.
+        </p>
+      </div>
+    </section>
+
+    <!-- Foundation tokens — review aid for the 1.0 gate; removed in 1.1 -->
+    <section id="tokens" class="scroll-mt-4 border-t border-hairline/80 py-16">
+      <h2 class="text-2xl font-semibold tracking-tight">
+        Foundation tokens
+        <span class="ml-2 align-middle font-mono text-xs text-ink-muted"
+          >(review aid — removed in Phase 1.1)</span
+        >
+      </h2>
+
+      <h3 class="mt-8 font-mono text-sm text-ink-muted">Color</h3>
+      <ul class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {
+          swatches.map((s) => (
+            <li class="overflow-hidden rounded-md border border-hairline bg-surface">
+              <div class={`h-14 ${s.class}`}></div>
+              <p class="px-2 py-1.5 font-mono text-xs">
+                {s.name} <span class="text-ink-muted">· {s.note}</span>
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <h3 class="mt-8 font-mono text-sm text-ink-muted">Type</h3>
+      <div
+        class="mt-3 rounded-md border border-hairline bg-surface p-6 leading-relaxed"
+      >
+        <p class="text-2xl font-semibold tracking-tight">Sans — heading</p>
+        <p class="mt-2 max-w-[68ch] text-body">
+          Body — 17px on a 65–72ch measure, left-aligned, never justified. The
+          quick brown fox jumps over the lazy dog.
+        </p>
+        <p class="mt-2 font-mono text-xs tracking-widest text-ink-muted uppercase">
+          Mono — labels, dates, metadata (the ledger voice)
+        </p>
+      </div>
+
+      <h3 class="mt-8 font-mono text-sm text-ink-muted">Accent usage</h3>
+      <div
+        class="mt-3 rounded-md border border-hairline bg-surface p-6 text-sm"
+      >
+        <p>
+          Link text uses
+          <a
+            href="#tokens"
+            class="text-accent-ink underline decoration-hairline underline-offset-4 hover:decoration-accent-ink"
+            >accent-ink</a
+          > (≥ 4.5:1). Cornflowerblue
+          <span class="rounded bg-accent-soft px-1.5 py-0.5 font-mono text-xs"
+            >#6495ed</span
+          >
+          stays the single accent for decoration, highlights, and hover tints —
+          never body text.
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>
