@@ -23,66 +23,424 @@ const { title, roleLabel, period, status, summary, repo, demo, tech, cover } =
   entry.data;
 
 // Cover image (owner-approved README screenshot, DL-011). Absent for projects whose
-// README has no real screenshot (e.g. perplexity, lingo-agent) -> no cover rendered.
+// README has no real screenshot -> no cover rendered.
 const covers = import.meta.glob('../../assets/work/*', {
   eager: true,
   import: 'default',
 });
 const coverSrc = cover ? covers[`../../assets/work/${cover}`] : undefined;
+
+// Previous / next links for navigation
+const allEntries = (await getCollection('work'))
+  .filter((e) => !e.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+const currentIndex = allEntries.findIndex((e) => e.id === entry.id);
+const prev = currentIndex > 0 ? allEntries[currentIndex - 1] : null;
+const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1] : null;
 ---
 
 <Base title={`${title} — Kashif Rezwi`} description={summary}>
-  <article class="container-site py-16 md:py-20">
-    <!-- Header: name · role label (always visible) · period/status · links -->
-    <header>
-      <p class="section-label">{roleLabel}</p>
-      <h1 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-        {title}
-      </h1>
-      <p class="mt-2 font-mono text-sm text-ink-muted">
-        {period} · {status}
-      </p>
-      <p class="mt-5 flex flex-wrap gap-x-5 gap-y-1 font-mono text-sm">
-        <a href={repo} class="link-accent">Repository</a>
-        {demo && <a href={demo} class="link-accent">Live demo</a>}
-        <a href={withBase('/#work')} class="link-accent">← Back to selected work</a>
-      </p>
-    </header>
+  <article class="case-study">
 
+    <!-- =========================================================
+         Page header / hero
+    ========================================================= -->
+    <div class="case-hero">
+      <div class="container-site case-hero-inner">
+        <!-- Breadcrumb + role label -->
+        <div class="case-hero-meta animate-fade-up">
+          <a href={withBase('/#work')} class="case-back">← Work</a>
+          <span class="case-sep" aria-hidden="true">·</span>
+          <span class="section-label">{roleLabel}</span>
+        </div>
+
+        <h1 class="case-title animate-fade-up delay-100">{title}</h1>
+
+        <p class="case-period animate-fade-up delay-200">
+          {period}
+          <span class="case-status-badge">{status}</span>
+        </p>
+
+        <p class="case-summary animate-fade-up delay-300">{summary}</p>
+
+        <div class="case-links animate-fade-up delay-400">
+          <a href={repo} class="btn-outline" target="_blank" rel="noopener noreferrer">
+            View repo →
+          </a>
+          {demo && (
+            <a href={demo} class="btn" target="_blank" rel="noopener noreferrer">
+              Live demo →
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         Cover image
+    ========================================================= -->
     {
       coverSrc && (
-        <figure class="mt-8">
-          <Image
-            src={coverSrc}
-            alt={`${title} — screenshot from the project README`}
-            width={1200}
-            format="avif"
-            quality={70}
-            loading="lazy"
-            class="rounded-md border border-hairline bg-surface"
-          />
-        </figure>
+        <div class="container-site">
+          <figure class="case-cover animate-fade-up delay-200">
+            <Image
+              src={coverSrc as Parameters<typeof Image>[0]['src']}
+              alt={`${title} — project screenshot`}
+              width={1200}
+              format="avif"
+              quality={75}
+              loading="lazy"
+              class="case-cover-img"
+            />
+          </figure>
+        </div>
       )
     }
 
-    <!-- Body: Overview / What I built / Challenges / Outcomes (brief template).
-         The Challenges heading appears only where the content documents it. -->
-    <div class="markdown mt-10">
-      <Content />
+    <!-- =========================================================
+         Body content
+    ========================================================= -->
+    <div class="container-site case-body">
+
+      <!-- Main narrative -->
+      <div class="case-content">
+        <div class="markdown reveal">
+          <Content />
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="case-sidebar">
+        <!-- Tech stack -->
+        <div class="case-sidebar-card reveal">
+          <h2 class="case-sidebar-label">Tech stack</h2>
+          <ul class="case-sidebar-tech">
+            {tech.map((t) => <li class="tech-tag">{t}</li>)}
+          </ul>
+        </div>
+
+        <!-- Links -->
+        <div class="case-sidebar-card reveal delay-100">
+          <h2 class="case-sidebar-label">Links</h2>
+          <ul class="case-sidebar-links">
+            <li>
+              <a href={repo} class="case-sidebar-link" target="_blank" rel="noopener noreferrer">
+                <span class="case-sidebar-link-icon" aria-hidden="true">⟨⟩</span>
+                Repository
+              </a>
+            </li>
+            {demo && (
+              <li>
+                <a href={demo} class="case-sidebar-link" target="_blank" rel="noopener noreferrer">
+                  <span class="case-sidebar-link-icon" aria-hidden="true">↗</span>
+                  Live demo
+                </a>
+              </li>
+            )}
+          </ul>
+        </div>
+      </aside>
     </div>
 
-    <!-- Tech — text tags, not logos (brief) -->
-    <section class="mt-10">
-      <h2 class="font-mono text-sm text-ink-muted">Tech</h2>
-      <ul class="mt-3 flex flex-wrap gap-2">
-        {
-          tech.map((t) => (
-            <li class="rounded bg-accent-soft px-2 py-0.5 font-mono text-xs text-accent-ink">
-              {t}
-            </li>
-          ))
-        }
-      </ul>
-    </section>
+    <!-- =========================================================
+         Next / Prev navigation
+    ========================================================= -->
+    <div class="container-site">
+      <nav class="case-nav" aria-label="Case study navigation">
+        <div class="case-nav-item">
+          {prev && (
+            <a href={withBase(`work/${prev.id}/`)} class="case-nav-link prev">
+              <span class="case-nav-dir">← Previous</span>
+              <span class="case-nav-name">{prev.data.title}</span>
+            </a>
+          )}
+        </div>
+        <div class="case-nav-item end">
+          {next && (
+            <a href={withBase(`work/${next.id}/`)} class="case-nav-link next">
+              <span class="case-nav-dir">Next →</span>
+              <span class="case-nav-name">{next.data.title}</span>
+            </a>
+          )}
+        </div>
+      </nav>
+    </div>
   </article>
 </Base>
+
+<style>
+  .case-study {
+    padding-bottom: 5rem;
+  }
+
+  /* ----------------------------------------------------------------
+     Hero header
+  ---------------------------------------------------------------- */
+  .case-hero {
+    padding-block: 4rem 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    overflow: hidden;
+  }
+  .case-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 80% at 50% 0%, var(--color-accent-glow), transparent 70%);
+    pointer-events: none;
+  }
+
+  .case-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .case-hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .case-back {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .case-back:hover {
+    color: var(--color-accent-light);
+  }
+
+  .case-sep {
+    color: var(--color-ink-dim);
+    font-size: 0.75rem;
+  }
+
+  .case-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .case-period {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-ink-dim);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .case-status-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-success);
+    background: color-mix(in srgb, var(--color-success) 12%, transparent);
+    padding: 0.15rem 0.625rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-success) 25%, transparent);
+    font-weight: 500;
+  }
+
+  .case-summary {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-ink-muted);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .case-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+
+  /* ----------------------------------------------------------------
+     Cover image
+  ---------------------------------------------------------------- */
+  .case-cover {
+    margin-top: 2rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .case-cover-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ----------------------------------------------------------------
+     Body — 2-column layout on wide screens
+  ---------------------------------------------------------------- */
+  .case-body {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 3rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+
+  .case-content {
+    min-width: 0;
+  }
+
+  /* Sidebar */
+  .case-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: sticky;
+    top: 5rem;
+  }
+
+  .case-sidebar-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .case-sidebar-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-dim);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .case-sidebar-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .case-sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .case-sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .case-sidebar-link:hover {
+    color: var(--color-accent-light);
+  }
+  .case-sidebar-link-icon {
+    font-size: 0.75rem;
+    opacity: 0.5;
+  }
+
+  /* ----------------------------------------------------------------
+     Next / Prev nav
+  ---------------------------------------------------------------- */
+  .case-nav {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid var(--color-border);
+    margin-top: 3rem;
+    padding-top: 2rem;
+  }
+
+  .case-nav-item {
+    flex: 1;
+  }
+  .case-nav-item.end {
+    text-align: right;
+  }
+
+  .case-nav-link {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-decoration: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    transition: border-color 0.2s ease, background 0.2s ease;
+    min-width: 160px;
+  }
+  .case-nav-link:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+    background: var(--color-accent-soft);
+  }
+  .case-nav-link.next {
+    align-items: flex-end;
+  }
+
+  .case-nav-dir {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .case-nav-name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  /* ----------------------------------------------------------------
+     Responsive
+  ---------------------------------------------------------------- */
+  @media (max-width: 900px) {
+    .case-body {
+      grid-template-columns: 1fr;
+    }
+    .case-sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .case-sidebar-card {
+      flex: 1;
+      min-width: 200px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .case-nav {
+      flex-direction: column;
+    }
+    .case-nav-item.end {
+      text-align: left;
+    }
+    .case-nav-link.next {
+      align-items: flex-start;
+    }
+  }
+</style>

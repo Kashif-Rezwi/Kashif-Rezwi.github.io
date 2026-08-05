@@ -9,6 +9,7 @@ demo: 'https://lingo-agent.vercel.app'
 tech: ['TypeScript', 'Babel', 'E2B']
 order: 3
 draft: false
+cover: 'lingo-agent.png'
 ---
 
 ## Overview

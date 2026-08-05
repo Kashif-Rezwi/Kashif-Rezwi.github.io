@@ -9,6 +9,7 @@ demo: 'https://perplexity-lilac.vercel.app'
 tech: ['Next.js', 'NestJS', 'Prisma']
 order: 2
 draft: false
+cover: 'perplexity.png'
 ---
 
 ## Overview
