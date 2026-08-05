@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-05 (DL-024)
+- **Last updated:** 2026-08-06 (DL-035)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -235,3 +235,17 @@
 - **Decision:** Implement R4-1 (hero identity) in `src/pages/index.astro`. The name `Kashif Rezwi` is now a single `<h1>` line (removed the `Kashif<br />Rezwi` split). The old gradient direction line ("Building toward AI product engineering and developer tools") was replaced with the canonical, consistent role line **"Frontend-focused Full Stack Engineer"** — the exact string already used in the page `<title>`, meta description, and approved positioning. The bio's direction ("Currently building AI products and developer tools") is retained in the bio copy, so no direction signal was lost. `npx astro build` passes; the rendered `dist/index.html` confirms both `Kashif Rezwi` and the role string present and the old split line absent.
 - **Rationale:** Resolves the "two-line name feels odd" + "no consistent role line" feedback; satisfies the AGENTS.md §2/§3 requirement that the public role be one consistent, claim-safe string across every surface.
 - **Approval status:** Implemented locally per the approved R4 cycle, R4-1 step. Not deployed; no branch merge. Next: R4-2 (dot matrix). [Marked by owner to proceed one step at a time.]
+
+## DL-034 — R4-2, R4-3, R4-4 implemented (backfilled record of the committed work)
+
+- **Date:** 2026-08-06
+- **Decision:** Backfill the decision log for R4-2/3/4 commits that were already committed on `v2-improvement`. **R4-2 (dot matrix, mode = B2)** — `HeroDotMatrix.astro` refactored (`888a8ef`) to drive every `.hero-dot-matrix` canvas on the page, so the interactive motif repeats across hero, contact, and footer rather than only the hero. **R4-3 (tech stack)** — `Icon.astro` + `TechIcon.astro` add an SVG icon registry (`db07f82`); `REST APIs` reordered in the Backend list (`19a7157`); membership corrected so the flat groups (Languages / Frontend / Backend / Databases & Infra / AI & Tools) stay claim-safe and un-tiered — **LangChain was dropped** and no tiered restructure was applied; the contribution snapshot refresh rode along. **R4-4 (Experience)** — Brand Exponents bullets deepened in `index.astro` (`:289–312`) with Template Library ("contributed to the shared Template Library"), reusable infinite-pagination ("used across four product surfaces"), launch stability ("helped keep production stable through launches and debugging"), and the drag-and-drop builder ("contributed to redesigning the workflow builder from blank-canvas drag-and-drop into a guided, template-led flow") — all collaborative wording, no metrics, no sole-ownership claims.
+- **Rationale:** Brings the decision log in line with the actual `v2-improvement` tip (previously DL-033). Each change stays within the plan's content/interaction/styling scope and AGENTS.md §3 claim safety; no invented depth.
+- **Approval status:** Recorded post-hoc (commits existed on `v2-improvement`); consistent with the owner-approved R4 direction. Not deployed; no branch merge.
+
+## DL-035 — R4-5 implemented: navbar bottom fade
+
+- **Date:** 2026-08-06
+- **Decision:** Complete R4-5 in `src/components/Header.astro`. The header was already `position: sticky; top: 0; z-index: 50` (pinned), but had no bottom-edge fade, so content scrolling beneath it abuts a hard line (plan §8.2, OQ-R4-6 = subtle). Added a `header::after` CSS-only gradient from `color-mix(in srgb, var(--color-canvas) 92%, transparent)` → transparent over `bottom: -1.25rem; height: 1.25rem`, with `pointer-events: none` so it never blocks clicks or the `inert` mobile drawer (plan §8.3). It uses the same theme canvas variable as the header background, so it reads as a gentle fade on both themes. `npx astro build` passes cleanly.
+- **Rationale:** Reliable pinning + a generous, muted bottom fade meets the "content never looks cut/flat beneath it" goal while staying within the constraining CSS-only, them-safe scope and keeping the mobile menu behavior intact.
+- **Approval status:** Implemented locally per the approved R4 cycle, R4-5 step, on request-onrun of the R4 items. Not deployed; no branch merge. Next: R4-6 (QA + evidence doc); R4-7 (promotion) remains owner-gated.

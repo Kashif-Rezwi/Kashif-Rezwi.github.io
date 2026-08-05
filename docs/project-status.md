@@ -2,7 +2,7 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-06 (**R3 launch COMPLETE** — owner-authorized, DL-030/031)
+- **Last updated:** 2026-08-06 (**R4 in progress** — R4-0..R4-5 implemented on `v2-improvement`; R4-6 QA pending; R4-7 deploy owner-gated)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase
@@ -60,5 +60,6 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- **R4 improvement cycle — plan DRAFTED, awaiting owner.** `docs/rebuild-02/09-r4-improvement-plan.md` captures the owner's five R4 requests (hero single-line name + role, dot-matrix enlargement/extension, tech-stack cross-check, deeper Experience, pinned+faded navbar). Six open decisions (OQ-R4-1…6) are logged in the plan; once the owner resolves them (see §9), R4-0 → R4-6 proceeds step-by-step per AGENTS.md §7, followed by R4-7 promotion (`v2-improvement` → `develop` → `gh-pages`) only on a separate owner "go".
-- **Owner spot-checks** (post-launch): LinkedIn click-through (OQ-06), visual captures at 320/1440, and resume-PDF review. Repository is back in maintenance mode per AGENTS.md §1: future changes are pushed to the working branch, built, then deployed to `gh-pages`.
+- **R4 improvement cycle — IN PROGRESS.** All five R4 improvements are now implemented on the working branch `v2-improvement` (not deployed): R4-1 hero single-line name + role line (DL-033), R4-2 dot-matrix enlarged + extended across hero/contact/footer via reusable component (DL-034), R4-3 tech-stack corrected + icon registry (DL-034), R4-4 Experience deepened with claim-safe bullets (DL-034), R4-5 navbar pinned + bottom fade (DL-035). Commits: `bc1ef37`, `888a8ef`, `db07f82`, `19a7157`, plus the R4-5 fade uncommitted.
+- **Next step: R4-6** — full QA pass (Lighthouse, axe, contrast, links, no-JS/canvas/reduced-motion) + evidence doc `docs/rebuild-02/10-r4-qa-evidence.md`, then owner gate. **R4-7** (promotion `v2-improvement` → `develop` → `gh-pages` + deploy) happens **only** on a separate owner "go".
+- **Owner spot-checks** (post-R3 launch): LinkedIn click-through (OQ-06), visual captures at 320/1440, and resume-PDF review. Repository is in maintenance mode per AGENTS.md §1: future changes are pushed to the working branch, built, then deployed to `gh-pages`.
