@@ -17,12 +17,14 @@ const checks = [
   ['ink-muted on paper', '#4f4f4f', PAPER, 4.5, true],
   ['ink-muted on surface', '#4f4f4f', SURFACE, 4.5, true],
   // Link text (accent-ink) — >= 4.5:1
-  ['accent-ink on paper', '#3d69c8', PAPER, 4.5, true],
-  ['accent-ink on surface', '#3d69c8', SURFACE, 4.5, true],
-  // Reversed text (skip link, selection)
+  ['accent-ink on paper', '#3862c0', PAPER, 4.5, true],
+  ['accent-ink on surface', '#3862c0', SURFACE, 4.5, true],
+  ['accent-ink on accent-soft (tags)', '#3862c0', '#e8eefa', 4.5, true],
+  // Reversed text (skip link, selection, buttons)
+  ['white on accent-ink', '#ffffff', '#3862c0', 4.5, true],
   ['paper on ink', PAPER, '#1f1f1f', 4.5, true],
   // Non-text (focus ring / UI) — >= 3:1 (WCAG 1.4.11); focus rings use accent-ink
-  ['accent-ink non-text on paper', '#3d69c8', PAPER, 3.0, true],
+  ['accent-ink non-text on paper', '#3862c0', PAPER, 3.0, true],
   // Informational — decorative, not asserted
   ['accent on paper (decorative)', '#6495ed', PAPER, 3.0, false],
   ['hairline on paper (decorative)', '#d9d9d9', PAPER, 1.0, false],

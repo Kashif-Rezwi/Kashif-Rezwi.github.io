@@ -7,7 +7,7 @@
 
 ## Current phase
 
-**Phase 1.1 — Core home page: IN PROGRESS** (Phase 1.0 gate approved by owner 2026-08-05, DL-009). Scope per roadmap: all home sections with claim-mapped copy (hero, selected work cards, experience, AI journey/now, contact incl. owner-approved phone number, footer), `/resume` route as the single source of truth, optimized portrait, home meta/OG; deliverable = copy-to-claim mapping table for owner content review.
+**Phase 1.1 — Core home page: BUILT, awaiting owner content-review gate** (2026-08-05). All home sections built with claim-mapped copy (hero, selected work cards + compact row, experience, AI journey/now, contact incl. owner-approved phone per DL-009, footer); `/resume` route serves the PDF as the single source of truth (C-08); portrait re-encoded via Astro (AVIF 16 KB, ≤150 KB criterion); home meta/OG including og:image; featured-work content entries created (draft: narrative bodies pending in 1.2). **Content-review deliverable: `docs/strategy/home-copy-claim-map.md`** — every public sentence mapped to a CL-ID.
 
 **Phase 1.0 — Foundation: COMPLETE, gate approved** (2026-08-05). Foundation decisions adopted as DL-008: branch model (`develop` carries Phase 1; `main`/`gh-pages` frozen until 1.4), preview mechanism (companion repo `Kashif-Rezwi/portfolio-preview`, on-demand project-site deploys, zero secrets), repo shape (Astro at root of `develop`; CRA preserved on `main`/`gh-pages` until the 1.4 merge), system font stacks, contrast-verified token palette. Operating rules in `docs/engineering/branching-and-deploys.md` (audit F-04 deliverable).
 
@@ -39,6 +39,6 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- **Phase 1.1 — build the core home page** per the approved plan (claim-mapped sections, `/resume` route, portrait, meta/OG); ends at the owner content-review gate with the copy-to-claim mapping table (`docs/strategy/home-copy-claim-map.md`).
+- **Phase 1.1 gate: owner content review.** Review the preview URL (https://kashif-rezwi.github.io/portfolio-preview/) against the home-page copy in `docs/strategy/home-copy-claim-map.md` (every sentence → CL-ID). On approval, Phase 1.2 (featured case studies) may begin per the roadmap. Case study narratives and per-project visuals are owner-reviewed at the 1.2 gate.
 - To refresh the preview after new work lands on `develop`: Actions tab of `Kashif-Rezwi/portfolio-preview` → "Run workflow" (or the agent runs `gh workflow run preview.yml --repo Kashif-Rezwi/portfolio-preview`).
 - After the gate: proceed gate-by-gate per the roadmap (1.2 case studies → 1.3 QA → 1.4 launch); the production URL remains untouched until Phase 1.4 approval.

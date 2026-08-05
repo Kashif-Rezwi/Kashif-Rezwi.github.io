@@ -2,16 +2,13 @@
 import { base, withBase } from '../lib/paths';
 
 // Nav per the brief (Part 2): Home · Work · Experience · Contact + Resume link.
-// During the Phase 1.0 skeleton the section links point at labeled placeholder
-// sections below; real claim-mapped sections land in Phase 1.1.
-// The Resume link serves the approved PDF directly (OQ-05) until the /resume
-// route is built in Phase 1.1.
+// The Resume link points at the /resume route (single source of truth, C-08).
 const links = [
   { href: withBase('#work'), label: 'Work' },
   { href: withBase('#experience'), label: 'Experience' },
   { href: withBase('#contact'), label: 'Contact' },
 ];
-const resumeHref = withBase('resume/Kashif-Rezwi-Resume.pdf');
+const resumeHref = withBase('resume/');
 ---
 
 <header class="border-b border-hairline/80">
@@ -36,10 +33,7 @@ const resumeHref = withBase('resume/Kashif-Rezwi-Resume.pdf');
         ))
       }
     </ul>
-    <a
-      href={resumeHref}
-      class="ml-auto font-mono text-sm text-accent-ink underline decoration-hairline underline-offset-4 transition-colors duration-150 hover:decoration-accent-ink"
-    >
+    <a href={resumeHref} class="link-accent ml-auto font-mono text-sm">
       Resume
     </a>
   </nav>

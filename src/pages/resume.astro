@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/paths';
+
+// /resume — single source of truth for the resume (owner decision OQ-05; resolves C-08).
+const pdfHref = withBase('resume/Kashif-Rezwi-Resume.pdf');
+---
+
+<Base
+  title="Resume — Kashif Rezwi"
+  description="Resume of Kashif Rezwi, Frontend-focused Full Stack Engineer (PDF)."
+>
+  <div class="container-site py-16 md:py-24">
+    <p class="section-label">Resume</p>
+    <h1 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+      Kashif Rezwi — Resume
+    </h1>
+    <p class="mt-6 max-w-[68ch] text-body">
+      This PDF is the single source of truth for my experience, skills, and
+      education; the experience section on the home page mirrors it.
+    </p>
+    <p class="mt-8 flex flex-wrap gap-4">
+      <a href={pdfHref} target="_blank" rel="noopener" class="btn">Open PDF</a>
+      <a href={pdfHref} download class="btn-secondary">Download</a>
+    </p>
+  </div>
+</Base>

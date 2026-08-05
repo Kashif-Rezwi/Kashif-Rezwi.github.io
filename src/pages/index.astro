@@ -1,133 +1,257 @@
 ---
+import { getCollection } from 'astro:content';
+import { getImage, Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { withBase } from '../lib/paths';
+import portrait from '../assets/portrait.jpg';
 
+// Claim mapping lives in docs/strategy/home-copy-claim-map.md (Phase 1.1 gate artifact).
 const description =
-  'Kashif Rezwi — Frontend-focused Full Stack Engineer. Foundation skeleton of the rebuilt portfolio (Phase 1.0).';
+  'Frontend-focused Full Stack Engineer with 2+ years building customer-facing SaaS in startup teams — landing-page builders, CRM, and workflow automation. Currently building AI products and developer tools.';
 
-const swatches = [
-  { name: 'paper', class: 'bg-paper border border-hairline', note: '#f5f5f5' },
-  { name: 'surface', class: 'bg-surface border border-hairline', note: '#ffffff' },
-  { name: 'ink', class: 'bg-ink', note: '#1f1f1f' },
-  { name: 'ink-muted', class: 'bg-ink-muted', note: '#4f4f4f' },
-  { name: 'accent', class: 'bg-accent', note: '#6495ed · decor only' },
-  { name: 'accent-ink', class: 'bg-accent-ink', note: '#3d69c8 · links' },
-  { name: 'accent-soft', class: 'bg-accent-soft border border-hairline', note: '#e8eefa' },
-  { name: 'hairline', class: 'bg-hairline', note: '#d9d9d9' },
-];
+const featured = (await getCollection('work'))
+  .filter((e) => e.data.order <= 3)
+  .sort((a, b) => a.data.order - b.data.order);
+
+// og:image — interim: the portrait (a dedicated OG card is a possible 1.3 nicety)
+const ogImage = await getImage({
+  src: portrait,
+  format: 'jpeg',
+  width: 640,
+  height: 640,
+});
+const ogImageUrl = new URL(ogImage.src, Astro.site).href;
+
+const links = {
+  email: 'kashifrezwi850@gmail.com',
+  phone: '9883909187',
+  github: 'https://github.com/Kashif-Rezwi',
+  linkedin: 'https://www.linkedin.com/in/kashif-rezwi-149372216/',
+  devto: 'https://dev.to/kashifrezwi',
+  devtoArticle:
+    'https://dev.to/kashifrezwi/i-built-an-ai-agent-that-makes-any-nextjs-app-multilingual-in-3-minutes-4bdm',
+  archive: 'https://github.com/Kashif-Rezwi?tab=repositories',
+  betterDevUi: 'https://github.com/Kashif-Rezwi/better-dev-ui',
+  betterDevApi: 'https://github.com/Kashif-Rezwi/better-dev-api',
+  betterDevDemo: 'https://betterdev.in',
+  looplens: 'https://github.com/Kashif-Rezwi/looplens',
+  looplensDemo: 'https://looplens-rho.vercel.app',
+  aiPlayground: 'https://github.com/Kashif-Rezwi/ai-playground',
+  languagePlayground: 'https://github.com/Kashif-Rezwi/language-playground',
+};
 ---
 
 <Base
   title="Kashif Rezwi — Frontend-focused Full Stack Engineer"
   description={description}
+  ogImage={ogImageUrl}
 >
   <div class="container-site">
-    <!-- Hero — Phase 1.1 replaces this with claim-mapped copy (positioning.md).
-         Headline below is CL-01 (VERIFIED). -->
+    <!-- Hero — CL-01/CL-02/CL-18; short variant of the approved positioning statement (DL-004), never amplified -->
     <section class="py-16 md:py-24">
-      <p class="section-label">Portfolio · foundation skeleton</p>
-      <h1 class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
-        Kashif Rezwi
-      </h1>
-      <p class="mt-3 text-xl text-ink-muted md:text-2xl">
-        Frontend-focused Full Stack Engineer
-      </p>
-      <p class="mt-6 max-w-[68ch] text-body text-ink-muted">
-        Phase 1.0 foundation skeleton — design tokens, layout, navigation, and
-        the case-study schema. Claim-mapped content arrives in the next phases.
-      </p>
+      <div class="flex flex-col-reverse items-start gap-10 md:flex-row md:items-center">
+        <div class="max-w-2xl">
+          <p class="section-label">Portfolio</p>
+          <h1 class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
+            Kashif Rezwi
+          </h1>
+          <p class="mt-3 text-xl text-ink-muted md:text-2xl">
+            Frontend-focused Full Stack Engineer
+          </p>
+          <p class="mt-6 max-w-[68ch] text-body">
+            2+ years building customer-facing SaaS products in startup teams —
+            landing-page builders, CRM, and campaign & workflow automation.
+            Currently building AI products and developer tools.
+          </p>
+          <p class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a href={withBase('resume/')} class="btn">Resume</a>
+            <a href={`mailto:${links.email}`} class="link-accent font-mono text-sm">Email</a>
+            <a href={links.github} class="link-accent font-mono text-sm">GitHub</a>
+            <a href={links.linkedin} class="link-accent font-mono text-sm">LinkedIn</a>
+            <a href={links.devto} class="link-accent font-mono text-sm">dev.to</a>
+          </p>
+        </div>
+        <Image
+          src={portrait}
+          alt="Portrait of Kashif Rezwi"
+          width={512}
+          height={512}
+          format="avif"
+          quality={65}
+          loading="eager"
+          fetchpriority="high"
+          class="h-40 w-40 shrink-0 rounded-full border border-hairline object-cover md:h-56 md:w-56"
+        />
+      </div>
     </section>
 
-    <!-- Selected work — content lands in 1.1 (cards) / 1.2 (case studies) -->
+    <!-- Selected work — CL-13/14/15 (featured), CL-16/17 (compact row) -->
     <section id="work" class="scroll-mt-4 border-t border-hairline/80 py-16">
       <h2 class="text-2xl font-semibold tracking-tight">Selected work</h2>
-      <div
-        class="mt-6 rounded-md border border-dashed border-hairline bg-surface/70 p-8"
-      >
-        <p class="font-mono text-sm text-ink-muted">
-          Placeholder — featured case studies land in Phase 1.2.
-        </p>
-      </div>
-    </section>
-
-    <!-- Experience — content lands in 1.1 (resume-equivalent text, OQ-08) -->
-    <section id="experience" class="scroll-mt-4 border-t border-hairline/80 py-16">
-      <h2 class="text-2xl font-semibold tracking-tight">Experience</h2>
-      <div
-        class="mt-6 rounded-md border border-dashed border-hairline bg-surface/70 p-8"
-      >
-        <p class="font-mono text-sm text-ink-muted">
-          Placeholder — experience section lands in Phase 1.1.
-        </p>
-      </div>
-    </section>
-
-    <!-- Contact — content lands in 1.1 (mailto + GitHub/LinkedIn/dev.to) -->
-    <section id="contact" class="scroll-mt-4 border-t border-hairline/80 py-16">
-      <h2 class="text-2xl font-semibold tracking-tight">Contact</h2>
-      <div
-        class="mt-6 rounded-md border border-dashed border-hairline bg-surface/70 p-8"
-      >
-        <p class="font-mono text-sm text-ink-muted">
-          Placeholder — contact links land in Phase 1.1.
-        </p>
-      </div>
-    </section>
-
-    <!-- Foundation tokens — review aid for the 1.0 gate; removed in 1.1 -->
-    <section id="tokens" class="scroll-mt-4 border-t border-hairline/80 py-16">
-      <h2 class="text-2xl font-semibold tracking-tight">
-        Foundation tokens
-        <span class="ml-2 align-middle font-mono text-xs text-ink-muted"
-          >(review aid — removed in Phase 1.1)</span
-        >
-      </h2>
-
-      <h3 class="mt-8 font-mono text-sm text-ink-muted">Color</h3>
-      <ul class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <p class="mt-2 max-w-[68ch] text-body text-ink-muted">
+        Featured personal projects in AI products and developer tools.
+      </p>
+      <div class="mt-8 grid gap-6">
         {
-          swatches.map((s) => (
-            <li class="overflow-hidden rounded-md border border-hairline bg-surface">
-              <div class={`h-14 ${s.class}`}></div>
-              <p class="px-2 py-1.5 font-mono text-xs">
-                {s.name} <span class="text-ink-muted">· {s.note}</span>
-              </p>
-            </li>
+          featured.map((entry) => (
+            <WorkCard
+              title={entry.data.title}
+              roleLabel={entry.data.roleLabel}
+              period={entry.data.period}
+              status={entry.data.status}
+              summary={entry.data.summary}
+              repo={entry.data.repo}
+              demo={entry.data.demo}
+              tech={entry.data.tech}
+            />
           ))
         }
-      </ul>
-
-      <h3 class="mt-8 font-mono text-sm text-ink-muted">Type</h3>
-      <div
-        class="mt-3 rounded-md border border-hairline bg-surface p-6 leading-relaxed"
-      >
-        <p class="text-2xl font-semibold tracking-tight">Sans — heading</p>
-        <p class="mt-2 max-w-[68ch] text-body">
-          Body — 17px on a 65–72ch measure, left-aligned, never justified. The
-          quick brown fox jumps over the lazy dog.
-        </p>
-        <p class="mt-2 font-mono text-xs tracking-widest text-ink-muted uppercase">
-          Mono — labels, dates, metadata (the ledger voice)
-        </p>
       </div>
 
-      <h3 class="mt-8 font-mono text-sm text-ink-muted">Accent usage</h3>
-      <div
-        class="mt-3 rounded-md border border-hairline bg-surface p-6 text-sm"
-      >
+      <h3 class="mt-12 font-mono text-sm text-ink-muted">More</h3>
+      <ul class="mt-4 space-y-3">
+        <li class="max-w-[72ch]">
+          <span class="font-semibold">Better DEV</span>
+          <span class="font-mono text-xs text-ink-muted"> · Personal project</span>
+          <span class="text-body">
+            — AI chat platform with a streaming UI that shows the model's tool
+            calls, backed by a NestJS API with JWT auth and web search.
+          </span>
+          <span class="font-mono text-sm">
+            <a href={links.betterDevUi} class="link-accent">UI repo</a> ·
+            <a href={links.betterDevApi} class="link-accent"> API repo</a> ·
+            <a href={links.betterDevDemo} class="link-accent"> live</a>
+          </span>
+        </li>
+        <li class="max-w-[72ch]">
+          <span class="font-semibold">LoopLens</span>
+          <span class="font-mono text-xs text-ink-muted"> · Hackathon project (TestSprite Hackathon Season 3)</span>
+          <span class="text-body">
+            — proof-of-work dashboard that turns AI-coding-loop evidence into a
+            shareable engineering timeline.
+          </span>
+          <span class="font-mono text-sm">
+            <a href={links.looplens} class="link-accent">repo</a> ·
+            <a href={links.looplensDemo} class="link-accent"> live</a>
+          </span>
+        </li>
+        <li class="max-w-[72ch]">
+          <span class="text-body">
+            Learning in public:
+            <a href={links.aiPlayground} class="link-accent">ai-playground</a> and
+            <a href={links.languagePlayground} class="link-accent">language-playground</a>
+            — open repos of experiments. ·
+          </span>
+          <a href={links.archive} class="link-accent font-mono text-sm">
+            Full archive on GitHub
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Experience — CL-03…CL-12; resume-equivalent text, no screenshots (OQ-08) -->
+    <section id="experience" class="scroll-mt-4 border-t border-hairline/80 py-16">
+      <h2 class="text-2xl font-semibold tracking-tight">Experience</h2>
+
+      <div class="mt-8 space-y-10">
+        <article>
+          <h3 class="text-lg font-semibold tracking-tight">
+            Full Stack Developer · Brand Exponents Creatives Pvt Ltd
+          </h3>
+          <p class="mt-1 font-mono text-xs text-ink-muted">Oct 2023 – Aug 2025</p>
+          <p class="mt-3 max-w-[72ch] text-body text-ink-muted">
+            Swipe Pages — a no-code landing-page and workflow-automation SaaS — and
+            Swipe One, a CRM with AI-assisted features.
+          </p>
+          <ul class="mt-4 max-w-[72ch] list-disc space-y-2 pl-5 text-body">
+            <li>
+              Contributed to the Workflow Builder's integration layer on Swipe Pages —
+              shared configuration, property selection, field-mapping, and auto-matching
+              patterns reused across six providers: SendFox, ActiveCampaign, AWeber,
+              Moosend, Salesflare, and EngageBay.
+            </li>
+            <li>
+              Helped build Swipe One's CRM features — contacts, leads, contact
+              properties, and email & WhatsApp campaigns — and contributed to
+              redesigning the workflow builder from a blank-canvas drag-and-drop into a
+              guided, template-led flow.
+            </li>
+            <li>
+              Contributed to AI-assisted features, including natural-language workflow
+              generation and the original Swipe Genie guided page-generation
+              experience.
+            </li>
+            <li>
+              Worked with background jobs, queues, and webhooks; contributed end to end
+              to the shared Template Library; built a reusable infinite-pagination
+              system used across four product surfaces; and helped keep production
+              stable through launches, debugging, and customer-facing issues.
+            </li>
+          </ul>
+        </article>
+
+        <article>
+          <h3 class="text-lg font-semibold tracking-tight">
+            Frontend Developer Intern · Nexus Software Solutions
+          </h3>
+          <p class="mt-1 font-mono text-xs text-ink-muted">Jun 2023 – Aug 2023</p>
+          <p class="mt-3 max-w-[72ch] text-body">
+            Contributed responsive React UI (hooks + Redux) and WebSocket real-time
+            features for UBMe, an event-management product.
+          </p>
+        </article>
+
+        <article>
+          <h3 class="font-mono text-sm text-ink-muted">Education</h3>
+          <p class="mt-2 max-w-[72ch] text-body">
+            Masai School — full-stack web development bootcamp (2022) · BCA, Amity
+            University (in progress)
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- AI journey / now — CL-18 (directional only), SRC-11 -->
+    <section id="journey" class="scroll-mt-4 border-t border-hairline/80 py-16">
+      <h2 class="text-2xl font-semibold tracking-tight">AI journey / now</h2>
+      <div class="mt-4 max-w-[72ch] space-y-3 text-body">
+        <p>I'm building toward AI product engineering and developer tools.</p>
         <p>
-          Link text uses
-          <a
-            href="#tokens"
-            class="text-accent-ink underline decoration-hairline underline-offset-4 hover:decoration-accent-ink"
-            >accent-ink</a
-          > (≥ 4.5:1). Cornflowerblue
-          <span class="rounded bg-accent-soft px-1.5 py-0.5 font-mono text-xs"
-            >#6495ed</span
-          >
-          stays the single accent for decoration, highlights, and hover tints —
-          never body text.
+          Recent personal projects include an AI code-review agent, a cited AI answer
+          engine, and an autonomous i18n agent.
+        </p>
+        <p>
+          I write about what I build — the
+          <a href={links.devtoArticle} class="link-accent">LingoAgent article on dev.to</a>
+          walks through that build.
+        </p>
+        <p>
+          Two more repos track my learning in public:
+          <a href={links.aiPlayground} class="link-accent">ai-playground</a> and
+          <a href={links.languagePlayground} class="link-accent">language-playground</a>.
         </p>
       </div>
     </section>
+
+    <!-- Contact — brief: mailto + links, no form; phone included per owner directive (DL-009) -->
+    <section id="contact" class="scroll-mt-4 border-t border-hairline/80 py-16">
+      <h2 class="text-2xl font-semibold tracking-tight">Contact</h2>
+      <p class="mt-4 max-w-[68ch] text-body">
+        Reach me by email or phone, or find me on GitHub, LinkedIn, and dev.to.
+      </p>
+      <ul class="mt-6 flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm">
+        <li>
+          <a href={`mailto:${links.email}`} class="link-accent">{links.email}</a>
+        </li>
+        <li>
+          <a href={`tel:${links.phone}`} class="link-accent">{links.phone}</a>
+        </li>
+        <li><a href={links.github} class="link-accent">GitHub</a></li>
+        <li><a href={links.linkedin} class="link-accent">LinkedIn</a></li>
+        <li><a href={links.devto} class="link-accent">dev.to</a></li>
+      </ul>
+    </section>
+
   </div>
 </Base>

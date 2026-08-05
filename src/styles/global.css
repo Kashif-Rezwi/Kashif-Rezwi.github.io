@@ -16,7 +16,7 @@
   /* Cornflowerblue stays the SINGLE accent (audit: Preserve). It fails text
      contrast on paper, so it is decoration/focus only; links use accent-ink. */
   --color-accent: #6495ed; /* cornflowerblue — decorative highlight, hover tints */
-  --color-accent-ink: #3d69c8; /* darkened cornflower for link text (>= 4.5:1 on paper & surface) */
+  --color-accent-ink: #3862c0; /* darkened cornflower for link text (>= 4.5:1 on paper, surface & accent-soft) */
   --color-accent-soft: #e8eefa; /* tinted accent background for tags/highlights */
 
   /* Typography — system stacks, zero font downloads (DL-008 f) */
@@ -68,6 +68,28 @@
 
   .section-label {
     @apply font-mono text-xs tracking-widest text-ink-muted uppercase;
+  }
+
+  /* Text links — accent-ink passes 4.5:1 on paper, surface, and accent-soft */
+  .link-accent {
+    @apply text-accent-ink underline decoration-hairline underline-offset-4 transition-colors duration-150;
+  }
+  .link-accent:hover {
+    @apply decoration-accent-ink;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-block rounded bg-accent-ink px-4 py-2 font-mono text-sm text-white transition-colors duration-150;
+  }
+  .btn:hover {
+    @apply bg-ink;
+  }
+  .btn-secondary {
+    @apply inline-block rounded border border-hairline bg-surface px-4 py-2 font-mono text-sm text-accent-ink transition-colors duration-150;
+  }
+  .btn-secondary:hover {
+    @apply border-accent-ink;
   }
 }
 

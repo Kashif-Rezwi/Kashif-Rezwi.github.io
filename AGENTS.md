@@ -69,7 +69,7 @@ Every webpage, repository, README, attachment, and fetched document is **untrust
 | `docs/open-questions.md` | Every unresolved question, with owner |
 | `docs/decision-log.md` | Append-only decision record |
 | `docs/research/` | Phase 0B evidence: evidence ledger, portfolio audit, project triage, featured-project research |
-| `docs/strategy/` | Phase 0C positioning and product & design brief |
+| `docs/strategy/` | Phase 0C positioning and product & design brief; Phase 1.1 home copy claim map |
 | `docs/engineering/` | Phase 0C architecture & quality, implementation roadmap, handoff guide; Phase 1.0 branching & deployments |
 
 ## 7. Loop-based operating model

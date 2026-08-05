@@ -1,0 +1,44 @@
+---
+/**
+ * Featured work card — Phase 1.1 (brief Part 2, section 3).
+ * Case-study links are added in Phase 1.2 when the pages exist.
+ */
+interface Props {
+  title: string;
+  roleLabel: string;
+  period: string;
+  status: string;
+  summary: string;
+  repo: string;
+  demo?: string;
+  tech: string[];
+}
+
+const { title, roleLabel, period, status, summary, repo, demo, tech } =
+  Astro.props;
+---
+
+<article
+  class="rounded-md border border-hairline bg-surface p-6 transition-shadow duration-150 hover:shadow-md"
+>
+  <header class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+    <h3 class="text-lg font-semibold tracking-tight">{title}</h3>
+    <p class="font-mono text-xs text-ink-muted">
+      {roleLabel} · {period} · {status}
+    </p>
+  </header>
+  <p class="mt-3 max-w-[68ch] text-body">{summary}</p>
+  <ul class="mt-4 flex flex-wrap gap-2" aria-label={`Technologies used in ${title}`}>
+    {
+      tech.map((t) => (
+        <li class="rounded bg-accent-soft px-2 py-0.5 font-mono text-xs text-accent-ink">
+          {t}
+        </li>
+      ))
+    }
+  </ul>
+  <p class="mt-4 flex flex-wrap gap-x-5 gap-y-1 font-mono text-sm">
+    <a href={repo} class="link-accent">Repository</a>
+    {demo && <a href={demo} class="link-accent">Live demo</a>}
+  </p>
+</article>
