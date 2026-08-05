@@ -10,10 +10,10 @@
 Apply a focused round (R4) of polish to the currently-live portfolio:
 
 1. **Hero identity** — single-line name with a consistent professional role line directly beneath it.
-2. **Dot-matrix animation** — extend the pointer-reactive hero matrix so it reads as a deliberate visual signature across the portfolio, and enlarge the dots (currently barely visible).
+2. **Dot-matrix animation** — extend the pointer-reactive hero matrix so it reads as a deliberate visual signature across the portfolio.
 3. **Tech-stack accuracy** — cross-check the published tech stack against the verified evidence and online profiles, then update claims and grouping so nothing overstates depth.
 4. **Experience detail** — deepen the Experience section bullets using the master resumes and the private evidence workspace, while preserving claim safety.
-5. **Navbar behavior** — keep the navbar pinned at the top while scrolling and give it a bottom fade so content never looks "cut" or flat beneath it.
+5. **Navbar behavior** — keep the navbar pinned at the top while scrolling so it never scrolls away or moves from its place.
 
 Scope rule: this round is **content + interaction + styling polish only** — no architecture change, no new routes, no public claim invented.
 
@@ -82,21 +82,20 @@ B) Name → role → direction tagline ("building toward AI product engineering 
 
 Recommend **B** (keeps the human direction while adding the role), but only if it doesn't crowd the hero; else **A** with the direction folded into the bio.
 
-## 4. Design decision 2 — Dot matrix: enlarge + extend as a signature
+## 4. Design decision 2 — Dot matrix: extend as a signature
 
 ### 4.1 Current behavior
 
 - `HeroDotMatrix.astro` draws a canvas grid with spacing `34px` (fallback `27px` under 640px), base dot size ~`1.05px` (emphasized up to `1.7px`), and alpha ~`0.16–0.5` (light theme lower).
-- Sizes are deliberately tiny; at these alpha/size the matrix reads as faint texture, not a legible "dot matrix" pattern — owner says it's "barely visible."
+- Sizes are deliberately tiny; at these alpha/size the matrix reads as faint texture, not a legible "dot matrix" pattern.
 - Interaction only exists on the **hero** (`inset: 0` within `.hero-section`); the CSS fallback + canvas are hero-only.
 
 ### 4.2 Change
 
-1. **Make dots bigger but calm.** Increase base dot size (proposal: ~1.4–1.6px, emphasized ~2.2–2.4px) and modestly raise minimum alpha so the pattern is clearly legible on both themes, while keeping the "calm field, not confetti" feel. Re-verify contrast/noise in light theme (currently opacity .78 canvas, .18 fallback).
-2. **Extend the motif across the portfolio**, not just the hero. Two candidate approaches (owner pick):
-   - **(B1) Subtle site-wide fixed grid backdrop** — a near-invisible static dot grid on the body (a CSS `radial-gradient` background layer, respecting reduced-motion and no-JS) so the texture colours every section, with the hero keeping the only *interactive* canvas. Cheapest, most cohesive, no perf hit.
+1. **Extend the motif across the portfolio**, not just the hero. Two candidate approaches (owner pick):
+   - **(B1) Subtle site-wide fixed grid backdrop** — a near-invisible static dot grid on the body (a CSS `radial-gradient` background layer, respecting reduced-motion and no-JS) so the texture colours every page, with the hero keeping the only *interactive* canvas. Cheapest, most cohesive, no perf hit.
    - **B2) Reuse the interactive canvas on a second section** (e.g. the contact/CTA band) via a prop so the component is generic. More impressive but more animation surface + risk; likely only if B1 feels too flat.
-3. Support both themes equivalently (dark: cornflower palette; light: deeper accent set already present) and keep `prefers-reduced-motion` → static fallback; keep `matrix-ready` fallback retirement flow.
+2. Support both themes equivalently (dark: cornflower palette; light: deeper accent set already present) and keep `prefers-reduced-motion` → static fallback; keep `matrix-ready` fallback retirement flow.
 
 ### 4.3 Constraint guard
 
@@ -177,23 +176,20 @@ Recommend adding **1, 4, 5, 2** as the "few more points," and **sharpen 3**; **6
 - Confirm the bullets to add (recommend 1, 4, 5, 2; sharpen 3).
 - Keep the current 4-group Brand Exponents layout or expand to a 5th group (e.g. "Platform & delivery").
 
-## 8. Design decision 5 — Navbar pin + bottom fade
+## 8. Design decision 5 — Navbar pinned
 
 ### 8.1 Current issue
 
 - `Header.astro` uses `header { position: sticky; top: 0; z-index: 50; ... backdrop-blur }`. `sticky` should pin the header once the page scrolls, but the owner reports the header scrolls away at the top — likely because the header is inside the normal flow before content and `sticky` may be defeated by a scroll container mismatch (to be reproduced/confirmed in QA). Whatever the root cause, the intended behavior — a header that stays at the top during scroll — must be made reliable.
-- There is no bottom-edge fade: the header background is `color-mix(in srgb, var(--color-canvas) 85%, transparent)` + blur, so content scrolling beneath abuts a hard line and can feel "cut."
+- The header background is `color-mix(in srgb, var(--color-canvas) 85%, transparent)` + blur.
 
 ### 8.2 Change
 
-1. Confirm/reproduce the sticky header behavior, then set/patch `position` so the header reliably stays pinned while scrolling; confirm on home + case-study pages (all use `Base` → `Header`).
-2. **Add a bottom fade gradient.** Implement via a `.site-header::after` gradient (or a `background: linear-gradient(color-mix(canvas) → transparent)`) so content scrolls gently out of view beneath instead of abutting a hard edge. Keep it muted, theme-safe, and generous so nothing reads flat. Coordinate with any hero-section top fade so the transition is seamless.
-3. The fade must never block clicks or the mobile menu.
+1. Confirm/reproduce the sticky header behavior, then set/patch `position` so the header reliably stays pinned while scrolling; confirm on home + case-study pages (all use `Base` → `Header`). The header must stay fixed at the top of the viewport at all times while scrolling.
 
 ### 8.3 Constraint
 
-- The change is CSS only (position + fade gradient). The mobile drawer and its `inert` toggle behavior stay untouched.
-- Do not regress the backdrop-blur effect the theme currently relies on.
+- The change keeps the frosted-glass (translucent + blur) navbar background and is CSS only. The mobile drawer and its `inert` toggle behavior stay untouched.
 
 ## 9. Open decisions (owner) — record in `docs/open-questions.md`
 
@@ -204,7 +200,7 @@ Recommend adding **1, 4, 5, 2** as the "few more points," and **sharpen 3**; **6
 | OQ-R4-3 | AI & Tools items (Vercel AI SDK, LangChain, BullMQ, Prisma, pgvector) — keep vs label vs drop | Keep as headline / label "AI · building" / move to projects note / drop | Label as "AI · building" with a caveat, or drop from headline |
 | OQ-R4-4 | Which Experience bullets to add | All / subset | 1, 2, 4, 5 (sharpen 3) |
 | OQ-R4-5 | Dot extension mode | B1 static site-wide / B2 interactive repeat | B1 |
-| OQ-R4-6 | Header fade intensity | subtle gradient / full fade | subtle |
+| OQ-R4-6 | Header pin | fixed at top while scrolling | keep frosted-glass blur |
 
 Each open decision is gated: owner picks → implement.
 
@@ -216,10 +212,10 @@ Per AGENTS.md §7, each step is the smallest useful action, verified, recorded; 
 |---|---|---|---|
 | R4-0 | Decide OQ-R4-1..6 | Open questions closed | owner |
 | R4-1 | Hero — single-line name + role line | Build passes; role legible at all widths | owner spot-check + LinkedIn cross-check |
-| R4-2 | Dot matrix size + extension (B1) | Enlarged dots; site-wide static grid; reduced-motion/no-JS fallback | Lighthouse + axe + visual |
+| R4-2 | Dot matrix extension (B1/B2) | Motif extended; reduced-motion/no-JS fallback | Lighthouse + axe + visual |
 | R4-3 | Tech-stack correctness (+ regroup if tiered) | Updated groups; each item source-tagged | owner |
 | R4-4 | Experience additions | Added bullets (claim-safe wording); source map | owner |
-| R4-5 | Navbar pinned + bottom fade | Pinned across scroll on all pages; fade confirmed | owner |
+| R4-5 | Navbar pinned | Pinned at top across scroll on all pages | owner |
 | R4-6 | QA + record | Lighthouse, axe, contrast, links, no-JS; evidence in a 10-r4-* doc | owner gate → R4-7 |
 | R4-7 | (Deploy) branch promotion | `v2-improvement` → `develop` → `gh-pages` | owner only ("go") |
 
