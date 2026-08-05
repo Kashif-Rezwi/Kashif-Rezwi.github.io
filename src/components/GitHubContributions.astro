@@ -195,11 +195,12 @@ const username = (snapshot as any)?.username ?? 'Kashif-Rezwi';
   }
 
   /* Level scale: empty = visible neutral tint; filled = cornflower at rising opacity. */
-  .gh-l0 { fill: color-mix(in srgb, var(--color-ink) 7%, transparent); }
-  .gh-l1 { fill: color-mix(in srgb, var(--color-accent) 36%, transparent); }
-  .gh-l2 { fill: color-mix(in srgb, var(--color-accent) 60%, transparent); }
-  .gh-l3 { fill: color-mix(in srgb, var(--color-accent) 84%, transparent); }
-  .gh-l4 { fill: var(--color-accent); }
+  /* SVG rects use fill; the HTML legend squares use background. */
+  rect.gh-l0, .gh-sq.gh-l0 { fill: color-mix(in srgb, var(--color-ink) 7%, transparent); background: color-mix(in srgb, var(--color-ink) 7%, transparent); }
+  rect.gh-l1, .gh-sq.gh-l1 { fill: color-mix(in srgb, var(--color-accent) 36%, transparent); background: color-mix(in srgb, var(--color-accent) 36%, transparent); }
+  rect.gh-l2, .gh-sq.gh-l2 { fill: color-mix(in srgb, var(--color-accent) 60%, transparent); background: color-mix(in srgb, var(--color-accent) 60%, transparent); }
+  rect.gh-l3, .gh-sq.gh-l3 { fill: color-mix(in srgb, var(--color-accent) 84%, transparent); background: color-mix(in srgb, var(--color-accent) 84%, transparent); }
+  rect.gh-l4, .gh-sq.gh-l4 { fill: var(--color-accent); background: var(--color-accent); }
 
   .gh-contrib-foot {
     display: flex;
