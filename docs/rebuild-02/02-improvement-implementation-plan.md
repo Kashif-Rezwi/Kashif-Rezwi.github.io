@@ -383,8 +383,8 @@ R3-B, R3-C, and R3-D may be developed separately after R3-A, but each remains ow
 - [x] Add one secondary `ProjectRow`. (R3-C — DL-024)
 - [ ] Add evidence-aware `SkillGroup`.
 - [ ] Add first-party `GitHubActivity`.
-- [ ] Simplify experience/now/contact structures.
-- [ ] Standardize case-study actions and navigation.
+- [x] Simplify experience/now/contact structures. (R3-E — DL-027; evidence `08-r3-e-content-evidence.md`; owner gate pending)
+- [x] Standardize case-study actions and navigation. (R3-E — confirmed complete via shared `[slug].astro` template; DL-027)
 
 ### Quality
 

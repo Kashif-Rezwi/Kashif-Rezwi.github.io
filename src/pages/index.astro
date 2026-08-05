@@ -246,16 +246,28 @@ const techStack = [
             </div>
             <ul class="exp-bullets">
               <li>
-                Contributed to the Workflow Builder's integration layer on Swipe Pages: shared configuration, property selection, field-mapping, and auto-matching patterns reused across six providers, including SendFox, ActiveCampaign, AWeber, Moosend, Salesflare, and EngageBay.
+                <p class="exp-group-label">Integrations</p>
+                <p class="exp-group-text">
+                  Contributed to the Workflow Builder's integration layer on Swipe Pages: shared configuration, property selection, field-mapping, and auto-matching patterns reused across six providers, including SendFox, ActiveCampaign, AWeber, Moosend, Salesflare, and EngageBay.
+                </p>
               </li>
               <li>
-                Helped build Swipe One's CRM features, including contacts, leads, contact properties, and email & WhatsApp campaigns, and contributed to redesigning the workflow builder from blank-canvas drag-and-drop into a guided, template-led flow.
+                <p class="exp-group-label">CRM</p>
+                <p class="exp-group-text">
+                  Helped build Swipe One's CRM features, including contacts, leads, contact properties, and email & WhatsApp campaigns, and contributed to redesigning the workflow builder from blank-canvas drag-and-drop into a guided, template-led flow.
+                </p>
               </li>
               <li>
-                Contributed to AI-assisted features including natural-language workflow generation and the original Swipe Genie guided page-generation experience.
+                <p class="exp-group-label">AI-assisted features</p>
+                <p class="exp-group-text">
+                  Contributed to AI-assisted features including natural-language workflow generation and the original Swipe Genie guided page-generation experience.
+                </p>
               </li>
               <li>
-                Worked with background jobs, queues, and webhooks; contributed to the shared Template Library; built a reusable infinite-pagination system used across four product surfaces; helped keep production stable through launches and debugging.
+                <p class="exp-group-label">Platform &amp; reliability</p>
+                <p class="exp-group-text">
+                  Worked with background jobs, queues, and webhooks; contributed to the shared Template Library; built a reusable infinite-pagination system used across four product surfaces; and helped keep production stable through launches and debugging.
+                </p>
               </li>
             </ul>
             <div class="exp-tech">
@@ -322,27 +334,34 @@ const techStack = [
         <h2 class="section-title">AI journey</h2>
       </div>
 
-      <div class="now-grid">
-        <div class="now-card reveal">
-          <div class="now-card-icon"><Icon name="sparkles" size={20} /></div>
-          <h3 class="now-card-title">Building</h3>
-          <p class="now-card-desc">
-            I'm building toward AI product engineering and developer tools. Recent personal projects include an AI code-review agent, a cited AI answer engine, and an autonomous i18n agent.
-          </p>
+      <div class="now-list">
+        <div class="now-row reveal">
+          <span class="now-row-icon"><Icon name="sparkles" size={17} /></span>
+          <div class="now-row-body">
+            <h3 class="now-row-title">Building</h3>
+            <p class="now-row-desc">
+              Toward AI product engineering and developer tools. Recent personal projects include an AI code-review agent, a cited AI answer engine, and an autonomous i18n agent. <a href="#work" class="link-accent">See the work →</a>
+            </p>
+          </div>
         </div>
-        <div class="now-card reveal delay-100">
-          <div class="now-card-icon"><Icon name="writing" size={20} /></div>
-          <h3 class="now-card-title">Writing</h3>
-          <p class="now-card-desc">
-            I write about what I build. The <a href={links.devtoArticle} class="link-accent" target="_blank" rel="noopener noreferrer">LingoAgent article on dev.to</a> walks through that build.
-          </p>
+        <div class="now-row reveal delay-100">
+          <span class="now-row-icon"><Icon name="writing" size={17} /></span>
+          <div class="now-row-body">
+            <h3 class="now-row-title">Writing</h3>
+            <p class="now-row-desc">
+              <a href={links.devtoArticle} class="link-accent" target="_blank" rel="noopener noreferrer">I Built an AI Agent That Makes Any Landing Page (Next.js App) Multilingual in Minutes</a>
+              <span class="now-row-meta">· LingoAgent build walkthrough on dev.to · Feb 2026</span>
+            </p>
+          </div>
         </div>
-        <div class="now-card reveal delay-200">
-          <div class="now-card-icon"><Icon name="learning" size={20} /></div>
-          <h3 class="now-card-title">Learning in public</h3>
-          <p class="now-card-desc">
-            <a href={links.aiPlayground} class="link-accent" target="_blank" rel="noopener noreferrer">ai-playground</a> and <a href={links.languagePlayground} class="link-accent" target="_blank" rel="noopener noreferrer">language-playground</a> are open repos of experiments, notes, and rough edges.
-          </p>
+        <div class="now-row reveal delay-200">
+          <span class="now-row-icon"><Icon name="learning" size={17} /></span>
+          <div class="now-row-body">
+            <h3 class="now-row-title">Learning in public</h3>
+            <p class="now-row-desc">
+              <a href={links.aiPlayground} class="link-accent" target="_blank" rel="noopener noreferrer">ai-playground</a> and <a href={links.languagePlayground} class="link-accent" target="_blank" rel="noopener noreferrer">language-playground</a> are open repos of experiments, notes, and rough edges.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -690,23 +709,26 @@ const techStack = [
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
   }
   .exp-bullets li {
+    max-width: 72ch;
+    margin: 0;
+  }
+  .exp-group-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-ink-dim);
+    margin: 0 0 0.25rem;
+  }
+  .exp-group-text {
     font-size: 0.9375rem;
     line-height: 1.65;
     color: var(--color-ink-muted);
-    padding-left: 1.25rem;
-    position: relative;
-    max-width: 70ch;
-  }
-  .exp-bullets li::before {
-    content: '·';
-    position: absolute;
-    left: 0;
-    color: var(--color-accent);
-    font-weight: 700;
-    line-height: inherit;
+    margin: 0;
   }
 
   .exp-summary {
@@ -750,41 +772,45 @@ const techStack = [
   /* ----------------------------------------------------------------
      Now / AI Journey
   ---------------------------------------------------------------- */
-  .now-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
-    gap: 1.25rem;
-  }
-  .now-card {
-    background: var(--color-surface);
-    border: 0;
-    border-radius: var(--radius-card);
-    padding: 1.5rem;
+  .now-list {
     display: flex;
     flex-direction: column;
-    gap: 0.625rem;
-    transition: background 0.2s ease, transform 0.2s ease;
+    max-width: 720px;
   }
-  .now-card:hover {
-    background: var(--color-surface-2);
-    transform: translateY(-2px);
+  .now-row {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 0 1rem;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
   }
-  .now-card-icon {
+  .now-row:last-child {
+    border-bottom: none;
+  }
+  .now-row-icon {
     display: inline-flex;
     color: var(--color-accent-text);
     line-height: 1;
+    padding-top: 0.25rem;
   }
-  .now-card-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-ink);
-    margin: 0;
+  .now-row-title {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+    color: var(--color-ink-dim);
+    margin: 0 0 0.375rem;
   }
-  .now-card-desc {
-    font-size: 0.9rem;
+  .now-row-desc {
+    font-size: 0.9375rem;
     line-height: 1.65;
     color: var(--color-ink-muted);
     margin: 0;
+    max-width: 62ch;
+  }
+  .now-row-meta {
+    color: var(--color-ink-dim);
   }
 
   /* ----------------------------------------------------------------

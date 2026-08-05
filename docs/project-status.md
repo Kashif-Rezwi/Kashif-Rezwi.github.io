@@ -2,12 +2,12 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-06 (R3-D contribution calendar complete locally; owner gate pending)
+- **Last updated:** 2026-08-06 (R3-D + R3-E complete locally; owner gates pending)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase
 
-**Rebuild-03 improvement cycle — R3-C + R3-D OWNER GATE** (2026-08-06, DL-018–DL-026). R3-C is complete locally: `WorkCard` v2 (16/9 media, neutral status, two-line summary slot, first-4 tech + `+N more`, one primary action, icon+text secondary links), the `ProjectRow` secondary grammar, and the neutralized case-study status badge (evidence: `docs/rebuild-02/06-r3-c-card-evidence.md`). R3-D delivered the GitHub contribution calendar via **Option B** (DL-026): a build-time GraphQL snapshot (`scripts/fetch-github-contributions.mjs` → `src/data/github-contributions.json`) rendered as cornflower local SVG by `src/components/GitHubContributions.astro`, token via repo secret `GH_CONTRIBUTIONS_TOKEN` + gitignored `.env`, failure-honest, "Last refreshed" shown, 1,683 contributions / 53 weeks verified. Proficiency tiers (Core/Working/Exploring) were dropped for claim-safety; the old third-party stats/streak image cards were not carried over. Evidence: `docs/rebuild-02/07-r3-d-skills-evidence.md`. All work remains undeployed.
+**Rebuild-03 improvement cycle — R3-D + R3-E OWNER GATE** (2026-08-06, DL-018–DL-027). R3-C is complete locally: `WorkCard` v2 (16/9 media, neutral status, two-line summary slot, first-4 tech + `+N more`, one primary action, icon+text secondary links), the `ProjectRow` secondary grammar, and the neutralized case-study status badge (evidence: `docs/rebuild-02/06-r3-c-card-evidence.md`). R3-D delivered the GitHub contribution calendar via **Option B** (DL-026): a build-time GraphQL snapshot (`scripts/fetch-github-contributions.mjs` → `src/data/github-contributions.json`) rendered as cornflower local SVG by `src/components/GitHubContributions.astro`, token via repo secret `GH_CONTRIBUTIONS_TOKEN` + gitignored `.env`, failure-honest, "Last refreshed" shown, 1,683 contributions / 53 weeks verified. Proficiency tiers (Core/Working/Exploring) were dropped for claim-safety; the old third-party stats/streak image cards were not carried over. Evidence: `docs/rebuild-02/07-r3-d-skills-evidence.md`. **R3-E** refined Experience/Now/Contact: Brand Exponents experience re-grouped under Integrations / CRM / AI-assisted features / Platform & reliability sub-headings (bullet text unchanged); the Now section's bordered cards replaced by hairline-separated editorial rows; writing surfaced as evidence ("I Built an AI Agent That Makes Any Landing Page (Next.js App) Multilingual in Minutes", dev.to, Feb 2026 — publish date API-verified 2026-02-23); Contact left as-is (DL-020 freelance copy already satisfies the plan); case-study standardization confirmed complete via the shared `[slug].astro` template. Evidence: `docs/rebuild-02/08-r3-e-content-evidence.md`; DL-027. All work remains undeployed.
 
 | Phase | Scope | Status |
 |---|---|---|
@@ -19,7 +19,8 @@
 | R3-B | Hero matrix fallback, tuning, responsive/motion validation, performance evidence | ✅ Approved by owner in DL-024; evidence in `docs/rebuild-02/05-r3-b-matrix-evidence.md` |
 | R3-C | Flagship project-card system (WorkCard v2, ProjectRow, status semantics) | ✅ Complete locally; evidence in `docs/rebuild-02/06-r3-c-card-evidence.md`; owner gate pending |
 | R3-D | GitHub contribution calendar (Option B: build-time GraphQL snapshot → local cornflower SVG); proficiency tiers dropped | ✅ Complete locally as `9ea171b`; evidence in `docs/rebuild-02/07-r3-d-skills-evidence.md`; owner gate pending |
-| R3-E–R3-G | Remaining implementation through launch | ⏸ Planned; not authorized by this status |
+| R3-E | Experience/Now/Contact refinement + case-study standardization; writing surfaced as evidence (dev.to date API-verified) | ✅ Complete locally; evidence in `docs/rebuild-02/08-r3-e-content-evidence.md`; DL-027; owner gate pending |
+| R3-F–R3-G | Production QA through launch | ⏸ Planned; not authorized by this status |
 
 **Rebuild-02 — Design Overhaul: COMPLETE** (2026-08-05, DL-016/DL-017). All five original R2 phases remain committed on `rebuild-02`; this completed state is now the base for the proposed improvement cycle.
 
@@ -46,7 +47,7 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Blocked
 
-- R3-C and later remain blocked until the R3-B owner gate. GitHub proof implementation stays in R3-D despite the owner-approved direction: a dated public contribution view plus project links.
+- R3-C, R3-D, and R3-E remain blocked until their respective owner gates pass. GitHub proof implementation stayed in R3-D despite the owner-approved direction: a dated public contribution view plus project links.
 - General availability wording remains blocked/omitted because the owner marked it undecided. Freelance invitation and Kolkata display are owner-approved (DL-020).
 - All Phase 0 open questions remain closed.
 
@@ -58,4 +59,4 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- Review the R3-B evidence (`docs/rebuild-02/05-r3-b-matrix-evidence.md`) and captures, then decide the R3-B owner gate. Do not begin R3-C/project-card/GitHub work, merge, or production deployment without its separate owner gate.
+- Review the R3-D evidence (`docs/rebuild-02/07-r3-d-skills-evidence.md`) and the R3-E evidence (`docs/rebuild-02/08-r3-e-content-evidence.md`) and their captures, then decide the R3-D/R3-E owner gates. Do not begin R3-F/QA, merge, or production deployment without a separate owner gate.
