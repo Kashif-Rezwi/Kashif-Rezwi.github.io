@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-05 (DL-017)
+- **Last updated:** 2026-08-05 (DL-018)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -131,3 +131,10 @@
 - **Decision:** Each rebuild-02 phase (R2-A through R2-E) is committed separately with a conventional commit message. Branch `rebuild-02` diverges from `main` and will be merged to `main`/deployed to `gh-pages` after full QA.
 - **Rationale:** Owner directive (2026-08-05): "make sure on completing each Phase update the task and commit it properly so every commit will be meaningful and separate."
 - **Approval status:** Approved (owner directive, 2026-08-05).
+
+## DL-018 — Use rebuild-02 as the improvement base; restore evidence richness and add one interactive hero signature
+
+- **Date:** 2026-08-05
+- **Decision:** Use `rebuild-02` as the base for the next improvement cycle. Preserve the claim-safe professional narrative and case-study depth of the first Astro rebuild; recover the old CRA portfolio's scanability, project-card richness, recognizable technology signals, and GitHub proof concept without restoring excluded/stale projects or fragile third-party widgets. Reduce borders, normalize card anatomy, establish one accessible local icon language, and make an original dual-theme pointer-responsive hero dot matrix—publicly inspired by Google Antigravity's interaction principle—the single signature motif.
+- **Rationale:** Owner review in conversation: `rebuild-02` is preferred, but is not yet modern/creative/stylish or sufficiently organized; icons, card consistency, GitHub stats, border restraint, and a light/dark Antigravity-like hero background need improvement. Comparative source/render review confirms `rebuild-02` has the best base but currently combines a familiar dark-developer aesthetic with claim/resilience regressions. Full findings and bounded phases are in `docs/rebuild-02/01-three-version-comparative-review.md` and `02-improvement-implementation-plan.md`.
+- **Approval status:** Direction and documentation approved by owner directive (2026-08-05). Hero matrix prototype authorized and implemented in the working tree for review; no commit, merge, or production deployment authorized.

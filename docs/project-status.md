@@ -2,20 +2,22 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-05 (rebuild-02 complete)
+- **Last updated:** 2026-08-05 (three-version review + R3 plan)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase
 
-**Rebuild-02 — Design Overhaul: COMPLETE** (2026-08-05, DL-016/DL-017). All 5 phases committed to `rebuild-02` branch. Awaiting owner review + deploy to `gh-pages`.
+**Rebuild-03 improvement cycle — REVIEW GATE** (2026-08-05, DL-018). Three-version comparison and bounded implementation plan are complete. An Antigravity-inspired hero matrix is implemented only as an uncommitted, undeployed working-tree prototype for owner review.
 
 | Phase | Scope | Status |
 |---|---|---|
-| R2-A — Design System | dark tokens, fonts, Header, Footer | ✅ Committed `8d754e9` |
-| R2-B — Homepage | hero, work grid, tech stack, experience, contact | ✅ Committed `628fca3` |
-| R2-C — Case Studies | [slug].astro redesign, cover images for all 3 projects | ✅ Committed `e680003` |
-| R2-D — Polish | 404, resume, CSS cleanup, enriched tech tags | ✅ Committed `4f06aab` |
-| R2-E — Docs | decision log, project-status, task tracker | ✅ This commit |
+| Review | Compare archived CRA, first Astro rebuild, and `rebuild-02` | ✅ `docs/rebuild-02/01-three-version-comparative-review.md` |
+| Plan | Claims, system, hero, projects, capability/GitHub, content, QA, launch | ✅ `docs/rebuild-02/02-improvement-implementation-plan.md` |
+| R3-B prototype | Dual-theme pointer-responsive hero dot matrix; body grid removed | 🟡 Built and locally verified; uncommitted/undeployed |
+| R3-0 | Claim/resilience corrections and baseline | ⏸ Awaiting owner gate decisions |
+| R3-A–R3-G | Full implementation through launch | ⏸ Planned; not authorized by this status |
+
+**Rebuild-02 — Design Overhaul: COMPLETE** (2026-08-05, DL-016/DL-017). All five original R2 phases remain committed on `rebuild-02`; this completed state is now the base for the proposed improvement cycle.
 
 **Phase 1.4 — Production launch: COMPLETE** (2026-08-05, DL-014–015). Production now serves the new Astro portfolio.
 
@@ -40,7 +42,8 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Blocked
 
-- Nothing. All Phase 0 open questions are closed (owner decisions, 2026-08-05).
+- R3 implementation beyond the hero prototype awaits owner review of: professional title, availability/freelance wording, preferred GitHub facts, and matrix behavior in light/dark desktop/mobile.
+- All Phase 0 open questions remain closed.
 
 ## Phase 0 gate outcome (2026-08-05)
 
@@ -50,4 +53,4 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- **Phase 1 — COMPLETE.** Production (`https://kashif-rezwi.github.io/`) now serves the Astro build; all Phase 1 gates approved (DL-005 → DL-015). Repository `Kashif-Rezwi/Kashif-Rezwi.github.io` is in maintenance mode: deploy future changes by pushing to `develop` then building + deploying the `dist/` output to `gh-pages` (or switch Pages to GitHub Actions via web UI to activate `deploy.yml`). Preview repo archived.
+- Present the comparative findings, implementation plan, and local matrix prototype to the owner. After owner decisions, begin **R3-0 only**. No commit, merge, or production deployment is currently authorized.
