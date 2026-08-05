@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import WorkCard from '../components/WorkCard.astro';
 import ProjectRow from '../components/ProjectRow.astro';
+import GitHubContributions from '../components/GitHubContributions.astro';
 import HeroDotMatrix from '../components/HeroDotMatrix.astro';
 import Icon from '../components/Icon.astro';
 import { withBase } from '../lib/paths';
@@ -188,6 +189,9 @@ const techStack = [
           </ProjectRow>
         </ul>
       </div>
+
+      <!-- Public GitHub contribution calendar (build-time snapshot, local SVG) -->
+      <GitHubContributions />
     </div>
   </section>
 

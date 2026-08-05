@@ -45,3 +45,6 @@ jobs:
 
       - name: Build (production base)
         run: npm run build
+        env:
+          # Read-only PAT for the contribution-calendar snapshot (R3-D).
+          GH_CONTRIBUTIONS_TOKEN: ${{ secrets.GH_CONTRIBUTIONS_TOKEN }}

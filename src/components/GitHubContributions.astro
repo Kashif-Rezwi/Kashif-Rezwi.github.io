@@ -1,0 +1,171 @@
+---
+/**
+ * R3-D / Option B — GitHub contribution calendar, rendered as LOCAL SVG.
+ *
+ * Data comes from a build-time snapshot (src/data/github-contributions.json,
+ * produced by scripts/fetch-github-contributions.mjs via GitHub's GraphQL API
+ * with a read-only token). No client-side fetch, no third-party service, no
+ * token in the browser. Squares are themed to the site's cornflower accent.
+ *
+ * Failure-honest: if the snapshot is missing or stale-flagged (`ok:false`),
+ * renders a single plain link to the GitHub profile instead of fake data.
+ */
+import snapshot from '../data/github-contributions.json';
+
+const CELL = 10; // px square
+const GAP = 3; // px gap
+const R = 2; // corner radius
+
+interface Day {
+  date: string;
+  count: number;
+  level: 'NONE' | 'FIRST_QUARTILE' | 'SECOND_QUARTILE' | 'THIRD_QUARTILE' | 'FOURTH_QUARTILE';
+  weekday: number;
+}
+
+const ok = (snapshot as any)?.ok === true;
+const weeks = ok ? ((snapshot as any).weeks as { days: Day[] }[]) : [];
+const total = ok ? ((snapshot as any).totalContributions as number) : 0;
+const fetchedAt = ok ? new Date((snapshot as any).fetchedAt) : null;
+const refreshedLabel = fetchedAt
+  ? fetchedAt.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+  : null;
+
+// Contribution level → opacity step on the accent square.
+const levelClass: Record<Day['level'], string> = {
+  NONE: 'gh-l0',
+  FIRST_QUARTILE: 'gh-l1',
+  SECOND_QUARTILE: 'gh-l2',
+  THIRD_QUARTILE: 'gh-l3',
+  FOURTH_QUARTILE: 'gh-l4',
+};
+
+const width = weeks.length * (CELL + GAP);
+const height = 7 * (CELL + GAP);
+const username = (snapshot as any)?.username ?? 'Kashif-Rezwi';
+---
+
+<div class="gh-contrib reveal">
+  <div class="gh-contrib-head">
+    <p class="gh-contrib-label">Public GitHub activity</p>
+    {
+      ok && refreshedLabel && (
+        <p class="gh-contrib-meta">
+          {total.toLocaleString()} contributions in the last year · Last refreshed {refreshedLabel}
+        </p>
+      )
+    }
+  </div>
+
+  {
+    ok ? (
+      <div class="gh-contrib-scroll">
+        <svg
+          class="gh-contrib-svg"
+          viewBox={`0 0 ${width} ${height}`}
+          width={width}
+          height={height}
+          role="img"
+          aria-label={`GitHub contribution calendar, ${total} contributions in the last year`}
+        >
+          {weeks.map((week, wi) =>
+            week.days.map((day) => (
+              <rect
+                class={levelClass[day.level] ?? 'gh-l0'}
+                x={wi * (CELL + GAP)}
+                y={day.weekday * (CELL + GAP)}
+                width={CELL}
+                height={CELL}
+                rx={R}
+              >
+                <title>
+                  {day.count} contribution{day.count === 1 ? '' : 's'} on {day.date}
+                </title>
+              </rect>
+            )),
+          )}
+        </svg>
+        <div class="gh-contrib-legend" aria-hidden="true">
+          <span>Less</span>
+          <span class="gh-sq gh-l0" /><span class="gh-sq gh-l1" /><span class="gh-sq gh-l2" /><span class="gh-sq gh-l3" /><span class="gh-sq gh-l4" />
+          <span>More</span>
+        </div>
+      </div>
+    ) : (
+      <p class="gh-contrib-fallback">
+        Contribution data isn't available right now.{' '}
+        <a href={`https://github.com/${username}`} target="_blank" rel="noopener noreferrer" class="link-accent">
+          View the activity graph on GitHub →
+        </a>
+      </p>
+    )
+  }
+</div>
+
+<style>
+  .gh-contrib {
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .gh-contrib-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin-bottom: 1rem;
+  }
+  .gh-contrib-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .gh-contrib-meta {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-ink-dim);
+    margin: 0;
+  }
+
+  .gh-contrib-scroll {
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+  }
+  .gh-contrib-svg {
+    display: block;
+    max-width: none;
+  }
+
+  /* Level scale: empty = faint surface; filled = cornflower at rising opacity. */
+  .gh-l0 { fill: var(--color-surface-2); }
+  .gh-l1 { fill: color-mix(in srgb, var(--color-accent) 32%, transparent); }
+  .gh-l2 { fill: color-mix(in srgb, var(--color-accent) 55%, transparent); }
+  .gh-l3 { fill: color-mix(in srgb, var(--color-accent) 78%, transparent); }
+  .gh-l4 { fill: var(--color-accent); }
+
+  .gh-contrib-legend {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-ink-dim);
+  }
+  .gh-contrib-legend .gh-sq {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .gh-contrib-fallback {
+    font-size: 0.875rem;
+    color: var(--color-ink-muted);
+    margin: 0;
+  }
+</style>

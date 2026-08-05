@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "fetch:github": "node scripts/fetch-github-contributions.mjs",
+    "build": "node scripts/fetch-github-contributions.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "check:contrast": "node scripts/check-contrast.mjs"
