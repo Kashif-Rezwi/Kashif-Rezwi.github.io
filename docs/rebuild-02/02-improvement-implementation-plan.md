@@ -363,9 +363,9 @@ R3-B, R3-C, and R3-D may be developed separately after R3-A, but each remains ow
 - [x] Restore approved professional title and metadata (R3-0).
 - [x] Remove unapproved availability/freelance/location wording pending owner decision (R3-0).
 - [x] Map all R2/R3 home copy (R3-0).
-- [ ] Label skill proficiency (R3-D).
+- [x] ~~Label skill proficiency (R3-D).~~ **Dropped in DL-026** — self-assigned proficiency tiers conflict with claim-safety (AGENTS.md §3); honest topic groups kept.
 - [x] Verify article wording/metadata boundary (R3-0; SRC-11 reference retained).
-- [ ] Approve exact GitHub facts (R3-D gate).
+- [x] Approve exact GitHub facts (R3-D gate) — **resolved DL-026:** contribution calendar (total + per-day squares) + "Last refreshed"; stars/streak/top-language/stats cards intentionally omitted.
 
 ### Visual system
 
