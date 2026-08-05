@@ -2,12 +2,12 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-06 (R3-D + R3-E complete; R3-E gate approved; **R3-F Production QA complete**; launch awaits owner go/no-go)
+- **Last updated:** 2026-08-06 (**R3 launch COMPLETE** — owner-authorized, DL-030/031)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase
 
-**Rebuild-03 improvement cycle — R3-F PRODUCTION QA COMPLETE** (2026-08-06, DL-018–DL-029). R3-C is complete locally: `WorkCard` v2 (16/9 media, neutral status, two-line summary slot, first-4 tech + `+N more`, one primary action, icon+text secondary links), the `ProjectRow` secondary grammar, and the neutralized case-study status badge (evidence: `docs/rebuild-02/06-r3-c-card-evidence.md`; R3-C owner gate pending). R3-D delivered the GitHub contribution calendar via **Option B** (DL-026): a build-time GraphQL snapshot rendered as cornflower local SVG, token via repo secret, failure-honest, "Last refreshed" shown, 1,683 contributions / 53 weeks verified (evidence: `docs/rebuild-02/07-r3-d-skills-evidence.md`; DL-025/26 records; R3-D owner gate pending). **R3-E** refined Experience/Now/Contact and confirmed case-study standardization; evidence `docs/rebuild-02/08-r3-e-content-evidence.md` — **gate approved (DL-028)**. **R3-F Production QA is now COMPLETE (DL-029)** against the full matrix (widths 320/390/768/1024/1440 × light/dark/system × normal/reduced motion × keyboard/mouse/coarse × normal/blocked-JS/slow-network/canvas-unavailable × home/case-studies/resume/404/sitemap/robots/manifest/OG): Lighthouse **100/100/100/100** (home mobile+desktop both themes, lingo-agent mobile), axe **zero violations** on every route/theme (case-study sidebar `aside`→`role="region"` fix), contrast **16/16 pass**, CLS **0**, no console errors, all links verified, no-JS content intact. Results recorded in `docs/engineering/qa-report.md` §R3-F. **R3-G (launch) remains blocked on the owner's explicit go/no-go.** All work remains undeployed.
+**Rebuild-03 improvement cycle — R3 COMPLETE** (2026-08-06, DL-018–DL-031). R3-C (WorkCard v2, ProjectRow, neutral status), R3-D (build-time GitHub contribution calendar, Option B), and R3-E (Experience/Now/Contact refinement + case-study standardization) are complete and their evidence is in `docs/rebuild-02/`. R3-F Production QA passed every quality target (Lighthouse 100/100/100/100; axe zero violations; contrast 16/16; CLS 0; no console errors; no-JS/canvas/reduced-motion fallbacks; all links checked; results in `docs/engineering/qa-report.md` §R3-F). **R3-G launch was owner-authorized (DL-030) and executed (DL-031):** R3 commits promoted `rebuild-02` → `develop` (fast-forward, pushed), production `dist/` built and committed to the live **`gh-pages`** branch (new tip `b04e6e0`; prior `6991386` retained as the rollback commit), and pushed. Production smoke tests passed: all routes 200, R3 content live (contribution calendar, hero matrix, theme control, `role="region"` case-study sidebar, R3 title), no `noindex`, internal links 11/11, **live Lighthouse 100/100/100/100** (LCP 0.5s, CLS 0). **The R3 rebuild is now live at `https://kashif-rezwi.github.io/`.** Owner spot-checks remain: LinkedIn click-through (OQ-06), 320/1440 visual captures, resume-PDF review.
 
 | Phase | Scope | Status |
 |---|---|---|
@@ -20,8 +20,8 @@
 | R3-C | Flagship project-card system (WorkCard v2, ProjectRow, status semantics) | ✅ Complete locally; evidence in `docs/rebuild-02/06-r3-c-card-evidence.md`; owner gate pending |
 | R3-D | GitHub contribution calendar (Option B: build-time GraphQL snapshot → local cornflower SVG); proficiency tiers dropped | ✅ Complete locally as `9ea171b`; evidence in `docs/rebuild-02/07-r3-d-skills-evidence.md`; owner gate pending |
 | R3-E | Experience/Now/Contact refinement + case-study standardization; writing surfaced as evidence (dev.to date API-verified) | ✅ Gate approved (DL-028); committed as `04fe8bd`; evidence in `docs/rebuild-02/08-r3-e-content-evidence.md` |
-| R3-F | Production QA — full test matrix + quality targets; `docs/engineering/qa-report.md` | ✅ Complete (DL-029); results recorded; recommend GO |
-| R3-G | Launch and rollback | ⏸ Planned; requires explicit owner launch authorization |
+| R3-F | Production QA — full test matrix + quality targets; `docs/engineering/qa-report.md` | ✅ Complete (DL-029); all targets pass |
+| R3-G | Launch and rollback | ✅ **COMPLETE** (DL-030/031) — live at `kashif-rezwi.github.io`; rollback tip `6991386` retained |
 
 **Rebuild-02 — Design Overhaul: COMPLETE** (2026-08-05, DL-016/DL-017). All five original R2 phases remain committed on `rebuild-02`; this completed state is now the base for the proposed improvement cycle.
 
@@ -48,8 +48,7 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Blocked
 
-- R3-C and R3-D remain blocked until their owner gates pass (implementation complete, gate review pending). GitHub proof implementation stayed in R3-D despite the owner-approved direction: a dated public contribution view plus project links.
-- **R3-G (launch) remains blocked on explicit owner launch authorization.** R3-F (QA) is complete (DL-029); the QA report recommends GO but the gate is owner-held.
+- Nothing blocked. R3 launch complete (DL-030/031). Remaining items are owner spot-checks, not blockers: LinkedIn click-through (OQ-06), 320/1440 visual captures, resume-PDF review.
 - General availability wording remains blocked/omitted because the owner marked it undecided. Freelance invitation and Kolkata display are owner-approved (DL-020).
 - All Phase 0 open questions remain closed.
 
@@ -61,4 +60,4 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- **Owner go/no-go for launch** on the completed R3-F Production QA report (`docs/engineering/qa-report.md` §R3-F). A **GO** authorizes R3-G (separate and always owner-gated); a **NO-GO** reopens specific QA items. Owner spot-checks remaining: LinkedIn click-through (OQ-06), pixel captures at 320/1440, and resume-PDF review.
+- **Owner spot-checks** (post-launch): LinkedIn click-through (OQ-06), visual captures at 320/1440, and resume-PDF review. Repository is back in maintenance mode per AGENTS.md §1: future changes are pushed to `develop`, built, then deployed to `gh-pages`.
