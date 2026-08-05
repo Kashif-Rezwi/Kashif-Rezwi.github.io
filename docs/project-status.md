@@ -7,7 +7,9 @@
 
 ## Current phase
 
-**Phase 1.0 — Foundation: IN PROGRESS** (owner go given 2026-08-05). Foundation decisions adopted as DL-008: branch model (`develop` carries Phase 1; `main`/`gh-pages` frozen until 1.4), preview mechanism (companion repo `Kashif-Rezwi/portfolio-preview`, on-demand project-site deploys, zero secrets), repo shape (Astro at root of `develop`; CRA preserved on `main`/`gh-pages` until the 1.4 merge), system font stacks, contrast-verified token palette. Operating rules documented in `docs/engineering/branching-and-deploys.md` (audit F-04 deliverable).
+**Phase 1.0 — Foundation: BUILT, awaiting owner skeleton-review gate** (2026-08-05). Foundation decisions adopted as DL-008: branch model (`develop` carries Phase 1; `main`/`gh-pages` frozen until 1.4), preview mechanism (companion repo `Kashif-Rezwi/portfolio-preview`, on-demand project-site deploys, zero secrets), repo shape (Astro at root of `develop`; CRA preserved on `main`/`gh-pages` until the 1.4 merge), system font stacks, contrast-verified token palette. Operating rules in `docs/engineering/branching-and-deploys.md` (audit F-04 deliverable).
+
+**Built & verified (2026-08-05):** Astro 7 + Tailwind v4 scaffold at repo root (zero client JS — verified 0 `<script>` tags in output); design tokens in CSS-first `@theme` with `npm run check:contrast` enforcement (all text pairs ≥ 4.5:1; cornflowerblue decoration-only by design); base layout + nav (Home/Work/Experience/Contact + Resume) + footer; `work` content-collection schema + case-study template; `ci.yml` build check on develop (passing); `deploy.yml` production workflow armed but inert; **preview live at https://kashif-rezwi.github.io/portfolio-preview/** (noindex; verified 200 + raw-HTML content); **production untouched** (verified: still serving the CRA bundle; Pages source still `branch: gh-pages`).
 
 **Phase 0 — CLOSED, owner-ratified** (2026-08-05). All open questions resolved (OQ-01…OQ-13 closed); positioning approved with the DL-004 condition applied; Phase 1 plan approved (DL-005).
 
@@ -35,5 +37,6 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- **Phase 1.0 — Foundation: in progress** per `docs/engineering/implementation-roadmap.md` and DL-008. Ends at the owner skeleton-review gate (preview URL renders the skeleton; tokens match the brief; production URL untouched).
+- **Phase 1.0 gate: owner skeleton review.** Review the preview URL (https://kashif-rezwi.github.io/portfolio-preview/) — tokens, layout, nav/footer against the brief. On approval, Phase 1.1 (core home page) may begin per the roadmap.
+- To refresh the preview after new work lands on `develop`: Actions tab of `Kashif-Rezwi/portfolio-preview` → "Run workflow" (or the agent runs `gh workflow run preview.yml --repo Kashif-Rezwi/portfolio-preview`).
 - After the gate: proceed gate-by-gate per the roadmap; the production URL remains untouched until Phase 1.4 approval.

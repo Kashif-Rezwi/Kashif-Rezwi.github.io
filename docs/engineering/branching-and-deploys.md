@@ -27,9 +27,10 @@
 
 - **Repo:** `Kashif-Rezwi/portfolio-preview` (companion, GitHub-only — no new platforms).
 - **Trigger:** on demand — `workflow_dispatch` inside the preview repo (owner via the Actions tab, or the agent via `gh workflow run`). No auto-deploys on push; zero secrets needed.
-- **Flow:** the preview repo's workflow checks out `Kashif-Rezwi/Kashif-Rezwi.github.io@develop` (public repo — no token required), runs `npm ci` + Astro build with `PREVIEW_BASE=/portfolio-preview/` and `PREVIEW=1`, then deploys the output to its own Pages environment via `actions/upload-pages-artifact` + `actions/deploy-pages`.
-- **URL:** `https://kashif-rezwi.github.io/portfolio-preview/` — the `/portfolio-preview` base path is the unavoidable difference from production; internal links are generated base-aware by Astro.
-- **Indexing:** preview builds emit `<meta name="robots" content="noindex">` (`PREVIEW=1`); the preview repo carries a README marking it as a temporary review surface. Archived after launch.
+- **Flow:** the preview repo's workflow checks out `Kashif-Rezwi/Kashif-Rezwi.github.io@develop` (public repo — no token required), runs `npm ci` + Astro build with `PREVIEW_BASE=/portfolio-preview` and `PUBLIC_PREVIEW=1`, then deploys the output to its own Pages environment via `actions/upload-pages-artifact` + `actions/deploy-pages`.
+- **URL:** `https://kashif-rezwi.github.io/portfolio-preview/` — the `/portfolio-preview` base path is the unavoidable difference from production; internal links are generated base-aware by Astro (`src/lib/paths.ts`).
+- **Indexing:** preview builds emit `<meta name="robots" content="noindex">` (`PUBLIC_PREVIEW=1`); the preview repo carries a README marking it as a temporary review surface. Archived after launch.
+- **Verified 2026-08-05:** first preview deployed successfully (run 31005904254). One platform quirk found and fixed: enabling Pages via the API created the `github-pages` environment with a **custom deployment-branch policy containing zero branches**, which silently rejected the first deploy (job failed with no logs). Fix: `POST /repos/{owner}/{repo}/environments/github-pages/deployment-branch-policies` with the deploying branch (`master` for the preview repo). **At Phase 1.4, after switching the main repo's Pages source to GitHub Actions, verify the `github-pages` environment permits `main` the same way.**
 
 ## Production deployment
 
