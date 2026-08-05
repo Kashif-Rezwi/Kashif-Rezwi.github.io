@@ -30,7 +30,7 @@ const work = defineCollection({
     tech: z.array(z.string()).min(1),
     /** Sort order on the home page */
     order: z.number().int(),
-    /** Keep an entry out of listings while its copy is unfinished */
+    /** Keep an entry out of case-study listing while its copy is unfinished */
     draft: z.boolean().default(false),
   }),
 });

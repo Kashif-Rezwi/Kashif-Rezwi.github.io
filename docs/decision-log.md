@@ -76,3 +76,10 @@
 - **Decision:** The owner reviewed the Phase 1.0 skeleton at the preview URL and **approved the gate** (tokens, layout, nav/footer vs the "Calm Engineering Ledger" brief). Phase 1.1 (core home page) began the same day per roadmap gate rule 1. Owner amendment to the approved 1.1 plan: the contact section **includes the phone number** (the active value already published on the live site; the commented-out alternative values recorded in conflict C-12 remain prohibited from use).
 - **Rationale:** Phase 1.0 done-when criteria were verified: preview URL renders the skeleton (HTTP 200, content in raw HTML, zero client JS, `noindex`); tokens contrast-verified and matched to the brief; production untouched (still serving the CRA bundle; Pages source still `branch: gh-pages`).
 - **Approval status:** Approved (owner, 2026-08-05).
+
+## DL-010 — Phase 1.1 gate approved; Phase 1.2 started (featured case studies)
+
+- **Date:** 2026-08-05
+- **Decision:** The owner approved the Phase 1.1 home-page copy (hero, selected work, experience, AI journey/now, contact incl. phone) against `docs/strategy/home-copy-claim-map.md`. Phase 1.2 (featured case studies) began the same day per roadmap gate rule 1. Scope: three case-study pages (code-review-agent, perplexity, lingo-agent) built to the brief template strictly from `docs/research/featured-project-research.md` + the evidence ledger; home cards link to their case-study pages; personal/hackathon labels stay visible. Better DEV's `[Your Frontend URL]` README placeholder remains an **owner action on the external repo** (audit F-07) and does not block its compact home entry.
+- **Rationale:** 1.1 done-when met: owner content review passed; home page live on the preview; production untouched.
+- **Approval status:** Approved (owner, 2026-08-05). Phase 1.2 page visuals (screenshots) are still owner-decided at the 1.2 gate per the brief.

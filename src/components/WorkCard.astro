@@ -1,7 +1,7 @@
 ---
 /**
  * Featured work card — Phase 1.1 (brief Part 2, section 3).
- * Case-study links are added in Phase 1.2 when the pages exist.
+ * Case-study link wired to the /work/<slug> route in Phase 1.2.
  */
 interface Props {
   title: string;
@@ -12,9 +12,10 @@ interface Props {
   repo: string;
   demo?: string;
   tech: string[];
+  href: string;
 }
 
-const { title, roleLabel, period, status, summary, repo, demo, tech } =
+const { title, roleLabel, period, status, summary, repo, demo, tech, href } =
   Astro.props;
 ---
 
@@ -22,7 +23,11 @@ const { title, roleLabel, period, status, summary, repo, demo, tech } =
   class="rounded-md border border-hairline bg-surface p-6 transition-shadow duration-150 hover:shadow-md"
 >
   <header class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-    <h3 class="text-lg font-semibold tracking-tight">{title}</h3>
+    <h3 class="text-lg font-semibold tracking-tight">
+      <a href={href} class="underline-offset-4 hover:underline hover:decoration-accent-ink">
+        {title}
+      </a>
+    </h3>
     <p class="font-mono text-xs text-ink-muted">
       {roleLabel} · {period} · {status}
     </p>
@@ -38,6 +43,7 @@ const { title, roleLabel, period, status, summary, repo, demo, tech } =
     }
   </ul>
   <p class="mt-4 flex flex-wrap gap-x-5 gap-y-1 font-mono text-sm">
+    <a href={href} class="link-accent">Case study →</a>
     <a href={repo} class="link-accent">Repository</a>
     {demo && <a href={demo} class="link-accent">Live demo</a>}
   </p>

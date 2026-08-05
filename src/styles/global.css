@@ -91,6 +91,38 @@
   .btn-secondary:hover {
     @apply border-accent-ink;
   }
+
+  /* Case-study body (rendered Markdown — Overview / What I built / Challenges / Outcomes) */
+  .markdown h2 {
+    @apply mt-10 text-xl font-semibold tracking-tight;
+  }
+  .markdown > :first-child {
+    @apply mt-0;
+  }
+  .markdown p {
+    @apply mt-3 max-w-[72ch] text-body;
+  }
+  .markdown ul {
+    @apply mt-3 max-w-[72ch] list-disc space-y-2 pl-5 text-body;
+  }
+  .markdown ol {
+    @apply mt-3 max-w-[72ch] list-decimal space-y-2 pl-5 text-body;
+  }
+  .markdown strong {
+    @apply font-semibold;
+  }
+  .markdown code {
+    @apply rounded bg-accent-soft px-1 py-0.5 font-mono text-[0.85em] text-accent-ink;
+  }
+  .markdown blockquote {
+    @apply mt-3 border-l-2 border-hairline pl-4 text-sm text-ink-muted;
+  }
+  .markdown a {
+    @apply text-accent-ink underline decoration-hairline underline-offset-4 transition-colors duration-150;
+  }
+  .markdown a:hover {
+    @apply decoration-accent-ink;
+  }
 }
 
 /* Motion — micro-transitions only; every animation honors prefers-reduced-motion

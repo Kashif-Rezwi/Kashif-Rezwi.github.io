@@ -7,7 +7,9 @@
 
 ## Current phase
 
-**Phase 1.1 — Core home page: BUILT, awaiting owner content-review gate** (2026-08-05). All home sections built with claim-mapped copy (hero, selected work cards + compact row, experience, AI journey/now, contact incl. owner-approved phone per DL-009, footer); `/resume` route serves the PDF as the single source of truth (C-08); portrait re-encoded via Astro (AVIF 16 KB, ≤150 KB criterion); home meta/OG including og:image; featured-work content entries created (draft: narrative bodies pending in 1.2). **Content-review deliverable: `docs/strategy/home-copy-claim-map.md`** — every public sentence mapped to a CL-ID.
+**Phase 1.2 — Featured case studies: IN PROGRESS** (Phase 1.1 gate approved by owner 2026-08-05, DL-010). Scope per roadmap: three case-study pages (code-review-agent, perplexity, lingo-agent) from the brief template + `featured-project-research.md`; home cards link to them; personal/hackathon labels visible; Better DEV `[Your Frontend URL]` fix = owner action on the external repo (F-07). Phase 1.2 gate: owner approves each page copy + visuals.
+
+**Phase 1.1 — Core home page: COMPLETE, gate approved** (2026-08-05, DL-010). All home sections built with claim-mapped copy (hero, selected work cards + compact row, experience, AI journey/now, contact incl. owner-approved phone per DL-009, footer); `/resume` route serves the PDF as the single source of truth (C-08); portrait re-encoded via Astro (AVIF 16 KB); home meta/OG including og:image. Every public sentence mapped to a CL-ID in `docs/strategy/home-copy-claim-map.md`.
 
 **Phase 1.0 — Foundation: COMPLETE, gate approved** (2026-08-05). Foundation decisions adopted as DL-008: branch model (`develop` carries Phase 1; `main`/`gh-pages` frozen until 1.4), preview mechanism (companion repo `Kashif-Rezwi/portfolio-preview`, on-demand project-site deploys, zero secrets), repo shape (Astro at root of `develop`; CRA preserved on `main`/`gh-pages` until the 1.4 merge), system font stacks, contrast-verified token palette. Operating rules in `docs/engineering/branching-and-deploys.md` (audit F-04 deliverable).
 
