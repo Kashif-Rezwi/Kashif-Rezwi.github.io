@@ -7,7 +7,7 @@
 
 ## Current phase
 
-**Phase 1.2 — Featured case studies: IN PROGRESS** (Phase 1.1 gate approved by owner 2026-08-05, DL-010). Scope per roadmap: three case-study pages (code-review-agent, perplexity, lingo-agent) from the brief template + `featured-project-research.md`; home cards link to them; personal/hackathon labels visible; Better DEV `[Your Frontend URL]` fix = owner action on the external repo (F-07). Phase 1.2 gate: owner approves each page copy + visuals.
+**Phase 1.2 — Featured case studies: BUILT, awaiting owner gate** (2026-08-05, DL-010). Three case-study pages live at `/work/{code-review-agent,perplexity,lingo-agent}` — header (name · role label · period/status · repo/demo/back links) + body sections Overview / What I built / Challenges / Outcomes + tech tags; narratives written strictly from `featured-project-research.md` + the ledger (claim-safe, capability-only, personal/hackathon labels visible). Home cards link to their case-study pages. **Phase 1.2 gate: owner reviews each page copy + visuals.** Visuals (screenshots) are the open owner decision — options: repo README assets (with approval), owner-provided, or text+links only. Better DEV `[Your Frontend URL]` fix remains an owner action on the external repo (F-07).
 
 **Phase 1.1 — Core home page: COMPLETE, gate approved** (2026-08-05, DL-010). All home sections built with claim-mapped copy (hero, selected work cards + compact row, experience, AI journey/now, contact incl. owner-approved phone per DL-009, footer); `/resume` route serves the PDF as the single source of truth (C-08); portrait re-encoded via Astro (AVIF 16 KB); home meta/OG including og:image. Every public sentence mapped to a CL-ID in `docs/strategy/home-copy-claim-map.md`.
 
@@ -41,6 +41,7 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- **Phase 1.1 gate: owner content review.** Review the preview URL (https://kashif-rezwi.github.io/portfolio-preview/) against the home-page copy in `docs/strategy/home-copy-claim-map.md` (every sentence → CL-ID). On approval, Phase 1.2 (featured case studies) may begin per the roadmap. Case study narratives and per-project visuals are owner-reviewed at the 1.2 gate.
+- **Phase 1.2 gate: owner case-study review.** Review the three pages at https://kashif-rezwi.github.io/portfolio-preview/work/ (copy + per-page visuals decision). On approval, Phase 1.3 (Polish & QA: a11y, Lighthouse, SEO, link checks) may begin per the roadmap.
 - To refresh the preview after new work lands on `develop`: Actions tab of `Kashif-Rezwi/portfolio-preview` → "Run workflow" (or the agent runs `gh workflow run preview.yml --repo Kashif-Rezwi/portfolio-preview`).
-- After the gate: proceed gate-by-gate per the roadmap (1.2 case studies → 1.3 QA → 1.4 launch); the production URL remains untouched until Phase 1.4 approval.
+- Owner action (external repo, audit F-07): fix the `[Your Frontend URL]` placeholder in `better-dev-ui`'s README before that repo is deepened.
+- After the gate: proceed gate-by-gate per the roadmap (1.3 QA → 1.4 launch); the production URL remains untouched until Phase 1.4 approval.
