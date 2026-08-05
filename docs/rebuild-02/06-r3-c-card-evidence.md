@@ -55,3 +55,15 @@
 
 - Card hairline border — keep or remove (borderless + stronger surface separation).
 - Whether `+N more` should instead be plain (non-linked) text.
+
+## 6. Post-review polish corrections (owner feedback, 2026-08-05)
+
+Owner review flagged: action row wrapping/clipping, ragged card bases, unpolished bottoms. Root causes and fixes:
+
+| Root cause | Fix |
+|---|---|
+| Action row wrapped to 2 lines (73px) at card widths ≤478px; Live demo overflowed the card edge by 1–2px at desktop width | `flex-wrap: nowrap` + shared center-aligned single line at desktop (gap 0.75rem); at ≤480px an **intentional two-tier layout**: full-width primary button, secondary icon links centered on their own row — no clipping, no accidental wrap |
+| Baseline/center mismatch put Repo/Live demo at y+7 vs the button | all items `align-items: center` on one shared line |
+| Tech row could double in height: a long tag label (e.g. "E2B Sandboxes") was flex-shrunk onto two text lines → 39px row → unequal card heights at some widths | tech slot is now exactly one 28px row (`height`, `flex-wrap: nowrap`, `flex-shrink: 0` on items, clipped overflow); visible tags reduced 4 → 3 |
+
+**Verified after fixes (DOM measurements):** equal card heights and zero overflowing action rows at 320 / 390 / 480 / 768 / 1024 / 1280 / 1440; zero horizontal page overflow; captures `fix2-dark-1440.png`, `fix2-light-1440.png`, `fix2-dark-390.png`.
