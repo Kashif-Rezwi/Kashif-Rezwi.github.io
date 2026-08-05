@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/paths';
+---
+<Base
+  title="404 — Not found · Kashif Rezwi"
+  description="That page doesn't exist."
+>
+  <div class="container-site py-24 text-center">
+    <p class="section-label">404</p>
+    <h1 class="mt-4 text-3xl font-semibold tracking-tight">Page not found</h1>
+    <p class="mt-4 max-w-[68ch] mx-auto text-body text-ink-muted">
+      That page doesn't exist. Try the home page or the selected work.
+    </p>
+    <p class="mt-8">
+      <a href={withBase('')} class="btn">Home</a>
+    </p>
+  </div>
+</Base>

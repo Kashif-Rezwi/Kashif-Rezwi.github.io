@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 // Preview builds (companion repo `Kashif-Rezwi/portfolio-preview`) set
 // PREVIEW_BASE='/portfolio-preview'; production uses the site root.
@@ -10,6 +11,7 @@ const base = process.env.PREVIEW_BASE || '/';
 export default defineConfig({
   site: 'https://kashif-rezwi.github.io',
   base,
+  integrations: [sitemap()],
   vite: {
     // Tailwind v4 is a Vite plugin (CSS-first config via @theme in global.css)
     plugins: [tailwindcss()],

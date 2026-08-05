@@ -14,6 +14,8 @@ interface Props {
 const { title, description, ogImage } = Astro.props;
 const isPreview = import.meta.env.PUBLIC_PREVIEW === '1';
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// Default OG image = the dedicated card (scripts/make-og-card.mjs, DL-012).
+const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
 ---
 
 <!doctype html>
@@ -26,15 +28,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     {isPreview && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/x-icon" href={withBase('favicon.ico')} />
-    <!-- Open Graph / Twitter (home meta — Phase 1.1; site-wide pass in 1.3) -->
+    <link rel="manifest" href={withBase('manifest.webmanifest')} />
+    <!-- Open Graph / Twitter -->
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    <meta name="twitter:card" content={ogImage ? 'summary' : 'summary'} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={ogImageUrl} />
   </head>
   <body
     class="flex min-h-dvh flex-col"

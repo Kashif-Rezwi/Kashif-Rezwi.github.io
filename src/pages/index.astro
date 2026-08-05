@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { getImage, Image } from 'astro:assets';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import WorkCard from '../components/WorkCard.astro';
 import { withBase } from '../lib/paths';
@@ -13,15 +13,6 @@ const description =
 const featured = (await getCollection('work'))
   .filter((e) => e.data.order <= 3)
   .sort((a, b) => a.data.order - b.data.order);
-
-// og:image — interim: the portrait (a dedicated OG card is a possible 1.3 nicety)
-const ogImage = await getImage({
-  src: portrait,
-  format: 'jpeg',
-  width: 640,
-  height: 640,
-});
-const ogImageUrl = new URL(ogImage.src, Astro.site).href;
 
 const links = {
   email: 'kashifrezwi850@gmail.com',
@@ -45,7 +36,6 @@ const links = {
 <Base
   title="Kashif Rezwi — Frontend-focused Full Stack Engineer"
   description={description}
-  ogImage={ogImageUrl}
 >
   <div class="container-site">
     <!-- Hero — CL-01/CL-02/CL-18; short variant of the approved positioning statement (DL-004), never amplified -->

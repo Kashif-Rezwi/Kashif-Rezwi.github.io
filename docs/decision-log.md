@@ -90,3 +90,17 @@
 - **Decision:** The owner approved the three case-study pages' copy and chose to use **each project's own README screenshots** as their page visuals (the brief's "repo README assets with approval" option) for code-review-agent, perplexity, and lingo-agent. Phase 1.2 copy gate closed; visuals are wired into the pages immediately after this decision; Phase 1.3 (Polish & QA) may begin once the visuals are in place per the roadmap. LoopLens and Better DEV remain compact home-row entries (links only, per triage) — README screenshots apply to the three featured pages.
 - **Rationale:** Phase 1.2 done-when met (owner approves each case-study page copy + visuals). Reusing each project's own already-public README assets requires no new capture work and keeps images honest to the build.
 - **Approval status:** Approved (owner, 2026-08-05).
+
+## DL-012 — Phase 1.2 gate closed; Phase 1.3 started; dedicated OG card approved
+
+- **Date:** 2026-08-05
+- **Decision:** Phase 1.2 gate closed (DL-011 covered copy + README-screenshot visuals; only code-review-agent had a real README screenshot — wired in as a 22 KB AVIF cover; perplexity/lingo-agent honestly text-only). Phase 1.3 (Polish & QA) started the same day per roadmap gate rule 1. Owner additionally approved creating a **dedicated OG card image** now, replacing the interim portrait-as-og:image.
+- **Rationale:** Phase 1.2 done-when met; Phase 1.3 is the final pre-launch QA gate before the irreversible Phase 1.4 launch.
+- **Approval status:** Approved (owner, 2026-08-05).
+
+## DL-013 — Phase 1.3 gate approved; Phase 1.4 launch authorized
+
+- **Date:** 2026-08-05
+- **Decision:** Phase 1.3 gate approved. All acceptance criteria met or exceeded (Lighthouse 100/100/100/100 on home and case-study pages; zero client JS; LCP 1.4 s home / 1.3 s case-study; CLS 0; TBT 0 ms; zero JS bundle; WCAG 2.2 AA — 0 axe failures; `prefers-reduced-motion` active; unique titles/descriptions/meta per page; sitemap + robots; dedicated OG card live; 404 page; manifest; favicon). Production untouched (still serves CRA bundle; Pages source still `branch: gh-pages`). Phase 1.4 (irreversible production launch) authorized per roadmap gate rule 1.
+- **Rationale:** Phase 1.3 definition of done met — QA report (`docs/engineering/qa-report.md`) completed with all criteria passing; residual risks documented and accepted; preview verified live and `noindex`.
+- **Approval status:** Approved (owner, 2026-08-05).
