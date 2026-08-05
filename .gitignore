@@ -24,4 +24,5 @@ yarn-error.log*
 # private working material — never committed (AGENTS.md, "Repo privacy")
 /temp
 
+# environment variables
 .env
