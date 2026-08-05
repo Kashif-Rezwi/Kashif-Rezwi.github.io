@@ -141,9 +141,13 @@
     scroll-behavior: smooth;
     /* Prevent layout shift from scrollbar appearance */
     scrollbar-gutter: stable;
+    /* Keep anchored sections clear of the fixed header */
+    scroll-padding-top: 5rem;
   }
 
   body {
+    /* Reserve space for the fixed header so content never sits underneath it */
+    padding-top: 65px;
     background-color: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
