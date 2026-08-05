@@ -2,7 +2,7 @@
 
 - **Purpose:** Convert the three-version review into a bounded, approval-gated implementation plan for the preferred `rebuild-02` direction.
 - **Authority:** Owner directives in conversation (2026-08-05), constrained by `AGENTS.md`, the evidence ledger, and the comparative review. This plan authorizes no deployment by itself.
-- **Last updated:** 2026-08-05 (R3-A authorization and implementation notes)
+- **Last updated:** 2026-08-05 (R3-B execution complete; owner gate pending)
 - **Related:** [01-three-version-comparative-review.md](./01-three-version-comparative-review.md) · [00-full-audit.md](./00-full-audit.md) · [home-copy-claim-map.md](../strategy/home-copy-claim-map.md) · [architecture-and-quality.md](../engineering/architecture-and-quality.md) · [project-status.md](../project-status.md)
 
 ## 1. Outcome
@@ -184,6 +184,8 @@ Each phase ends with review evidence and an owner-held gate. A later phase does 
 - profile animation and reduce particle density/paint work where needed;
 - ensure text/portrait remain dominant and matrix never reduces contrast;
 - add a static CSS fallback if canvas context is unavailable.
+
+**Execution status (2026-08-05):** Complete locally under DL-021/DL-022; owner gate pending. The matrix has a hero-scoped static CSS dot fallback that is removed only after the first canvas frame; opacity follows both explicit `data-theme` and system scheme; the render loop settles with a parked pointer, pauses off-screen, and is static under reduced motion. The DL-021 elevation/hover corrections, the owner-confirmed ThemeControl segmented control, and footer social wrapping are included. All acceptance criteria pass, including Lighthouse Performance 100 (mobile and desktop) and zero long tasks in a 10-second interaction profile. Full evidence: `05-r3-b-matrix-evidence.md`.
 
 **Acceptance**
 
@@ -385,8 +387,8 @@ R3-B, R3-C, and R3-D may be developed separately after R3-A, but each remains ow
 ### Quality
 
 - [x] Fix and verify no-JS reveal baseline (R3-0).
-- [ ] Test matrix performance and reduced motion (R3-B QA).
-- [ ] Run responsive/theme/input matrix.
+- [x] Test matrix performance and reduced motion (R3-B QA).
+- [x] Run responsive/theme/input matrix.
 - [ ] Run axe, Lighthouse, contrast, and link checks.
 - [ ] Update QA report, status, decision log, and rollback instructions.
 

@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-05 (DL-019)
+- **Last updated:** 2026-08-05 (DL-022)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -152,3 +152,17 @@
 - **Decision:** The owner authorized the R3-A visual-system phase and gave the following previously unresolved content/product directions: (a) leave a general availability statement omitted because it remains undecided; (b) invite freelance-project conversations; (c) display `Kolkata, India`; and (d) in the later R3-D proof phase, add a dated public GitHub contribution view and project links. R3-A is limited to visual-system simplification, a local accessible SVG icon registry, persisted System/Light/Dark theme preference with a pre-paint initializer, and local system typography; project-card redesign and GitHub activity implementation remain later phases.
 - **Rationale:** This closes the R3-0 owner gate, converts only the owner-confirmed facts into public contact copy, and maintains the approved phased order. A freelance invitation does not assert a generalized availability status.
 - **Approval status:** Approved (owner directive in conversation, 2026-08-05). R3-A implementation began under this authorization; merge and production deployment remain unauthorized.
+
+## DL-021 — R3-A approved; remove remaining perceived elevation and begin R3-B
+
+- **Date:** 2026-08-05
+- **Decision:** The owner approved progression from R3-A to R3-B and requested two final visual corrections: remove the perceived navbar and portrait-photo shadow/elevation, and replace hover border-color changes with subtle color/surface feedback. R3-B is authorized only for hero dot-matrix fallback, tuning, responsive/motion validation, and performance/resilience evidence.
+- **Rationale:** The flat cornflower visual system should not retain any element that reads as a color shadow or a hover-state outline. This correction preserves the “hero matrix as sole signature” direction while keeping all later card and GitHub work phased.
+- **Approval status:** Approved (owner directive in conversation, 2026-08-05). R3-C and later, merge, and production deployment remain unauthorized.
+
+## DL-022 — R3-B scope confirmations and validation fixes
+
+- **Date:** 2026-08-05
+- **Decision:** (a) The owner confirmed in conversation that the ThemeControl segmented System/Light/Dark radio control and the footer social-link wrapping present in the R3-B working tree were owner-requested and belong to this phase. (b) During R3-B validation, two matrix defects were found and fixed under the authorized tuning scope: matrix/fallback opacity now follows the explicit `data-theme` preference as well as the system color scheme, and the render loop now settles while a pointer is parked over the hero (previously it redrew indefinitely). R3-B implementation is complete locally; evidence in `docs/rebuild-02/05-r3-b-matrix-evidence.md`.
+- **Rationale:** Keeps the decision record accurate about phase scope, and records the validation-driven corrections so later phases can trust the matrix behavior contract (settles when idle, pauses off-screen, static under reduced motion, correct opacity in every theme combination).
+- **Approval status:** Scope confirmation by owner directive (2026-08-05). R3-B owner gate review pending; R3-C and later, merge, and production deployment remain unauthorized.

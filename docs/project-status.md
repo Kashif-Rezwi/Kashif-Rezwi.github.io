@@ -2,12 +2,12 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-05 (R3-A complete locally; owner gate pending)
+- **Last updated:** 2026-08-05 (R3-B complete locally; owner gate pending)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase
 
-**Rebuild-03 improvement cycle — R3-A OWNER GATE** (2026-08-05, DL-018–DL-020). The R3-0 owner gate is approved. R3-A’s bounded visual-system, accessible icon, local typography, and theme-preference scope is complete locally and awaits owner review; all work remains undeployed.
+**Rebuild-03 improvement cycle — R3-B OWNER GATE** (2026-08-05, DL-018–DL-022). The bounded R3-B hero-matrix phase is complete locally: static canvas fallback, theme-attribute-aware opacity, parked-pointer settle fix, responsive/motion/performance validation (Lighthouse Performance 100 mobile + desktop; zero long tasks). The DL-021 elevation/hover corrections and the owner-confirmed ThemeControl segmented control and footer wrap are included. All work remains undeployed.
 
 | Phase | Scope | Status |
 |---|---|---|
@@ -15,8 +15,9 @@
 | Plan | Claims, system, hero, projects, capability/GitHub, content, QA, launch | ✅ `docs/rebuild-02/02-improvement-implementation-plan.md` |
 | R3-B prototype | Dual-theme pointer-responsive hero dot matrix; body grid removed | ✅ Implemented and committed as `29b5218`; locally verified; undeployed |
 | R3-0 | Claim/resilience corrections and baseline | ✅ Committed as `a008e94`; evidence in `docs/rebuild-02/03-r3-0-correctness-baseline.md`; owner gate approved in DL-020 |
-| R3-A | Visual-system simplification, local icons, theme control, local typography | ✅ Complete locally; evidence in `docs/rebuild-02/04-r3-a-system-evidence.md`; owner gate pending |
-| R3-B–R3-G | Remaining implementation through launch | ⏸ Planned; not authorized by this status |
+| R3-A | Visual-system simplification, local icons, theme control, local typography | ✅ Approved by owner in DL-021; final elevation/hover corrections included in the R3-B transition |
+| R3-B | Hero matrix fallback, tuning, responsive/motion validation, performance evidence | ✅ Complete locally; evidence in `docs/rebuild-02/05-r3-b-matrix-evidence.md`; owner gate pending |
+| R3-C–R3-G | Remaining implementation through launch | ⏸ Planned; not authorized by this status |
 
 **Rebuild-02 — Design Overhaul: COMPLETE** (2026-08-05, DL-016/DL-017). All five original R2 phases remain committed on `rebuild-02`; this completed state is now the base for the proposed improvement cycle.
 
@@ -43,7 +44,7 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Blocked
 
-- R3-B and later remain blocked until the R3-A owner gate. GitHub proof implementation stays in R3-D despite the owner-approved direction: a dated public contribution view plus project links.
+- R3-C and later remain blocked until the R3-B owner gate. GitHub proof implementation stays in R3-D despite the owner-approved direction: a dated public contribution view plus project links.
 - General availability wording remains blocked/omitted because the owner marked it undecided. Freelance invitation and Kolkata display are owner-approved (DL-020).
 - All Phase 0 open questions remain closed.
 
@@ -55,4 +56,4 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- Review the completed R3-A evidence and request owner approval of the simplified system. Do not begin R3-B/project-card/GitHub work, merge, or production deployment without its separate owner gate.
+- Review the R3-B evidence (`docs/rebuild-02/05-r3-b-matrix-evidence.md`) and captures, then decide the R3-B owner gate. Do not begin R3-C/project-card/GitHub work, merge, or production deployment without its separate owner gate.

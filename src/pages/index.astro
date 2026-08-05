@@ -103,7 +103,6 @@ const techStack = [
       <!-- Portrait -->
       <div class="hero-portrait delay-300 animate-fade-up">
         <div class="portrait-wrapper">
-          <div class="portrait-glow" aria-hidden="true"></div>
           <Image
             src={portrait}
             alt="Portrait of Kashif Rezwi"
@@ -402,16 +401,6 @@ const techStack = [
     overflow: hidden;
     isolation: isolate;
   }
-  .hero-section::before {
-    /* Subtle radial glow behind content */
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 50% at 50% 0%, var(--color-accent-glow), transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
   .hero-inner {
     display: flex;
     align-items: center;
@@ -488,15 +477,6 @@ const techStack = [
     position: relative;
     width: 220px;
     height: 220px;
-  }
-  .portrait-glow {
-    position: absolute;
-    inset: -12px;
-    background: var(--gradient-accent);
-    border-radius: 50%;
-    opacity: 0.25;
-    filter: blur(20px);
-    z-index: 0;
   }
   .portrait-img {
     position: relative;
@@ -647,7 +627,7 @@ const techStack = [
     border: 0;
     padding: 0.25rem 0.625rem;
     border-radius: var(--radius-control);
-    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    transition: color 0.15s ease, background 0.15s ease;
     cursor: default;
   }
   .tech-item:hover {

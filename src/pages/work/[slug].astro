@@ -389,11 +389,11 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     padding: 0.75rem;
     border-radius: var(--radius-control);
     border: 1px solid var(--color-border);
-    transition: border-color 0.2s ease, background 0.2s ease;
+    transition: color 0.2s ease, background 0.2s ease;
     min-width: 160px;
   }
   .case-nav-link:hover {
-    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+    color: var(--color-accent-text);
     background: var(--color-accent-soft);
   }
   .case-nav-link.next {
