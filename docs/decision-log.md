@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-06 (DL-051)
+- **Last updated:** 2026-08-06 (DL-052)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -368,3 +368,11 @@
 - **Decision:** Extend `ci.yml` to run the build/contrast check on pushes and PRs to **`main`** as well as `develop` (`push.branches` and `pull_request.branches` now `[develop, main]`). Production deploy (`.github/workflows/deploy.yml`) is intentionally **left manual-only** (`workflow_dispatch`), so a push/merge to `main` triggers CI automatically but never auto-deploys — production deploys stay owner-gated. No inline branch pin was added to `deploy.yml`; manual runs deploy from the branch selected in the Actions UI (default `main`).
 - **Rationale:** Give `main` the same self-healing build signal `develop` has, while keeping production deploys approval-gated (AGENTS.md §1 gate loop). Matches the owner's ask to replicate the `develop` CI/CD loop on `main` with a manual deploy trigger.
 - **Approval status:** Approved (owner directive in conversation, 2026-08-06). Verified via a manual CI run on `main`.
+
+## DL-052 — Production deploy auto-triggers on push/merge to `main`
+
+- **Date:** 2026-08-06
+- **Decision:** Add a `push` trigger to `.github/workflows/deploy.yml` so it runs **automatically on every push/merge to `main`** (in addition to the existing `workflow_dispatch`). Supersedes the earlier "manual-only on main" approach (DL-051) at the owner's request. A push/merge to `main` now builds and deploys production without a manual dispatch.
+- **Rationale:** Owner requested auto-deploy on `main` ("Option C") so changes are visible live on push, matching the push-to-deploy expectation. Production surface is the `main` branch only, so the trigger is scoped to `main`.
+- **Note — still gated by Pages source:** `actions/deploy-pages` only publishes once the repo's Pages source is switched from branch `gh-pages` to **GitHub Actions** (repo Settings → Pages, owner action). Until that switch, `deploy.yml` runs but does not change the live site.
+- **Approval status:** Approved (owner directive in conversation, 2026-08-06).

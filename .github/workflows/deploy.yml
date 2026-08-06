@@ -1,16 +1,16 @@
-# PRODUCTION DEPLOY — MANUAL ONLY, and INERT until Phase 1.4.
+# PRODUCTION DEPLOY — auto on push/merge to main; also manually dispatchable.
 #
-# The Pages source stays "branch: gh-pages" until the owner switches it to
-# GitHub Actions at Phase 1.4 (repo Settings -> Pages). Until then this
-# workflow can run but does not affect the live site.
+# Requires the Pages source to be set to "GitHub Actions" (repo Settings ->
+# Pages). While the source is "branch: gh-pages" this workflow runs but does
+# not affect the live site (owner action to switch, not scriptable here).
 #
-# Roadmap gate rule 4: deploying to the production URL happens only in 1.4
-# with explicit owner approval. See docs/engineering/branching-and-deploys.md
-# (decision DL-008).
+# See docs/engineering/branching-and-deploys.md (DL-008, DL-052).
 
 name: Deploy production
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
