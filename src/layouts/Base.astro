@@ -8,9 +8,10 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, noindex = false } = Astro.props;
 const isPreview = import.meta.env.PUBLIC_PREVIEW === '1';
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
@@ -38,7 +39,7 @@ const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
     </script>
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
-    {isPreview && <meta name="robots" content="noindex" />}
+    {(isPreview || noindex) && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/x-icon" href={withBase('favicon.ico')} />
     <link rel="manifest" href={withBase('manifest.webmanifest')} />

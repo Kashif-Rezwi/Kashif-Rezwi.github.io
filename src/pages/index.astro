@@ -585,6 +585,23 @@ const techStack = [
     width: 220px;
     height: 220px;
   }
+  /* Solid accent ring, visible on all sides at rest; on hover it shrinks down
+     to the photo's own size (behind it) so the photo appears to press into/out
+     from a solid backing. */
+  .portrait-wrapper::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    inset: -8px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    transition: inset 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+  }
+  .hero-portrait:hover .portrait-wrapper::after {
+    inset: 0;
+    transform: translate(10px, 12px);
+  }
   .portrait-img {
     position: relative;
     z-index: 1;
@@ -592,6 +609,10 @@ const techStack = [
     height: 220px;
     border-radius: 50%;
     object-fit: cover;
+    transition: transform 0.35s ease;
+  }
+  .hero-portrait:hover .portrait-img {
+    transform: translate(-6px, -6px);
   }
 
   /* ----------------------------------------------------------------
