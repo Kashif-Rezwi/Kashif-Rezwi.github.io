@@ -2,12 +2,12 @@
 import { base, withBase } from '../lib/paths';
 import ThemeControl from './ThemeControl.astro';
 
+const resumeHref = withBase('resume/');
 const links = [
   { href: withBase('#work'), label: 'Work' },
   { href: withBase('#experience'), label: 'Experience' },
   { href: withBase('#contact'), label: 'Contact' },
 ];
-const resumeHref = withBase('resume/');
 ---
 
 <header id="site-header">
@@ -31,10 +31,7 @@ const resumeHref = withBase('resume/');
 
     <div class="nav-tools">
       <ThemeControl />
-      <a href={resumeHref} class="btn-outline nav-resume">Resume</a>
     </div>
-
-    <!-- Mobile hamburger -->
     <button
       id="mobile-menu-btn"
       class="mobile-menu-btn"
@@ -64,13 +61,18 @@ const resumeHref = withBase('resume/');
         <a href={resumeHref} class="mobile-nav-link accent">Resume</a>
       </li>
     </ul>
+    <div class="mobile-nav-theme">
+      <ThemeControl idPrefix="menu-" />
+    </div>
   </div>
 </header>
 
 <style>
   header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 50;
     background: color-mix(in srgb, var(--color-canvas) 85%, transparent);
     backdrop-filter: blur(12px);
@@ -143,11 +145,6 @@ const resumeHref = withBase('resume/');
     gap: 0.875rem;
   }
 
-  .nav-resume {
-    padding: 0.375rem 0.875rem;
-    font-size: 0.8125rem;
-  }
-
   /* Mobile hamburger */
   .mobile-menu-btn {
     display: none;
@@ -208,6 +205,14 @@ const resumeHref = withBase('resume/');
     border-bottom: none;
   }
 
+  .mobile-nav-theme {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 1.5rem 1.25rem;
+    border-top: 1px solid var(--color-border);
+    margin-top: 0.25rem;
+  }
+
   /* Hamburger → X animation when open */
   .mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
@@ -220,12 +225,15 @@ const resumeHref = withBase('resume/');
   }
 
   @media (max-width: 640px) {
-    .nav-links,
-    .nav-resume {
+    .nav-links {
       display: none;
     }
     .nav-tools {
       margin-left: auto;
+    }
+    /* Theme control lives in the hamburger drawer; hide the header one. */
+    .nav-tools :global(.theme-control) {
+      display: none;
     }
     .mobile-menu-btn {
       display: flex;

@@ -80,15 +80,6 @@
         angle: number;
       };
 
-      let dots: Dot[] = [];
-      let width = 0;
-      let height = 0;
-      let dpr = 1;
-      let frame = 0;
-      let isVisible = true;
-      let isSettled = true;
-      const pointer = { x: 0, y: 0, active: false };
-
       const isLightTheme = () => {
         const preference = document.documentElement.dataset.theme;
         return preference === 'light' || (preference !== 'dark' && colorScheme.matches);
@@ -104,132 +95,159 @@
         return value - Math.floor(value);
       };
 
-      const buildDots = () => {
-        const spacing = width < 640 ? 27 : 34;
-        const cols = Math.ceil(width / spacing) + 2;
-        const rows = Math.ceil(height / spacing) + 2;
-        const next: Dot[] = [];
+      // Support multiple instances on one page (hero, contact, footer).
+      const instances: Array<() => void> = [];
+      const canvases = Array.from(document.querySelectorAll<HTMLCanvasElement>('.hero-dot-matrix'));
 
-        for (let row = -1; row < rows; row += 1) {
-          for (let col = -1; col < cols; col += 1) {
-            const seed = hash(col, row);
-            const emphasis = hash(col + 9, row + 17);
-            next.push({
-              x: col * spacing + (row % 2 ? spacing * 0.16 : 0),
-              y: row * spacing,
-              dx: 0,
-              dy: 0,
-              alpha: 0.16 + seed * 0.34,
-              size: emphasis > 0.91 ? 1.7 : 1.05,
-              color: emphasis > 0.96 ? 2 : emphasis > 0.86 ? 1 : 0,
-              angle: (seed - 0.5) * 0.5,
-            });
-          }
-        }
+      for (const canvas of canvases) {
+        const context = canvas.getContext('2d');
+        const container = canvas.parentElement;
+        if (!context || !container) continue;
 
-        dots = next;
-        isSettled = false;
-      };
+        let dots: Dot[] = [];
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+        let frame = 0;
+        let isVisible = true;
+        let isSettled = true;
+        const pointer = { x: 0, y: 0, active: false };
 
-      const render = () => {
-        context.clearRect(0, 0, width, height);
-        const colors = palette();
-        const radius = 155;
-        let remainingMotion = 0;
+        const buildDots = () => {
+          const spacing = width < 640 ? 27 : 34;
+          const cols = Math.ceil(width / spacing) + 2;
+          const rows = Math.ceil(height / spacing) + 2;
+          const next: Dot[] = [];
 
-        for (const dot of dots) {
-          let targetX = 0;
-          let targetY = 0;
-
-          if (pointer.active && !reducedMotion.matches && !coarsePointer.matches) {
-            const deltaX = dot.x - pointer.x;
-            const deltaY = dot.y - pointer.y;
-            const distance = Math.hypot(deltaX, deltaY);
-
-            if (distance < radius && distance > 0) {
-              const force = Math.pow(1 - distance / radius, 2) * 23;
-              targetX = (deltaX / distance) * force;
-              targetY = (deltaY / distance) * force;
+          for (let row = -1; row < rows; row += 1) {
+            for (let col = -1; col < cols; col += 1) {
+              const seed = hash(col, row);
+              const emphasis = hash(col + 9, row + 17);
+              next.push({
+                x: col * spacing + (row % 2 ? spacing * 0.16 : 0),
+                y: row * spacing,
+                dx: 0,
+                dy: 0,
+                alpha: 0.16 + seed * 0.34,
+                size: emphasis > 0.91 ? 1.7 : 1.05,
+                color: emphasis > 0.96 ? 2 : emphasis > 0.86 ? 1 : 0,
+                angle: (seed - 0.5) * 0.5,
+              });
             }
           }
 
-          dot.dx += (targetX - dot.dx) * 0.13;
-          dot.dy += (targetY - dot.dy) * 0.13;
-          remainingMotion += Math.abs(targetX - dot.dx) + Math.abs(targetY - dot.dy);
+          dots = next;
+          isSettled = false;
+        };
 
-          const x = dot.x + dot.dx;
-          const y = dot.y + dot.dy;
-          const movement = Math.hypot(dot.dx, dot.dy);
-          const length = dot.size + Math.min(movement * 0.12, 2.6);
+        const render = () => {
+          context.clearRect(0, 0, width, height);
+          const colors = palette();
+          const radius = 155;
+          let remainingMotion = 0;
 
-          context.save();
-          context.translate(x, y);
-          context.rotate(dot.angle + Math.atan2(dot.dy, dot.dx || 1) * 0.12);
-          context.globalAlpha = Math.min(dot.alpha + movement * 0.018, 0.88);
-          context.fillStyle = colors[dot.color];
-          context.fillRect(-length / 2, -dot.size / 2, length, dot.size);
-          context.restore();
-        }
+          for (const dot of dots) {
+            let targetX = 0;
+            let targetY = 0;
 
-        // Settle once spring motion decays — even if the pointer stays parked
-        // over the hero — so an idle cursor never keeps the loop redrawing.
-        isSettled = remainingMotion < 0.7;
-        if (isVisible && !isSettled) frame = requestAnimationFrame(render);
-      };
+            if (pointer.active && !reducedMotion.matches && !coarsePointer.matches) {
+              const deltaX = dot.x - pointer.x;
+              const deltaY = dot.y - pointer.y;
+              const distance = Math.hypot(deltaX, deltaY);
 
-      const resize = () => {
-        const rect = hero.getBoundingClientRect();
-        width = rect.width;
-        height = rect.height;
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = Math.round(width * dpr);
-        canvas.height = Math.round(height * dpr);
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
-        context.setTransform(dpr, 0, 0, dpr, 0, 0);
-        buildDots();
-        render();
-      };
+              if (distance < radius && distance > 0) {
+                const force = Math.pow(1 - distance / radius, 2) * 23;
+                targetX = (deltaX / distance) * force;
+                targetY = (deltaY / distance) * force;
+              }
+            }
 
-      const requestRender = () => {
-        if (frame) cancelAnimationFrame(frame);
-        isSettled = false;
-        if (isVisible) frame = requestAnimationFrame(render);
-      };
+            dot.dx += (targetX - dot.dx) * 0.13;
+            dot.dy += (targetY - dot.dy) * 0.13;
+            remainingMotion += Math.abs(targetX - dot.dx) + Math.abs(targetY - dot.dy);
 
-      const onPointerMove = (event: PointerEvent) => {
-        if (reducedMotion.matches || coarsePointer.matches) return;
-        const rect = canvas.getBoundingClientRect();
-        pointer.x = event.clientX - rect.left;
-        pointer.y = event.clientY - rect.top;
-        pointer.active =
-          pointer.x >= 0 && pointer.x <= rect.width && pointer.y >= 0 && pointer.y <= rect.height;
-        requestRender();
-      };
+            const x = dot.x + dot.dx;
+            const y = dot.y + dot.dy;
+            const movement = Math.hypot(dot.dx, dot.dy);
+            const length = dot.size + Math.min(movement * 0.12, 2.6);
 
-      const onPointerLeave = () => {
-        pointer.active = false;
-        requestRender();
-      };
+            context.save();
+            context.translate(x, y);
+            context.rotate(dot.angle + Math.atan2(dot.dy, dot.dx || 1) * 0.12);
+            context.globalAlpha = Math.min(dot.alpha + movement * 0.018, 0.88);
+            context.fillStyle = colors[dot.color];
+            context.fillRect(-length / 2, -dot.size / 2, length, dot.size);
+            context.restore();
+          }
 
-      const resizeObserver = new ResizeObserver(resize);
-      const visibilityObserver = new IntersectionObserver(([entry]) => {
-        isVisible = entry.isIntersecting;
-        if (isVisible) requestRender();
-        else if (frame) cancelAnimationFrame(frame);
-      });
+          // Settle once spring motion decays — even if the pointer stays parked
+          // over the section — so an idle cursor never keeps the loop redrawing.
+          isSettled = remainingMotion < 0.7;
+          if (isVisible && !isSettled) frame = requestAnimationFrame(render);
+        };
 
-      resizeObserver.observe(hero);
-      visibilityObserver.observe(hero);
-      hero.addEventListener('pointermove', onPointerMove, { passive: true });
-      hero.addEventListener('pointerleave', onPointerLeave, { passive: true });
-      colorScheme.addEventListener('change', requestRender);
-      window.addEventListener('portfolio-theme-change', requestRender);
-      reducedMotion.addEventListener('change', requestRender);
-      coarsePointer.addEventListener('change', requestRender);
+        const resize = () => {
+          const rect = container.getBoundingClientRect();
+          width = rect.width;
+          height = rect.height;
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = Math.round(width * dpr);
+          canvas.height = Math.round(height * dpr);
+          canvas.style.width = `${width}px`;
+          canvas.style.height = `${height}px`;
+          context.setTransform(dpr, 0, 0, dpr, 0, 0);
+          buildDots();
+          render();
+        };
 
-      // Draw the first frame, then retire the static CSS fallback.
-      resize();
+        const requestRender = () => {
+          if (frame) cancelAnimationFrame(frame);
+          isSettled = false;
+          if (isVisible) frame = requestAnimationFrame(render);
+        };
+
+        const onPointerMove = (event: PointerEvent) => {
+          if (reducedMotion.matches || coarsePointer.matches) return;
+          const rect = canvas.getBoundingClientRect();
+          pointer.x = event.clientX - rect.left;
+          pointer.y = event.clientY - rect.top;
+          pointer.active =
+            pointer.x >= 0 && pointer.x <= rect.width && pointer.y >= 0 && pointer.y <= rect.height;
+          requestRender();
+        };
+
+        const onPointerLeave = () => {
+          pointer.active = false;
+          requestRender();
+        };
+
+        const resizeObserver = new ResizeObserver(resize);
+        const visibilityObserver = new IntersectionObserver(([entry]) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible) requestRender();
+          else if (frame) cancelAnimationFrame(frame);
+        });
+
+        resizeObserver.observe(container);
+        visibilityObserver.observe(container);
+        container.addEventListener('pointermove', onPointerMove, { passive: true });
+        container.addEventListener('pointerleave', onPointerLeave, { passive: true });
+
+        // Draw the first frame.
+        resize();
+        instances.push(requestRender);
+      }
+
+      // Re-render all instances when theme or motion preference changes.
+      function rethemeAll() {
+        for (const render of instances) render();
+      }
+      colorScheme.addEventListener('change', rethemeAll);
+      window.addEventListener('portfolio-theme-change', rethemeAll);
+      reducedMotion.addEventListener('change', rethemeAll);
+      coarsePointer.addEventListener('change', rethemeAll);
+
+      // Retire the static CSS fallback once the canvas matrix is active.
       document.documentElement.classList.add('matrix-ready');
     }
   }
