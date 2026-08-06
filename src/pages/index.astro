@@ -1029,10 +1029,17 @@ const techStack = [
     }
   }
 
+  @media (min-width: 769px) and (max-width: 1023px) {
+    .hero-inner {
+      margin-top: -2rem; /* tablet: lighter uplift than desktop */
+    }
+  }
+
   @media (max-width: 768px) {
     .hero-inner {
       flex-direction: column-reverse;
       gap: 2rem;
+      margin-top: 0; /* mobile: no uplift */
     }
     .portrait-wrapper {
       width: 160px;
