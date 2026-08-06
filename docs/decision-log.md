@@ -347,3 +347,17 @@
 - **Decision:** Add `margin-bottom: 5rem` to `footer` in `src/components/Footer.astro` (alongside its existing `margin-top: 4rem`). The contact section is the last block on the home page, so the page max-scrolled (4980px) 66px short of the anchor position (needed 5046px); the section topped out at 86px, and with its own 80px top padding the heading landed ~166px — about 100px below the header, versus ~34px for every other section. The footer margin adds 80px of scroll room so `#contact` now reaches the `scroll-padding-top: 1.25rem` anchor like the rest.
 - **Rationale:** DL-046 fixed the double-offset for all sections reachable at full scroll; the contact section was unreachable because no scrollable content existed below it. Adding scroll room below the footer (rather than more padding inside the already-80px-padded section) makes the anchor reachable and keeps section spacing consistent.
 - **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages). Verified at 1280×800: `#work`, `#experience`, `#contact` all land with section top 20px, heading 100px, gap 35px below the fixed header (was ~100px for contact). Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-049 — System-theme icon is device-aware (monitor/tablet/phone by viewport)
+
+- **Date:** 2026-08-06
+- **Decision:** In `src/components/Icon.astro`, the `system` glyph is now a device-aware triple: `g.sys-desktop` (monitor), `g.sys-tablet` (tablet), and `g.sys-phone` (phone) are all rendered inside the same `<svg>`, and CSS in the component shows exactly one by viewport width — desktop `>1024px` (default), tablet `641–1024px`, phone `≤640px` (the same breakpoint that moves the theme control into the hamburger). The `theme-choice.choice-system` scope keeps the switch local to the system option.
+- **Rationale:** The "system" theme option previously used a generic desktop-monitor icon on every screen, which misrepresented the device the theme is following. Showing the actual device type reinforces what "system" means.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages). Verified with agent-browser device emulation: iPhone 12 (390px) → phone glyph, iPad Pro (1024px) → tablet glyph, desktop (1280px) → monitor glyph. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-050 — Resume removed from desktop navbar (kept in hamburger drawer)
+
+- **Date:** 2026-08-06
+- **Decision:** Remove the `.nav-resume` `<a class="btn-outline">` from the desktop `.nav-tools` row in `src/components/Header.astro`, along with its `.nav-resume` style and the `@media (max-width:640px)` `.nav-resume` hide rule. The Resume link stays as the last `.mobile-nav-link accent` item inside the `#mobile-nav` drawer, so it remains reachable on small screens and in the hamburger on desktop.
+- **Rationale:** Owner asked to declutter the desktop navbar; Resume remains one tap away in the drawer.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); verified desktop `.nav-tools` has no resume link and the drawer still lists Work/Experience/Contact/Resume. Part of R4-6 QA; promotion/deploy owner-gated.
