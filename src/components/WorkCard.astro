@@ -37,7 +37,7 @@ const hiddenTechCount = tech.length - visibleTech.length;
 <article class="work-card card">
   {
     coverSrc && (
-      <div class="work-card-cover">
+      <div class="work-card-cover" style={`background-image: url('${coverSrc.src}')`}>
         <img src={coverSrc.src} alt={`${title} screenshot`} loading="lazy" width={coverSrc.width} height={coverSrc.height} />
       </div>
     )
@@ -106,16 +106,32 @@ const hiddenTechCount = tech.length - visibleTech.length;
   }
 
   .work-card-cover {
+    position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: var(--color-surface-2);
+    background-size: cover;
+    background-position: center;
+    /* fallback canvas in case the inline image fails */
+    background-color: var(--color-surface-2);
+  }
+  /* Blurred same-image filler fills the letterboxed top/bottom empty space
+     behind the fully-fit foreground screenshot. */
+  .work-card-cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    filter: blur(14px) saturate(1.2);
+    transform: scale(1.15);
   }
   .work-card-cover img {
+    position: relative;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: top;
+    object-fit: contain;
     transition: transform 0.4s ease;
   }
   .work-card:hover .work-card-cover img {

@@ -421,13 +421,23 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
 
   @media (max-width: 600px) {
     .case-nav {
-      flex-direction: column;
+      flex-direction: row;
     }
-    .case-nav-item.end {
-      text-align: left;
+    .case-nav-item {
+      flex: 1;
+      min-width: 0;
     }
-    .case-nav-link.next {
-      align-items: flex-start;
+    .case-nav-link {
+      min-width: 0;
+      width: 100%;
+      padding: 0.625rem;
+    }
+    .case-nav-name,
+    .case-nav-dir {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
   }
 </style>

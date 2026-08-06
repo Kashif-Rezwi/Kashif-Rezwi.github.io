@@ -1,25 +1,39 @@
 ---
 import Icon from './Icon.astro';
+/**
+ * Theme color control: system / light / dark segmented control.
+ *
+ * Rendered in the header on desktop and (optionally, via `idPrefix`) inside
+ * the mobile drawer. Each instance must use a distinct `idPrefix` so the
+ * radio inputs keep unique ids in the same document.
+ */
+interface Props {
+  idPrefix?: string;
+}
+const { idPrefix = '' } = Astro.props;
+const themeSystem = `${idPrefix}theme-system`;
+const themeLight = `${idPrefix}theme-light`;
+const themeDark = `${idPrefix}theme-dark`;
 ---
 
 <fieldset class="theme-control">
   <legend class="sr-only">Color theme</legend>
   <span class="theme-control-thumb" aria-hidden="true"></span>
 
-  <input id="theme-system" name="portfolio-theme-control" type="radio" value="system" checked />
-  <label class="theme-choice choice-system" for="theme-system" title="Use system theme">
+  <input id={themeSystem} name="portfolio-theme-control" type="radio" value="system" checked data-theme-control />
+  <label class="theme-choice choice-system" for={themeSystem} title="Use system theme">
     <Icon name="system" size={15} />
     <span class="sr-only">System theme</span>
   </label>
 
-  <input id="theme-light" name="portfolio-theme-control" type="radio" value="light" />
-  <label class="theme-choice choice-light" for="theme-light" title="Use light theme">
+  <input id={themeLight} name="portfolio-theme-control" type="radio" value="light" data-theme-control />
+  <label class="theme-choice choice-light" for={themeLight} title="Use light theme">
     <Icon name="sun" size={15} />
     <span class="sr-only">Light theme</span>
   </label>
 
-  <input id="theme-dark" name="portfolio-theme-control" type="radio" value="dark" />
-  <label class="theme-choice choice-dark" for="theme-dark" title="Use dark theme">
+  <input id={themeDark} name="portfolio-theme-control" type="radio" value="dark" data-theme-control />
+  <label class="theme-choice choice-dark" for={themeDark} title="Use dark theme">
     <Icon name="moon" size={15} />
     <span class="sr-only">Dark theme</span>
   </label>
@@ -80,18 +94,12 @@ import Icon from './Icon.astro';
     color: var(--color-accent-text);
   }
 
-  .theme-control:has(#theme-light:checked) .theme-control-thumb {
-    transform: translateX(2rem);
-  }
-
-  .theme-control:has(#theme-dark:checked) .theme-control-thumb {
-    transform: translateX(4rem);
-  }
-
+  .theme-control:has(input[value='light']:checked) .theme-control-thumb,
   :global(html[data-theme='light']) .theme-control-thumb {
     transform: translateX(2rem);
   }
 
+  .theme-control:has(input[value='dark']:checked) .theme-control-thumb,
   :global(html[data-theme='dark']) .theme-control-thumb {
     transform: translateX(4rem);
   }
@@ -106,7 +114,7 @@ import Icon from './Icon.astro';
 <script>
   const key = 'portfolio-theme';
   const root = document.documentElement;
-  const controls = document.querySelectorAll<HTMLInputElement>('input[name="portfolio-theme-control"]');
+  const controls = document.querySelectorAll<HTMLInputElement>('input[data-theme-control]');
 
   const applyTheme = (theme: string) => {
     if (theme === 'light' || theme === 'dark') {
@@ -124,8 +132,9 @@ import Icon from './Icon.astro';
     saved = localStorage.getItem(key);
   } catch {}
   const initial = saved === 'light' || saved === 'dark' ? saved : 'system';
-  const active = [...controls].find((control) => control.value === initial);
-  if (active) active.checked = true;
+  controls.forEach((control) => {
+    if (control.value === initial) control.checked = true;
+  });
 
   controls.forEach((control) => {
     control.addEventListener('change', () => {

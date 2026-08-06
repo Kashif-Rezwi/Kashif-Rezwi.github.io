@@ -2,7 +2,7 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-06 (**R3 launch COMPLETE** — owner-authorized, DL-030/031)
+- **Last updated:** 2026-08-06 (**R4 in progress** — R4-1..R4-5 implemented on `v2-improvement`; R4-6 QA pending; R4-7 deploy owner-gated)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase
@@ -60,4 +60,15 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- **Owner spot-checks** (post-launch): LinkedIn click-through (OQ-06), visual captures at 320/1440, and resume-PDF review. Repository is back in maintenance mode per AGENTS.md §1: future changes are pushed to `develop`, built, then deployed to `gh-pages`.
+- **R4 improvement cycle — IN PROGRESS.**
+
+  Implemented on the working branch `v2-improvement` (NOT deployed), per owner-confirmed decisions:
+  - **R4-1 Hero** (DL-033): single-line name + canonical role line **"Frontend-focused Full Stack Engineer"**. ✅
+  - **R4-2 Dot-matrix extension (B2):** reusable multi-instance component now drives the hero **and** contact matrix. Dot **enlargement dropped** per owner. ✅
+  - **R4-3 Tech stack:** icon registry added; `REST APIs` reordered; membership corrected (LangChain dropped, ClickHouse/RabbitMQ added); flat groups retained. ✅
+  - **R4-4 Experience:** Brand Exponents deepened with workflow-builder/analytics, page-builder shared systems, AI workflow auto-config/auto-draft, and two AppSumo launch periods; "six providers" → "several" per owner; Nexus internship expanded to three bullets (features & integration, code quality). ✅
+  - **R4-5 Navbar:** pinned via `position: fixed` (frosted glass kept); bottom fade **dropped per owner**. ✅
+  - **Resume `/resume`:** PDF replaced with the **Full-stack master** (`kashif-rezwi-master-full-stack-developer-2026-07`) — matches the site identity + expanded experience. ✅
+
+- **Next step: R4-6** — full QA pass (Lighthouse, axe, contrast, links, no-JS/canvas/reduced-motion) + evidence doc `docs/rebuild-02/10-r4-qa-evidence.md`, then owner gate. **R4-7** (promotion `v2-improvement` → `develop` → `gh-pages` + deploy) happens **only** on a separate owner "go".
+- **Owner spot-checks** (post-launch): LinkedIn click-through (OQ-06), visual captures at 320/1440, and resume-PDF review. Repository is back in maintenance mode per AGENTS.md §1: future changes are pushed to the working branch, built, then deployed to `gh-pages`.

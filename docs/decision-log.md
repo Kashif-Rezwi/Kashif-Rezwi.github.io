@@ -221,3 +221,143 @@
 - **Smoke test (all on `https://kashif-rezwi.github.io/`):** `/` 200 (R3 title, hero matrix, ThemeControl, GitHub contribution calendar + "Last refreshed", dev.to writing evidence); `/work/{code-review-agent,perplexity,lingo-agent}/` 200 (`role="region"` sidebar + one h1); `/resume/`, `/sitemap-index.xml`, `/robots.txt`, `/manifest.webmanifest`, `/og.png` all 200; unknown route → 404; no `noindex` in production; internal links 11/11 resolve; **live Lighthouse 100/100/100/100** (LCP 0.5s, CLS 0, TBT 0ms).
 - **Rationale:** The owner's "go" was the explicit R3-G authorization. Deploy was routed through the repository's actual live Pages source (`gh-pages` branch, confirmed via API on 2026-08-06) rather than the never-activated `deploy.yml`/Actions path.
 - **Approval status:** Owner launch authorization recorded (DL-030); smoke tests pass — **R3 launch COMPLETE**. Rollback available by reverting `gh-pages` to `6991386`. Owner spot-checks remain: LinkedIn click-through (OQ-06), 320/1440 visual captures, resume-PDF review.
+
+## DL-032 — R4 improvement plan drafted (plan only; no code, no deploy)
+
+- **Date:** 2026-08-06
+- **Decision:** Record the owner's R4 improvement requests as the canonical plan `docs/rebuild-02/09-r4-improvement-plan.md`. Scope is content + interaction + styling polish on the live portfolio only: (1) single-line hero name with a consistent professional role line — resolved to **"Frontend-focused Full Stack Engineer"** by cross-checking PROFILE.md, target-roles.md, the GitHub profile, and the master resumes; (2) extend the dot motif across the portfolio (preferred: subtle static site-wide grid, hero keeps the interactive canvas); (3) cross-check and correct the tech-stack groups against the evidence tiers (Core / Working / AI-building), flagging project-derived items (Vercel AI SDK, LangChain, BullMQ, Prisma, pgvector) as needing an owner label decision; (4) deepen the Experience section with verified bullet candidates from the master resumes + experience evidence (Template Library, launch/AppSumo support, infinite-pagination reuse, drag-and-drop builder); (5) make the navbar reliably pinned at the top while scrolling. Open decisions are logged for owner pick.
+- **Rationale:** AGENTS.md loop model — capture the requested improvements as a clear, evidence-mapped plan before any implementation; each R4 step remains individually gated.
+- **Approval status:** Plan DRAFT — awaiting owner review and OQ-R4 decisions before R4-0 implementation begins. No code changed, nothing committed to a branch, no deploy.
+
+## DL-033 — R4-1 implemented: hero single-line name + consistent role line
+
+- **Date:** 2026-08-06
+- **Decision:** Implement R4-1 (hero identity) in `src/pages/index.astro`. The name `Kashif Rezwi` is now a single `<h1>` line (removed the `Kashif<br />Rezwi` split). The old gradient direction line ("Building toward AI product engineering and developer tools") was replaced with the canonical, consistent role line **"Frontend-focused Full Stack Engineer"** — the exact string already used in the page `<title>`, meta description, and approved positioning. The bio's direction ("Currently building AI products and developer tools") is retained in the bio copy, so no direction signal was lost. `npx astro build` passes; the rendered `dist/index.html` confirms both `Kashif Rezwi` and the role string present and the old split line absent.
+- **Rationale:** Resolves the "two-line name feels odd" + "no consistent role line" feedback; satisfies the AGENTS.md §2/§3 requirement that the public role be one consistent, claim-safe string across every surface.
+- **Approval status:** Implemented locally per the approved R4 cycle, R4-1 step. Not deployed; no branch merge. Next: R4-2 (dot matrix). [Marked by owner to proceed one step at a time.]
+
+## DL-034 — R4-2/3/4 backfilled: dot-matrix multi-instance, tech-stack correction, first Experience additions
+
+- **Date:** 2026-08-06
+- **Decision:** Backfill the `v2-improvement` commits that implemented R4-2, R4-3, and part of R4-4: **R4-2** — `HeroDotMatrix.astro` refactored (`888a8ef`) to drive every `.hero-dot-matrix` canvas on the page, so the interactive motif repeats across hero and contact. **R4-3** — `TechIcon.astro`/`Icon.astro` add an SVG icon registry (`db07f82`); `REST APIs` reordered (`19a7157`); membership corrected with flat groups kept, LangChain dropped, ClickHouse/RabbitMQ added. **R4-4 (partial)** — Brand Exponents bullets deepened (Template Library "contributed to", reusable infinite-pagination "four product surfaces", production-stability wording).
+- **Rationale:** Brings the log in line with the actual `v2-improvement` tip; stays within the R4 content/interaction/styling scope and AGENTS.md §3 claim safety (collaborative wording, no metrics).
+- **Approval status:** Recorded post-hoc; consistent with the owner-approved R4 direction. Not deployed; no branch merge.
+
+## DL-035 — R4-5 implemented: navbar pinned (fixed); dot enlargement + fade dropped per owner
+
+- **Date:** 2026-08-06
+- **Decision:** Complete R4-5 in `src/components/Header.astro`: `position: fixed; top/left/right: 0` so the navbar stays pinned at the top at all times; kept the frosted-glass translucent + blur background; removed the bottom-fade `::after` approach. Added `body { padding-top: 65px; }` + `scroll-padding-top: 5rem` in `src/styles/global.css` to prevent the fixed header covering content and anchors (matches the hero's existing `100svh - 65px`). Separately, per owner commentary, **dot enlargement was dropped** (R4-2 keeps the current ~1.05–1.7px dots and only extends the motif) and the **navbar bottom fade was removed from the plan**.
+- **Rationale:** Reliable, absolute pinning with the theme's frosted glass intact and no hard-click/sticky-issue; the offset keeps content clear of the fixed bar. `npx astro build` passes.
+- **Approval status:** Implemented locally. Not deployed; no branch merge. A previous R4-5 fade attempt had been reverted; the owner's now-confirmed scope is pinning only.
+
+## DL-036 — R4-4 completed: Experience fill-out (Brand Exponents + Nexus), "several providers" correction, resume swap
+
+- **Date:** 2026-08-06
+- **Decision:**
+  1. **Brand Exponents** (`index.astro`): added/aware of a **Workflow builder & analytics** group (workflow dashboards + reusable templates on Swipe Pages; Swipe One workflow-templates dashboard and analytics from an early stage; shared page-builder systems — global responsive typography, named solid/gradient colour systems, responsive video module); expanded **AI-assisted** to include the workflow AI assistant that auto-configures workflow nodes and auto-drafts email nodes from the user's profile context; expanded **Platform, launches & reliability** to two AppSumo launch periods (resolving customer queries, fixing live issues, shipping hotfixes, iterating across Discord/Facebook/AppSumo). Changed **"six providers" → "several providers"** per the owner (they worked on several, not six).
+  2. **Nexus** — single summary line split into three bullets: event-management product (original content), features & integration (API via Axios/Fetch, CRUD, reusable components/UI libraries with designers/senior engineers), code quality (refactored frontend code).
+  3. **Resume** — the site's `/resume` PDF was replaced with the rendered **Full-stack master** (`kashif-rezwi-master-full-stack-developer-2026-07.pdf`) so the served resume matches the site identity ("Frontend-focused Full Stack Engineer") and the expanded experience section.
+- **Rationale:** Adds verified depth from the experience-evidence + master resumes; preserves all existing points; collaborative wording; no measured metrics, no "revenue" or "instant-messaging chat" unverified claims introduced. Resume selection aligned with the site's canonical role string.
+- **Approval status:** Implemented locally (owner directed the additions and the resume swap). R4-6 QA and R4-7 deploy remain owner-gated. No branch merge, no deploy.
+
+## DL-037 — Case-study prev/next nav: side-by-side on mobile (responsive fix)
+
+- **Date:** 2026-08-06
+- **Decision:** Fix the case-study bottom navigation (`src/pages/work/[slug].astro`) at `max-width: 600px`. The previous mobile rule stacked `.case-nav` into a column and left-aligned both items, which put Previous and Next on two lines at the left — a reported mobile defect. The rule now keeps `flex-direction: row` on all breakpoints, gives each `.case-nav-item` `flex: 1; min-width: 0`, makes `.case-nav-link` `width: 100%; min-width: 0`, and ellipsizes the `.case-nav-dir`/`.case-nav-name` text so long case titles truncate instead of wrapping. Result: Previous sits left, Next sits right, on a single row, at every width from 320px up. Verified programmatically at 320/375/390/414/768/1024/1280/1440 (prev 24–152, next 168–296 at 320px; `scrollWidth === clientWidth`; zero page overflow).
+- **Rationale:** The reported mobile breakage came from the column/left-align override in the `@media (max-width: 600px)` block; keeping the row with shrink + ellipsis preserves the desktop left/right pattern and guarantees the bottom card edge still has meaningful hit targets on narrow screens.
+- **Approval status:** Implemented locally on `v2-improvement` (working branch, not deployed). `npm run build` passes (6 pages). Part of the R4-6 QA pass; promotion/deploy remain owner-gated.
+
+## DL-038 — Theme toggle relocated to hamburger drawer on mobile/tablet
+
+- **Date:** 2026-08-06
+- **Decision:** On non-desktop screens (≤640px) the theme control no longer renders in the navbar; it is moved into the mobile hamburger drawer (`src/components/Header.astro`). `ThemeControl.astro` was refactored to accept an `idPrefix` prop so each instance gets unique radio ids (`theme-*` vs `menu-theme-*`); its script now selects `input[data-theme-control]` and its thumbnail CSS uses value-based `:has(input[value='light'|'dark']:checked)` selectors instead of id-based ones, which is instance-agnostic. The header instance is hidden via `@media (max-width:640px) .nav-tools :global(.theme-control){display:none}` (scoped-CSS requires the `:global()` to reach the child component's element). The drawer hosts a second `<ThemeControl idPrefix="menu-" />` in a bordered `.mobile-nav-theme` row.
+- **Rationale:** Declutters the mobile header (was logo + theme + hamburger); one setting UI now lives inside the menu. theme state stays shared via one localStorage key; both instances sync to the same `html[data-theme]`. No duplicate ids (`theme-system/light/dark`, `menu-theme-system/light/dark`). Verified: header hidden + drawer control present at 375/320; header shows on desktop; dark-mode click in drawer sets `data-theme`, persists, and moves both thumbs; build passes (6 pages).
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-039 — Experience section text justified
+
+- **Date:** 2026-08-06
+- **Decision:** In `src/pages/index.astro`, apply `text-align: justify; text-justify: inter-word;` with `text-align-last: left` to the experience body text (`.exp-group-text` and `.exp-summary`) so multi-line paragraphs read evenly on both edges. Scoped to body paragraphs only — labels (`.exp-group-label`), company/period lines, and single-line elements keep left alignment.
+- **Rationale:** Owner requested justify for better readability/consistency in the Experience section. `text-align-last: left` keeps the final line of each paragraph ragged so justification doesn't stretch the last line into awkward gaps; `inter-word` limits spacing distortion to word gaps.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed style confirmed `justify`/`inter-word`/`left`. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-040 — Work-card screenshots fit fully (contain); zoom only on hover
+
+- **Date:** 2026-08-06
+- **Decision:** In `src/components/WorkCard.astro`, change the cover image `object-fit: cover` → `contain` (and drop the fixed `object-position: top`). Each project screenshot now renders whole at rest instead of being center/top-cropped, while the `.work-card:hover img` `scale(1.03)` zoom remains the only magnification. The cover container keeps its `aspect-ratio: 16 / 9` so grid cards stay uniform in height; the two near-16:9 OG captures (perplexity 2940×1600, lingo-agent 2938×1598) show thin side letterboxing, the 1920×1080 one fills edge-to-edge.
+- **Rationale:** Owner reported the covers looked pre-zoomed/cropped from every direction when idle; they asked for the full screenshot to fit and zoom only on hover. `contain` satisfies that; `reduce-motion` transform override already disables the hover zoom.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed `object-fit: contain` verified on all three cards. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-041 — Work-card covers: blurred same-image filler behind letterboxed screenshot
+
+- **Date:** 2026-08-06
+- **Decision:** In `src/components/WorkCard.astro`, the cover div now carries its processed screenshot as an inline `background-image`. A `::before` layer (which inherits that same image via `background-image: inherit`) is `blur(14px) saturate(1.2)` and `scale(1.15)` to hide its edges, filling the top/bottom empty space left by `object-fit: contain` on the near-16:9 OG captures. The foreground `img` stays `position: relative; object-fit: contain` on top. Hover `scale(1.03)` zoom and the `prefers-reduced-motion` disable remain unchanged; `background-color: var(--color-surface-2)` is the fail-safe.
+- **Rationale:** Owner wanted the fully-fit screenshot (DL-040) but the empty letterbox bars looked unfinished; using the same image blurred as filler is the standard, self-consistent treatment and needs no new asset.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed style confirms blur layer on all three cards; no mobile overflow. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-042 — Work section dividers de-duplicated (More projects list)
+
+- **Date:** 2026-08-06
+- **Decision:** Remove the per-row `border-bottom` in `src/components/ProjectRow.astro` (the `.project-row` rules and the `:last-child` override). The "More projects" compact list now keeps only the single `.more-projects` container `border-top`, which separates the list from the work-card grid above; rows are separated purely by padding.
+- **Rationale:** The compact three-row block had four stacked horizontal rules (container top + a border after each row), which was visually noisy. One separators line is cleaner and keeps the vertical rhythm.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed style confirms container `border-top: 1px` and row borders `0px`. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-043 — Hero role as skewed cornflower badge + direction accent restored
+
+- **Date:** 2026-08-06
+- **Decision:** In the hero (`src/pages/index.astro`), the role line `Frontend-focused Full Stack Engineer` is now a **solid cornflower badge**: `.hero-role-badge` gets `background: var(--color-accent)` (cornflower), `skewX(-8deg)` (parallelogram leaning top-left → top-right), a soft accent shadow, and rounded corner; the inner `.hero-role-text-inner` is counter-skewed `skewX(8deg)` so the title reads upright, with **white** text over the cornflower fill. Separately, the direction line below the role restored its accent highlight: `hero-direction` again wraps its text in `.gradient-text` (accent tint `--color-accent-text`), matching the pre-DL-033 look.
+- **Rationale:** Owner asked for a solid highlight on the role ("cornflower variant bg, leaning top-left to top-right, white text") and to revert the description's altered style. Confirmed two design choices: skewed parallelogram + restore accent on the direction line. White on cornflower `#6495ed` meets AA against the badge fill.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed styles confirm cornflower bg (rgb(100,149,237)), skew matrix, white text, counter-skew, accent direction; no overflow at 1440 or 375. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-044 — Direction line restored to the exact old deployed accent style
+
+- **Date:** 2026-08-06
+- **Decision:** Correct DL-043's incomplete restore. The description line `Building toward AI product engineering and developer tools` now renders exactly as it did in the deployed R3 build (`gh-pages` tip `b04e6e0`): the phrase **"Building toward AI product engineering"** is wrapped in `.gradient-text` (accent tint `--color-accent-text`, verified `rgb(169,200,255)`), followed by `<br />` and plain **"and developer tools"** in `--color-ink-muted`. `.hero-direction` reverted to the old role sizing `clamp(1.25rem,3vw,1.75rem)` / weight 500 / line-height 1.3 to match the pre-R4 visual. The `Frontend-focused Full Stack Engineer` role badge (DL-043) is retained above it.
+- **Rationale:** The owner compared the direction line to the live site and it still looked unstyled — because the whole string had been gradient-wrapped and the size/dim styling had drifted. This restores the precise old markup (partial accent + line break + plain tail) at the old size.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed style verified (badge bg `rgb(100,149,237)`, direction 28px, gradient `rgb(169,200,255)`, plain tail). Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-045 — Role badge finalized: original skewed cornflower, sharp corners
+
+- **Date:** 2026-08-06
+- **Decision:** Lock the hero role badge back to the owner's original design (per DL-043) with one change: **remove the corner radius** (`border-radius: 0`). Solid cornflower (`--color-accent`) parallelogram via `skewX(-8deg)`, inner text counter-skewed `skewX(8deg)`, white text, soft accent shadow. The two alternatives trialed (soft-tint pill chip; ink text + underline) were reviewed and the owner kept the original skewed design.
+- **Rationale:** Owner preference — the original highlight reads better in their design language; the sharp corner removes the pill/"badge" look and keeps it a crisp ledger-highlight block.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed styles confirm cornflower bg, radius 0, skew matrix, white text, no overflow at 1440. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-046 — Anchored section landing fixed (remove double scroll offset)
+
+- **Date:** 2026-08-06
+- **Decision:** Change `html { scroll-padding-top }` in `src/styles/global.css` from `5rem` (80px) to `1.25rem` (20px). The nav anchors (`#work`, `#skills`, `#experience`, `#contact`) previously landed each section 80px from the viewport top — the fixed header is 66px — *and* every section already carries its own `padding-block: 5rem` (80px) top padding. The result was a **95px dead zone** between the header bottom and the section heading (heading sat at 160px), which read as "previous section still visible." With `1.25rem`, the section lands at 20px, the heading at ~100px — right below the 66px bar with a ~35px breathing gap, and no part of the previous section on screen.
+- **Rationale:** The offset was being double-counted (scroll padding + the section's own top padding). Because sections carry their own top padding, the scroll offset only needs to clear the bar, not add a second gap. Verified programmatically at 1280×800: before — section top 80px / heading 160px / dead zone 95px; after — section top 20px / heading 100px / dead zone 35px. Deployed R3 (gh-pages tip `b04e6e0`) had no `scroll-padding-top` at all, which caused the opposite defect (section heading tucked under the sticky header). 
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages). Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-047 — Portrait refinements: solid ring at rest, hover shrink + lean, larger on desktop
+
+- **Date:** 2026-08-06
+- **Decision:** Final portrait treatment in `src/pages/index.astro`:
+  - `.portrait-wrapper::after` is now a **solid cornflower ring visible on all sides** at rest (`inset: -8px; background: var(--color-accent)`), replacing the earlier "shadow on one corner" attempt.
+  - On `.hero-portrait:hover` the ring **shrinks to the photo's own size** (`inset: 0`) and **moves** `translate(10px, 12px)`; the `.portrait-img` simultaneously shifts the opposite direction `translate(-6px, -6px)`. Both transition at `0.35s ease`.
+  - Desktop `@media (min-width: 1024px)` enlarges the portrait from 220px → **260px** (tablet keeps 220px; mobile ≤768px keeps 160px).
+  - The temporary comparison page `src/pages/portrait-preview.astro` (four variants) was deleted after the owner rejected all of them; `src/layouts/Base.astro` gained an optional `noindex` prop (used for such throwaway pages) so stray preview pages never enter search indexes.
+- **Rationale:** Owner directed the sequence: solid ring first ("shadow on all sides" instead of offset), then hover should *shrink* the ring to profile size and move it, with the photo leaning slightly opposite for a tactile effect; then enlarged portrait on desktop. Removing the preview page keeps the repo's "one canonical doc/file per subject" discipline and prevents accidental indexing.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages, down from 7). Verified at 1440/1024/375: no page x-overflow; ring at rest `inset -8px`, hover `inset 0` + `translate(10px,12px)`, img `translate(-6px,-6px)`. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-048 — Contact anchor landing fixed (footer bottom scroll room)
+
+- **Date:** 2026-08-06
+- **Decision:** Add `margin-bottom: 5rem` to `footer` in `src/components/Footer.astro` (alongside its existing `margin-top: 4rem`). The contact section is the last block on the home page, so the page max-scrolled (4980px) 66px short of the anchor position (needed 5046px); the section topped out at 86px, and with its own 80px top padding the heading landed ~166px — about 100px below the header, versus ~34px for every other section. The footer margin adds 80px of scroll room so `#contact` now reaches the `scroll-padding-top: 1.25rem` anchor like the rest.
+- **Rationale:** DL-046 fixed the double-offset for all sections reachable at full scroll; the contact section was unreachable because no scrollable content existed below it. Adding scroll room below the footer (rather than more padding inside the already-80px-padded section) makes the anchor reachable and keeps section spacing consistent.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages). Verified at 1280×800: `#work`, `#experience`, `#contact` all land with section top 20px, heading 100px, gap 35px below the fixed header (was ~100px for contact). Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-049 — System-theme icon is device-aware (monitor/tablet/phone by viewport)
+
+- **Date:** 2026-08-06
+- **Decision:** In `src/components/Icon.astro`, the `system` glyph is now a device-aware triple: `g.sys-desktop` (monitor), `g.sys-tablet` (tablet), and `g.sys-phone` (phone) are all rendered inside the same `<svg>`, and CSS in the component shows exactly one by viewport width — desktop `>1024px` (default), tablet `641–1024px`, phone `≤640px` (the same breakpoint that moves the theme control into the hamburger). The `theme-choice.choice-system` scope keeps the switch local to the system option.
+- **Rationale:** The "system" theme option previously used a generic desktop-monitor icon on every screen, which misrepresented the device the theme is following. Showing the actual device type reinforces what "system" means.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages). Verified with agent-browser device emulation: iPhone 12 (390px) → phone glyph, iPad Pro (1024px) → tablet glyph, desktop (1280px) → monitor glyph. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-050 — Resume removed from desktop navbar (kept in hamburger drawer)
+
+- **Date:** 2026-08-06
+- **Decision:** Remove the `.nav-resume` `<a class="btn-outline">` from the desktop `.nav-tools` row in `src/components/Header.astro`, along with its `.nav-resume` style and the `@media (max-width:640px)` `.nav-resume` hide rule. The Resume link stays as the last `.mobile-nav-link accent` item inside the `#mobile-nav` drawer, so it remains reachable on small screens and in the hamburger on desktop.
+- **Rationale:** Owner asked to declutter the desktop navbar; Resume remains one tap away in the drawer.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); verified desktop `.nav-tools` has no resume link and the drawer still lists Work/Experience/Contact/Resume. Part of R4-6 QA; promotion/deploy owner-gated.
