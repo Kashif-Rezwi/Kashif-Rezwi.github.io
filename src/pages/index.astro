@@ -593,8 +593,8 @@ const techStack = [
     position: absolute;
     z-index: 0;
     inset: -8px;
-    border-radius: 50%;
     background: var(--color-accent);
+    clip-path: polygon(30% 4%, 70% 4%, 88% 18%, 100% 48%, 86% 78%, 50% 100%, 24% 90%, 10% 76%, 3% 56%, 6% 34%, 18% 12%);
     transition: inset 0.35s ease, transform 0.35s ease;
     pointer-events: none;
   }
@@ -607,8 +607,9 @@ const techStack = [
     z-index: 1;
     width: 220px;
     height: 220px;
-    border-radius: 50%;
     object-fit: cover;
+    background-color: #a9c8ff; /* light cornflower — photo backing, both themes */
+    clip-path: polygon(30% 4%, 70% 4%, 88% 18%, 100% 48%, 86% 78%, 50% 100%, 24% 90%, 10% 76%, 3% 56%, 6% 34%, 18% 12%);
     transition: transform 0.35s ease;
   }
   .hero-portrait:hover .portrait-img {
