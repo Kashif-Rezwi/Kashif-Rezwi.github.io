@@ -322,3 +322,28 @@
 - **Decision:** Lock the hero role badge back to the owner's original design (per DL-043) with one change: **remove the corner radius** (`border-radius: 0`). Solid cornflower (`--color-accent`) parallelogram via `skewX(-8deg)`, inner text counter-skewed `skewX(8deg)`, white text, soft accent shadow. The two alternatives trialed (soft-tint pill chip; ink text + underline) were reviewed and the owner kept the original skewed design.
 - **Rationale:** Owner preference — the original highlight reads better in their design language; the sharp corner removes the pill/"badge" look and keeps it a crisp ledger-highlight block.
 - **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed styles confirm cornflower bg, radius 0, skew matrix, white text, no overflow at 1440. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-046 — Anchored section landing fixed (remove double scroll offset)
+
+- **Date:** 2026-08-06
+- **Decision:** Change `html { scroll-padding-top }` in `src/styles/global.css` from `5rem` (80px) to `1.25rem` (20px). The nav anchors (`#work`, `#skills`, `#experience`, `#contact`) previously landed each section 80px from the viewport top — the fixed header is 66px — *and* every section already carries its own `padding-block: 5rem` (80px) top padding. The result was a **95px dead zone** between the header bottom and the section heading (heading sat at 160px), which read as "previous section still visible." With `1.25rem`, the section lands at 20px, the heading at ~100px — right below the 66px bar with a ~35px breathing gap, and no part of the previous section on screen.
+- **Rationale:** The offset was being double-counted (scroll padding + the section's own top padding). Because sections carry their own top padding, the scroll offset only needs to clear the bar, not add a second gap. Verified programmatically at 1280×800: before — section top 80px / heading 160px / dead zone 95px; after — section top 20px / heading 100px / dead zone 35px. Deployed R3 (gh-pages tip `b04e6e0`) had no `scroll-padding-top` at all, which caused the opposite defect (section heading tucked under the sticky header). 
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages). Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-047 — Portrait refinements: solid ring at rest, hover shrink + lean, larger on desktop
+
+- **Date:** 2026-08-06
+- **Decision:** Final portrait treatment in `src/pages/index.astro`:
+  - `.portrait-wrapper::after` is now a **solid cornflower ring visible on all sides** at rest (`inset: -8px; background: var(--color-accent)`), replacing the earlier "shadow on one corner" attempt.
+  - On `.hero-portrait:hover` the ring **shrinks to the photo's own size** (`inset: 0`) and **moves** `translate(10px, 12px)`; the `.portrait-img` simultaneously shifts the opposite direction `translate(-6px, -6px)`. Both transition at `0.35s ease`.
+  - Desktop `@media (min-width: 1024px)` enlarges the portrait from 220px → **260px** (tablet keeps 220px; mobile ≤768px keeps 160px).
+  - The temporary comparison page `src/pages/portrait-preview.astro` (four variants) was deleted after the owner rejected all of them; `src/layouts/Base.astro` gained an optional `noindex` prop (used for such throwaway pages) so stray preview pages never enter search indexes.
+- **Rationale:** Owner directed the sequence: solid ring first ("shadow on all sides" instead of offset), then hover should *shrink* the ring to profile size and move it, with the photo leaning slightly opposite for a tactile effect; then enlarged portrait on desktop. Removing the preview page keeps the repo's "one canonical doc/file per subject" discipline and prevents accidental indexing.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages, down from 7). Verified at 1440/1024/375: no page x-overflow; ring at rest `inset -8px`, hover `inset 0` + `translate(10px,12px)`, img `translate(-6px,-6px)`. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-048 — Contact anchor landing fixed (footer bottom scroll room)
+
+- **Date:** 2026-08-06
+- **Decision:** Add `margin-bottom: 5rem` to `footer` in `src/components/Footer.astro` (alongside its existing `margin-top: 4rem`). The contact section is the last block on the home page, so the page max-scrolled (4980px) 66px short of the anchor position (needed 5046px); the section topped out at 86px, and with its own 80px top padding the heading landed ~166px — about 100px below the header, versus ~34px for every other section. The footer margin adds 80px of scroll room so `#contact` now reaches the `scroll-padding-top: 1.25rem` anchor like the rest.
+- **Rationale:** DL-046 fixed the double-offset for all sections reachable at full scroll; the contact section was unreachable because no scrollable content existed below it. Adding scroll room below the footer (rather than more padding inside the already-80px-padded section) makes the anchor reachable and keeps section spacing consistent.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages). Verified at 1280×800: `#work`, `#experience`, `#contact` all land with section top 20px, heading 100px, gap 35px below the fixed header (was ~100px for contact). Part of R4-6 QA; promotion/deploy owner-gated.

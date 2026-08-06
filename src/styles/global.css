@@ -141,8 +141,9 @@
     scroll-behavior: smooth;
     /* Prevent layout shift from scrollbar appearance */
     scrollbar-gutter: stable;
-    /* Keep anchored sections clear of the fixed header */
-    scroll-padding-top: 5rem;
+    /* Keep anchored sections clear of the fixed header; sections carry their
+       own top padding, so this only needs to clear the bar, not add more. */
+    scroll-padding-top: 1.25rem;
   }
 
   body {
