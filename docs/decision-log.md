@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-05 (DL-024)
+- **Last updated:** 2026-08-06 (DL-051)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -361,3 +361,10 @@
 - **Decision:** Remove the `.nav-resume` `<a class="btn-outline">` from the desktop `.nav-tools` row in `src/components/Header.astro`, along with its `.nav-resume` style and the `@media (max-width:640px)` `.nav-resume` hide rule. The Resume link stays as the last `.mobile-nav-link accent` item inside the `#mobile-nav` drawer, so it remains reachable on small screens and in the hamburger on desktop.
 - **Rationale:** Owner asked to declutter the desktop navbar; Resume remains one tap away in the drawer.
 - **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); verified desktop `.nav-tools` has no resume link and the drawer still lists Work/Experience/Contact/Resume. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-051 — CI build check extended from `develop` to `main`; deploy stays manual-only
+
+- **Date:** 2026-08-06
+- **Decision:** Extend `ci.yml` to run the build/contrast check on pushes and PRs to **`main`** as well as `develop` (`push.branches` and `pull_request.branches` now `[develop, main]`). Production deploy (`.github/workflows/deploy.yml`) is intentionally **left manual-only** (`workflow_dispatch`), so a push/merge to `main` triggers CI automatically but never auto-deploys — production deploys stay owner-gated. No inline branch pin was added to `deploy.yml`; manual runs deploy from the branch selected in the Actions UI (default `main`).
+- **Rationale:** Give `main` the same self-healing build signal `develop` has, while keeping production deploys approval-gated (AGENTS.md §1 gate loop). Matches the owner's ask to replicate the `develop` CI/CD loop on `main` with a manual deploy trigger.
+- **Approval status:** Approved (owner directive in conversation, 2026-08-06). Verified via a manual CI run on `main`.

@@ -1,12 +1,13 @@
 # Build check for the portfolio rebuild (Phase 1.0+).
-# Runs on pushes/PRs touching the site on develop. Preview deploys are separate
-# (companion repo Kashif-Rezwi/portfolio-preview — see docs/engineering/branching-and-deploys.md).
+# Runs on pushes/PRs touching the site on develop AND main. Preview deploys are
+# separate (companion repo Kashif-Rezwi/portfolio-preview — see
+# docs/engineering/branching-and-deploys.md).
 
 name: CI
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, main]
     paths:
       - 'src/**'
       - 'public/**'
@@ -18,7 +19,7 @@ on:
       - '.nvmrc'
       - '.github/workflows/**'
   pull_request:
-    branches: [develop]
+    branches: [develop, main]
 
 permissions:
   contents: read

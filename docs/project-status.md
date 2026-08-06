@@ -72,3 +72,4 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 - **Next step: R4-6** — full QA pass (Lighthouse, axe, contrast, links, no-JS/canvas/reduced-motion) + evidence doc `docs/rebuild-02/10-r4-qa-evidence.md`, then owner gate. **R4-7** (promotion `v2-improvement` → `develop` → `gh-pages` + deploy) happens **only** on a separate owner "go".
 - **Owner spot-checks** (post-launch): LinkedIn click-through (OQ-06), visual captures at 320/1440, and resume-PDF review. Repository is back in maintenance mode per AGENTS.md §1: future changes are pushed to the working branch, built, then deployed to `gh-pages`.
+- **CI/CD (DL-051, 2026-08-06):** `ci.yml` build check now runs automatically on pushes/PRs to **both `develop` and `main`**. The production `deploy.yml` stays **manual-only** (`workflow_dispatch`) — a push/merge to `main` triggers CI but never auto-deploys. Manual CI run on `main` verified passing.

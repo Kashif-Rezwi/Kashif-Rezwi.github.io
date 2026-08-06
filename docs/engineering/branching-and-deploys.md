@@ -41,5 +41,5 @@
 
 ## CI in this repository
 
-- `ci.yml` — build check on pushes/PRs touching the site or workflows on `develop` (catches breakage before preview/production work).
-- `deploy.yml` — production build + `upload-pages-artifact` + `deploy-pages`; manual-only; effective only after the 1.4 Pages-source switch.
+- `ci.yml` — build check on pushes/PRs touching the site or workflows on `develop` and `main` (catches breakage before preview/production work). CI runs automatically on both branches; no manual trigger needed.
+- `deploy.yml` — production build + `upload-pages-artifact` + `deploy-pages`; manual-only (`workflow_dispatch`); runs against the branch selected in the Actions UI (default `main`). Effective only after the 1.4 Pages-source switch.
