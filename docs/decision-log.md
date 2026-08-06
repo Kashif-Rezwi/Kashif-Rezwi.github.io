@@ -280,3 +280,17 @@
 - **Decision:** In `src/pages/index.astro`, apply `text-align: justify; text-justify: inter-word;` with `text-align-last: left` to the experience body text (`.exp-group-text` and `.exp-summary`) so multi-line paragraphs read evenly on both edges. Scoped to body paragraphs only — labels (`.exp-group-label`), company/period lines, and single-line elements keep left alignment.
 - **Rationale:** Owner requested justify for better readability/consistency in the Experience section. `text-align-last: left` keeps the final line of each paragraph ragged so justification doesn't stretch the last line into awkward gaps; `inter-word` limits spacing distortion to word gaps.
 - **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed style confirmed `justify`/`inter-word`/`left`. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-040 — Work-card screenshots fit fully (contain); zoom only on hover
+
+- **Date:** 2026-08-06
+- **Decision:** In `src/components/WorkCard.astro`, change the cover image `object-fit: cover` → `contain` (and drop the fixed `object-position: top`). Each project screenshot now renders whole at rest instead of being center/top-cropped, while the `.work-card:hover img` `scale(1.03)` zoom remains the only magnification. The cover container keeps its `aspect-ratio: 16 / 9` so grid cards stay uniform in height; the two near-16:9 OG captures (perplexity 2940×1600, lingo-agent 2938×1598) show thin side letterboxing, the 1920×1080 one fills edge-to-edge.
+- **Rationale:** Owner reported the covers looked pre-zoomed/cropped from every direction when idle; they asked for the full screenshot to fit and zoom only on hover. `contain` satisfies that; `reduce-motion` transform override already disables the hover zoom.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed `object-fit: contain` verified on all three cards. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-041 — Work-card covers: blurred same-image filler behind letterboxed screenshot
+
+- **Date:** 2026-08-06
+- **Decision:** In `src/components/WorkCard.astro`, the cover div now carries its processed screenshot as an inline `background-image`. A `::before` layer (which inherits that same image via `background-image: inherit`) is `blur(14px) saturate(1.2)` and `scale(1.15)` to hide its edges, filling the top/bottom empty space left by `object-fit: contain` on the near-16:9 OG captures. The foreground `img` stays `position: relative; object-fit: contain` on top. Hover `scale(1.03)` zoom and the `prefers-reduced-motion` disable remain unchanged; `background-color: var(--color-surface-2)` is the fail-safe.
+- **Rationale:** Owner wanted the fully-fit screenshot (DL-040) but the empty letterbox bars looked unfinished; using the same image blurred as filler is the standard, self-consistent treatment and needs no new asset.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed style confirms blur layer on all three cards; no mobile overflow. Part of R4-6 QA; promotion/deploy owner-gated.
