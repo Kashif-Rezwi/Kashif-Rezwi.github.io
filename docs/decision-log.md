@@ -301,3 +301,24 @@
 - **Decision:** Remove the per-row `border-bottom` in `src/components/ProjectRow.astro` (the `.project-row` rules and the `:last-child` override). The "More projects" compact list now keeps only the single `.more-projects` container `border-top`, which separates the list from the work-card grid above; rows are separated purely by padding.
 - **Rationale:** The compact three-row block had four stacked horizontal rules (container top + a border after each row), which was visually noisy. One separators line is cleaner and keeps the vertical rhythm.
 - **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed style confirms container `border-top: 1px` and row borders `0px`. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-043 — Hero role as skewed cornflower badge + direction accent restored
+
+- **Date:** 2026-08-06
+- **Decision:** In the hero (`src/pages/index.astro`), the role line `Frontend-focused Full Stack Engineer` is now a **solid cornflower badge**: `.hero-role-badge` gets `background: var(--color-accent)` (cornflower), `skewX(-8deg)` (parallelogram leaning top-left → top-right), a soft accent shadow, and rounded corner; the inner `.hero-role-text-inner` is counter-skewed `skewX(8deg)` so the title reads upright, with **white** text over the cornflower fill. Separately, the direction line below the role restored its accent highlight: `hero-direction` again wraps its text in `.gradient-text` (accent tint `--color-accent-text`), matching the pre-DL-033 look.
+- **Rationale:** Owner asked for a solid highlight on the role ("cornflower variant bg, leaning top-left to top-right, white text") and to revert the description's altered style. Confirmed two design choices: skewed parallelogram + restore accent on the direction line. White on cornflower `#6495ed` meets AA against the badge fill.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed styles confirm cornflower bg (rgb(100,149,237)), skew matrix, white text, counter-skew, accent direction; no overflow at 1440 or 375. Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-044 — Direction line restored to the exact old deployed accent style
+
+- **Date:** 2026-08-06
+- **Decision:** Correct DL-043's incomplete restore. The description line `Building toward AI product engineering and developer tools` now renders exactly as it did in the deployed R3 build (`gh-pages` tip `b04e6e0`): the phrase **"Building toward AI product engineering"** is wrapped in `.gradient-text` (accent tint `--color-accent-text`, verified `rgb(169,200,255)`), followed by `<br />` and plain **"and developer tools"** in `--color-ink-muted`. `.hero-direction` reverted to the old role sizing `clamp(1.25rem,3vw,1.75rem)` / weight 500 / line-height 1.3 to match the pre-R4 visual. The `Frontend-focused Full Stack Engineer` role badge (DL-043) is retained above it.
+- **Rationale:** The owner compared the direction line to the live site and it still looked unstyled — because the whole string had been gradient-wrapped and the size/dim styling had drifted. This restores the precise old markup (partial accent + line break + plain tail) at the old size.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed style verified (badge bg `rgb(100,149,237)`, direction 28px, gradient `rgb(169,200,255)`, plain tail). Part of R4-6 QA; promotion/deploy owner-gated.
+
+## DL-045 — Role badge finalized: original skewed cornflower, sharp corners
+
+- **Date:** 2026-08-06
+- **Decision:** Lock the hero role badge back to the owner's original design (per DL-043) with one change: **remove the corner radius** (`border-radius: 0`). Solid cornflower (`--color-accent`) parallelogram via `skewX(-8deg)`, inner text counter-skewed `skewX(8deg)`, white text, soft accent shadow. The two alternatives trialed (soft-tint pill chip; ink text + underline) were reviewed and the owner kept the original skewed design.
+- **Rationale:** Owner preference — the original highlight reads better in their design language; the sharp corner removes the pill/"badge" look and keeps it a crisp ledger-highlight block.
+- **Approval status:** Implemented locally on `v2-improvement` (not deployed). Build passes (6 pages); computed styles confirm cornflower bg, radius 0, skew matrix, white text, no overflow at 1440. Part of R4-6 QA; promotion/deploy owner-gated.

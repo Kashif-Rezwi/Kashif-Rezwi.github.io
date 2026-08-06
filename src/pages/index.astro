@@ -108,14 +108,18 @@ const techStack = [
           Kashif Rezwi
         </h1>
 
-        <!-- Role line (consistent with title/meta/positioning) -->
+        <!-- Role line (consistent with title/meta/positioning) — skewed accent badge -->
         <p class="hero-role delay-300 animate-fade-up">
-          <span class="gradient-text">Frontend-focused Full Stack Engineer</span>
+          <span class="hero-role-badge">
+            <span class="hero-role-text-inner">Frontend-focused Full Stack Engineer</span>
+          </span>
         </p>
 
-        <!-- Direction -->
+        <!-- Direction — old deployed accent style restored -->
         <p class="hero-direction delay-350 animate-fade-up">
-          Building toward AI product engineering and developer tools
+          <span class="gradient-text">Building toward AI product engineering</span>
+          <br />
+          and developer tools
         </p>
 
         <!-- Bio -->
@@ -505,17 +509,34 @@ const techStack = [
   }
 
   .hero-role {
+    margin: 0.5rem 0 0;
+  }
+
+  /* Role badge — solid cornflower, leaning top-left to top-right (parallelogram),
+     sharp corners, white text; the title is counter-skewed so it reads upright. */
+  .hero-role-badge {
+    display: inline-block;
+    padding: 0.45rem 0.9rem 0.45rem 1.1rem;
+    background: var(--color-accent);
+    border-radius: 0;
+    transform: skewX(-8deg);
+    transform-origin: center;
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--color-accent) 55%, transparent);
+  }
+  .hero-role-text-inner {
+    display: inline-block;
+    transform: skewX(8deg);
     font-size: clamp(1.25rem, 3vw, 1.75rem);
     font-weight: 500;
     line-height: 1.3;
-    color: var(--color-ink-muted);
-    margin: 0;
+    color: #fff;
+    letter-spacing: -0.01em;
   }
 
   .hero-direction {
-    font-size: clamp(1rem, 2.2vw, 1.15rem);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.3;
     color: var(--color-ink-muted);
     margin: 0;
   }
