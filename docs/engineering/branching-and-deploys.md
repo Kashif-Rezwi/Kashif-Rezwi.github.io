@@ -2,7 +2,7 @@
 
 - **Purpose:** The decided branch model and the preview/production deployment mechanisms for Phase 1 — the explicit deliverable audit finding F-04 assigned to Phase 1.0 ("which branch carries Phase 1 work, and what triggers preview vs production deploys").
 - **Authority:** Owner-approved 2026-08-05 (decision DL-008); subordinate to `AGENTS.md` and the roadmap's gate rules. GitHub platform facts below were verified 2026-08-05.
-- **Last updated:** 2026-08-05
+- **Last updated:** 2026-08-06 (DL-051/052)
 - **Related:** [implementation-roadmap.md](./implementation-roadmap.md) · [architecture-and-quality.md](./architecture-and-quality.md) · [decision-log.md](../decision-log.md)
 
 ## Why a separate mechanism was needed (verified platform facts)
@@ -34,12 +34,11 @@
 
 ## Production deployment
 
-- **Phase 1.0–1.3:** production keeps deploying from branch `gh-pages` exactly as today — **except no further pushes are planned to it**; the old site simply stays live. `deploy.yml` exists in-repo but is `workflow_dispatch`-only and inert (the Pages source is not Actions yet).
-- **Phase 1.4 (owner-approved, step by step):** (1) merge `develop → main`; (2) switch Pages source from branch to **GitHub Actions** (repo Settings → Pages, owner action); (3) run `deploy.yml` manually (recommended: add an environment protection rule so only `main` can deploy to the `github-pages` environment); (4) live smoke tests per the roadmap; (5) retain `gh-pages` for rollback until the owner confirms.
-- **Rollback before 1.4:** nothing can have changed — production never receives Phase 1 deployments.
-- **Rollback after 1.4:** redeploy the retained `gh-pages` content (switch Pages source back to branch `gh-pages`), or revert the merge, owner's choice.
+- **Current model (DL-052):** `deploy.yml` runs **automatically on every push/merge to `main`** (plus `workflow_dispatch` for manual runs). Auto-deploy is gated by the Pages source: until it is switched from branch `gh-pages` to **GitHub Actions** (repo Settings → Pages, owner action), the workflow runs but does not affect the live site.
+- **Switch steps (owner action, once):** (1) ensure the desired content is merged to `main`; (2) repo Settings → Pages → Source → **GitHub Actions**; (3) the next push to `main` auto-deploys; (4) live smoke tests per the roadmap; (5) retain `gh-pages` for rollback until the owner confirms.
+- **Rollback:** redeploy the retained `gh-pages` content (switch Pages source back to branch `gh-pages`), or revert the merge, owner's choice.
 
 ## CI in this repository
 
 - `ci.yml` — build check on pushes/PRs touching the site or workflows on `develop` and `main` (catches breakage before preview/production work). CI runs automatically on both branches; no manual trigger needed.
-- `deploy.yml` — production build + `upload-pages-artifact` + `deploy-pages`; manual-only (`workflow_dispatch`); runs against the branch selected in the Actions UI (default `main`). Effective only after the 1.4 Pages-source switch.
+- `deploy.yml` — production build + `upload-pages-artifact` + `deploy-pages`; runs **automatically on push/merge to `main`** and is also manually dispatchable (`workflow_dispatch`, default branch `main`). Effective only after the Pages source is switched to GitHub Actions.
