@@ -8,6 +8,7 @@ import GitHubContributions from '../components/GitHubContributions.astro';
 import HeroDotMatrix from '../components/HeroDotMatrix.astro';
 import Icon from '../components/Icon.astro';
 import TechIcon from '../components/TechIcon.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
 import { withBase } from '../lib/paths';
 import portrait from '../assets/portrait.jpg';
 
@@ -17,6 +18,10 @@ const description =
 const featured = (await getCollection('work'))
   .filter((e) => e.data.order <= 3)
   .sort((a, b) => a.data.order - b.data.order);
+
+const testimonials = (await getCollection('testimonials')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 
 const links = {
   email: 'kashifrezwi850@gmail.com',
@@ -388,6 +393,40 @@ const techStack = [
             </ul>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       TESTIMONIALS
+  ================================================================ -->
+  <section id="testimonials" class="section-block section-alt">
+    <div class="container-site">
+      <div class="section-header reveal">
+        <p class="section-label">Testimonials</p>
+        <h2 class="section-title">What teammates say</h2>
+        <p class="section-subtitle">
+          Recommendations from seniors at Brand Exponents Creatives Pvt Ltd,
+          published on my LinkedIn profile.
+        </p>
+      </div>
+
+      <div class="testimonial-grid">
+        {testimonials.map((entry, i) => (
+          <div class={`reveal delay-${(i + 1) * 100}`}>
+            <TestimonialCard
+              quote={entry.data.quote}
+              highlights={entry.data.highlights}
+              author={entry.data.author}
+              role={entry.data.role}
+              company={entry.data.company}
+              relationship={entry.data.relationship}
+              date={entry.data.date}
+              avatar={entry.data.avatar}
+              linkedinUrl={entry.data.linkedinUrl}
+            />
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -904,6 +943,16 @@ const techStack = [
     font-size: 0.875rem;
     color: var(--color-ink-muted);
     font-family: var(--font-mono);
+  }
+
+  /* ----------------------------------------------------------------
+     Testimonials
+  ---------------------------------------------------------------- */
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
   }
 
   /* ----------------------------------------------------------------

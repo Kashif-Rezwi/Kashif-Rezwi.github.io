@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-06 (DL-052)
+- **Last updated:** 2026-08-07 (DL-053)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -376,3 +376,10 @@
 - **Rationale:** Owner requested auto-deploy on `main` ("Option C") so changes are visible live on push, matching the push-to-deploy expectation. Production surface is the `main` branch only, so the trigger is scoped to `main`.
 - **Note — still gated by Pages source:** `actions/deploy-pages` only publishes once the repo's Pages source is switched from branch `gh-pages` to **GitHub Actions** (repo Settings → Pages, owner action). Until that switch, `deploy.yml` runs but does not change the live site.
 - **Approval status:** Approved (owner directive in conversation, 2026-08-06).
+
+## DL-053 — LinkedIn testimonials section added as a content collection
+
+- **Date:** 2026-08-07
+- **Decision:** Add a **Testimonials** home section sourced from two LinkedIn recommendations (Thanga Balaji S, Adithya Santhosh — seniors at Brand Exponents Creatives Pvt Ltd). Implemented as an Astro content collection (`testimonials`) with a `TestimonialCard` component, rendering quote + highlighted pull-quotes + author attribution linking to each recommender's LinkedIn profile, with photos committed under `public/testimonials/`. Quotes were chosen to be inserted **verbatim** (claim-safe — AGENTS.md §3).
+- **Rationale:** Owner evaluated automatic LinkedIn syncing (Official Recommendation API is partner-gated; scraping/Voyager/cookie-based and third-party scrapers violate LinkedIn's ToS and the operating contract's source safety §4) and chose the managed-content approach this repo already uses for case studies. Owner supplied the quotes, relationship labels, dates, profile URLs, and photos directly.
+- **Approval status:** Approved (owner directive in conversation, 2026-08-07). Implementation complete; deployed to production only on a separate owner "go".

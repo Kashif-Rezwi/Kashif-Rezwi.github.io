@@ -38,4 +38,37 @@ const work = defineCollection({
   }),
 });
 
-export const collections = { work };
+/**
+ * LinkedIn testimonials from former teammates/seniors at a previous employer.
+ *
+ * Source: owner-provided (AGENTS.md §3, VERIFIED via direct owner confirmation +
+ * matching LinkedIn URL). Quotes are reproduced verbatim. Photos are the public
+ * files committed under public/testimonials/.
+ */
+const testimonials = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/testimonials' }),
+  schema: z.object({
+    /** Recommender's full name as on LinkedIn */
+    author: z.string(),
+    /** Profession header shown on the testimonial card, e.g. "Lead Full-Stack Engineer" */
+    role: z.string(),
+    /** Employer context from the owner's prior company */
+    company: z.string(),
+    /** Relationship note LinkedIn labels, e.g. "Managed Kashif directly" */
+    relationship: z.string(),
+    /** Publication date as shown on LinkedIn (yyyy-mm-dd) */
+    date: z.string(),
+    /** Recommender's public LinkedIn profile URL */
+    linkedinUrl: z.string().url(),
+    /** Avatar served from public/testimonials/, e.g. "/testimonials/thanga_balaji_s.png" */
+    avatar: z.string(),
+    /** Full verbatim recommendation text */
+    quote: z.string(),
+    /** Exact phrases (substrings of quote) to highlight inline within the quote */
+    highlights: z.array(z.string()).min(1),
+    /** Sort order on the home page */
+    order: z.number().int(),
+  }),
+});
+
+export const collections = { work, testimonials };

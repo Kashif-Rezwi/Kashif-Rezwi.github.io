@@ -1,0 +1,190 @@
+---
+/**
+ * Testimonial card — a verbatim LinkedIn recommendation from a former teammate
+ * or senior at a previous employer.
+ *
+ * Design: the full quote is shown without added line breaks. Key phrases
+ * (exact substrings provided in the collection data) are highlighted inline
+ * within the quote — no separate bullet list, no altered wording. The author's
+ * name links out to their public LinkedIn profile via rel="noopener". Photos
+ * are served from public/testimonials/ (committed, base-path aware via withBase).
+ */
+import Icon from './Icon.astro';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  quote: string;
+  highlights: string[];
+  author: string;
+  role: string;
+  company: string;
+  relationship: string;
+  date: string;
+  avatar: string;
+  linkedinUrl: string;
+}
+
+const { quote, highlights, author, role, company, relationship, date, avatar, linkedinUrl } =
+  Astro.props;
+
+// Escape HTML so the verbatim quote is never interpreted as markup, then wrap the
+// exact highlight phrases in <mark> so only they are emphasized. Phrases are
+// substrings guaranteed by the collection data, so iteration is lossless.
+function esc(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+const escapedQuote: string = esc(quote);
+const escapedHighlights = highlights.map((h) => esc(h)).sort((a, b) => b.length - a.length);
+
+let highlighted = escapedQuote;
+for (const phrase of escapedHighlights) {
+  // Skip phrases that don't literally appear (defensive; data is source-verified).
+  if (phrase && highlighted.includes(phrase)) {
+    highlighted = highlighted.replace(phrase, `<mark class="testimonial-highlight">${phrase}</mark>`);
+  }
+}
+
+const paragraphsHtml = highlighted
+  .trim()
+  .split(/\n\s*\n/)
+  .map((p) => `<p>${p.replace(/\n/g, ' ').trim()}</p>`)
+  .join('');
+---
+
+<figure class="testimonial-card card">
+  <span class="testimonial-mark" aria-hidden="true">“</span>
+
+  <blockquote class="testimonial-quote" set:html={paragraphsHtml}></blockquote>
+
+  <figcaption class="testimonial-attribution">
+    <a href={linkedinUrl} class="testimonial-photo-link" target="_blank" rel="noopener noreferrer" aria-label={`${author}'s LinkedIn profile`}>
+      <img
+        class="testimonial-photo"
+        src={withBase(avatar)}
+        alt=""
+        width={48}
+        height={48}
+        loading="lazy"
+      />
+    </a>
+    <div class="testimonial-byline">
+      <a href={linkedinUrl} class="testimonial-name" target="_blank" rel="noopener noreferrer">
+        {author} <Icon name="external" size={12} />
+      </a>
+      <p class="testimonial-role">{role} · {company}</p>
+      <p class="testimonial-meta">{relationship} · {date}</p>
+    </div>
+  </figcaption>
+</figure>
+
+<style>
+  .testimonial-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.75rem 1.75rem 1.5rem;
+    height: 100%;
+  }
+
+  .testimonial-mark {
+    position: absolute;
+    top: 0.25rem;
+    right: 1.5rem;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 4.75rem;
+    line-height: 1;
+    color: var(--color-accent-soft);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .testimonial-quote {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-ink);
+    margin: 0;
+    padding-right: 0.75rem;
+    position: relative;
+    z-index: 1;
+    text-rendering: optimizeLegibility;
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+  }
+
+  .testimonial-quote :global(p) {
+    margin: 0;
+  }
+
+  /* Highlighted key phrases: styled in primary accent text color only, no background highlight fill */
+  .testimonial-quote :global(mark.testimonial-highlight),
+  .testimonial-quote :global(.testimonial-highlight) {
+    background: none;
+    background-color: transparent;
+    color: var(--color-accent);
+    font-weight: 600;
+    padding: 0;
+  }
+
+  .testimonial-attribution {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    margin-top: auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .testimonial-photo-link {
+    flex-shrink: 0;
+    line-height: 0;
+  }
+  .testimonial-photo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    transition: border-color 0.15s ease;
+  }
+  .testimonial-photo-link:hover .testimonial-photo {
+    border-color: var(--color-accent);
+  }
+
+  .testimonial-byline {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+  .testimonial-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+    font-size: 0.9375rem;
+  }
+  .testimonial-name:hover {
+    color: var(--color-accent-light);
+  }
+  .testimonial-role {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--color-ink-muted);
+  }
+  .testimonial-meta {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-ink-dim);
+  }
+</style>
