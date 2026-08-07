@@ -240,7 +240,7 @@ Constraint: **no JS islands added** — everything stays server-rendered + exist
 
 ## 9. Phased roadmap (each phase is the smallest independently-verifiable unit)
 
-Working branch: **`v2-improvement`** (same as R4). Phase order and gates are **this proposal**; owner approves each phase start (one step at a time, per the owner's standard).
+Working branch: **`evolve-design`** (= develop + this spec; R4 work + testimonials are already merged into `develop` — verified 2026-08-07, DL-055). Do **not** branch from `v2-improvement` (stale; fully contained in develop). Phase order and gates are **this proposal**; owner approves each phase start (one step at a time, per the owner's standard).
 
 | Phase | Name | Scope | Done-when evidence | Gate |
 |---|---|---|---|---|
@@ -252,7 +252,7 @@ Working branch: **`v2-improvement`** (same as R4). Phase order and gates are **t
 | R5-5 | **Case-study + inner pages** | Sidebar glass, case-cover frame, page-hero glass band, mobile drawer glass | All 3 studies; both themes | Owner "go" |
 | R5-6 | **Architecture cleanup** | `SectionHeader`, `GlassPanel`, split style blocks, delete dead code, unify durations, extend `check-contrast` for glass tokens | `npm run build` passes; diff is refactor-only (no visual change) | Owner "go" |
 | R5-7 | **Full QA report** | Re-run the R3-F matrix **with** glass: both themes, back-of-glass, reduced motion/transparency, no-JS, Lighthouse, axe, overflow, links, contrast-incl-glass; evidence doc `docs/rebuild-02/12-r5-qa-evidence.md` | All targets green; rollback recorded | Owner "go" → deploy |
-| R5-8 | **Deploy** (promote `v2-improvement` → `develop` → `gh-pages`) | Execution only on a separate owner "go" | smoke tests; rollback readiness | Owner explicit |
+| R5-8 | **Deploy** (evolve-design → `develop` → `gh-pages`, or promote to `main` once Pages source = Actions) | Execution only on a separate owner "go" | smoke tests; rollback readiness | Owner explicit |
 
 Each phase is written/committed **only after its gate**; no phase authorizes the next.
 
@@ -329,6 +329,7 @@ Each pending answer gates exactly one phase — the plan never deadlocks.
 | Date | Change |
 |---|---|
 | 2026-08-07 | Initial draft (Step 0). Status: DRAFT, pending owner review of §1–§13. |
+| 2026-08-07 | Working branch corrected to `evolve-design`; R5-8 deploy path fixed (DL-054/055). R5 part of the new **R5 Operating Loop** (`docs/engineering/engineering-workflow.md`). |
 
 ---
 

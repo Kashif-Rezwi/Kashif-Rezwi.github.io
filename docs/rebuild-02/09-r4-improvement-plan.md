@@ -1,6 +1,6 @@
 # R4 — Portfolio Improvement Plan
 
-- **Purpose:** Capture the five owner-requested improvements to the live portfolio (served from `v2-improvement`/`gh-pages`) as a clear, evidence-mapped plan. This document is the brainstorming + planning artifact; it authorizes no code, branch merge, or deploy by itself.
+- **Purpose:** Capture the five owner-requested improvements to the live portfolio (merged into `develop` as of DL-055; originally `v2-improvement`/`gh-pages`) as a clear, evidence-mapped plan. This document is the brainstorming + planning artifact; it authorizes no code, branch merge, or deploy by itself.
 - **Authority:** Owner directives in conversation (2026-08-06), constrained by `AGENTS.md` (claim safety §3, source hierarchy §2, loop model §7). The `temp/career-ops-workspace` resumes/profile evidence is treated as input evidence per DL-007, not as a live override.
 - **Last updated:** 2026-08-06
 - **Related:** [project-status.md](../project-status.md) · [decision-log.md](../decision-log.md) · [02-improvement-implementation-plan.md](./02-improvement-implementation-plan.md) · [skills evidence](./07-r3-d-skills-evidence.md) · [career-ops skills-inventory](../temp/career-ops-workspace/profile/skills-inventory.md)
@@ -218,8 +218,8 @@ Per AGENTS.md §7, each step is the smallest useful action, verified, recorded; 
 | R4-3 | Tech-stack correctness (+ regroup if tiered) | Corrected groups; items source-tagged | owner | ✅ flat + corrected |
 | R4-4 | Experience additions | Added claim-safe bullets; source map | owner | ✅ workflow/analytics + AI workflow + AppSumo + Nexus |
 | R4-5 | Navbar pinned | Pinned at top across scroll on all pages | owner | ✅ `position: fixed`; fade dropped |
-| R4-6 | QA + record | Lighthouse, axe, contrast, links, no-JS; evidence in a 10-r4-* doc | owner gate → R4-7 | **Pending** |
-| R4-7 | (Deploy) branch promotion | `v2-improvement` → `develop` → `gh-pages` | owner only ("go") | **Pending** |
+| R4-6 | QA + record | Lighthouse, axe, contrast, links, no-JS; evidence in a 10-r4-* doc | owner gate | **Pending** |
+| R4-7 | (Deploy) branch promotion | ~~`v2-improvement` → develop → gh-pages~~ — **`v2-improvement` already merged into `develop` (2026-08-07, DL-055)**; remaining path: build/QA then deploy from `develop` on owner "go" | owner only ("go") | **Pending** |
 
 ## 11. Approval
 
@@ -227,5 +227,5 @@ This document is a **plan for owner review** — brainstorming + decision artifa
 
 ---
 
-- **Status:** IN PROGRESS — owner decisions resolved (OQ-R4-1..6); R4-1..R4-5 + resume swap implemented and verified locally on `v2-improvement`. **R4-6 QA + R4-7 deploy still owner-gated.**
+- **Status:** R4-1..R4-5 + resume swap + testimonials are complete and **merged into `develop`** (verified 2026-08-07, DL-055). **R4-6 QA + deploy still owner-gated.** Working branch for any future R4-completing/QA work is `develop` or `evolve-design` (not `v2-improvement`).
 - **Owner gate:** required before R4-0 execution.
