@@ -56,7 +56,7 @@ const paragraphsHtml = highlighted
   .join('');
 ---
 
-<figure class="testimonial-card card">
+<figure class="testimonial-card glass-card">
   <span class="testimonial-mark" aria-hidden="true">“</span>
 
   <blockquote class="testimonial-quote" set:html={paragraphsHtml}></blockquote>
@@ -90,6 +90,18 @@ const paragraphsHtml = highlighted
     gap: 1.25rem;
     padding: 1.75rem 1.75rem 1.5rem;
     height: 100%;
+    transition: transform var(--duration-base) ease;
+  }
+  /* R5-3: glass-card surface per §7 (Testimonials = II); hover lift is a pure
+     transform (the flat `.card` background sweep is not carried over).
+     Backdrop-filter disabled locally: cards float over a smooth ambient band —
+     nothing to blur, so no GPU layer is spent (spec §12). */
+  .testimonial-card:hover {
+    transform: translateY(-2px);
+  }
+  .testimonial-card {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .testimonial-mark {
@@ -185,6 +197,6 @@ const paragraphsHtml = highlighted
     margin: 0;
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
   }
 </style>

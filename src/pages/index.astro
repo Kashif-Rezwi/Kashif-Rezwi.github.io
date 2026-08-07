@@ -171,7 +171,8 @@ const techStack = [
   <!-- ================================================================
        SELECTED WORK
   ================================================================ -->
-  <section id="work" class="section-block">
+  <section id="work" class="section-block band-host">
+    <div class="section-band" aria-hidden="true"></div>
     <div class="container-site">
       <div class="section-header reveal">
         <p class="section-label">Selected work</p>
@@ -245,7 +246,8 @@ const techStack = [
   <!-- ================================================================
        TECH STACK
   ================================================================ -->
-  <section id="skills" class="section-block section-alt">
+  <section id="skills" class="section-block section-alt band-host">
+    <div class="section-band" aria-hidden="true"></div>
     <div class="container-site">
       <div class="section-header reveal">
         <p class="section-label">Tech stack</p>
@@ -403,7 +405,8 @@ const techStack = [
   <!-- ================================================================
        TESTIMONIALS
   ================================================================ -->
-  <section id="testimonials" class="section-block section-alt">
+  <section id="testimonials" class="section-block section-alt band-host">
+    <div class="section-band" aria-hidden="true"></div>
     <div class="container-site">
       <div class="section-header reveal">
         <p class="section-label">Testimonials</p>
@@ -437,7 +440,8 @@ const techStack = [
   <!-- ================================================================
        AI JOURNEY / NOW
   ================================================================ -->
-  <section id="now" class="section-block section-alt">
+  <section id="now" class="section-block section-alt band-host">
+    <div class="section-band" aria-hidden="true"></div>
     <div class="container-site">
       <div class="section-header reveal">
         <p class="section-label">Now</p>
@@ -629,7 +633,7 @@ const techStack = [
     gap: 0.3rem;
     font-family: var(--font-mono);
     font-size: 0.8125rem;
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
     text-decoration: none;
     transition: color 0.15s ease;
   }
@@ -684,6 +688,28 @@ const techStack = [
     padding-block: 5rem;
   }
 
+  /* R5-3: ambient console-field band behind content surfaces (work, skills,
+     testimonials, now). Mirrors the hero ambience recipe (§5.2 .field-backdrop);
+     a masked static glow so glass panels read as floating over a lit field. */
+  .band-host {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .section-band {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: var(--color-glow);
+    mask-image: radial-gradient(ellipse 75% 70% at 50% 48%, #000 28%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 48%, #000 28%, transparent 78%);
+  }
+  .band-host > .container-site {
+    position: relative;
+    z-index: 1;
+  }
+
   .section-alt {
     background: color-mix(in srgb, var(--color-surface) 40%, transparent);
   }
@@ -721,13 +747,18 @@ const techStack = [
      More projects
   ---------------------------------------------------------------- */
   .more-projects {
-    border-top: 1px solid var(--color-border);
-    padding-top: 2rem;
+    /* R5-3: glass strip (I) — subtle tint + token edge over the work-section
+       band; rows keep their hairline grammar (ProjectRow untouched). */
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    position: relative;
   }
   .more-projects-label {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-bottom: 1.25rem;
@@ -776,8 +807,10 @@ const techStack = [
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     color: var(--color-ink-muted);
-    background: var(--color-surface);
-    border: 0;
+    /* R5-3: glass chip (II) — tint + token edge; backdrop-filter locally off
+       because the section banner behind is a smooth band (spec §12). */
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     padding: 0.25rem 0.625rem;
     border-radius: var(--radius-control);
     display: inline-flex;
@@ -793,10 +826,13 @@ const techStack = [
   }
   .tech-item:hover {
     color: var(--brand-on-dark, var(--brand));
-    background: color-mix(in srgb, var(--brand-on-dark, var(--brand)) 14%, var(--color-surface));
+    /* Tonal brand tint over the glass chip (R5-3: "brand-glow made tonal" §7) —
+       brand at reduced alpha against the glass, not a solid surface. */
+    background: color-mix(in srgb, var(--brand-on-dark, var(--brand)) 14%, var(--glass-bg));
+    border-color: color-mix(in srgb, var(--brand-on-dark, var(--brand)) 40%, var(--glass-border));
     border-radius: var(--radius-control);
     transform: translateY(-2px);
-    box-shadow: 0 4px 14px color-mix(in srgb, var(--brand-on-dark, var(--brand)) 30%, transparent);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--brand-on-dark, var(--brand)) 20%, transparent);
   }
   .tech-item:hover svg {
     opacity: 1;
@@ -1006,7 +1042,7 @@ const techStack = [
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-family: var(--font-mono);
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
     margin: 0 0 0.375rem;
   }
   .now-row-desc {
@@ -1017,7 +1053,7 @@ const techStack = [
     max-width: 62ch;
   }
   .now-row-meta {
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
   }
 
   /* ----------------------------------------------------------------

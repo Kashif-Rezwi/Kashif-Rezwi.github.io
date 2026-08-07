@@ -34,7 +34,7 @@ const visibleTech = tech.slice(0, VISIBLE_TECH);
 const hiddenTechCount = tech.length - visibleTech.length;
 ---
 
-<article class="work-card card">
+<article class="work-card glass-card">
   {
     coverSrc && (
       <div class="work-card-cover" style={`background-image: url('${coverSrc.src}')`}>
@@ -103,6 +103,18 @@ const hiddenTechCount = tech.length - visibleTech.length;
     display: flex;
     flex-direction: column;
     height: 100%;
+    transition: transform var(--duration-base) ease;
+  }
+  /* R5-3: glass-card replaces the flat `.card`; hover is a pure transform lift
+     (the old background sweep is gone — glass does the depth, §7 row Work cards).
+     Backdrop-filter is disabled locally: the cards float over a smooth ambient
+     band (nothing to blur), so keeping it would only add GPU layers (spec §12). */
+  .work-card:hover {
+    transform: translateY(-2px);
+  }
+  .work-card {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .work-card-cover {
@@ -171,7 +183,7 @@ const hiddenTechCount = tech.length - visibleTech.length;
   .work-card-status {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
     font-weight: 500;
     white-space: nowrap;
   }
@@ -194,7 +206,7 @@ const hiddenTechCount = tech.length - visibleTech.length;
   .work-card-period {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
     margin: 0;
   }
 
@@ -235,7 +247,7 @@ const hiddenTechCount = tech.length - visibleTech.length;
     padding: 0.2rem 0.55rem;
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
     text-decoration: none;
     border-radius: var(--radius-control);
     transition: color 0.15s ease, background 0.15s ease;

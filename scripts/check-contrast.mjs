@@ -19,6 +19,7 @@ const checks = [
   ['ink-muted on surface (dark)', '#888888', DARK.surface, 4.5, true],
   ['ink-dim on canvas (dark)', '#808080', DARK.canvas, 4.5, true],
   ['ink-dim on surface (dark)', '#808080', DARK.surface, 4.5, true],
+  ['ink-dim-glass on canvas (dark)', '#848484', DARK.canvas, 4.5, true],
   ['accent-text on canvas (dark)', '#a9c8ff', DARK.canvas, 4.5, true],
   // --- Light theme (text >= 4.5:1) ---
   ['ink on canvas (light)', '#111111', LIGHT.canvas, 4.5, true],
@@ -27,6 +28,7 @@ const checks = [
   ['ink-muted on surface (light)', '#555555', LIGHT.surface, 4.5, true],
   ['ink-dim on canvas (light)', '#707070', LIGHT.canvas, 4.5, true],
   ['ink-dim on surface (light)', '#707070', LIGHT.surface, 4.5, true],
+  ['ink-dim-glass on canvas (light)', '#6c6c6c', LIGHT.canvas, 4.5, true],
   ['accent-text on canvas (light)', '#2f57ad', LIGHT.canvas, 4.5, true],
   // --- Non-text UI (>= 3:1, WCAG 1.4.11) ---
   ['accent non-text on canvas (dark)', '#6495ed', DARK.canvas, 3.0, true],
