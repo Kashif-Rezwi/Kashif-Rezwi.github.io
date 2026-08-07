@@ -12,7 +12,8 @@
     "build": "node scripts/fetch-github-contributions.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check:contrast": "node scripts/check-contrast.mjs"
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "check:glass-contrast": "node scripts/check-glass-contrast.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

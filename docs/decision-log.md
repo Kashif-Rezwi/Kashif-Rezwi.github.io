@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-07 (DL-056)
+- **Last updated:** 2026-08-07 (DL-057)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -397,6 +397,13 @@
 - **Decision:** (1) Record git truth: `v2-improvement` was already merged into `develop` (`895d89c`); testimonials + DL-053 landed on `develop` (pushed `655c6f7`); `v2-improvement` is fully contained in `develop` and must **not** be used as a base for new work. (2) The **R5 working branch is `evolve-design`** (= `develop` + the R5 design spec, committed `de90c67`) — matches the cycle name and is the base for all R5-1…R5-8 gates; promotion to `develop` → `gh-pages` (or `main` once Pages source = Actions) only on a separate owner "go". (3) Corrected stale docs to match: `README.md` (R3 now live), `docs/project-status.md` (R4 merged; next action = R4-6 QA + deploy gate, then R5-0), `docs/rebuild-02/09-r4-improvement-plan.md` (status + R4-7 path), `docs/rebuild-02/11-r5-glassmorphism-design.md` (§10 working branch + R5-8 path), and `docs/engineering/handoff-guide.md` (Phase-1-era → post-launch cycle era).
 - **Rationale:** Documentation must be the single source of truth and must match the repository's actual state (AGENTS.md §1 "Last updated", §5 documentation quality). The audit (DL-054) surfaced doc-vs-code-vs-git drift; this decision closes it so a fresh agent orienting per the R5 Operating Loop step 1 finds prose aliased to reality.
 - **Approval status:** Owner selected "fix all stale claims" and "evolve-design" in conversation (2026-08-07).
+
+## DL-057 — R5-2 header + hero glass implemented (first rendered glass)
+
+- **Date:** 2026-08-07
+- **Decision:** Implement **R5-2** per the R5 spec (§7 rows Header/Hero, §9 R5-2): (1) **Navbar** — replace the historical hand-rolled frost (`color-mix(canvas 85%)` + `blur(12px)`) with the token glass recipe (`--glass-bg`, `backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate))`, `1px solid var(--glass-border)` bottom edge, `transition: background var(--duration-base) ease`), plus `@supports not (backdrop-filter)` and `prefers-reduced-transparency: reduce` fallbacks to `--glass-bg-solid`. (2) **Hero identity plate** — `.hero-content` becomes a single `.glass-panel` (`glass-panel hero-panel`) floating over the live matrix (whole identity block: label → bio → CTA row), with a new static `.hero-ambience` radial `--color-glow` layer (masked, `aria-hidden`, `pointer-events:none`) behind it so the glass reads as a lit console field. Portrait ring and parallelogram badge untouched (owner-locked). New `npm run check:glass-contrast` script (`scripts/check-glass-contrast.mjs`) models the composited glass-over-backdrop and AA-checks every hero/nav text token in both themes.
+- **Rationale:** R5-2 is the first phase that renders glass — its contract is "make the navbar + hero articulate the material, keep everything else flat" (spec §9). Decisions from the plan doc: navbar = token glass (A1), hero = single identity plate + ambient glow (B1) — both per the §7 score (Header II, Hero III) and ≤3 surfaces/§12. On-glass contrast is enforced as actually rendered over the token backdrop (S-5/§5.3), not over a flat swatch.
+- **Approval status:** Owner "go" for R5-2 in conversation (2026-08-07, before this DL). Implementation complete; evidence in `docs/rebuild-02/15-r5-2-header-hero-glass-evidence.md`. Verification: build clean (6 pages), `check:contrast` 16/16, on-glass contrast 6/6 AA dark+light, Lighthouse perf/bp/seo 100 (mobile+desktop), axe 0, zero overflow 320–1440. Lighthouse a11y = 96 due to the **pre-existing R4 role badge** (white-on-cornflower, 2.97:1, `8a076ec`) — not introduced or fixed here; **badge AA decision deferred to owner** (spec §3.4 defect G). No claims changed; no deploy.
 
 ## DL-056 — R5-1 glass foundation implemented (tokens + utilities, zero visual diff)
 

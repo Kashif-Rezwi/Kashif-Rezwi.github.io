@@ -103,8 +103,11 @@ const techStack = [
   ================================================================ -->
   <section class="hero-section">
     <HeroDotMatrix />
+    <!-- Ambient console-field glow: sits behind the glass plate so the identity
+         pane floats over a lit field, not flat alpha (R5-2, spec §4.3/§5.2). -->
+    <div class="hero-ambience" aria-hidden="true"></div>
     <div class="container-site hero-inner">
-      <div class="hero-content animate-fade-up">
+      <div class="hero-content glass-panel hero-panel animate-fade-up">
         <!-- Label -->
         <p class="section-label delay-100 animate-fade-up">Portfolio</p>
 
@@ -537,6 +540,24 @@ const techStack = [
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  /* R5-2: the hero identity plate IS the glass — one `.glass-panel` over the
+     luminous field. Padding keeps content off the edge; radius from the utility */
+  .hero-panel {
+    padding: 2rem;
+  }
+
+  /* Ambient console-field glow behind the plate (spec §4.3/§5.2 — a lit field,
+     never flat alpha). Static; pointer-agnostic; behind the glass. */
+  .hero-ambience {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: var(--color-glow);
+    mask-image: radial-gradient(ellipse 70% 65% at 50% 42%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 42%, #000 30%, transparent 80%);
   }
 
   .hero-name {
@@ -1097,6 +1118,9 @@ const techStack = [
     .portrait-img {
       width: 160px;
       height: 160px;
+    }
+    .hero-panel {
+      padding: 1.25rem;
     }
     .hero-section {
       padding-block: 3rem 2.5rem;
