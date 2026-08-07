@@ -47,9 +47,24 @@
   --gradient-accent: var(--color-accent);
   --gradient-accent-text: var(--color-accent-text);
 
-  /* Status colors */
-  --color-success: #4ade80;
-  --color-warning: #fb923c;
+  /* ── R5 glass material (glass-foundation, §5.1/5.2) ──────────────────────
+     A translucent "console plane" over the dot field. Never animated;
+     static per surface. Contrast floor enforced at implementation time. */
+  --glass-blur: 12px;                                 /* inside the 8–15 px band */
+  --glass-saturate: 1.15;                             /* dark: field stays rich behind the plane */
+  --glass-bg: color-mix(in srgb, var(--color-canvas) 62%, color-mix(in srgb, var(--color-accent) 8%, transparent));
+  --glass-border: color-mix(in srgb, #ffffff 14%, transparent);
+  --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 10%, transparent), transparent 55%);
+  --glass-bg-solid: var(--color-surface);            /* fallback / reduced-transparency floor */
+  --color-glow: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 70%);
+
+  /* ── Motion + elevation seeds (R5) — no default depth ── */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-xslow: 700ms;
+  --elevation-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --elevation-md: 0 4px 16px rgba(0, 0, 0, 0.55);
 
   /* Aliases used in Tailwind utilities */
   --color-paper: var(--color-canvas);
@@ -86,6 +101,13 @@
   --color-hairline: var(--color-border);
   --color-accent-ink: var(--color-accent);
   color-scheme: light;
+
+  /* R5 glass (light recipe): translucent white + cooler tint (OQ-R5-2, option A) */
+  --glass-saturate: 1.05;
+  --glass-bg: color-mix(in srgb, #ffffff 66%, color-mix(in srgb, var(--color-accent) 6%, transparent));
+  --glass-border: color-mix(in srgb, #ffffff 55%, transparent);
+  --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 40%, transparent), transparent 55%);
+  --color-glow: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 70%);
 }
 
 :root[data-theme='light'] .tech-item,
@@ -113,6 +135,13 @@
     --color-hairline: var(--color-border);
     --color-accent-ink: var(--color-accent);
     color-scheme: light;
+
+    /* R5 glass (light recipe) — mirrors :root[data-theme='light'] */
+    --glass-saturate: 1.05;
+    --glass-bg: color-mix(in srgb, #ffffff 66%, color-mix(in srgb, var(--color-accent) 6%, transparent));
+    --glass-border: color-mix(in srgb, #ffffff 55%, transparent);
+    --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 40%, transparent), transparent 55%);
+    --color-glow: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 70%);
   }
 
   .tech-item,
@@ -213,6 +242,24 @@
     text-transform: uppercase;
     color: var(--color-accent-text); /* readable accent tint — accent alone fails AA in light theme */
     font-weight: 500;
+  }
+
+  /* --- R5 text utilities (defect E extraction; wired into components in R5-5/R5-6) --- */
+  .label-overline {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-dim);
+    letter-spacing: 0.08em;
+  }
+  .mono {
+    font-family: var(--font-mono);
   }
 
   /* --- Gradient text utility --- */
@@ -325,6 +372,55 @@
     border: 0;
     font-weight: 500;
     letter-spacing: 0.01em;
+  }
+
+  /* --- R5 glass surfaces (glass-foundation, §5.1) ---
+     Static glass: blur only via backdrop-filter (never animated — §6). The
+     `.glass` utility is the material; `.glass-panel` / `.glass-card` add the
+     shape (radius) so a panel ≠ a card. Fallback + reduced transparency below. */
+  .glass, .glass-panel, .glass-card {
+    position: relative;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-card);
+  }
+  /* Top-edge "catch light" — cheap, premium, static (no animation). */
+  .glass::before, .glass-panel::before, .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: var(--glass-highlight);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  /* Ambient band the matrix / glow sits behind glass (§5.2 .field-backdrop). */
+  .field-backdrop {
+    position: relative;
+    background: var(--color-glow);
+  }
+
+  /* Fallback: no backdrop-filter support → near-opaque surface tint ("today's
+     look"), so content stays readable on any browser (S-9). */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass, .glass-panel, .glass-card {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    .glass::before, .glass-panel::before, .glass-card::before { display: none; }
+  }
+
+  /* OS transparency preference → glass becomes solid (S-9). */
+  @media (prefers-reduced-transparency: reduce) {
+    .glass, .glass-panel, .glass-card {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    .glass::before, .glass-panel::before, .glass-card::before { display: none; }
   }
 
   /* --- Section divider --- */

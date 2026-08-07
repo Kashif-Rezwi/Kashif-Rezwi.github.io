@@ -245,7 +245,7 @@ Working branch: **`evolve-design`** (= develop + this spec; R4 work + testimonia
 | Phase | Name | Scope | Done-when evidence | Gate |
 |---|---|---|---|---|
 | R5-0 | **This document** — research, analysis, plan, principles | Docs only | review of content + rationale + §7 score | Owner: approve/amend |
-| R5-1 | **Glass foundation** | Tokens (§5.1/5.2), `.glass`/`.glass-panel`/`.glass-card` utilities, `@supports` fallback, transparency preference, `--duration` + `--elevation` seeds, dead-CSS cleanup (defects A/E) | Utilities run **nowhere yet** → zero visual diff; token contrast report | Owner "go" |
+| R5-1 | **Glass foundation** | Tokens (§5.1/5.2), `.glass`/`.glass-panel`/`.glass-card` utilities, `@supports` fallback, transparency preference, `--duration` + `--elevation` seeds, dead-CSS cleanup (defects A/E) | Utilities run **nowhere yet** → zero visual diff; token contrast report | ✅ **Complete** (DL-056; evidence `13-r5-1-glass-foundation-evidence.md`) |
 | R5-2 | **Header + hero** (the signature change) | Navbar token glass; hero identity panel floats over matrix; CTA row into glass; portrait ring untouched | Home renders (dark/light, desktop/mobile) + contrast check on the new glass + Lighthouse/axe on home | Owner "go" |
 | R5-3 | **Card + surfaces pass** | WorkCard, testimonials, GitHub, tech chips, more-projects — glass per §7 score; ambient bands under sections | All pages × 2 themes; axe; contrast; no overflow | Owner "go" |
 | R5-4 | **Motion & micro-interactions** | Reveal refinement, glass settle-in, field shimmer, focus ring echo; expose `prefers-reduced-motion` **and** `prefers-reduced-transparency` | Reduced-motion screenshot diff (static); TBT still 0 | Owner "go" |
@@ -330,6 +330,7 @@ Each pending answer gates exactly one phase — the plan never deadlocks.
 |---|---|
 | 2026-08-07 | Initial draft (Step 0). Status: DRAFT, pending owner review of §1–§13. |
 | 2026-08-07 | Working branch corrected to `evolve-design`; R5-8 deploy path fixed (DL-054/055). R5 part of the new **R5 Operating Loop** (`docs/engineering/engineering-workflow.md`). |
+| 2026-08-07 | **R5-1 glass foundation complete** (DL-056): tokens + `.glass`/`.glass-panel`/`.glass-card`/`.field-backdrop` utilities with `@supports` + reduced-transparency fallbacks; `--duration`/`--elevation` seeds; defect A dead tokens removed; defect E text utilities created. Zero visual diff (nothing wired). Evidence: `docs/rebuild-02/13-r5-1-glass-foundation-evidence.md`. Gate open: R5-2. |
 
 ---
 

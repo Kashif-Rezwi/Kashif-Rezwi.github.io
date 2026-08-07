@@ -2,7 +2,7 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-07 (**R5 active** — R3 live on `gh-pages`; R4 code + testimonials **merged to `develop`**, deploy owner-gated; R5-0 design spec complete on `evolve-design`, R5-1 awaiting owner gate)
+- **Last updated:** 2026-08-07 (**R5 active** — R3 live on `gh-pages`; R4 code + testimonials **merged to `develop`**, deploy owner-gated; R5-1 glass foundation **implemented on `evolve-design`**, R5-2 awaiting owner gate)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase
@@ -72,6 +72,6 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
   - **Testimonials (DL-053):** new home section from two LinkedIn recommendations (Thanga Balaji S, Adithya Santhosh) as a `testimonials` content collection + `TestimonialCard`; verbatim quotes, highlights, LinkedIn links, photos under `public/testimonials/`. Merged to `develop`; production deploy owner-gated. ✅
 
 - **R4 deploy (was R4-7):** promotion/deploy of the already-merged R4 work to production. Path: `develop` → built + deployed (owner "go"); with the Pages-source switch to GitHub Actions, a `main` promote-and-push auto-deploys (DL-052). Execution only on a separate owner "go".
-- **R5 — active cycle (owner gate pending):** R5-0 design spec complete at `docs/rebuild-02/11-r5-glassmorphism-design.md` on working branch **`evolve-design`** (= develop + spec). Per that spec, each phase R5-1…R5-8 is individually owner-gated; next decision point: OQ-R5-1…8 + approval to start **R5-1 glass foundation** (tokens/utilities, zero visual diff).
+- **R5 — active cycle.** R5-0 design spec complete at `docs/rebuild-02/11-r5-glassmorphism-design.md` on working branch **`evolve-design`**. **R5-1 glass foundation (DL-056) implemented** — tokens (§5.1/5.2), `.glass`/`.glass-panel`/`.glass-card`/`.field-backdrop` utilities, `@supports` + reduced-transparency fallbacks, `--duration`/`--elevation` seeds, defect-A dead tokens removed, defect-E text utilities created; **zero visual diff** (nothing wired yet); evidence in `docs/rebuild-02/13-r5-1-glass-foundation-evidence.md`. Per the spec, each phase R5-1…R5-8 is individually owner-gated; **next decision point: approval to start R5-2 (header + hero glass)** — the first phase that renders glass.
 - **Owner spot-checks** (post-launch): LinkedIn click-through (OQ-06), visual captures at 320/1440, and resume-PDF review. Repository is in maintenance mode: future changes land on the active cycle's working branch, are reviewed on `evolve-design`, then promoted to `develop` → `gh-pages`.
 - **CI/CD (DL-051/052, 2026-08-06):** `ci.yml` build check runs automatically on pushes/PRs to **both `develop` and `main`**. `deploy.yml` **auto-deploys on every push/merge to `main`** (also manually dispatchable). Both workflows publish only once the Pages source is switched from branch `gh-pages` to **GitHub Actions** (repo Settings → Pages, owner action).

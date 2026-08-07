@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-07 (DL-055)
+- **Last updated:** 2026-08-07 (DL-056)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -397,3 +397,10 @@
 - **Decision:** (1) Record git truth: `v2-improvement` was already merged into `develop` (`895d89c`); testimonials + DL-053 landed on `develop` (pushed `655c6f7`); `v2-improvement` is fully contained in `develop` and must **not** be used as a base for new work. (2) The **R5 working branch is `evolve-design`** (= `develop` + the R5 design spec, committed `de90c67`) — matches the cycle name and is the base for all R5-1…R5-8 gates; promotion to `develop` → `gh-pages` (or `main` once Pages source = Actions) only on a separate owner "go". (3) Corrected stale docs to match: `README.md` (R3 now live), `docs/project-status.md` (R4 merged; next action = R4-6 QA + deploy gate, then R5-0), `docs/rebuild-02/09-r4-improvement-plan.md` (status + R4-7 path), `docs/rebuild-02/11-r5-glassmorphism-design.md` (§10 working branch + R5-8 path), and `docs/engineering/handoff-guide.md` (Phase-1-era → post-launch cycle era).
 - **Rationale:** Documentation must be the single source of truth and must match the repository's actual state (AGENTS.md §1 "Last updated", §5 documentation quality). The audit (DL-054) surfaced doc-vs-code-vs-git drift; this decision closes it so a fresh agent orienting per the R5 Operating Loop step 1 finds prose aliased to reality.
 - **Approval status:** Owner selected "fix all stale claims" and "evolve-design" in conversation (2026-08-07).
+
+## DL-056 — R5-1 glass foundation implemented (tokens + utilities, zero visual diff)
+
+- **Date:** 2026-08-07
+- **Decision:** Implement **R5-1 glass foundation** per the R5 spec (§9): added the R5 glass material tokens (`--glass-bg/--glass-border/--glass-blur/--glass-saturate/--glass-highlight/--glass-bg-solid/--color-glow`) and motion/elevation seeds (`--duration-fast/base/slow/xslow`, `--elevation-sm/md`) in `global.css` across all three theme scopes; added `.glass`, `.glass-panel`, `.glass-card`, and `.field-backdrop` utilities with `@supports not (backdrop-filter)` and `prefers-reduced-transparency` fallbacks to solid `--glass-bg-solid`; created `.label-overline`, `.meta`, `.mono` text utilities (defect E extraction, wired in R5-5/R5-6); removed dead tokens `--color-success`/`--color-warning` (defect A). **No markup was changed** — glass classes run nowhere yet (zero visual diff by design). Elevation seeds use fixed `rgba(0,0,0,…)` so they behave identically in both themes.
+- **Rationale:** R5-1's contract is "build the vocabulary, change nothing visible" (spec §9 even-when + R5 Operating Loop step 4 "smallest change, prove no regressions"). Keeping utilities unwired means the whole phase is trivially reversible and provable; wiring happens exactly in the phase that owns each surface (R5-2 header/hero, R5-3 cards, R5-5 inner pages). Contrast floor for the fallback path is the existing AA-safe surface. AA-on-glass is checked in R5-2 where actual glass + content first render (§5.3).
+- **Approval status:** Owner "go" for R5-1 in conversation (2026-08-07, before this DL). Implementation complete + evidence in `docs/rebuild-02/13-r5-1-glass-foundation-evidence.md`; **next gate R5-2 (header + hero glass) awaiting owner approval.**
