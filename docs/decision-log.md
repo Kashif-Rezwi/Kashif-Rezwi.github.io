@@ -465,3 +465,10 @@
 - **Scope:** T1–T5 only, presentation/interaction; **no claim/copy changes**; no R5-8 deploy in this cycle.
 - **Verification:** per-theme evidence docs; shared done-when: build 6 pages clean; `check:contrast` 19/19 + on-glass **30/30** (updated as surfaces change); Lighthouse **100/100/100/100** (mob+desk × light/dark); axe **0** (settled); overflow **0**; reduced-motion + reduced-transparency; no-JS; JS budget re-measured; zero claim changes.
 - **Approval status:** Plan recorded; implementation starts with **T1** (next after this record). Commits remain owner-gated.
+
+## DL-064 — T2 (R5-8a) portrait favicon + portfolio `<title>` complete
+- **Decision:** Replace generic favicon with circular portrait favicon (16px thick accent border, no cropping). Align home `<title>` to `Kashif Rezwi · Portfolio` to match manifest `name`.
+- **Rationale:** Owner wanted "exact replica of the profile of mine from hero section with its shape, border." The Hero's `.portrait-wrapper::after` is a solid `--color-accent` (`#6495ed`) parallelogram at `inset: -8px` behind the clipped portrait. Favicon is a circle with 16px solid #6495ed border, portrait centered inside — rendered using `sharp` (vendored, build-time only, zero new runtime deps — S-12 compliant).
+- **Fixes included:** T1 `.hero-textshadow` text-shadow was leaking onto `.btn` (dark-theme contrast ~1:1). Added scoped reset `.hero-textshadow .btn, .hero-textshadow .hero-social { text-shadow: none; -webkit-text-stroke: 0; }`.
+- **Done-when evidence:** `docs/rebuild-02/26-r5-8a-t2-favicon-evidence.md`.
+- **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval → T3.

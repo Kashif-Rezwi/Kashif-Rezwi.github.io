@@ -2,7 +2,7 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-08 (**R5 active** — R3 live on `gh-pages`; R4 code + testimonials **merged to `develop`**, deploy owner-gated; R5-1…R5-6 + **R5-7 full QA** complete/verified on `evolve-design`; **R5-8a pre-deploy polish cycle (DL-063) in progress** — T1…T5 one-at-a-time, awaiting **owner R5-8 deploy go/no-go** after the polish cycle)
+- **Last updated:** 2026-08-08 (**R5 active** — R3 live on `gh-pages`; R4 code + testimonials **merged to `develop`**, deploy owner-gated; R5-1…R5-6 + **R5-7 full QA** complete/verified on `evolve-design`; **R5-8a pre-deploy polish cycle (DL-063) in progress** — T2 complete (uncommitted), **T3 next**, awaiting **owner R5-8 deploy go/no-go** after the polish cycle)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase

@@ -112,14 +112,22 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
     margin-top: -4.5rem;
   }
 
-  /* T1 (R5-8a): subtle text-legibility treatment over the live dot matrix —
+    /* T1 (R5-8a): subtle text-legibility treatment over the live dot matrix —
      a soft, theme-adaptive text shadow so the identity reads crisply without
-     a glass card. Not a card; no background/blur. */
+     a glass card. Not a card; no background/blur. Scope: identity text only;
+     interactive children (buttons/social links) reset their own text-shadow
+     so it doesn't leak (would otherwise tank dark-theme button contrast). */
   .hero-textshadow {
     text-shadow:
       0 1px 2px color-mix(in srgb, var(--color-canvas) 55%, transparent),
       0 0 18px color-mix(in srgb, var(--color-canvas) 40%, transparent);
     -webkit-text-stroke: 0.5px color-mix(in srgb, var(--color-canvas) 22%, transparent);
+  }
+  /* Reset inherited shadow on interactive children — they paint their own bg. */
+  .hero-textshadow .btn,
+  .hero-textshadow .hero-social {
+    text-shadow: none;
+    -webkit-text-stroke: 0;
   }
 
   .hero-ambience {
