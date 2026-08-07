@@ -104,10 +104,12 @@ const techStack = [
   <section class="hero-section">
     <HeroDotMatrix />
     <!-- Ambient console-field glow: sits behind the glass plate so the identity
-         pane floats over a lit field, not flat alpha (R5-2, spec §4.3/§5.2). -->
-    <div class="hero-ambience" aria-hidden="true"></div>
+         pane floats over a lit field, not flat alpha (R5-2, spec §4.3/§5.2).
+         R5-4: field-breathe adds the spec §6 shimmer (extremely slow, opacity
+         only, static under prefers-reduced-motion). -->
+    <div class="hero-ambience field-breathe" aria-hidden="true"></div>
     <div class="container-site hero-inner">
-      <div class="hero-content glass-panel hero-panel animate-fade-up">
+      <div class="hero-content glass-panel hero-panel glass-settle">
         <!-- Label -->
         <p class="section-label delay-100 animate-fade-up">Portfolio</p>
 

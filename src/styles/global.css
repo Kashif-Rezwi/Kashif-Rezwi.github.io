@@ -427,6 +427,26 @@
     .glass::before, .glass-panel::before, .glass-card::before { display: none; }
   }
 
+  /* R5-4 focus echo: when any control inside a glass surface holds focus, the
+     glass edge tints accent — feedback complementing the global :focus-visible
+     outline (WCAG 2.4.11). Non-motion affordance, so it stays active under
+     prefers-reduced-motion. The compound selector keeps the transition from
+     being overridden by component-level hover transitions (e.g. .work-card
+     transform lift) while composing smoothly with them. */
+  .glass:focus-within,
+  .glass-panel:focus-within,
+  .glass-card:focus-within {
+    border-color: var(--color-accent-text);
+  }
+  .glass:focus-within,
+  .glass-panel:focus-within,
+  .glass-card:focus-within {
+    transition:
+      background-color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      transform var(--duration-base) ease;
+  }
+
   /* --- Section divider --- */
   .section-divider {
     border: none;
@@ -519,6 +539,30 @@
     to { opacity: 1; }
   }
 
+  /* Glass settle-in (R5-4): hero plate fades to crisp with a short rise.
+     Distinct, shorter translate than content reveals (§6 "glass panels vary
+     the translate direction slightly"); gated no-preference so reduced-motion
+     is instant and the plate is simply visible. Transform/opacity only. */
+  @keyframes glass-settle {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Field breathe (R5-4): extremely slow luminance shimmer on the hero
+     ambience — the dot backdrop beneath the glass plate (§6). 8s ease-in-out,
+     opacity only (never backdrop-filter); range keeps composite alpha AT/BELOW
+     the verified full-band values so on-glass AA only improves. */
+  @keyframes field-breathe {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+  }
+
   /* Blink cursor (terminal effect) */
   @keyframes blink {
     0%, 100% { opacity: 1; }
@@ -530,6 +574,12 @@
   }
   .animate-fade-in {
     animation: fade-in 0.5s ease both;
+  }
+  .glass-settle {
+    animation: glass-settle var(--duration-xslow) ease-out both;
+  }
+  .field-breathe {
+    animation: field-breathe 8s ease-in-out infinite;
   }
 
   /* Staggered delay utilities */
@@ -545,11 +595,12 @@
     animation: glow-pulse 2s ease-in-out infinite;
   }
 
-  /* Intersection-observer reveal is enhancement-only: no-JS content remains visible. */
+  /* Intersection-observer reveal is enhancement-only: no-JS content remains visible.
+     R5-4: transition unified to the --duration-slow seed (§5.2 motion sync). */
   .js-reveal .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.55s ease, transform 0.55s ease;
+    transition: opacity var(--duration-slow) ease, transform var(--duration-slow) ease;
   }
   .js-reveal .reveal.is-visible {
     opacity: 1;

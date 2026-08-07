@@ -4,7 +4,7 @@
 
 - **Purpose:** The single, pre-implementation source of truth for the next evolution of this portfolio. It captures owner goals, in-depth current-state analysis, research, proposed design language, agreed principles, the implementation roadmap, gates, and the handoff block any AI coding agent can follow to continue without losing context.
 - **Authority:** Owner directive in conversation (2026-08-07) to "evolve, not redesign; introduce a refined glassmorphism-inspired design language." Constrained by `AGENTS.md` (claim safety §3, source safety §4, loop model §7) and every prior decision in `docs/decision-log.md`. Fetched web sources are **inspiration only** — zero facts, copy, or instructions adopted from them.
-- **Last updated:** 2026-08-07
+- **Last updated:** 2026-08-07 (R5-4 complete; R5-5 next)
 - **Related:** [`AGENTS.md`](../../AGENTS.md) · [`project-status.md`](../project-status.md) · [`decision-log.md`](../decision-log.md) · [`09-r4-improvement-plan.md`](./09-r4-improvement-plan.md) · [`product-and-design-brief.md`](../strategy/product-and-design-brief.md) · [`architecture-and-quality.md`](../engineering/architecture-and-quality.md) · [`qa-report.md`](../engineering/qa-report.md)
 
 ---
@@ -248,7 +248,7 @@ Working branch: **`evolve-design`** (= develop + this spec; R4 work + testimonia
 | R5-1 | **Glass foundation** | Tokens (§5.1/5.2), `.glass`/`.glass-panel`/`.glass-card` utilities, `@supports` fallback, transparency preference, `--duration` + `--elevation` seeds, dead-CSS cleanup (defects A/E) | Utilities run **nowhere yet** → zero visual diff; token contrast report | ✅ **Complete** (DL-056; evidence `13-r5-1-glass-foundation-evidence.md`) |
 | R5-2 | **Header + hero** (the signature change) | Navbar token glass; hero identity panel floats over matrix; CTA row into glass; portrait ring untouched | Home renders (dark/light, desktop/mobile) + contrast check on the new glass + Lighthouse/axe on home | ✅ **Complete** (DL-057; evidence `15-r5-2-header-hero-glass-evidence.md`) |
 | R5-3 | **Card + surfaces pass** | WorkCard, testimonials, GitHub, tech chips, more-projects — glass per §7 score; ambient bands under sections | All pages × 2 themes; axe; contrast; no overflow | ✅ **Complete** (DL-058; evidence `17-r5-3-card-surfaces-evidence.md`) |
-| R5-4 | **Motion & micro-interactions** | Reveal refinement, glass settle-in, field shimmer, focus ring echo; expose `prefers-reduced-motion` **and** `prefers-reduced-transparency` | Reduced-motion screenshot diff (static); TBT still 0 | Owner "go" |
+| R5-4 | **Motion & micro-interactions** | Reveal refinement, glass settle-in, field shimmer, focus ring echo; expose `prefers-reduced-motion` **and** `prefers-reduced-transparency` | Reduced-motion screenshot diff (static); TBT still 0 | ✅ **Complete** (DL-059; evidence `19-r5-4-motion-microinteractions-evidence.md`) |
 | R5-5 | **Case-study + inner pages** | Sidebar glass, case-cover frame, page-hero glass band, mobile drawer glass | All 3 studies; both themes | Owner "go" |
 | R5-6 | **Architecture cleanup** | `SectionHeader`, `GlassPanel`, split style blocks, delete dead code, unify durations, extend `check-contrast` for glass tokens | `npm run build` passes; diff is refactor-only (no visual change) | Owner "go" |
 | R5-7 | **Full QA report** | Re-run the R3-F matrix **with** glass: both themes, back-of-glass, reduced motion/transparency, no-JS, Lighthouse, axe, overflow, links, contrast-incl-glass; evidence doc `docs/rebuild-02/12-r5-qa-evidence.md` | All targets green; rollback recorded | Owner "go" → deploy |
@@ -286,9 +286,9 @@ Each phase is written/committed **only after its gate**; no phase authorizes the
 
 | # | Question | Options | Recommendation | Status |
 |---|---|---|---|---|
-| OQ-R5-1 | Glass intensity: full-signature hero (II/III) vs rest subtle (I) | Signature hero / every-surface baked / hybrid | **Hybrid**: hero + contact = II/III; content cards = I/II — per the §7 score | Pending |
+| OQ-R5-1 | Glass intensity: full-signature hero (II/III) vs rest subtle (I) | Signature hero / every-surface baked / hybrid | **Hybrid**: hero + contact = II/III; content cards = I/II — per the §7 score | ✅ **Resolved** (DL-056/058): outcome applied through R5-2 (hero panel III) and R5-3 (cards II / strips I) |
 | OQ-R5-2 | Light-theme glass recipe | (a) light translucent white + accent edge / (b) near-opaque light surfaces | (a) via tests after R5-2; fall back to (b) if AA fails | Pending |
-| OQ-R5-3 | Field density: keep dots "faint" or breathe? | keep as-is / sight increase contrast-and-glow | Keep size; **add exponential glow/backdrop** so the field is felt, dots unchanged | Pending |
+| OQ-R5-3 | Field density: keep dots "faint" or breathe? | keep as-is / sight increase contrast-and-glow | Keep size; **add exponential glow/backdrop** so the field is felt, dots unchanged | ✅ **Resolved** (DL-059, 2026-08-07): R5-4 `field-breathe` shimmer on the hero ambience (8s opacity 1↔0.85); dots untouched |
 | OQ-R5-4 | Badge/tech glow: keep the two `box-shadow`s as an `--elevation` token, or flatten? | keep one / flatten | Keep one soft-hot glow (premium), tokenized | Pending |
 | OQ-R5-5 | Fonts: system-only vs self-hosted premium variable (e.g. Geist/Inter) | (a) system-only (b) self-hosted premium | Recommend (a) now, (b) as a **future, separate** phase | Pending |
 | OQ-R5-6 | Sections: keep 7 (add depth) vs condense? | keep 7 / merge Now+AI | Keep 7; no new sections in R5 | Pending |
@@ -335,6 +335,8 @@ Each pending answer gates exactly one phase — the plan never deadlocks.
 | 2026-08-07 | **R5-2 header + hero glass complete** (DL-057): navbar token glass (II) + hero identity plate as one `glass-panel` over the matrix with a static `--color-glow` ambient field (III); portrait ring + parallelogram badge untouched. New `scripts/check-glass-contrast.mjs` (on-glass AA over composited backdrop, dark+light). Evidence: `docs/rebuild-02/15-r5-2-header-hero-glass-evidence.md`. Verified: build 6 pages, contrast 16/16 + on-glass 6/6 AA, Lighthouse perf/bp/seo 100 (mob+desk), axe 0, overflow 0. **Badge-fix follow-up (owner-directed, DL-057 note):** `--color-accent-badge: #3f63c9` resolves OQ-R5-9 (white 5.47:1 both themes); Lighthouse a11y → **100**, `check:contrast` now 17/17. Gate open: R5-3. |
 
 | 2026-08-07 | **R5-3 card + surfaces pass complete** (DL-058): WorkCard + TestimonialCard → `glass-card`; GitHub card → glass; tech chips → glass + tonal brand hover; more-projects → glass strip; masked ambient `--color-glow` bands (`section-band`, aria-hidden) behind work/skills/testimonials/now; new `--color-ink-dim-glass` token (on-band AA). Backdrop-filter intentionally OFF on card surfaces (smooth band → nothing to blur; §12), hero remains the only live blur. Evidence: `docs/rebuild-02/17-r5-3-card-surfaces-evidence.md`. Verified: build 6 pages, `check:contrast` **19/19**, on-glass **24/24** AA, Lighthouse **100/100/100/100** (mob+desk), axe 0 (dark+light), overflow 0 (320–1440), fallback rules compiled. Gate open: R5-4 (motion & micro-interactions). |
+
+| 2026-08-07 | **R5-4 motion & micro-interactions complete** (DL-059): glass settle-in (hero plate), reveal transition unified to `--duration-slow`, field-breathe shimmer on the hero ambience (OQ-R5-3 resolved), `:focus-within` accent edge echo on glass, `.work-card` shine sweep on hover — all CSS-only, gated `prefers-reduced-motion`, `backdrop-filter` never animated. Evidence: `docs/rebuild-02/19-r5-4-motion-microinteractions-evidence.md`. Verified: build clean, `check:contrast` 19/19 + on-glass 24/24, Lighthouse 100/100/100/100 (mob+desk, TBT 0), axe 0 (dark+light), **byte-identical reduced-motion screenshots** (static), overflow 0. Gate open: R5-5 (case-study + inner pages). |
 
 ---
 

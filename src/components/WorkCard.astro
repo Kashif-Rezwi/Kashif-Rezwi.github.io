@@ -103,7 +103,9 @@ const hiddenTechCount = tech.length - visibleTech.length;
     display: flex;
     flex-direction: column;
     height: 100%;
-    transition: transform var(--duration-base) ease;
+    /* border-color in the base transition (R5-4): lets the glass focus-echo
+       animate through this unlayered rule instead of the layered global one */
+    transition: transform var(--duration-base) ease, border-color var(--duration-fast) ease;
   }
   /* R5-3: glass-card replaces the flat `.card`; hover is a pure transform lift
      (the old background sweep is gone — glass does the depth, §7 row Work cards).
@@ -115,6 +117,36 @@ const hiddenTechCount = tech.length - visibleTech.length;
   .work-card {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
+  }
+  /* R5-4 hover catch (§6): one-pass diagonal shine sweep across the card on
+     hover, using --glass-highlight, opacity + transform only (never
+     backdrop-filter). Absolute layer inside the card (overflow: hidden clips
+     it); pointer-events: none so it never intercepts clicks. Gated
+     no-preference so reduced-motion shows no sweep at all. */
+  @media (prefers-reduced-motion: no-preference) {
+    .work-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 60%;
+      background: linear-gradient(
+        105deg,
+        transparent 0%,
+        var(--glass-highlight) 50%,
+        transparent 100%
+      );
+      opacity: 0;
+      transform: translateX(-120%);
+      transition: opacity 0.35s ease, transform var(--duration-xslow) ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .work-card:hover::after {
+      opacity: 1;
+      transform: translateX(280%);
+    }
   }
 
   .work-card-cover {
