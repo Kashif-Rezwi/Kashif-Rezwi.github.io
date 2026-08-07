@@ -1,18 +1,19 @@
 /**
- * R5-2/R5-3 — On-glass WCAG AA verification.
+ * R5-2/R5-3/R5-5 — On-glass WCAG AA verification.
  *
  * Models how the R5 glass material actually renders over the live backdrop by
  * compositing the token-defined `--glass-bg` (a color-mix over base + accent
  * tint) onto the base palette, then AA-checks every text color that sits ON
  * glass. R5-2: hero identity plate + navbar. R5-3: work cards, testimonials,
- * GitHub card, tech chips, more-projects strip. Checked in both themes.
+ * GitHub card, tech chips, more-projects strip. R5-5: case-study page-hero
+ * glass band, sidebar cards, drawer links. Checked in both themes.
  *
- * Two backdrops per theme:
- *   1. plain canvas (hero / navbar feel)
- *   2. canvas + ambient `--color-glow` band behind the card sections (R5-3).
- *      The band is an accent radial that peaks at `glow` at its centre then
- *      masks to nothing at its edge. Cards sit *below* the centre, so we model
- *      the region where cards render: ~50% of the centre alpha (7%/5%).
+ * Backdrops per theme:
+ *   1. plain canvas (hero / navbar / sidebar feel — nothing behind)
+ *   2. canvas + ambient `--color-glow` band at the card zone (R5-3): ~50% of
+ *      the centre alpha (7%/5%) — cards sit below the glow's centre.
+ *   3. canvas + glow at the FULL centre alpha (14%/10%) — R5-5 case-hero:
+ *      the page-hero glass band sits close to the glow peak, not below it.
  *
  * Sources of truth: src/styles/global.css @theme / theme overrides + spec §5.1/§5.3.
  * Run: node scripts/check-glass-contrast.mjs
@@ -22,28 +23,30 @@ const THEMES = {
     canvas: '#0f0f0f',
     accent: '#6495ed',
     glow: 0.07, // band at card zone ≈ 50% of centre alpha (14% peak → 7%)
+    glowCentre: 0.14, // full peak under the case-study page-hero band (R5-5)
     glass: { base: '#0f0f0f', mix: 0.62, tint: 0.08 },
     text: {
-      'name/nav-logo (ink)': '#f0f0f0',
-      '#bio/nav-link (ink-muted)': '#888888',
-      'section-label (accent-text)': '#a9c8ff',
-'card title / quote / gh strong (ink)': '#f0f0f0',
-      'card summary / chip / gh meta (ink-muted)': '#888888',
-      'card period / status / meta (ink-dim-glass)': '#848484',
+      'case title / nav (ink)': '#f0f0f0',
+      'case summary / nav-link (ink-muted)': '#8d8d8d',
+      'card title / quote (ink)': '#f0f0f0',
+      'card summary / chip / gh meta (ink-muted)': '#8d8d8d',
+      'card meta / label / hero period / sep (ink-dim-glass)': '#8b8b8b',
+      'section-label / link (accent-text)': '#a9c8ff',
     },
   },
   light: {
     canvas: '#f8f8f8',
     accent: '#6495ed',
-    glow: 0.05, // band zone: 50% of the light centre alpha (10% → 5%)
+    glow: 0.05,
+    glowCentre: 0.10,
     glass: { base: '#ffffff', mix: 0.66, tint: 0.06 },
     text: {
-      'name/nav (ink)': '#111111',
-      'bio/nav-link (ink-muted)': '#555555',
-      'section-label (accent-text)': '#2f57ad',
-      'card title / quote / gh strong (ink)': '#111111',
+      'case title / nav (ink)': '#111111',
+      'case summary / nav-link (ink-muted)': '#555555',
+      'card title / quote (ink)': '#111111',
       'card summary / chip / gh meta (ink-muted)': '#555555',
-      'card period / status / meta (ink-dim-glass)': '#6c6c6c',
+      'card meta / label / hero period / sep (ink-dim-glass)': '#6a6a6a',
+      'section-label / link (accent-text)': '#2f57ad',
     },
   },
 };
@@ -89,27 +92,45 @@ function ratio(fg, bg) {
 }
 
 let failed = false;
+
+function glowBackdrop(backdropHex, accentHex, alpha) {
+  return hexToRgb(backdropHex)
+    .map((c, i) => Math.round(c * (1 - alpha) + hexToRgb(accentHex)[i] * alpha))
+    .map((v) => v.toString(16).padStart(2, '0'))
+    .join('');
+}
+
 for (const [name, theme] of Object.entries(THEMES)) {
   // Backdrop 1: plain canvas.
   const canvasBg = glassOverBackdrop(theme.canvas, theme.accent, theme.glass.mix, theme.glass.tint);
-  // Backdrop 2: canvas blended with the glow-band centre (accent @ glow alpha).
-  const bandBackdrop = hexToRgb(theme.canvas)
-    .map((c, i) => Math.round(c * (1 - theme.glow) + hexToRgb(theme.accent)[i] * theme.glow));
+  // Backdrop 2: canvas blended with the glow band at the CARD zone.
   const bandBg = glassOverBackdrop(
-    bandBackdrop.map((v) => v.toString(16).padStart(2, '0')).join(''),
+    glowBackdrop(theme.canvas, theme.accent, theme.glow),
+    theme.accent,
+    theme.glass.mix,
+    theme.glass.tint,
+  );
+  // Backdrop 3 (R5-5 case-hero centre): glow at the FULL centre alpha — the
+  // page-hero glass band sits at the glow peak, not below it.
+  const centreBg = glassOverBackdrop(
+    glowBackdrop(theme.canvas, theme.accent, theme.glowCentre),
     theme.accent,
     theme.glass.mix,
     theme.glass.tint,
   );
 
   console.log(`\n${name.toUpperCase()} — composited glass:`);
-  console.log(`  over canvas → rgb(${canvasBg.join(', ')}) · over +band → rgb(${bandBg.join(', ')})`);
+  console.log(
+    `  canvas rgb(${canvasBg.join(', ')}) · band rgb(${bandBg.join(', ')}) · centre rgb(${centreBg.join(', ')})`,
+  );
+
+  // The three core ink tokens are checked against every backdrop (30 checks
+  // total: 3 tokens × 4 backdrops... plain tags that sit over the glow peak).
+  const core = ['case title / nav (ink)', 'case summary / nav-link (ink-muted)', 'card meta / label / hero period / sep (ink-dim-glass)'];
   for (const [label, fgHex] of Object.entries(theme.text)) {
     const fg = hexToRgb(fgHex);
-    const rows = [
-      ['canvas', ratio(fg, canvasBg)],
-      ['band', ratio(fg, bandBg)],
-    ];
+    const rows = [['canvas', ratio(fg, canvasBg)], ['band', ratio(fg, bandBg)]];
+    if (core.includes(label)) rows.push(['centre', ratio(fg, centreBg)]);
     for (const [which, r] of rows) {
       const ok = r >= 4.5;
       if (!ok) failed = true;

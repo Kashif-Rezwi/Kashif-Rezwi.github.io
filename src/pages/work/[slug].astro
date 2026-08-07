@@ -46,10 +46,11 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     <!-- =========================================================
          Page header / hero
     ========================================================= -->
-    <div class="case-hero">
-      <div class="container-site case-hero-inner">
+    <div class="case-hero band-host">
+      <div class="section-band" aria-hidden="true"></div>
+      <div class="container-site case-hero-inner glass-band">
         <!-- Breadcrumb + role label -->
-        <div class="case-hero-meta animate-fade-up">
+        <div class="case-hero-meta glass-settle">
           <a href={withBase('/#work')} class="case-back">← Work</a>
           <span class="case-sep" aria-hidden="true">·</span>
           <span class="section-label">{roleLabel}</span>
@@ -83,10 +84,10 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     {
       coverSrc && (
         <div class="container-site">
-          <figure class="case-cover animate-fade-up delay-200">
-            <Image
-              src={coverSrc as Parameters<typeof Image>[0]['src']}
-              alt={`${title} project screenshot`}
+<figure class="case-cover">
+              <Image
+                src={coverSrc as Parameters<typeof Image>[0]['src']}
+                alt={`${title} project screenshot`}
               width={1200}
               format="avif"
               quality={75}
@@ -113,7 +114,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
       <!-- Sidebar (labelled region — avoids nesting a complementary `<aside>` inside <main>) -->
       <div class="case-sidebar" role="region" aria-label="Project details">
         <!-- Tech stack -->
-        <div class="case-sidebar-card reveal">
+        <div class="case-sidebar-card reveal glass-card">
           <h2 class="case-sidebar-label">Tech stack</h2>
           <ul class="case-sidebar-tech">
             {tech.map((t) => <li class="tech-tag">{t}</li>)}
@@ -121,7 +122,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
         </div>
 
         <!-- Links -->
-        <div class="case-sidebar-card reveal delay-100">
+        <div class="case-sidebar-card reveal delay-100 glass-card">
           <h2 class="case-sidebar-label">Links</h2>
           <ul class="case-sidebar-links">
             <li>
@@ -175,16 +176,46 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
   }
 
   /* ----------------------------------------------------------------
-     Hero header
+     Hero header (R5-5: glass band over a masked glow field)
   ---------------------------------------------------------------- */
   .case-hero {
     padding-block: 4rem 2.5rem;
   }
 
+  /* Ambient console-field glow behind the hero glass band (same recipe as
+     home section bands; a smooth masked gradient — nothing to blur, §12). */
+  .case-hero.band-host {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .case-hero .section-band {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: var(--color-glow);
+    mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 28%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 28%, transparent 78%);
+  }
+
+  /* The hero content sits on a soft glass band (R5-5, spec §7 "page-hero
+     heading on a soft glass band"). Backdrop-filter none: the field behind is
+     a smooth masked glow, so blurring it would spend a GPU layer for nothing. */
   .case-hero-inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-card);
+    padding: 2rem;
+  }
+  .case-hero-inner.glass-band {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .case-hero-meta {
@@ -205,7 +236,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
   }
 
   .case-sep {
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
     font-size: 0.75rem;
   }
 
@@ -221,7 +252,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
   .case-period {
     font-family: var(--font-mono);
     font-size: 0.8125rem;
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
     margin: 0;
     display: flex;
     align-items: center;
@@ -253,14 +284,16 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
   }
 
   /* ----------------------------------------------------------------
-     Cover image
+     Cover image (R5-5: glass frame)
   ---------------------------------------------------------------- */
   .case-cover {
     margin-top: 2rem;
     border-radius: var(--radius-card);
     overflow: hidden;
-    border: 0;
-    background: var(--color-surface);
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
   .case-cover-img {
     width: 100%;
@@ -283,7 +316,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     min-width: 0;
   }
 
-  /* Sidebar */
+  /* Sidebar (R5-5: glass cards; flat canvas behind → no blur, §12) */
   .case-sidebar {
     display: flex;
     flex-direction: column;
@@ -293,13 +326,15 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
   }
 
   .case-sidebar-card {
-    background: var(--color-surface);
-    border: 0;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: var(--radius-card);
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .case-sidebar-label {
@@ -307,7 +342,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     font-size: 0.6875rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
     font-weight: 500;
     margin: 0;
   }

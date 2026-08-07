@@ -186,14 +186,33 @@ const links = [
     transition: transform 0.25s ease, opacity 0.25s ease;
   }
 
-  /* Mobile nav drawer */
+  /* Mobile nav drawer — R5-5: same navbar glass recipe so the open drawer is
+     one continuous glass panel with the fixed header. Blur is a static layer
+     (never animated); fallbacks mirror the header. */
   .mobile-nav {
     display: none;
     overflow: hidden;
     max-height: 0;
     visibility: hidden;
     transition: max-height 0.3s ease;
-    border-top: 1px solid var(--color-border);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border-top: 1px solid var(--glass-border);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .mobile-nav {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .mobile-nav {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
   }
   .mobile-nav.is-open {
     max-height: 300px;
@@ -214,7 +233,7 @@ const links = [
     color: var(--color-ink-muted);
     text-decoration: none;
     padding: 0.5rem 0;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--glass-border);
     transition: color 0.15s ease;
   }
   .mobile-nav-link:hover,

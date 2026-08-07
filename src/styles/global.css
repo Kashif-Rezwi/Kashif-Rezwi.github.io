@@ -33,9 +33,9 @@
 
   /* Ink */
   --color-ink: #f0f0f0;            /* primary text — near white */
-  --color-ink-muted: #888888;      /* secondary text — medium gray */
+  --color-ink-muted: #8d8d8d;      /* R5-5 raised: AA on glass at the glow-peak centre (4.63:1) */
   --color-ink-dim: #808080;        /* tertiary — dim meta text, AA-safe on canvas (#0f0f0f) */
-  --color-ink-dim-glass: #848484;  /* R5-3: dim meta ON glass/band — 4.57:1 (plain ink-dim dips to 4.33) */
+  --color-ink-dim-glass: #8b8b8b;  /* R5-3/5: dim meta ON glass/band — 4.51:1 at the glow-peak centre */
 
   /* Accent — cornflowerblue family */
   --color-accent: #6495ed;          /* cornflowerblue core */
@@ -92,7 +92,7 @@
   --color-ink: #111111;
   --color-ink-muted: #555555;
   --color-ink-dim: #707070;
-  --color-ink-dim-glass: #6c6c6c; /* R5-3: dim meta ON glass/band — 4.64:1 */
+  --color-ink-dim-glass: #6a6a6a; /* R5-3/5: dim meta ON glass/band — 4.56:1 at the glow-peak centre */
   --color-accent: #6495ed;
   --color-accent-light: #4b74d3;
   --color-accent-text: #2f57ad;
@@ -127,7 +127,7 @@
     --color-ink: #111111;
     --color-ink-muted: #555555;
     --color-ink-dim: #707070;
-    --color-ink-dim-glass: #6c6c6c; /* R5-3: dim meta ON glass/band — 4.64:1 */
+    --color-ink-dim-glass: #6a6a6a; /* R5-3/5: dim meta ON glass/band — 4.56:1 at the glow-peak centre */
     --color-accent: #6495ed;
     --color-accent-light: #4b74d3;
     --color-accent-text: #2f57ad;
