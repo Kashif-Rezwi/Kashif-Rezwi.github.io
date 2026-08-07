@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-07 (DL-053)
+- **Last updated:** 2026-08-07 (DL-055)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -383,3 +383,17 @@
 - **Decision:** Add a **Testimonials** home section sourced from two LinkedIn recommendations (Thanga Balaji S, Adithya Santhosh — seniors at Brand Exponents Creatives Pvt Ltd). Implemented as an Astro content collection (`testimonials`) with a `TestimonialCard` component, rendering quote + highlighted pull-quotes + author attribution linking to each recommender's LinkedIn profile, with photos committed under `public/testimonials/`. Quotes were chosen to be inserted **verbatim** (claim-safe — AGENTS.md §3).
 - **Rationale:** Owner evaluated automatic LinkedIn syncing (Official Recommendation API is partner-gated; scraping/Voyager/cookie-based and third-party scrapers violate LinkedIn's ToS and the operating contract's source safety §4) and chose the managed-content approach this repo already uses for case studies. Owner supplied the quotes, relationship labels, dates, profile URLs, and photos directly.
 - **Approval status:** Approved (owner directive in conversation, 2026-08-07). Implementation complete; deployed to production only on a separate owner "go".
+
+## DL-054 — Adopt the "R5 Operating Loop" as the canonical engineering workflow
+
+- **Date:** 2026-08-07
+- **Decision:** Replace the generic six-step loop in AGENTS.md §7 with the **R5 Operating Loop**, fully specified in the new canonical document `docs/engineering/engineering-workflow.md`. The loop merges the owner's seven-step process (reason → brainstorm → research → evaluate → plan → implement → review) with the repo's existing model and adds two steps that guard against drift: **step 1 git-truth verification** (docs claims checked against actual branch/merge/origin state) and **explicit recording per phase**. The loop: Orient (read context + verify git) → Decide (objective, reason, brainstorm ≥2, research-label, evaluate → owner gate if scope/claims/identity change) → Plan (plan doc) → Build (smallest steps) → Prove (acceptance self-review + docs-vs-code-vs-git audit + repo checks + evidence doc) → Record (decision log, open questions, project status) → stop for owner approval.
+- **Rationale:** The audit (2026-08-07) found the exact failure this workflow prevents: `09-r4-improvement-plan.md`, `project-status.md`, and the R5 design doc described R4 work as living on `v2-improvement`, "not deployed" — while git showed it was already merged into `develop` and pushed. The previous loop never forced a git-truth check, and the seven-step process had no record step, so stale prose silently became authority. A single, documented loop with per-step artifacts makes every phase resumable by a fresh agent and keeps the repo the single source of truth.
+- **Approval status:** Owner approved in conversation (2026-08-07) via the correction workflow; applied with DL-055.
+
+## DL-055 — R4 merged to `develop`; R5 working branch is `evolve-design`; repo docs corrected to git truth
+
+- **Date:** 2026-08-07
+- **Decision:** (1) Record git truth: `v2-improvement` was already merged into `develop` (`895d89c`); testimonials + DL-053 landed on `develop` (pushed `655c6f7`); `v2-improvement` is fully contained in `develop` and must **not** be used as a base for new work. (2) The **R5 working branch is `evolve-design`** (= `develop` + the R5 design spec, committed `de90c67`) — matches the cycle name and is the base for all R5-1…R5-8 gates; promotion to `develop` → `gh-pages` (or `main` once Pages source = Actions) only on a separate owner "go". (3) Corrected stale docs to match: `README.md` (R3 now live), `docs/project-status.md` (R4 merged; next action = R4-6 QA + deploy gate, then R5-0), `docs/rebuild-02/09-r4-improvement-plan.md` (status + R4-7 path), `docs/rebuild-02/11-r5-glassmorphism-design.md` (§10 working branch + R5-8 path), and `docs/engineering/handoff-guide.md` (Phase-1-era → post-launch cycle era).
+- **Rationale:** Documentation must be the single source of truth and must match the repository's actual state (AGENTS.md §1 "Last updated", §5 documentation quality). The audit (DL-054) surfaced doc-vs-code-vs-git drift; this decision closes it so a fresh agent orienting per the R5 Operating Loop step 1 finds prose aliased to reality.
+- **Approval status:** Owner selected "fix all stale claims" and "evolve-design" in conversation (2026-08-07).

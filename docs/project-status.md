@@ -2,7 +2,7 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-07 (**R4 in progress** — R4-1..R4-5 implemented on `v2-improvement`; Testimonials section added locally (DL-053); R4-6 QA pending; R4-7 deploy owner-gated)
+- **Last updated:** 2026-08-07 (**R5 active** — R3 live on `gh-pages`; R4 code + testimonials **merged to `develop`**, deploy owner-gated; R5-0 design spec complete on `evolve-design`, R5-1 awaiting owner gate)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current phase
@@ -60,17 +60,18 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 
 ## Next approved action
 
-- **R4 improvement cycle — IN PROGRESS.**
+- **R4 improvement cycle — code merged, QA + deploy owner-gated.**
 
-  Implemented on the working branch `v2-improvement` (NOT deployed), per owner-confirmed decisions:
+  R4-1…R4-5 + the resume swap + testimonials are complete and **merged into `develop`** (commit history: `895d89c` merged `v2-improvement`; testimonials and DL-053 landed directly on `develop`, pushed at `655c6f7`). Branch truth verified 2026-08-07 (DL-055): `v2-improvement` is fully contained in `develop`; do **not** branch future work from it. Details of the R4 scope below are retained for the deploy gate.
   - **R4-1 Hero** (DL-033): single-line name + canonical role line **"Frontend-focused Full Stack Engineer"**. ✅
   - **R4-2 Dot-matrix extension (B2):** reusable multi-instance component now drives the hero **and** contact matrix. Dot **enlargement dropped** per owner. ✅
   - **R4-3 Tech stack:** icon registry added; `REST APIs` reordered; membership corrected (LangChain dropped, ClickHouse/RabbitMQ added); flat groups retained. ✅
   - **R4-4 Experience:** Brand Exponents deepened with workflow-builder/analytics, page-builder shared systems, AI workflow auto-config/auto-draft, and two AppSumo launch periods; "six providers" → "several" per owner; Nexus internship expanded to three bullets (features & integration, code quality). ✅
   - **R4-5 Navbar:** pinned via `position: fixed` (frosted glass kept); bottom fade **dropped per owner**. ✅
   - **Resume `/resume`:** PDF replaced with the **Full-stack master** (`kashif-rezwi-master-full-stack-developer-2026-07`) — matches the site identity + expanded experience. ✅
-  - **Testimonials (DL-053):** new home section from two LinkedIn recommendations (Thanga Balaji S, Adithya Santhosh) as a `testimonials` content collection + `TestimonialCard`; verbatim quotes, highlights, LinkedIn links, photos under `public/testimonials/`. Implemented locally, **not deployed**. ✅
+  - **Testimonials (DL-053):** new home section from two LinkedIn recommendations (Thanga Balaji S, Adithya Santhosh) as a `testimonials` content collection + `TestimonialCard`; verbatim quotes, highlights, LinkedIn links, photos under `public/testimonials/`. Merged to `develop`; production deploy owner-gated. ✅
 
-- **Next step: R4-6** — full QA pass (Lighthouse, axe, contrast, links, no-JS/canvas/reduced-motion) + evidence doc `docs/rebuild-02/10-r4-qa-evidence.md`, then owner gate. **R4-7** (promotion `v2-improvement` → `develop` → `gh-pages` + deploy) happens **only** on a separate owner "go".
-- **Owner spot-checks** (post-launch): LinkedIn click-through (OQ-06), visual captures at 320/1440, and resume-PDF review. Repository is back in maintenance mode per AGENTS.md §1: future changes are pushed to the working branch, built, then deployed to `gh-pages`.
+- **R4 deploy (was R4-7):** promotion/deploy of the already-merged R4 work to production. Path: `develop` → built + deployed (owner "go"); with the Pages-source switch to GitHub Actions, a `main` promote-and-push auto-deploys (DL-052). Execution only on a separate owner "go".
+- **R5 — active cycle (owner gate pending):** R5-0 design spec complete at `docs/rebuild-02/11-r5-glassmorphism-design.md` on working branch **`evolve-design`** (= develop + spec). Per that spec, each phase R5-1…R5-8 is individually owner-gated; next decision point: OQ-R5-1…8 + approval to start **R5-1 glass foundation** (tokens/utilities, zero visual diff).
+- **Owner spot-checks** (post-launch): LinkedIn click-through (OQ-06), visual captures at 320/1440, and resume-PDF review. Repository is in maintenance mode: future changes land on the active cycle's working branch, are reviewed on `evolve-design`, then promoted to `develop` → `gh-pages`.
 - **CI/CD (DL-051/052, 2026-08-06):** `ci.yml` build check runs automatically on pushes/PRs to **both `develop` and `main`**. `deploy.yml` **auto-deploys on every push/merge to `main`** (also manually dispatchable). Both workflows publish only once the Pages source is switched from branch `gh-pages` to **GitHub Actions** (repo Settings → Pages, owner action).
