@@ -465,26 +465,14 @@
     background: color-mix(in srgb, var(--color-surface) 40%, transparent);
   }
 
-  /* --- Hero plate (R5-6: relocated from Hero.astro so the GlassPanel-wrapped
-     plate keeps these layout rules — global-only classes, used solely by the
-     home hero, so no cross-page effects) --- */
+  /* --- Hero content layout (R5-6/R5-8a: kept — the identity is now flat over
+     the matrix; no glass plate, so no hero-panel padding rule) --- */
   .hero-content {
     flex: 1;
     min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
-
-  /* R5-2: the hero identity plate gap/stack — glass utility applies the material */
-  .hero-panel {
-    padding: 2rem;
-  }
-
-  @media (max-width: 768px) {
-    .hero-panel {
-      padding: 1.25rem;
-    }
   }
 
   /* --- Markdown (case studies) --- */

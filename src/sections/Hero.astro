@@ -5,7 +5,6 @@
  */
 import { Image } from 'astro:assets';
 import HeroDotMatrix from '../components/HeroDotMatrix.astro';
-import GlassPanel from '../components/GlassPanel.astro';
 import Icon from '../components/Icon.astro';
 import { withBase } from '../lib/paths';
 
@@ -24,13 +23,15 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
 
 <section class="hero-section">
   <HeroDotMatrix />
-  <!-- Ambient console-field glow: sits behind the glass plate so the identity
-       pane floats over a lit field, not flat alpha (R5-2, spec §4.3.3). -->
+  <!-- Ambient console-field glow: sits behind the identity so it reads over a lit
+       field, not flat alpha. The identity itself is intentionally flat over the
+       live matrix (T1: no glass card competes with the interactive dot field). -->
   <div class="hero-ambience field-breathe" aria-hidden="true"></div>
   <div class="container-site hero-inner">
-    <!-- Identity plate: glass material comes from the shared GlassPanel recipe;
-       hero sizing/settle live here. -->
-  <GlassPanel class="hero-content hero-panel glass-settle">
+    <!-- Identity block — flat over the matrix (T1): no glass card. Portrait and
+         role badge remain owner-locked. Subtle text-legibility treatment via
+         .hero-textshadow so the name reads crisply over the live dots. -->
+    <div class="hero-content hero-textshadow">
       <!-- Label -->
       <p class="section-label delay-100 animate-fade-up">Portfolio</p>
 
@@ -70,7 +71,7 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
           <a href={devto} class="hero-social" target="_blank" rel="noopener noreferrer"><Icon name="devto" size={15} />dev.to</a>
         </div>
       </div>
-    </GlassPanel>
+    </div>
 
     <!-- Portrait -->
     <div class="hero-portrait delay-300 animate-fade-up">
@@ -109,6 +110,16 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
     position: relative;
     z-index: 1;
     margin-top: -4.5rem;
+  }
+
+  /* T1 (R5-8a): subtle text-legibility treatment over the live dot matrix —
+     a soft, theme-adaptive text shadow so the identity reads crisply without
+     a glass card. Not a card; no background/blur. */
+  .hero-textshadow {
+    text-shadow:
+      0 1px 2px color-mix(in srgb, var(--color-canvas) 55%, transparent),
+      0 0 18px color-mix(in srgb, var(--color-canvas) 40%, transparent);
+    -webkit-text-stroke: 0.5px color-mix(in srgb, var(--color-canvas) 22%, transparent);
   }
 
   .hero-ambience {

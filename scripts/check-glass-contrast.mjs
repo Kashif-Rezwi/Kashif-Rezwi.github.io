@@ -1,12 +1,17 @@
 /**
- * R5-2/R5-3/R5-5 — On-glass WCAG AA verification.
+ * R5-2/R5-3/R5-5 + R5-8a(T1) — On-glass WCAG AA verification.
  *
  * Models how the R5 glass material actually renders over the live backdrop by
  * compositing the token-defined `--glass-bg` (a color-mix over base + accent
  * tint) onto the base palette, then AA-checks every text color that sits ON
- * glass. R5-2: hero identity plate + navbar. R5-3: work cards, testimonials,
- * GitHub card, tech chips, more-projects strip. R5-5: case-study page-hero
- * glass band, sidebar cards, drawer links. Checked in both themes.
+ * glass. Surfaces: navbar, work/testimonial cards, tech chips, GitHub card,
+ * more-projects strip, case-study page-hero glass band, sidebar cards, drawer
+ * links. Checked in both themes.
+ *
+ * NOTE (T1, R5-8a): the home-hero identity plate was removed — hero text now
+ * sits flat directly over the dot matrix / canvas, so it is validated by the
+ * base `check-contrast.mjs` (text on canvas), not by this on-glass script.
+ * All surfaces modelled here remain glass and continue to pass.
  *
  * Backdrops per theme:
  *   1. plain canvas (hero / navbar / sidebar feel — nothing behind)
