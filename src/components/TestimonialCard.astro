@@ -74,7 +74,7 @@ const paragraphsHtml = highlighted
     </a>
     <div class="testimonial-byline">
       <a href={linkedinUrl} class="testimonial-name" target="_blank" rel="noopener noreferrer">
-        {author} <Icon name="external" size={12} />
+        {author} <Icon name="linkedin" size={16} class="testimonial-li-icon" />
       </a>
       <p class="testimonial-role">{role} · {company}</p>
       <p class="testimonial-meta">{relationship} · {date}</p>
@@ -130,20 +130,24 @@ const paragraphsHtml = highlighted
     display: flex;
     flex-direction: column;
     gap: 1.125rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .testimonial-quote :global(p) {
     margin: 0;
   }
 
-  /* Highlighted key phrases: styled in primary accent text color only, no background highlight fill */
+  /* Highlighted key phrases: quiet accent treatment — soft fill only */
   .testimonial-quote :global(mark.testimonial-highlight),
   .testimonial-quote :global(.testimonial-highlight) {
-    background: none;
-    background-color: transparent;
-    color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    color: var(--color-accent-text);
     font-weight: 600;
-    padding: 0;
+    padding: 0.125em 0.25em;
+    border-radius: 0.25em;
   }
 
   .testimonial-attribution {
@@ -165,11 +169,12 @@ const paragraphsHtml = highlighted
     border-radius: 50%;
     object-fit: cover;
     background-color: var(--color-surface-2);
-    border: 1px solid var(--color-border);
-    transition: border-color var(--duration-fast) ease;
+    border: 2px solid var(--color-accent);
+    transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
   }
   .testimonial-photo-link:hover .testimonial-photo {
-    border-color: var(--color-accent);
+    border-color: var(--color-accent-light);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
   }
 
   .testimonial-byline {
