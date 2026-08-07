@@ -1,0 +1,27 @@
+---
+/**
+ * R5-6: pure-presentation glass wrapper — one glass recipe used everywhere.
+ *
+ * Renders a single glass surface (`glass-panel` / `glass-card` / `glass`) plus
+ * any caller classes, so every surface composes the same material without each
+ * file hand-rolling the recipe. No JS; slot content is passed through.
+ *
+ * The material itself stays in global.css (`.glass`, `.glass-panel`,
+ * `.glass-card` + `@supports` / prefers-reduced-transparency fallbacks) — this
+ * component only *applies* it, keeping one source of truth.
+ */
+interface Props {
+  /** Which glass shape: `panel` (radius-card) | `card` (same radius, semantic) | `glass` (bare material) */
+  variant?: 'panel' | 'card' | 'glass';
+  /** Extra classes merged onto the surface. */
+  class?: string;
+}
+
+const { variant = 'panel', class: extraClass = '' } = Astro.props;
+
+const recipe = variant === 'card' ? 'glass-card' : variant === 'glass' ? 'glass' : 'glass-panel';
+---
+
+<div class={`${recipe} ${extraClass}`.trim()}>
+  <slot />
+</div>

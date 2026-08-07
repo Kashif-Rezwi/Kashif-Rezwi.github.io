@@ -116,7 +116,7 @@ const links = [
     color: var(--color-ink);
     text-decoration: none;
     letter-spacing: -0.01em;
-    transition: color 0.15s ease;
+    transition: color var(--duration-fast) ease;
     white-space: nowrap;
   }
   .logo:hover {
@@ -138,7 +138,7 @@ const links = [
     font-weight: 400;
     color: var(--color-ink-muted);
     text-decoration: none;
-    transition: color 0.15s ease;
+    transition: color var(--duration-fast) ease;
     position: relative;
   }
   .nav-link::after {
@@ -183,7 +183,7 @@ const links = [
     height: 2px;
     background: var(--color-ink);
     border-radius: var(--radius-control);
-    transition: transform 0.25s ease, opacity 0.25s ease;
+    transition: transform var(--duration-base) ease, opacity var(--duration-base) ease;
   }
 
   /* Mobile nav drawer — R5-5: same navbar glass recipe so the open drawer is
@@ -234,7 +234,7 @@ const links = [
     text-decoration: none;
     padding: 0.5rem 0;
     border-bottom: 1px solid var(--glass-border);
-    transition: color 0.15s ease;
+    transition: color var(--duration-fast) ease;
   }
   .mobile-nav-link:hover,
   .mobile-nav-link.accent {

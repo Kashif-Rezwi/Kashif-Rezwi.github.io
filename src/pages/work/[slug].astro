@@ -182,19 +182,11 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     padding-block: 4rem 2.5rem;
   }
 
-  /* Ambient console-field glow behind the hero glass band (same recipe as
-     home section bands; a smooth masked gradient — nothing to blur, §12). */
-  .case-hero.band-host {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-  }
+  /* Ambient console-field glow behind the hero glass band. The shared
+     scaffolding (.band-host / .section-band) now lives in global.css; the
+     case-hero keeps only the mask-position override that makes it sit at the
+     45% ellipse anchor (the home sections use 48% from the shared rule). */
   .case-hero .section-band {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: var(--color-glow);
     mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 28%, transparent 78%);
     -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 28%, transparent 78%);
   }
@@ -229,7 +221,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     font-size: 0.8125rem;
     color: var(--color-ink-muted);
     text-decoration: none;
-    transition: color 0.15s ease;
+    transition: color var(--duration-fast) ease;
   }
   .case-back:hover {
     color: var(--color-accent-light);
@@ -373,7 +365,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     font-size: 0.8125rem;
     color: var(--color-ink-muted);
     text-decoration: none;
-    transition: color 0.15s ease;
+    transition: color var(--duration-fast) ease;
   }
   .case-sidebar-link:hover {
     color: var(--color-accent-light);

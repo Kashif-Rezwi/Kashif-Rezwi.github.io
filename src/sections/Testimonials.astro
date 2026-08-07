@@ -1,0 +1,64 @@
+---
+/**
+ * R5-6 section partition: Testimonials (was part of index.astro).
+ * Markup + scoped styles relocated verbatim from index.astro.
+ */
+import TestimonialCard from '../components/TestimonialCard.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+
+interface Props {
+  testimonials: Array<{
+    data: {
+      quote: string;
+      highlights: string[];
+      author: string;
+      role: string;
+      company: string;
+      relationship: string;
+      date: string;
+      avatar: string;
+      linkedinUrl: string;
+    };
+  }>;
+}
+
+const { testimonials } = Astro.props;
+---
+
+<section id="testimonials" class="section-block section-alt band-host">
+  <div class="section-band" aria-hidden="true"></div>
+  <div class="container-site">
+    <SectionHeader
+      label="Testimonials"
+      title="What teammates say"
+      subtitle="Recommendations from seniors at Brand Exponents Creatives Pvt Ltd, published on my LinkedIn profile."
+    />
+
+    <div class="testimonial-grid">
+      {testimonials.map((entry, i) => (
+        <div class={`reveal delay-${(i + 1) * 100}`}>
+          <TestimonialCard
+            quote={entry.data.quote}
+            highlights={entry.data.highlights}
+            author={entry.data.author}
+            role={entry.data.role}
+            company={entry.data.company}
+            relationship={entry.data.relationship}
+            date={entry.data.date}
+            avatar={entry.data.avatar}
+            linkedinUrl={entry.data.linkedinUrl}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+</style>

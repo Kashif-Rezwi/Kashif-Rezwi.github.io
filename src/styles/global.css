@@ -29,7 +29,6 @@
   --color-surface: #161616;        /* card / raised surface */
   --color-surface-2: #1c1c1c;     /* slightly lighter surface */
   --color-border: #2a2a2a;        /* subtle hairline border */
-  --color-border-focus: #6495ed;  /* cornflowerblue for focus rings */
 
   /* Ink */
   --color-ink: #f0f0f0;            /* primary text — near white */
@@ -44,10 +43,6 @@
   --color-accent-badge: #3f63c9;    /* role-badge fill — white text AA 5.47:1 (OQ-R5-9) */
   --color-accent-glow: #6495ed26;   /* sparse matrix / focus halo only */
   --color-accent-soft: #6495ed14;   /* restrained tag background */
-
-  /* Kept as aliases for existing components; intentionally flat, not gradients. */
-  --gradient-accent: var(--color-accent);
-  --gradient-accent-text: var(--color-accent-text);
 
   /* ── R5 glass material (glass-foundation, §5.1/5.2) ──────────────────────
      A translucent "console plane" over the dot field. Never animated;
@@ -65,13 +60,6 @@
   --duration-base: 250ms;
   --duration-slow: 400ms;
   --duration-xslow: 700ms;
-  --elevation-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
-  --elevation-md: 0 4px 16px rgba(0, 0, 0, 0.55);
-
-  /* Aliases used in Tailwind utilities */
-  --color-paper: var(--color-canvas);
-  --color-hairline: var(--color-border);
-  --color-accent-ink: var(--color-accent);
 }
 
 /* ---------------------------------------------------------------------------
@@ -98,11 +86,6 @@
   --color-accent-text: #2f57ad;
   --color-accent-glow: #3862c018;
   --color-accent-soft: #3862c010;
-  --gradient-accent: var(--color-accent);
-  --gradient-accent-text: var(--color-accent-text);
-  --color-paper: var(--color-canvas);
-  --color-hairline: var(--color-border);
-  --color-accent-ink: var(--color-accent);
   color-scheme: light;
 
   /* R5 glass (light recipe): translucent white + cooler tint (OQ-R5-2, option A) */
@@ -133,11 +116,6 @@
     --color-accent-text: #2f57ad;
     --color-accent-glow: #3862c018;
     --color-accent-soft: #3862c010;
-    --gradient-accent: var(--color-accent);
-    --gradient-accent-text: var(--color-accent-text);
-    --color-paper: var(--color-canvas);
-    --color-hairline: var(--color-border);
-    --color-accent-ink: var(--color-accent);
     color-scheme: light;
 
     /* R5 glass (light recipe) — mirrors :root[data-theme='light'] */
@@ -218,7 +196,7 @@
     top: 0.5rem;
     z-index: 100;
     transform: translateY(-200%);
-    transition: transform 0.15s ease;
+    transition: transform var(--duration-fast) ease;
     background: var(--color-ink);
     color: var(--color-canvas);
     padding: 0.5rem 0.75rem;
@@ -277,7 +255,7 @@
     text-decoration: underline;
     text-decoration-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
     text-underline-offset: 4px;
-    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    transition: color var(--duration-fast) ease, text-decoration-color var(--duration-fast) ease;
   }
   .link-accent:hover {
     color: var(--color-accent-text);
@@ -298,7 +276,7 @@
     border-radius: var(--radius-control);
     border: none;
     cursor: pointer;
-    transition: background 0.15s ease, transform 0.1s ease;
+    transition: background var(--duration-fast) ease, transform 0.1s ease;
     text-decoration: none;
   }
   .btn:hover {
@@ -344,7 +322,7 @@
     border-radius: var(--radius-control);
     border: 1px solid var(--color-accent-text); /* readable accent — border alone fails non-text AA on light */
     cursor: pointer;
-    transition: background 0.15s ease, transform 0.1s ease;
+    transition: background var(--duration-fast) ease, transform 0.1s ease;
     text-decoration: none;
   }
   .btn-outline:hover {
@@ -454,6 +432,61 @@
     margin-block: 0;
   }
 
+  /* --- Section scaffolding (R5-6: shared by index sections + case pages) ---
+     Moved from the duplicated scoped blocks (index.astro + [slug].astro) into
+     the shared layer so the grid/band recipe lives in one place. */
+  .section-block {
+    padding-block: 5rem;
+  }
+
+  /* R5-3: ambient console-field band behind content surfaces (work, skills,
+     testimonials, now). Mirrors the hero ambience recipe (§5.2 .field-backdrop);
+     a masked static glow so glass panels read as floating over a lit field. */
+  .band-host {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .section-band {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: var(--color-glow);
+    mask-image: radial-gradient(ellipse 75% 70% at 50% 48%, #000 28%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 48%, #000 28%, transparent 78%);
+  }
+  .band-host > .container-site {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-alt {
+    background: color-mix(in srgb, var(--color-surface) 40%, transparent);
+  }
+
+  /* --- Hero plate (R5-6: relocated from Hero.astro so the GlassPanel-wrapped
+     plate keeps these layout rules — global-only classes, used solely by the
+     home hero, so no cross-page effects) --- */
+  .hero-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* R5-2: the hero identity plate gap/stack — glass utility applies the material */
+  .hero-panel {
+    padding: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero-panel {
+      padding: 1.25rem;
+    }
+  }
+
   /* --- Markdown (case studies) --- */
   .markdown h2 {
     margin-top: 2.5rem;
@@ -505,7 +538,7 @@
     text-decoration: underline;
     text-decoration-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
     text-underline-offset: 4px;
-    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    transition: color var(--duration-fast) ease, text-decoration-color var(--duration-fast) ease;
   }
   .markdown a:hover {
     color: var(--color-accent-light);
@@ -531,12 +564,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-  }
-
-  /* Fade-in animation */
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
   }
 
   /* Glass settle-in (R5-4): hero plate fades to crisp with a short rise.
@@ -572,9 +599,6 @@
   .animate-fade-up {
     animation: fade-up 0.6s ease both;
   }
-  .animate-fade-in {
-    animation: fade-in 0.5s ease both;
-  }
   .glass-settle {
     animation: glass-settle var(--duration-xslow) ease-out both;
   }
@@ -589,11 +613,6 @@
   .delay-350 { animation-delay: 0.35s; }
   .delay-400 { animation-delay: 0.4s; }
   .delay-500 { animation-delay: 0.5s; }
-  .delay-600 { animation-delay: 0.6s; }
-
-  .glow-pulse {
-    animation: glow-pulse 2s ease-in-out infinite;
-  }
 
   /* Intersection-observer reveal is enhancement-only: no-JS content remains visible.
      R5-4: transition unified to the --duration-slow seed (§5.2 motion sync). */

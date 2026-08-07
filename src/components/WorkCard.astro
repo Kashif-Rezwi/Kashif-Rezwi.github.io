@@ -176,7 +176,7 @@ const hiddenTechCount = tech.length - visibleTech.length;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: transform 0.4s ease;
+    transition: transform var(--duration-slow) ease;
   }
   .work-card:hover .work-card-cover img {
     transform: scale(1.03);
@@ -229,7 +229,7 @@ const hiddenTechCount = tech.length - visibleTech.length;
   .work-card-title a {
     color: var(--color-ink);
     text-decoration: none;
-    transition: color 0.15s ease;
+    transition: color var(--duration-fast) ease;
   }
   .work-card-title a:hover {
     color: var(--color-accent-light);
@@ -282,7 +282,7 @@ const hiddenTechCount = tech.length - visibleTech.length;
     color: var(--color-ink-dim-glass);
     text-decoration: none;
     border-radius: var(--radius-control);
-    transition: color 0.15s ease, background 0.15s ease;
+    transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
   }
   .work-card-tech-more:hover {
     color: var(--color-accent-text);

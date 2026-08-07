@@ -1,0 +1,267 @@
+---
+/**
+ * R5-6 section partition: Home hero (was part of index.astro).
+ * Styles relocated verbatim from index.astro's scoped block.
+ */
+import { Image } from 'astro:assets';
+import HeroDotMatrix from '../components/HeroDotMatrix.astro';
+import GlassPanel from '../components/GlassPanel.astro';
+import Icon from '../components/Icon.astro';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  email: string;
+  github: string;
+  linkedin: string;
+  devto: string;
+  portrait: ImageImport;
+}
+
+type ImageImport = Parameters<typeof Image>[0]['src'];
+
+const { email, github, linkedin, devto, portrait } = Astro.props;
+---
+
+<section class="hero-section">
+  <HeroDotMatrix />
+  <!-- Ambient console-field glow: sits behind the glass plate so the identity
+       pane floats over a lit field, not flat alpha (R5-2, spec §4.3.3). -->
+  <div class="hero-ambience field-breathe" aria-hidden="true"></div>
+  <div class="container-site hero-inner">
+    <!-- Identity plate: glass material comes from the shared GlassPanel recipe;
+       hero sizing/settle live here. -->
+  <GlassPanel class="hero-content hero-panel glass-settle">
+      <!-- Label -->
+      <p class="section-label delay-100 animate-fade-up">Portfolio</p>
+
+      <!-- Name — single line -->
+      <h1 class="hero-name delay-200 animate-fade-up">
+        Kashif Rezwi
+      </h1>
+
+      <!-- Role line (consistent with title/meta/positioning) — skewed accent badge -->
+      <p class="hero-role delay-300 animate-fade-up">
+        <span class="hero-role-badge">
+          <span class="hero-role-text-inner">Frontend-focused Full Stack Engineer</span>
+        </span>
+      </p>
+
+      <!-- Direction — old deployed accent style restored -->
+      <p class="hero-direction delay-350 animate-fade-up">
+        <span class="gradient-text">Building toward AI product engineering</span>
+        <br />
+        and developer tools
+      </p>
+
+      <!-- Bio -->
+      <p class="hero-bio delay-400 animate-fade-up">
+        2+ years building customer-facing SaaS products in startup teams:
+        landing-page builders, CRM, and campaign &amp; workflow automation.
+        Currently building AI products and developer tools.
+      </p>
+
+      <!-- CTA row -->
+      <div class="hero-ctas delay-500 animate-fade-up">
+        <a href={withBase('resume/')} class="btn">View Resume</a>
+        <a href={`mailto:${email}`} class="btn-outline">Email me</a>
+        <div class="hero-social-links">
+          <a href={github} class="hero-social" target="_blank" rel="noopener noreferrer"><Icon name="github" size={15} />GitHub</a>
+          <a href={linkedin} class="hero-social" target="_blank" rel="noopener noreferrer"><Icon name="linkedin" size={15} />LinkedIn</a>
+          <a href={devto} class="hero-social" target="_blank" rel="noopener noreferrer"><Icon name="devto" size={15} />dev.to</a>
+        </div>
+      </div>
+    </GlassPanel>
+
+    <!-- Portrait -->
+    <div class="hero-portrait delay-300 animate-fade-up">
+      <div class="portrait-wrapper">
+        <Image
+          src={portrait}
+          alt="Portrait of Kashif Rezwi"
+          width={320}
+          height={320}
+          format="avif"
+          quality={70}
+          loading="eager"
+          fetchpriority="high"
+          class="portrait-img"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* R5-6: scoped styles moved from index.astro — byte-identical. */
+  .hero-section {
+    min-height: clamp(600px, calc(100svh - 65px), 860px);
+    padding-block: 5rem 4rem;
+    position: relative;
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+    margin-top: -4.5rem;
+  }
+
+  .hero-ambience {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: var(--color-glow);
+    mask-image: radial-gradient(ellipse 70% 65% at 50% 42%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 42%, #000 30%, transparent 80%);
+  }
+
+  .hero-name {
+    font-size: clamp(2.75rem, 7vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .hero-role {
+    margin: 0.5rem 0 0;
+  }
+
+  .hero-role-badge {
+    display: inline-block;
+    padding: 0.45rem 0.9rem 0.45rem 1.1rem;
+    background: var(--color-accent-badge);
+    border-radius: 0;
+    transform: skewX(-8deg);
+    transform-origin: center;
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--color-accent) 55%, transparent);
+  }
+  .hero-role-text-inner {
+    display: inline-block;
+    transform: skewX(8deg);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 500;
+    line-height: 1.3;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-direction {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--color-ink-muted);
+    margin: 0;
+  }
+
+  .hero-bio {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-ink-muted);
+    max-width: 58ch;
+    margin: 0;
+  }
+
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .hero-social-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: 0.25rem;
+  }
+  .hero-social {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-ink-dim-glass);
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+  }
+  .hero-social:hover {
+    color: var(--color-accent-light);
+  }
+
+  .hero-portrait {
+    flex-shrink: 0;
+  }
+  .portrait-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+  }
+  .portrait-wrapper::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    inset: -8px;
+    background: var(--color-accent);
+    clip-path: polygon(30% 4%, 70% 4%, 88% 18%, 100% 48%, 86% 78%, 50% 100%, 24% 90%, 10% 76%, 3% 56%, 6% 34%, 18% 12%);
+    transition: inset 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+  }
+  .hero-portrait:hover .portrait-wrapper::after {
+    inset: 0;
+    transform: translate(10px, 12px);
+  }
+  .portrait-img {
+    position: relative;
+    z-index: 1;
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    background-color: #a9c8ff;
+    clip-path: polygon(30% 4%, 70% 4%, 88% 18%, 100% 48%, 86% 78%, 50% 100%, 24% 90%, 10% 76%, 3% 56%, 6% 34%, 18% 12%);
+    transition: transform 0.35s ease;
+  }
+  .hero-portrait:hover .portrait-img {
+    transform: translate(-6px, -6px);
+  }
+
+  @media (min-width: 1024px) {
+    .portrait-wrapper,
+    .portrait-img {
+      width: 260px;
+      height: 260px;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    .hero-inner {
+      margin-top: -2rem; /* tablet: lighter uplift than desktop */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-inner {
+      flex-direction: column-reverse;
+      gap: 2rem;
+      margin-top: 0;
+    }
+    .portrait-wrapper {
+      width: 160px;
+      height: 160px;
+    }
+    .portrait-img {
+      width: 160px;
+      height: 160px;
+    }
+    .hero-section {
+      padding-block: 3rem 2.5rem;
+    }
+  }
+</style>
