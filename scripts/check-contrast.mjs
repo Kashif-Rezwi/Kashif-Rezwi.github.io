@@ -31,6 +31,8 @@ const checks = [
   // --- Non-text UI (>= 3:1, WCAG 1.4.11) ---
   ['accent non-text on canvas (dark)', '#6495ed', DARK.canvas, 3.0, true],
   ['accent-text non-text on canvas (light)', '#2f57ad', LIGHT.canvas, 3.0, true],
+  // --- Role badge (solid fill, white text — OQ-R5-9; both themes share the fill) ---
+  ['white on accent-badge (both)', '#ffffff', '#3f63c9', 4.5, true],
 ];
 
 function channel(v) {

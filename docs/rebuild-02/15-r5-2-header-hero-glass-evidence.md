@@ -38,7 +38,7 @@ Grep-verified: `glass` classes now **only** on real surfaces (header + hero), no
 | 8 | Screenshots | ✅ dark/light × desktop/mobile saved (evidence media) |
 | 9 | No copy/claim/dep/route change | ✅ grep: zero matches on claims; no new imports (`Header.astro` still 2 imports, no new package) |
 
-**A11y note (pre-existing, not R5-2):** Lighthouse a11y = 96 (vs R3 build 100). Sole item: white-on-accent role badge `#fff` on `#6495ed` → 2.97:1, **introduced in R4** (`8a076ec` hero badge) and **absent from the live R3** baseline. R5-2 did not touch the badge. Spec §3.4 defect G flags this as an R5-cycle item; **owner decision requested** (see open-question/DL-057): darken the badge fill to `--color-accent-text`-grade tint so white text stays AA, or keep the badge at its current R4 values for the R4 QA gate to resolve separately.
+**A11y close-out (OQ-R5-9, owner fix):** At review, Lighthouse registered a11y = 96 from the R4-origin role badge (`white` on cornflower `#6495ed` = 2.97:1). Per owner direction, the badge fill moved to a new token `--color-accent-badge: #3f63c9` (white **5.47:1**, both themes); parallelogram lock (DL-043/045), skew, shadow, and white text untouched. Row added to `check:contrast` (now 17/17). Re-audited: Lighthouse a11y = **100** (mobile), axe **0** dark + light.
 
 **B) Motion:** no new motion introduced here (plate + ambience are static; reveal/ambience animation deferred to R5-4 per spec). `prefers-reduced-motion` unaffected.
 

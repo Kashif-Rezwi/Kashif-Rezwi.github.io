@@ -40,6 +40,7 @@
   --color-accent: #6495ed;          /* cornflowerblue core */
   --color-accent-light: #89b4ff;    /* hover/decorative tint */
   --color-accent-text: #a9c8ff;     /* accessible text/link tint on dark */
+  --color-accent-badge: #3f63c9;    /* role-badge fill — white text AA 5.47:1 (OQ-R5-9) */
   --color-accent-glow: #6495ed26;   /* sparse matrix / focus halo only */
   --color-accent-soft: #6495ed14;   /* restrained tag background */
 
