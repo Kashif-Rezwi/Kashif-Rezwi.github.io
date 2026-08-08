@@ -1,0 +1,154 @@
+---
+/**
+ * R5-6 section partition: Selected work (was part of index.astro).
+ * Styles relocated verbatim from index.astro's scoped block.
+ */
+import WorkCard from '../components/WorkCard.astro';
+import ProjectRow from '../components/ProjectRow.astro';
+import GitHubContributions from '../components/GitHubContributions.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  featured: Array<{
+    data: {
+      title: string;
+      roleLabel: string;
+      period: string;
+      status: string;
+      summary: string;
+      repo: string;
+      demo?: string;
+      tech?: string[];
+      cover?: string;
+    };
+    id: string;
+  }>;
+  links: {
+    betterDevUi: string;
+    betterDevApi: string;
+    betterDevDemo: string;
+    looplens: string;
+    looplensDemo: string;
+    archive: string;
+    aiPlayground: string;
+    languagePlayground: string;
+  };
+}
+
+const { featured, links } = Astro.props;
+---
+
+<section id="work" class="section-block work-bg">
+  <div class="container-site">
+    <SectionHeader
+      label="Selected work"
+      title="Things I've built"
+      subtitle="AI products and developer tools, built as personal projects with live demos."
+    />
+
+    <div class="work-grid">
+      {featured.map((entry, i) => (
+        <div class={`reveal delay-${(i + 1) * 100}`}>
+          <WorkCard
+            title={entry.data.title}
+            roleLabel={entry.data.roleLabel}
+            period={entry.data.period}
+            status={entry.data.status}
+            summary={entry.data.summary}
+            repo={entry.data.repo}
+            demo={entry.data.demo}
+            tech={entry.data.tech}
+            href={withBase(`work/${entry.id}/`)}
+            cover={entry.data.cover}
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- More projects compact list -->
+    <div class="more-projects reveal">
+      <h3 class="more-projects-label">More projects</h3>
+      <ul class="more-projects-list">
+        <ProjectRow
+          name="Better DEV"
+          typeLabel="Personal"
+          links={[
+            { href: links.betterDevUi, label: 'UI repo', icon: 'repository' },
+            { href: links.betterDevApi, label: 'API repo', icon: 'repository' },
+            { href: links.betterDevDemo, label: 'Live', icon: 'external' },
+          ]}
+        >
+          AI chat platform with streaming UI, visible tool calls, NestJS API with JWT auth and web search integration.
+        </ProjectRow>
+        <ProjectRow
+          name="LoopLens"
+          typeLabel="Hackathon · TestSprite S3"
+          links={[
+            { href: links.looplens, label: 'Repo', icon: 'repository' },
+            { href: links.looplensDemo, label: 'Live', icon: 'external' },
+          ]}
+        >
+          Proof-of-work dashboard that turns AI-coding-loop evidence into a shareable engineering timeline.
+        </ProjectRow>
+        <ProjectRow
+          name="Learning in public"
+          typeLabel="Open repos"
+          links={[{ href: links.archive, label: 'Full archive →', icon: 'repository' }]}
+        >
+          <a href={links.aiPlayground} class="link-accent" target="_blank" rel="noopener noreferrer">ai-playground</a> and{' '}
+          <a href={links.languagePlayground} class="link-accent" target="_blank" rel="noopener noreferrer">language-playground</a>
+          are open experiments and notes.
+        </ProjectRow>
+      </ul>
+    </div>
+
+    <!-- Public GitHub contribution calendar (build-time snapshot, local SVG) -->
+    <GitHubContributions />
+  </div>
+</section>
+
+<style>
+  /* Gradient background: canvas → alt-blend at the bottom, so the
+     section's bottom edge is already at the section-alt shade when
+     Skills begins. No transparency — solid colours only so there is
+     never a hard compositing edge. */
+  .work-bg {
+    background: linear-gradient(
+      to bottom,
+      var(--color-canvas) 0%,
+      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 100%
+    );
+  }
+  /* R5-6: scoped styles moved from index.astro — byte-identical. */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .more-projects {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    position: relative;
+  }
+  .more-projects-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-dim-glass);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .more-projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>

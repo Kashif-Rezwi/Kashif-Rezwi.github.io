@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-08-07 (DL-053)
+- **Last updated:** 2026-08-07 (DL-059)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -383,3 +383,197 @@
 - **Decision:** Add a **Testimonials** home section sourced from two LinkedIn recommendations (Thanga Balaji S, Adithya Santhosh — seniors at Brand Exponents Creatives Pvt Ltd). Implemented as an Astro content collection (`testimonials`) with a `TestimonialCard` component, rendering quote + highlighted pull-quotes + author attribution linking to each recommender's LinkedIn profile, with photos committed under `public/testimonials/`. Quotes were chosen to be inserted **verbatim** (claim-safe — AGENTS.md §3).
 - **Rationale:** Owner evaluated automatic LinkedIn syncing (Official Recommendation API is partner-gated; scraping/Voyager/cookie-based and third-party scrapers violate LinkedIn's ToS and the operating contract's source safety §4) and chose the managed-content approach this repo already uses for case studies. Owner supplied the quotes, relationship labels, dates, profile URLs, and photos directly.
 - **Approval status:** Approved (owner directive in conversation, 2026-08-07). Implementation complete; deployed to production only on a separate owner "go".
+
+## DL-054 — Adopt the "R5 Operating Loop" as the canonical engineering workflow
+
+- **Date:** 2026-08-07
+- **Decision:** Replace the generic six-step loop in AGENTS.md §7 with the **R5 Operating Loop**, fully specified in the new canonical document `docs/engineering/engineering-workflow.md`. The loop merges the owner's seven-step process (reason → brainstorm → research → evaluate → plan → implement → review) with the repo's existing model and adds two steps that guard against drift: **step 1 git-truth verification** (docs claims checked against actual branch/merge/origin state) and **explicit recording per phase**. The loop: Orient (read context + verify git) → Decide (objective, reason, brainstorm ≥2, research-label, evaluate → owner gate if scope/claims/identity change) → Plan (plan doc) → Build (smallest steps) → Prove (acceptance self-review + docs-vs-code-vs-git audit + repo checks + evidence doc) → Record (decision log, open questions, project status) → stop for owner approval.
+- **Rationale:** The audit (2026-08-07) found the exact failure this workflow prevents: `09-r4-improvement-plan.md`, `project-status.md`, and the R5 design doc described R4 work as living on `v2-improvement`, "not deployed" — while git showed it was already merged into `develop` and pushed. The previous loop never forced a git-truth check, and the seven-step process had no record step, so stale prose silently became authority. A single, documented loop with per-step artifacts makes every phase resumable by a fresh agent and keeps the repo the single source of truth.
+- **Approval status:** Owner approved in conversation (2026-08-07) via the correction workflow; applied with DL-055.
+
+## DL-055 — R4 merged to `develop`; R5 working branch is `evolve-design`; repo docs corrected to git truth
+
+- **Date:** 2026-08-07
+- **Decision:** (1) Record git truth: `v2-improvement` was already merged into `develop` (`895d89c`); testimonials + DL-053 landed on `develop` (pushed `655c6f7`); `v2-improvement` is fully contained in `develop` and must **not** be used as a base for new work. (2) The **R5 working branch is `evolve-design`** (= `develop` + the R5 design spec, committed `de90c67`) — matches the cycle name and is the base for all R5-1…R5-8 gates; promotion to `develop` → `gh-pages` (or `main` once Pages source = Actions) only on a separate owner "go". (3) Corrected stale docs to match: `README.md` (R3 now live), `docs/project-status.md` (R4 merged; next action = R4-6 QA + deploy gate, then R5-0), `docs/rebuild-02/09-r4-improvement-plan.md` (status + R4-7 path), `docs/rebuild-02/11-r5-glassmorphism-design.md` (§10 working branch + R5-8 path), and `docs/engineering/handoff-guide.md` (Phase-1-era → post-launch cycle era).
+- **Rationale:** Documentation must be the single source of truth and must match the repository's actual state (AGENTS.md §1 "Last updated", §5 documentation quality). The audit (DL-054) surfaced doc-vs-code-vs-git drift; this decision closes it so a fresh agent orienting per the R5 Operating Loop step 1 finds prose aliased to reality.
+- **Approval status:** Owner selected "fix all stale claims" and "evolve-design" in conversation (2026-08-07).
+
+## DL-057 — R5-2 header + hero glass implemented (first rendered glass)
+
+- **Date:** 2026-08-07
+- **Decision:** Implement **R5-2** per the R5 spec (§7 rows Header/Hero, §9 R5-2): (1) **Navbar** — replace the historical hand-rolled frost (`color-mix(canvas 85%)` + `blur(12px)`) with the token glass recipe (`--glass-bg`, `backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate))`, `1px solid var(--glass-border)` bottom edge, `transition: background var(--duration-base) ease`), plus `@supports not (backdrop-filter)` and `prefers-reduced-transparency: reduce` fallbacks to `--glass-bg-solid`. (2) **Hero identity plate** — `.hero-content` becomes a single `.glass-panel` (`glass-panel hero-panel`) floating over the live matrix (whole identity block: label → bio → CTA row), with a new static `.hero-ambience` radial `--color-glow` layer (masked, `aria-hidden`, `pointer-events:none`) behind it so the glass reads as a lit console field. Portrait ring and parallelogram badge untouched (owner-locked). New `npm run check:glass-contrast` script (`scripts/check-glass-contrast.mjs`) models the composited glass-over-backdrop and AA-checks every hero/nav text token in both themes.
+- **Rationale:** R5-2 is the first phase that renders glass — its contract is "make the navbar + hero articulate the material, keep everything else flat" (spec §9). Decisions from the plan doc: navbar = token glass (A1), hero = single identity plate + ambient glow (B1) — both per the §7 score (Header II, Hero III) and ≤3 surfaces/§12. On-glass contrast is enforced as actually rendered over the token backdrop (S-5/§5.3), not over a flat swatch.
+- **Approval status:** Owner "go" for R5-2 in conversation (2026-08-07, before this DL). Implementation complete; evidence in `docs/rebuild-02/15-r5-2-header-hero-glass-evidence.md`. Verification: build clean (6 pages), `check:contrast` 16/16, on-glass contrast 6/6 AA dark+light, Lighthouse perf/bp/seo 100 (mobile+desktop), axe 0, zero overflow 320–1440. Lighthouse a11y = 96 due to the **pre-existing R4 role badge** (white-on-cornflower, 2.97:1, `8a076ec`) — not introduced here; see the dated note below (OQ-R5-9 resolved). No claims changed. No deploy.
+- **Note (2026-08-07, badge-fix follow-up, OQ-R5-9):** At the owner's direction ("apply the OQ-R5-9 badge fix now") the role-badge fill moved from `--color-accent` (#6495ed, 2.97:1) to a new token `--color-accent-badge: #3f63c9` (white text **5.47:1**, WCAG-compliant in both themes). Parallelogram shape, skew, shadow, and white text all untouched (DL-043/045 locks intact). Row added to `scripts/check-contrast.mjs` so the pair is CI-enforced (now 17/17). Re-verified: build clean, Lighthouse a11y **100/100** (mobile), axe **0** dark + light. R5-2 remains uncommitted on `evolve-design`; gate: R5-3.
+
+## DL-056 — R5-1 glass foundation implemented (tokens + utilities, zero visual diff)
+
+- **Date:** 2026-08-07
+- **Decision:** Implement **R5-1 glass foundation** per the R5 spec (§9): added the R5 glass material tokens (`--glass-bg/--glass-border/--glass-blur/--glass-saturate/--glass-highlight/--glass-bg-solid/--color-glow`) and motion/elevation seeds (`--duration-fast/base/slow/xslow`, `--elevation-sm/md`) in `global.css` across all three theme scopes; added `.glass`, `.glass-panel`, `.glass-card`, and `.field-backdrop` utilities with `@supports not (backdrop-filter)` and `prefers-reduced-transparency` fallbacks to solid `--glass-bg-solid`; created `.label-overline`, `.meta`, `.mono` text utilities (defect E extraction, wired in R5-5/R5-6); removed dead tokens `--color-success`/`--color-warning` (defect A). **No markup was changed** — glass classes run nowhere yet (zero visual diff by design). Elevation seeds use fixed `rgba(0,0,0,…)` so they behave identically in both themes.
+- **Rationale:** R5-1's contract is "build the vocabulary, change nothing visible" (spec §9 even-when + R5 Operating Loop step 4 "smallest change, prove no regressions"). Keeping utilities unwired means the whole phase is trivially reversible and provable; wiring happens exactly in the phase that owns each surface (R5-2 header/hero, R5-3 cards, R5-5 inner pages). Contrast floor for the fallback path is the existing AA-safe surface. AA-on-glass is checked in R5-2 where actual glass + content first render (§5.3).
+- **Approval status:** Owner "go" for R5-1 in conversation (2026-08-07, before this DL). Implementation complete + evidence in `docs/rebuild-02/13-r5-1-glass-foundation-evidence.md`; **next gate R5-2 (header + hero glass) awaiting owner approval.**
+
+## DL-058 — R5-3 card + surfaces pass implemented
+
+- **Date:** 2026-08-07
+- **Decision:** Implement **R5-3** per the R5 spec (§7 score rows, §9): (1) **WorkCard** — `card` → `glass-card`, hover = transform-only lift; (2) **TestimonialCard** — `card` → `glass-card` (quotes re-AA'd on glass per OQ-R5-7); (3) **GitHub card** → glass tokens + local top-edge catch light; (4) **tech chips** → glass chips with tonal brand hover (brand tint 14% + glow 20%); (5) **more-projects** → glass strip (I); (6) **ambient bands** — masked static `--color-glow` layer behind work/skills/testimonials/now sections (`.band-host` + `.section-band`, `aria-hidden`); (7) **new token `--color-ink-dim-glass`** (#848484 dark / #6c6c6c light) — plain ink-dim dips to 4.33–4.38:1 over the band composite, so glass/band meta uses the AA-safe tier. Backdrop-filter kept OFF on card surfaces (they float over a smooth band — nothing to blur, §12); hero panel remains the only real blur over the live matrix.
+- **Rationale:** Matches the "one-premium card system" (glassy §7) without stacking blurred layers (§12) and without regressing the AA bar (glass tint now extends to content surfaces exactly as it did to hero in R5-2). The global `ink-dim` stays at its AA-on-canvas value for flat surfaces; a dedicated token covers the on-glass/band case instead of weakening the band or the global token.
+- **Approval status:** Owner "go" for R5-3 in conversation (2026-08-07, before implementation). Implementation complete; evidence in `docs/rebuild-02/17-r5-3-card-surfaces-evidence.md`. Verification: build clean (6 pages), `check:contrast` **19/19**, on-glass contrast **24/24** AA (dark+light × canvas/band), Lighthouse **100/100/100/100** (mobile+desktop), axe **0** (dark+light), zero horizontal overflow 320–1440, fallback rules compiled. No claims changed; no deploy. **Gate open: R5-4 (motion & micro-interactions) awaiting owner approval.**
+
+## DL-059 — R5-4 motion & micro-interactions implemented
+
+- **Date:** 2026-08-07
+- **Decision:** Implement **R5-4** per the R5 spec §6 motion plan + §9: (1) **glass settle-in** — `@keyframes glass-settle` (fade to crisp, 8px rise, `--duration-xslow` ease-out) replaces the hero plate's generic `animate-fade-up`, per §6 "glass panels vary the translate direction slightly"; (2) **reveal refinement** — `.reveal` transition unified from raw 0.55s to the `--duration-slow` seed (motion sync, §5.2); (3) **field breathe** — 8s ease-in-out opacity 1↔0.85 on `.hero-ambience` only (the dot backdrop), resolving **OQ-R5-3** (field felt via shimmer, dots unchanged); (4) **focus echo** — `.glass/-panel/-card:focus-within` accent-tinted edge (`--color-accent-text`, `--duration-fast`), complementing the global `:focus-visible` ring (WCAG 2.4.11); (5) **hover catch** — `.work-card::after` one-pass diagonal shine sweep with `var(--glass-highlight)` (opacity + `translateX(-120%→280%)`, `--duration-xslow`, `pointer-events: none`).
+- **Rationale:** Least-motion set that makes glass feel alive: one steady-state infinite opacity shimmer (the hero field), one premium hover cue (work cards, §7 flagship), entrance/settle emphasis (hero), and keyboard feedback on glass. All CSS-only — zero new JS/deps; `backdrop-filter` never animated (§6 rules); every new rule gated by `prefers-reduced-motion` (except the non-motion focus echo). Field-breathe range stays ≤ the verified full-band alpha → on-glass AA can only improve. Section bands deliberately **not** shimmered (calm behind text-dense cards). Work/testimonial base transitions extended with `border-color` because the unlayered component rules otherwise override the layered global echo transition.
+- **Verification:** build clean (6 pages); `check:contrast` 19/19; on-glass 24/24; Lighthouse **100/100/100/100** (mobile+desktop) with TBT 0 ms, CLS 0; axe 0 (dark+light); **reduced-motion static proven** — emulated reduce produced byte-identical screenshots 1.2 s apart, zero settle/breathe/shine rules applied; no horizontal overflow 320–1440; no-JS/reduced-transparency unchanged; no claims changed; no deploy. Evidence: `docs/rebuild-02/19-r5-4-motion-microinteractions-evidence.md`.
+- **Approval status:** Owner "go" for R5-4 in conversation (2026-08-07, "move to next phase"). Implementation complete; uncommitted on `evolve-design` (owner gate: approve R5-4 → commit + R5-5). **Next: R5-5 (case-study + inner pages) awaiting owner approval.**
+
+## DL-060 — R5-5 case-study + inner pages glass implemented
+
+- **Date:** 2026-08-08
+- **Decision:** Implement **R5-5** per spec §7/§9 (inner pages = calm glass over flat surfaces): (1) **case-page hero** — `.case-hero` becomes a `band-host` (masked `.section-band` using the `--color-glow` recipe, `aria-hidden`, `pointer-events: none`) + `.case-hero-inner.glass-band` (glass-bg + `--glass-border` + `--radius-card`, no blur per §12 — nothing to blur behind a smooth masked field); hero-meta on `glass-settle`, children keep fade/stagger; (2) **`.case-centric` sidebar cards** — soft glass (tint + border + radius, no blur) with `glass-card` catch-light; (3) **case-cover glass frame** — tint + edge + radius, image unchanged; (4) **mobile nav drawer** — exactly the navbar glass recipe (glass-bg + blur + saturate + glass-border) so open drawer + fixed header read as one panel, with the header's existing `@supports` (no backdrop-filter → solid) and `prefers-reduced-transparency` fallbacks; drawer toggling untouched. Case-study body prose stays flat (§10).
+- **Rationale:** Mirrors R5-3's proven glass recipe on the remaining "inner page" surfaces, one phase later. Blur is intentionally omitted on hero/sidebar/cover (flat glow-field behind — no depth cue to blur), retained only on navbar/drawer/hero-panel where content passes behind (§12). Contrast plan pre-agreed as **D4**: the hero band sits near the glow *peak*, not the card-zone half — so the glass-contrast script gained a **centre scenario** (dark 0.14 / light 0.10 full peak alpha) on the 3 core ink tokens → 30 checks (24 → 30).
+- **Contrast outcome (D4 ruler):** the centre scenario exposed 3 sub-4.5 cases — dark `ink-muted` 4.34:1, dark `ink-dim-glass` 4.11:1, light `ink-dim-glass` 4.43:1 (the glow peak is the live worst case for the case-hero band). Same play as R5-3 (`--color-ink-dim-glass`): raised the tokens by the minimal delta preserving hierarchy — dark `ink-muted` `#888888→#8d8d8d` (4.63:1 centre), dark `ink-dim-glass` `#848484→#8b8b8b` (4.51:1 centre), light `ink-dim-glass` `#6c6c6c→#6a6a6a` (4.56:1 centre). No accent/ink change; all other checks only improved.
+- **Verification:** build clean (6 pages); `check:contrast` 19/19; on-glass **30/30** (canvas + band + centre × both themes); Lighthouse **100/100/100/100** on a case-study page (mobile + desktop), TBT 0 ms, LCP 1.0 s, CLS 0; axe **0** violations on a slug page (dark + light); no horizontal overflow 320/390/768/1024/1440; reduced-motion untouched (glass-settle stays gated; drawer toggle unchanged); no claims changed; no deploy. Case-page computed-material audit (hero band, sidebar cards, cover frame, drawer) confirms the glass tokens land as specified with `backdrop-filter: none` exactly where the spec says. Evidence: `docs/rebuild-02/21-r5-5-inner-pages-evidence.md`.
+- **Approval status:** Implemented + fully verified, uncommitted on `evolve-design` (owner gate: approve R5-5 → commit + R5-6 gate). **Next: R5-6.**
+
+## DL-061 — R5-6 architecture cleanup
+
+- **Date:** 2026-08-08
+- **Decision:** Implement **R5-6 (architecture cleanup)** per spec §8/§9. Scope: (1) create `SectionHeader.astro` (label/title/subtitle) to kill the 5 duplicated `.section-header.reveal` blocks in `index.astro`; (2) create `GlassPanel.astro` (pure-presentation wrapper, `class`-merged so any glass surface composes the recipe) — `.glass-*` utilities stay the single recipe in `global.css`; (3) split `index.astro`'s 7 sections into `src/sections/*` (Hero, Work, Skills, Experience, Testimonials, Now, Contact), moving each section's scoped styles verbatim and passing data via props; (4) promote shared scaffolding (`.section-block`, `.section-alt`, `.band-host`, `.section-band`, `.band-host > .container-site`) to `global.css`, deleting the duplicated scoped copy in `index.astro` and `[slug].astro` (slug keeps its `case-hero`-scoped band + `45%` mask override); (5) delete dead code: `--elevation-sm/-md`, `--gradient-accent`, `--gradient-accent-text`, `--color-paper`, `--color-hairline`, `--color-border-focus`, `--color-accent-ink`, `.glow-pulse`, `.delay-600`, `.animate-fade-in` (all verified zero-usage); (6) unify duration-literals equal to seeds: `0.15s→--duration-fast`, `0.25s→--duration-base`, `0.4s→--duration-slow` (others left literal; changing would alter feel); (7) fix `check-contrast.mjs` drift (`#888888→#8d8d8d`, `#848484→#8b8b8b`, `#6c6c6c→#6a6a6a` — the script still carried pre-R5-5 hexes).
+- **Rationale:** R5 layers have landed on almost every surface; evolution needs reusable primitives + one token source of truth (spec §8) before R5-7 full QA. Refactor-only by design: class-based scoped styles relocate 1:1 with their markup (`data-astro-cid` hashes change, computed styles don't), so zero visual diff is achievable and provable.
+- **Refactor-only guardrails:** CSS is moved verbatim (only legit diffs = deletions + 3 duration swaps + contrast-script hex fix); no copy/claims/JS/deps/themes/motion policy changes.
+- **Verification:** build clean (6 pages); `check:contrast` 19/19 (now enforcing the live R5-5 hexes after the drift fix); `check:glass-contrast` 30/30; Lighthouse 100/100/100/100 on home + a case page (mobile + desktop), TBT 0; axe 0 (dark + light, settled render); no horizontal overflow 320/390/768/1024/1440 (20/20); **rendered-output diff vs `HEAD` proves zero visual change** (only HTML-comment/whitespace/entity-encoding diffs on home, the deliberate `0.15s→var(--duration-fast)` swap on resume; 404 + all 3 case pages byte-identical); plan §2 items 1–7 all traceable; one advisory (pre-existing): standalone `@axe-core/cli` on the pre-settle load flags `.exp` gray `#707070` at 4.63:1 transiently — not an R5-6 regression, logged as OQ. Evidence: `docs/rebuild-02/22-r5-6-architecture-evidence.md`.
+- **Approval status:** Implemented + fully verified, uncommitted on `evolve-design` (owner gate: approve R5-6 → commit + R5-7 gate). **Next: R5-7 (full QA matrix).**
+- **Commit:** Approved by owner 2026-08-08 and committed to `evolve-design` as **`1f4a1a4`** (24 files, +1420/−1162; includes plan + evidence docs). **Next: R5-7 gate (full QA matrix).**
+
+## DL-062 — R5-7 full QA (glass) phase
+
+- **Date:** 2026-08-08
+- **Decision:** Run **R5-7 (full QA report)** per spec §9 row R5-7: re-run the R3-F matrix with the R5 glass layer live, extended with the glass-specific scenarios (back-of-glass, reduced transparency, reduced motion, no-JS, contrast incl. on-glass 30/30). **QA-only** — no code changes; any discovered defect stops the phase and becomes a separate owner-gated fix. Plan: `docs/rebuild-02/23-r5-7-qa-plan.md`.
+- **Rationale:** R5 (R5-1…R5-6) is the first self-contained glass release; the R3-F matrix predates glass, so the release needs one all-targets pass before the owner's R5-8 deploy go/no-go.
+- **Scope (matrix M1–M11):** build; contrast 19+30; Lighthouse (home + 3 case + resume + 404, mob+desk × themes); axe 0 (settled); overflow 0 (320–1440 × themes); reduced-motion static equivalence; reduced-transparency solid fallback; no-JS content; links (internal + external); console errors 0; metadata/SEO retained.
+- **Verification:** **R5-7 QA complete — all M1–M12 targets green** on the local release artifact (`dist/` via `astro preview`, `?theme=` hook; Chrome-headless/puppeteer-core/lighthouse/axe-core, tooling kept in `/tmp/qatools` — no repo `package.json`/`node_modules` change, S-12 intact). Build 6 pages clean; `check:contrast` **19/19**; `check:glass-contrast` **30/30** AA; **Lighthouse 100/100/100/100 on 24/24** cells (6 routes × mob/desk × light/dark), TBT 0, CLS 0, LCP ~0.5 s; axe **0** (settled) all routes × both themes; overflow **0 (20/20)**; reduced-motion proven static (`0.01ms` clamp, 0 real-motion elements, both themes); reduced-transparency → solid no-blur (`--glass-bg-solid`, `backdrop-filter:none` both themes, via CDP-emulated `prefers-reduced-transparency`); back-of-glass confirmed (2 `.hero-dot-matrix` canvases + `.hero-dot-fallback` behind semi-transparent `blur(12px)` glass panel); no-JS content visible (home 7297 chars, h1, hero fallback); internal + external links 200 (LinkedIn 999 authwall = benign, OQ-06); console 0 errors; metadata/SEO all unique + retained. Residuals logged: LinkedIn click-through (OQ-06), OQ-R5-11 pre-settle axe-CLI noise excluded by design (settled = 0, Lighthouse a11y 100). Rollback preserved: `gh-pages` tip `6991386`. Evidence: `docs/rebuild-02/12-r5-qa-evidence.md`.
+- **Approval status:** **Complete (QA-only), records uncommitted on `evolve-design`** (plan + evidence + QA section prepared; owner gate: review → approve → commit + R5-8 deploy go/no-go). **Next / owner gate: R5-8 deploy go/no-go** — promote `evolve-design` R5 work to `develop` → `gh-pages` (owner-authorized action). Commits remain owner-gated.
+
+## DL-063 — R5-8a pre-deploy polish & interaction enhancements (plan)
+
+- **Date:** 2026-08-08
+- **Decision:** Land a **pre-R5-8** enhancement cycle on `evolve-design` (before the R5-8 deploy go/no-go), per owner brainstorm. Five themes, implemented **one at a time**, each owner-gated: **T1** remove the hero glass card (flat content over the matrix + subtle legibility treatment); **T2** portrait favicon (`apple-touch-icon` + refreshed `favicon.ico`) + aligned `<title>`/manifest branding; **T3** testimonial premium redesign (editorial serif quote, refined glyph, hairline+inner-glow card, quiet highlights — presentation-only); **T4** replace static `--color-glow` bands with a **cursor-centered background spotlight** behind cards + neon-primary cursor glow (no-JS/reduced-motion/AA/perf gated); **T5** a contained **decoration-only canvas marquee** using `@chenglou/pretext` (expo-pretext measurement engine). Plan: `docs/rebuild-02/24-r5-8a-polish-interaction-plan.md`.
+- **Rationale:** Owner wants a more premium/cohesive feel and interaction richness before shipping R5, while keeping the R5 QA bar and claim safety.
+- **Constraint override (owner-approved):** **T5 overrides S-12** (zero new runtime deps) as the **first runtime JS dependency** — one contained, `aria-hidden`, decoration-only exception with a CSS-marquee fallback; it must never render body copy/claims and stays within S-2 (≤ 35 KB).
+- **Scope:** T1–T5 only, presentation/interaction; **no claim/copy changes**; no R5-8 deploy in this cycle.
+- **Verification:** per-theme evidence docs; shared done-when: build 6 pages clean; `check:contrast` 19/19 + on-glass **30/30** (updated as surfaces change); Lighthouse **100/100/100/100** (mob+desk × light/dark); axe **0** (settled); overflow **0**; reduced-motion + reduced-transparency; no-JS; JS budget re-measured; zero claim changes.
+- **Approval status:** Plan recorded; implementation starts with **T1** (next after this record). Commits remain owner-gated.
+
+## DL-064 — T2 (R5-8a) portrait favicon + portfolio `<title>` complete
+- **Decision:** Replace generic favicon with circular portrait favicon (16px thick accent border, no cropping). Align home `<title>` to `Kashif Rezwi · Portfolio` to match manifest `name`.
+- **Rationale:** Owner wanted "exact replica of the profile of mine from hero section with its shape, border." The Hero's `.portrait-wrapper::after` is a solid `--color-accent` (`#6495ed`) parallelogram at `inset: -8px` behind the clipped portrait. Favicon is a circle with 16px solid #6495ed border, portrait centered inside — rendered using `sharp` (vendored, build-time only, zero new runtime deps — S-12 compliant).
+- **Fixes included:** T1 `.hero-textshadow` text-shadow was leaking onto `.btn` (dark-theme contrast ~1:1). Added scoped reset `.hero-textshadow .btn, .hero-textshadow .hero-social { text-shadow: none; -webkit-text-stroke: 0; }`.
+- **Done-when evidence:** `docs/rebuild-02/26-r5-8a-t2-favicon-evidence.md`.
+- **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval → T3.
+
+## DL-065 — Section background transitions: replace transparent pseudo-element fades with solid-colour gradients
+
+- **Date:** 2026-08-08
+- **Decision:** Replace all `.section-fade-top` / `.section-fade-bottom` pseudo-element overlays with scoped solid-colour `background: linear-gradient(...)` directly on each section container. Each gradient uses only absolute resolved colours — `var(--color-canvas)` and `color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas))` (the "alt-blend") — with **no `transparent` stops**. Sections are now chained so adjacent edges always share the exact same computed colour:
+  - **Hero** → canvas (unchanged)
+  - **Work** → `canvas 0 … canvas (100% − 160px) … alt-blend 100%`
+  - **Skills** → solid alt-blend
+  - **Experience** → `alt-blend 0 … canvas 160px … canvas (100% − 160px) … alt-blend 100%`
+  - **Testimonials** → solid alt-blend
+  - **Now** → `alt-blend 0 … alt-blend (100% − 160px) … canvas 100%`
+  - **Contact** → canvas (unchanged; `section-fade-top` removed as Now already ends at canvas)
+- **Rationale:** `transparent` in `color-mix()` and `linear-gradient()` composes in premultiplied alpha space; when an adjacent section has a non-zero `background-color`, the alpha boundary is rendered as a hard 1-pixel step (the "divider line" the owner reported). Using solid colours throughout eliminates the alpha compositing path entirely — the GPU sees two adjacent rectangles of the same colour at every boundary, so the seam is invisible.
+- **Files changed:** `src/sections/Work.astro`, `src/sections/Skills.astro`, `src/sections/Experience.astro`, `src/sections/Testimonials.astro`, `src/sections/Now.astro`, `src/sections/Contact.astro`.
+- **Verification:** Build clean (6 pages); dark + light visual audit at all four key boundaries (Work→Skills, Skills→Experience, Experience→Testimonials, Now→Contact) — no visible divider line in either theme.
+- **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval before commit.
+
+## DL-066 — T4 (R5-8a) cursor-driven background lighting removed per owner directive
+
+- **Date:** 2026-08-08
+- **Decision:** Remove the cursor spotlight component, script, and CSS entirely per owner directive ("just remove the cursor spotlight"), while keeping all section background layouts intact.
+  - Removed `src/components/CursorSpotlight.astro` and its layout integration in `Base.astro`.
+  - Removed `#cursor-spotlight` CSS rules from `global.css`.
+- **Files changed:** `src/layouts/Base.astro`, `src/styles/global.css`, `src/components/CursorSpotlight.astro` (deleted).
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes.
+- **Status:** Complete (Cursor Spotlight removed).
+
+## DL-067 — Section background continuity refinement: unified middle content band
+
+- **Date:** 2026-08-08
+- **Decision:** Resolved the remaining abrupt background color boundaries between **Skills → Experience** and **Experience → Testimonials** shown in user audit captures:
+  - Removed the internal `160px` black-canvas gradient stops inside `Experience.astro` (`.exp-bg`) and updated it to solid `color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas))`.
+  - Updated `Work.astro` (`.work-bg`) to a smooth `0% -> 100%` vertical linear gradient fading from `var(--color-canvas)` (Hero) into the solid content tint.
+  - Updated `Now.astro` (`.now-bg`) to a smooth `0% -> 100%` vertical linear gradient fading from the solid content tint into `var(--color-canvas)` (Contact).
+  - The middle content sections (**Skills**, **Experience**, and **Testimonials**) now share a single, 100% continuous background surface with zero color breaks or mid-section dark stripes.
+- **Files changed:** `src/sections/Work.astro`, `src/sections/Experience.astro`, `src/sections/Now.astro`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes; Puppeteer browser audit confirmed 100% seamless visual flow across Skills → Experience and Experience → Testimonials.
+- **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval.
+
+## DL-068 — Hero ambient console-field backdrop glow removed
+
+- **Date:** 2026-08-08
+- **Decision:** Removed the ambient console-field glow backdrop (`.hero-ambience` div and `field-breathe` shimmer animation class) and the `section-fade-bottom` class from `src/sections/Hero.astro` per owner directive ("also remove the backdrop effect from the hero section too").
+  - The hero identity text (name, bio, CTAs) now renders completely flat over the interactive dot matrix canvas with no background glow block.
+- **Files changed:** `src/sections/Hero.astro`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes; verified dot matrix remains visible and readable.
+- **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval.
+
+## DL-069 — AI Journey (Now section) redesigned into a single GlassPanel card
+
+- **Date:** 2026-08-08
+- **Decision:** Redesigned the **AI journey / Now section** (`src/sections/Now.astro`):
+  - Replaced the plain text list with individual row border dividers by wrapping the items into a single `<GlassPanel variant="card">` matching the design pattern of the "More Projects" card in `Work.astro`.
+  - Removed all `border-bottom` row dividers and replaced them with clean vertical flex gaps (`1.5rem`).
+  - Added an uppercase monospace card label `RECENT UPDATES` (`.now-card-label`).
+- **Files changed:** `src/sections/Now.astro`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes.
+## DL-070 — Case study page mobile card alignment & global backdrop removal
+
+- **Date:** 2026-08-08
+- **Decision:** Made two portfolio-wide refinements:
+  1. **Removed all backdrop glows (`.section-band`) portfolio-wide**: Disabled `.section-band` glow layers in `src/styles/global.css` and removed `band-host` / `section-band` markup from case study pages ([src/pages/work/[slug].astro](file:///Users/kashifrezwi/Developer/Kashif-Rezwi.github.io/src/pages/work/[slug].astro)).
+  2. **Aligned Case Study cards & mobile gutters**: Unified card container widths and responsive padding (`padding: 1.25rem`) across all case study blocks (`.case-hero-inner`, `.case-cover`, `.case-sidebar-card`), ensuring cards fit within `.container-site` margins on mobile screens without touching edge boundaries.
+- **Files changed:** `src/pages/work/[slug].astro`, `src/styles/global.css`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes.
+## DL-071 — Light theme card contrast, dynamic tech stack hover system, and footer layout anchoring
+
+- **Date:** 2026-08-08
+- **Decision:** Solved key UX & visual design issues in light & dark themes:
+  1. **Light theme card visibility & borders**: Changed light theme `--glass-border` from invisible 55% white to crisp 12% ink (`color-mix(in srgb, var(--color-ink) 12%, transparent)`).
+  2. **Dynamic per-theme tech stack hover system**: Implemented theme-aware CSS custom properties (`--active-brand`, `--hover-text`, `--hover-bg-mix`, `--hover-border-mix`).
+     - **Dark theme**: `--active-brand` uses bright `--brand-on-dark`, text glows in bright brand tint.
+     - **Light theme**: `--active-brand` uses official `--brand` at 22% background mix with `var(--color-ink)` text contrast, producing rich brand background colors and glowing icons on hover in both themes with 100% WCAG AA text readability.
+  3. **Footer anchoring & excess space**: Added sticky flex column layout (`min-height: 100vh`, `main { flex: 1 }`) in `global.css`, removed redundant duplicate `footer-cta` block and 192px dead space, and anchored `footer` seamlessly to the page bottom with a top border.
+- **Files changed:** `src/styles/global.css`, `src/sections/Skills.astro`, `src/components/Footer.astro`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes.
+## DL-072 — T3 (R5-8a) Testimonials premium editorial redesign
+
+- **Date:** 2026-08-08
+- **Decision:** Implemented **T3 (Testimonials premium redesign)** per plan §2 (DL-063):
+  - **Editorial Quotation Glyph**: Replaced faint quote mark with a 6rem low-opacity display-serif quotation glyph (`opacity: 0.15`, Georgia/Playfair font stack) as an elegant top-right background motif.
+  - **Quiet Highlight Underlines**: Refined inline `<mark class="testimonial-highlight">` with soft accent fill + subtle accent underline (`border-bottom: 1.5px solid color-mix(in srgb, var(--color-accent) 40%, transparent)`).
+  - **Typography & Alignment**: Set quote body text to `1.03125rem`, `line-height: 1.75`, `text-align: left` (avoiding inter-word justification gaps).
+  - **Photo Ring & Hover Sheen**: Added dual accent ring (`box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent)`) with subtle hover scale (`transform: scale(1.05)`).
+- **Files changed:** `src/components/TestimonialCard.astro`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes; claims and verbatim recommendation quotes byte-identical.
+- **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval.
+
+## DL-073 — R5-8a Final pre-deploy audit (dead & duplicate code)
+
+- **Date:** 2026-08-08
+- **Decision:** Ran the final pre-deploy audit on `evolve-design` (owner-requested, "check and run the audit"). All three gates pass: `check:contrast` (19/19), `check:glass-contrast` (30/30), `npm run build` (6 pages, clean). Findings — **10 dead CSS blocks** in `src/styles/global.css` (`.label-overline`, `.field-backdrop`, `.section-divider`, `.section-band`/`.band-host`, `.section-alt`, `.section-fade-top/bottom`, `@keyframes field-breathe`, `.field-breathe`, `@keyframes blink`, `.card`) and **1 dead scoped rule** in `src/sections/Hero.astro` (`.hero-ambience`) — all verified zero-usage against every `.astro`/`.ts`/`.mjs` file. **No duplicate code found** (R5-6 SectionHeader/GlassPanel dedup holds; `.btn`/`.btn-outline` exist once in global.css).
+- **Rationale:** Dead styles ship in prod CSS; removing them cuts ~110 lines with zero visual delta, consistent with R5-6 precedent (DL-111) and R5 spec dead-code row.
+- **Approval status:** Approved (owner, 2026-08-08). Deletions applied: 129 lines removed (`src/styles/global.css` −120, `src/sections/Hero.astro` −10, 1 insertion); re-gated `check:contrast` 19/19, `check:glass-contrast` 30/30, `npm run build` 6 pages clean. Evidence: `docs/rebuild-02/26-r5-8a-audit-evidence.md`.
+
+
+
+
+
+
+
+
+
+
+

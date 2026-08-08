@@ -2,7 +2,7 @@
 
 - **Purpose:** The single log of everything unresolved. Anything not verified or not clear lives here — never a guess.
 - **Authority:** Entries are created during verified work; each has an owner and an explicit resolution path.
-- **Last updated:** 2026-08-05
+- **Last updated:** 2026-08-08
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [project-status.md](./project-status.md)
 
 | ID | Question | Source / context | Owner | What's needed to resolve | Status |
@@ -20,3 +20,4 @@
 | OQ-11 | Register correction: SRC-04b (`data/sources.csv`) is job-source tracking, not a LinkedIn substitute. Editing `docs/source-register.md` was outside Phase 0B's allowed edit list — approve amending it. | Conflict C-11 (evidence ledger) | Kashif (owner) | Approval to amend `docs/source-register.md`. | Closed — resolved 2026-08-05 (owner approved the audit corrections; register amended) |
 | OQ-12 | Ratify the documented 0B deviation: three SRC-13 files (`compensation-history.md`, `salary-location-preferences.md`, `interview-stories.md`) were deliberately left unread for privacy minimization (evidence ledger §8), although the 0B spec said to read every Available source. | Independent audit F-09 (2026-08-05) | Kashif (owner) | Ratify (yes/no). | Closed — ratified yes, 2026-08-05: deviation stands (privacy minimization) |
 | OQ-13 | Ratify roadmap gate rule 4 ("commits are allowed within an approved phase") — Phases 0A–0C each forbade commits without approval, and Phase 1 rules are owner-defined. | Independent audit F-08 (2026-08-05) | Kashif (owner) | Ratify, or state an alternative commit-approval rule for Phase 1. | Closed — ratified yes, 2026-08-05: commits allowed within an approved Phase 1 sub-phase; no production deploys until 1.4 |
+| OQ-R5-11 | Standalone `@axe-core/cli` on the *immediately-loaded* home page reports 23–36 transient color-contrast violations on `.exp` glass grays (`rgb(112,112,112)` = `--color-ink-dim` light, ratio 4.63:1 — just over the 4.5 AA line), non-deterministically (0 vs 23–36 across runs). The settled render passes everywhere (Lighthouse a11y 100; deterministic puppeteer+axe = 0). Likely backdrop-filter pre-settle state; pre-existing palette (R5-era), surfaced during R5-6. What's the intended response — accept as tool noise, or harden by darkening light `--color-ink-dim` (e.g. → `#6a6a6a`, ~5.1:1) in a later phase? | R5-6 evidence (2026-08-08) | Kashif (owner) | Decision: accept-as-noise vs harden token in a future cycle (not R5-6 — refactor-only). | Open — owner |

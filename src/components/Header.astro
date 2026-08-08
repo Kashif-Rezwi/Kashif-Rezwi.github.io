@@ -74,10 +74,30 @@ const links = [
     left: 0;
     right: 0;
     z-index: 50;
-    background: color-mix(in srgb, var(--color-canvas) 85%, transparent);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    transition: background 0.3s ease;
+    /* R5 glass (spec §5.1): the navbar's historical frost becomes the token recipe. */
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border-bottom: 1px solid var(--glass-border);
+    transition: background var(--duration-base) ease, border-color var(--duration-base) ease;
+  }
+
+  /* Fallback: no backdrop-filter support → near-opaque surface (S-9). */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    header {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  /* OS transparency preference → solid (S-9). */
+  @media (prefers-reduced-transparency: reduce) {
+    header {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
   }
 
   nav {
@@ -96,7 +116,7 @@ const links = [
     color: var(--color-ink);
     text-decoration: none;
     letter-spacing: -0.01em;
-    transition: color 0.15s ease;
+    transition: color var(--duration-fast) ease;
     white-space: nowrap;
   }
   .logo:hover {
@@ -118,7 +138,7 @@ const links = [
     font-weight: 400;
     color: var(--color-ink-muted);
     text-decoration: none;
-    transition: color 0.15s ease;
+    transition: color var(--duration-fast) ease;
     position: relative;
   }
   .nav-link::after {
@@ -163,17 +183,36 @@ const links = [
     height: 2px;
     background: var(--color-ink);
     border-radius: var(--radius-control);
-    transition: transform 0.25s ease, opacity 0.25s ease;
+    transition: transform var(--duration-base) ease, opacity var(--duration-base) ease;
   }
 
-  /* Mobile nav drawer */
+  /* Mobile nav drawer — R5-5: same navbar glass recipe so the open drawer is
+     one continuous glass panel with the fixed header. Blur is a static layer
+     (never animated); fallbacks mirror the header. */
   .mobile-nav {
     display: none;
     overflow: hidden;
     max-height: 0;
     visibility: hidden;
     transition: max-height 0.3s ease;
-    border-top: 1px solid var(--color-border);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border-top: 1px solid var(--glass-border);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .mobile-nav {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .mobile-nav {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
   }
   .mobile-nav.is-open {
     max-height: 300px;
@@ -194,8 +233,8 @@ const links = [
     color: var(--color-ink-muted);
     text-decoration: none;
     padding: 0.5rem 0;
-    border-bottom: 1px solid var(--color-border);
-    transition: color 0.15s ease;
+    border-bottom: 1px solid var(--glass-border);
+    transition: color var(--duration-fast) ease;
   }
   .mobile-nav-link:hover,
   .mobile-nav-link.accent {

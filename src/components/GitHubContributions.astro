@@ -135,10 +135,37 @@ const username = (snapshot as any)?.username ?? 'Kashif-Rezwi';
     margin-top: 2.5rem;
   }
   .gh-contrib-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: var(--radius-card, 0.75rem);
     padding: 1.5rem 1.5rem 1.25rem;
+    position: relative;
+    /* No backdrop-filter: the card sits on the smooth work-section ambient
+       band — nothing to blur, so no GPU layer is spent (spec §12). */
+  }
+  /* R5-3: top-edge catch light matches the shared glass vocabulary (kept local
+     here; R5-6 may promote to the utility). */
+  .gh-contrib-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: var(--glass-highlight);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  /* Fallbacks: same solid-surface floor as the shared `.glass` utilities. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .gh-contrib-card {
+      background: var(--glass-bg-solid);
+    }
+    .gh-contrib-card::before { display: none; }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .gh-contrib-card {
+      background: var(--glass-bg-solid);
+    }
+    .gh-contrib-card::before { display: none; }
   }
 
   .gh-contrib-head {
@@ -152,7 +179,7 @@ const username = (snapshot as any)?.username ?? 'Kashif-Rezwi';
   .gh-contrib-label {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin: 0;
@@ -160,7 +187,7 @@ const username = (snapshot as any)?.username ?? 'Kashif-Rezwi';
   .gh-contrib-meta {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
     margin: 0;
   }
   .gh-contrib-meta strong {
@@ -191,7 +218,7 @@ const username = (snapshot as any)?.username ?? 'Kashif-Rezwi';
   .gh-month {
     font-family: var(--font-mono);
     font-size: 9px;
-    fill: var(--color-ink-dim);
+    fill: var(--color-ink-dim-glass);
   }
 
   /* Level scale: empty = visible neutral tint; filled = cornflower at rising opacity. */
@@ -228,7 +255,7 @@ const username = (snapshot as any)?.username ?? 'Kashif-Rezwi';
     gap: 4px;
     font-family: var(--font-mono);
     font-size: 0.625rem;
-    color: var(--color-ink-dim);
+    color: var(--color-ink-dim-glass);
   }
   .gh-contrib-legend .gh-sq {
     width: 10px;

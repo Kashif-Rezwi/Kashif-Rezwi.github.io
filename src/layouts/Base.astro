@@ -41,7 +41,8 @@ const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
     {description && <meta name="description" content={description} />}
     {(isPreview || noindex) && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/x-icon" href={withBase('favicon.ico')} />
+        <link rel="icon" type="image/x-icon" href={withBase('favicon.ico')} />
+    <link rel="apple-touch-icon" href={withBase('apple-touch-icon.png')} />
     <link rel="manifest" href={withBase('manifest.webmanifest')} />
     <!-- Open Graph / Twitter -->
     <meta property="og:title" content={title} />

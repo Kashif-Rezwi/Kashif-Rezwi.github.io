@@ -1,0 +1,125 @@
+---
+/**
+ * R5-6 section partition: Now / AI journey (was part of index.astro).
+ * Markup + scoped styles relocated verbatim from index.astro.
+ */
+import Icon from '../components/Icon.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import GlassPanel from '../components/GlassPanel.astro';
+
+interface Props {
+  links: {
+    devtoArticle: string;
+    aiPlayground: string;
+    languagePlayground: string;
+  };
+}
+
+const { links } = Astro.props;
+---
+
+<section id="now" class="section-block now-bg">
+  <div class="container-site">
+    <SectionHeader label="Now" title="AI journey" />
+
+    <GlassPanel variant="card" class="now-card reveal">
+      <h3 class="now-card-label">Recent Updates</h3>
+      <div class="now-list">
+        <div class="now-row">
+          <span class="now-row-icon"><Icon name="sparkles" size={17} /></span>
+          <div class="now-row-body">
+            <h4 class="now-row-title">Building</h4>
+            <p class="now-row-desc">
+              Toward AI product engineering and developer tools. Recent personal projects include an AI code-review agent, a cited AI answer engine, and an autonomous i18n agent. <a href="#work" class="link-accent">See the work →</a>
+            </p>
+          </div>
+        </div>
+        <div class="now-row">
+          <span class="now-row-icon"><Icon name="writing" size={17} /></span>
+          <div class="now-row-body">
+            <h4 class="now-row-title">Writing</h4>
+            <p class="now-row-desc">
+              <a href={links.devtoArticle} class="link-accent" target="_blank" rel="noopener noreferrer">I Built an AI Agent That Makes Any Landing Page (Next.js App) Multilingual in Minutes</a>
+              <span class="now-row-meta">· LingoAgent build walkthrough on dev.to · Feb 2026</span>
+            </p>
+          </div>
+        </div>
+        <div class="now-row">
+          <span class="now-row-icon"><Icon name="learning" size={17} /></span>
+          <div class="now-row-body">
+            <h4 class="now-row-title">Learning in public</h4>
+            <p class="now-row-desc">
+              <a href={links.aiPlayground} class="link-accent" target="_blank" rel="noopener noreferrer">ai-playground</a> and <a href={links.languagePlayground} class="link-accent" target="_blank" rel="noopener noreferrer">language-playground</a> are open repos of experiments, notes, and rough edges.
+            </p>
+          </div>
+        </div>
+      </div>
+    </GlassPanel>
+  </div>
+</section>
+
+<style>
+  /* Gradient background: holds alt-blend from the top (matching Testimonials’
+     solid bottom), then fades to canvas in the last 160px so Contact’s
+     canvas top is a seamless continuation. Entirely solid colours. */
+  .now-bg {
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 0%,
+      var(--color-canvas) 100%
+    );
+  }
+  :global(.now-card) {
+    padding: 1.75rem 2rem;
+    position: relative;
+    width: 100%;
+  }
+  @media (max-width: 640px) {
+    :global(.now-card) {
+      padding: 1.25rem 1.5rem;
+    }
+  }
+  .now-card-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-dim-glass);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 1.25rem 0;
+  }
+  .now-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .now-row {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 0 1rem;
+  }
+  .now-row-icon {
+    display: inline-flex;
+    color: var(--color-accent-text);
+    line-height: 1;
+    padding-top: 0.25rem;
+  }
+  .now-row-title {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+    color: var(--color-ink-dim-glass);
+    margin: 0 0 0.375rem;
+  }
+  .now-row-desc {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--color-ink-muted);
+    margin: 0;
+    max-width: 62ch;
+  }
+  .now-row-meta {
+    color: var(--color-ink-dim-glass);
+  }
+</style>
