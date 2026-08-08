@@ -1,0 +1,42 @@
+---
+/**
+ * R5-6: shared section header (label overline + title + optional subtitle).
+ * Kills the 5× duplicated `<div class="section-header reveal">` blocks that
+ * lived in index.astro. The overline label uses the global `.section-label`
+ * utility; title/subtitle are scoped here.
+ */
+interface Props {
+  label: string;
+  title: string;
+  subtitle?: string;
+}
+
+const { label, title, subtitle } = Astro.props;
+---
+
+<div class="section-header reveal">
+  <p class="section-label">{label}</p>
+  <h2 class="section-title">{title}</h2>
+  {subtitle && <p class="section-subtitle">{subtitle}</p>}
+</div>
+
+<style>
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0.375rem 0 0;
+    color: var(--color-ink);
+  }
+
+  .section-subtitle {
+    margin: 0.5rem 0 0;
+    font-size: 0.9375rem;
+    color: var(--color-ink-muted);
+    max-width: 56ch;
+  }
+</style>

@@ -6,13 +6,15 @@
   "engines": {
     "node": ">=22"
   },
-  "scripts": {
+    "scripts": {
     "dev": "astro dev",
     "fetch:github": "node scripts/fetch-github-contributions.mjs",
-    "build": "node scripts/fetch-github-contributions.mjs && astro build",
+    "favicon": "node scripts/make-favicon.mjs",
+    "build": "node scripts/make-favicon.mjs && node scripts/fetch-github-contributions.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check:contrast": "node scripts/check-contrast.mjs"
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "check:glass-contrast": "node scripts/check-glass-contrast.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

@@ -186,3 +186,12 @@ Initial JS ≈ 4.2 KB inline far below the 35 KB target; no external script/font
 ## F7. R3-F conclusion
 
 Every quality target is met or exceeded across the full matrix. **Recommend GO for launch under the owner's explicit R3-G go/no-go.**
+
+---
+
+## R5-7 — R5 glass open-QA summary
+
+- **Scope:** Per `docs/rebuild-02/23-r5-7-qa-plan.md` (DL-062): re-run the R3-F matrix **with the R5 glassmorphism layer (R5-1…R5-6) live**, extended with the glass-specific scenarios (back-of-glass, reduced transparency, reduced motion, no-JS, on-glass contrast). QA-only; no code changes. Full evidence: `docs/rebuild-02/12-r5-qa-evidence.md`.
+- **Result (2026-08-08, all green):** build 6 pages clean · `check:contrast` **19/19** · `check:glass-contrast` **30/30** AA · **Lighthouse 100/100/100/100 on 24/24** cells (6 routes × mobile/desktop × light/dark; TBT 0, CLS 0) · axe **0** (settled render) all routes × themes · horizontal overflow **0** (20/20) · reduced-motion static (`0.01 ms` clamp, 0 real-motion elements) · reduced-transparency → solid no-blur (`--glass-bg-solid`, `backdrop-filter:none`) · back-of-glass confirmed (dot-matrix + fallback behind semi-transparent `blur(12px)` glass panel) · no-JS content visible · internal + external links 200 (LinkedIn 999 authwall benign, OQ-06) · console 0 errors · metadata/SEO retained.
+- **Residuals (not defects):** LinkedIn click-through (OQ-06, owner manual); OQ-R5-11 pre-settle axe-CLI noise (excluded by design; settled = 0, Lighthouse a11y 100); pixel visual spot-check remains an owner view.
+- **Conclusion:** R5 is verified as one release. **Recommend owner GO for the R5-8 deploy go/no-go** (promote `evolve-design` → `develop` → `gh-pages`).

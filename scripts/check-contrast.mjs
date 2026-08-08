@@ -15,10 +15,11 @@ const checks = [
   // --- Dark theme (text >= 4.5:1) ---
   ['ink on canvas (dark)', '#f0f0f0', DARK.canvas, 4.5, true],
   ['ink on surface (dark)', '#f0f0f0', DARK.surface, 4.5, true],
-  ['ink-muted on canvas (dark)', '#888888', DARK.canvas, 4.5, true],
-  ['ink-muted on surface (dark)', '#888888', DARK.surface, 4.5, true],
+  ['ink-muted on canvas (dark)', '#8d8d8d', DARK.canvas, 4.5, true],
+  ['ink-muted on surface (dark)', '#8d8d8d', DARK.surface, 4.5, true],
   ['ink-dim on canvas (dark)', '#808080', DARK.canvas, 4.5, true],
   ['ink-dim on surface (dark)', '#808080', DARK.surface, 4.5, true],
+  ['ink-dim-glass on canvas (dark)', '#8b8b8b', DARK.canvas, 4.5, true],
   ['accent-text on canvas (dark)', '#a9c8ff', DARK.canvas, 4.5, true],
   // --- Light theme (text >= 4.5:1) ---
   ['ink on canvas (light)', '#111111', LIGHT.canvas, 4.5, true],
@@ -27,10 +28,13 @@ const checks = [
   ['ink-muted on surface (light)', '#555555', LIGHT.surface, 4.5, true],
   ['ink-dim on canvas (light)', '#707070', LIGHT.canvas, 4.5, true],
   ['ink-dim on surface (light)', '#707070', LIGHT.surface, 4.5, true],
+  ['ink-dim-glass on canvas (light)', '#6a6a6a', LIGHT.canvas, 4.5, true],
   ['accent-text on canvas (light)', '#2f57ad', LIGHT.canvas, 4.5, true],
   // --- Non-text UI (>= 3:1, WCAG 1.4.11) ---
   ['accent non-text on canvas (dark)', '#6495ed', DARK.canvas, 3.0, true],
   ['accent-text non-text on canvas (light)', '#2f57ad', LIGHT.canvas, 3.0, true],
+  // --- Role badge (solid fill, white text — OQ-R5-9; both themes share the fill) ---
+  ['white on accent-badge (both)', '#ffffff', '#3f63c9', 4.5, true],
 ];
 
 function channel(v) {

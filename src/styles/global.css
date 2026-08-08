@@ -29,32 +29,37 @@
   --color-surface: #161616;        /* card / raised surface */
   --color-surface-2: #1c1c1c;     /* slightly lighter surface */
   --color-border: #2a2a2a;        /* subtle hairline border */
-  --color-border-focus: #6495ed;  /* cornflowerblue for focus rings */
 
   /* Ink */
   --color-ink: #f0f0f0;            /* primary text — near white */
-  --color-ink-muted: #888888;      /* secondary text — medium gray */
+  --color-ink-muted: #8d8d8d;      /* R5-5 raised: AA on glass at the glow-peak centre (4.63:1) */
   --color-ink-dim: #808080;        /* tertiary — dim meta text, AA-safe on canvas (#0f0f0f) */
+  --color-ink-dim-glass: #8b8b8b;  /* R5-3/5: dim meta ON glass/band — 4.51:1 at the glow-peak centre */
 
   /* Accent — cornflowerblue family */
   --color-accent: #6495ed;          /* cornflowerblue core */
   --color-accent-light: #89b4ff;    /* hover/decorative tint */
   --color-accent-text: #a9c8ff;     /* accessible text/link tint on dark */
+  --color-accent-badge: #3f63c9;    /* role-badge fill — white text AA 5.47:1 (OQ-R5-9) */
   --color-accent-glow: #6495ed26;   /* sparse matrix / focus halo only */
   --color-accent-soft: #6495ed14;   /* restrained tag background */
 
-  /* Kept as aliases for existing components; intentionally flat, not gradients. */
-  --gradient-accent: var(--color-accent);
-  --gradient-accent-text: var(--color-accent-text);
+  /* ── R5 glass material (glass-foundation, §5.1/5.2) ──────────────────────
+     A translucent "console plane" over the dot field. Never animated;
+     static per surface. Contrast floor enforced at implementation time. */
+  --glass-blur: 12px;                                 /* inside the 8–15 px band */
+  --glass-saturate: 1.15;                             /* dark: field stays rich behind the plane */
+  --glass-bg: color-mix(in srgb, var(--color-canvas) 62%, color-mix(in srgb, var(--color-accent) 8%, transparent));
+  --glass-border: color-mix(in srgb, #ffffff 14%, transparent);
+  --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 10%, transparent), transparent 55%);
+  --glass-bg-solid: var(--color-surface);            /* fallback / reduced-transparency floor */
+  --color-glow: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 70%);
 
-  /* Status colors */
-  --color-success: #4ade80;
-  --color-warning: #fb923c;
-
-  /* Aliases used in Tailwind utilities */
-  --color-paper: var(--color-canvas);
-  --color-hairline: var(--color-border);
-  --color-accent-ink: var(--color-accent);
+  /* ── Motion + elevation seeds (R5) — no default depth ── */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-xslow: 700ms;
 }
 
 /* ---------------------------------------------------------------------------
@@ -75,22 +80,27 @@
   --color-ink: #111111;
   --color-ink-muted: #555555;
   --color-ink-dim: #707070;
+  --color-ink-dim-glass: #6a6a6a; /* R5-3/5: dim meta ON glass/band — 4.56:1 at the glow-peak centre */
   --color-accent: #6495ed;
   --color-accent-light: #4b74d3;
   --color-accent-text: #2f57ad;
   --color-accent-glow: #3862c018;
   --color-accent-soft: #3862c010;
-  --gradient-accent: var(--color-accent);
-  --gradient-accent-text: var(--color-accent-text);
-  --color-paper: var(--color-canvas);
-  --color-hairline: var(--color-border);
-  --color-accent-ink: var(--color-accent);
   color-scheme: light;
+
+  /* R5 glass (light recipe): crisp subtle ink border + soft elevation */
+  --glass-saturate: 1.05;
+  --glass-bg: color-mix(in srgb, #ffffff 82%, color-mix(in srgb, var(--color-accent) 6%, transparent));
+  --glass-border: color-mix(in srgb, var(--color-ink) 12%, transparent);
+  --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 80%, transparent), transparent 55%);
+  --color-glow: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 70%);
 }
 
-:root[data-theme='light'] .tech-item,
-:root[data-theme='light'] .tech-item:hover {
-  --brand-on-dark: var(--brand);
+:root[data-theme='light'] .tech-item {
+  --active-brand: var(--brand);
+  --hover-text: var(--color-ink);
+  --hover-bg-mix: 22%;
+  --hover-border-mix: 60%;
 }
 
 @media (prefers-color-scheme: light) {
@@ -102,22 +112,27 @@
     --color-ink: #111111;
     --color-ink-muted: #555555;
     --color-ink-dim: #707070;
+    --color-ink-dim-glass: #6a6a6a; /* R5-3/5: dim meta ON glass/band — 4.56:1 at the glow-peak centre */
     --color-accent: #6495ed;
     --color-accent-light: #4b74d3;
     --color-accent-text: #2f57ad;
     --color-accent-glow: #3862c018;
     --color-accent-soft: #3862c010;
-    --gradient-accent: var(--color-accent);
-    --gradient-accent-text: var(--color-accent-text);
-    --color-paper: var(--color-canvas);
-    --color-hairline: var(--color-border);
-    --color-accent-ink: var(--color-accent);
     color-scheme: light;
+
+    /* R5 glass (light recipe) — mirrors :root[data-theme='light'] */
+    --glass-saturate: 1.05;
+    --glass-bg: color-mix(in srgb, #ffffff 82%, color-mix(in srgb, var(--color-accent) 6%, transparent));
+    --glass-border: color-mix(in srgb, var(--color-ink) 12%, transparent);
+    --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 80%, transparent), transparent 55%);
+    --color-glow: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 70%);
   }
 
-  .tech-item,
-  .tech-item:hover {
-    --brand-on-dark: var(--brand);
+  :root:not([data-theme]) .tech-item {
+    --active-brand: var(--brand);
+    --hover-text: var(--color-ink);
+    --hover-bg-mix: 22%;
+    --hover-border-mix: 60%;
   }
 }
 
@@ -147,6 +162,9 @@
   }
 
   body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     /* Reserve space for the fixed header so content never sits underneath it */
     padding-top: 65px;
     background-color: var(--color-canvas);
@@ -156,6 +174,10 @@
     -moz-osx-font-smoothing: grayscale;
     /* The interactive matrix is intentionally limited to the hero. */
     background-image: none;
+  }
+
+  main {
+    flex: 1;
   }
 
   ::selection {
@@ -185,7 +207,7 @@
     top: 0.5rem;
     z-index: 100;
     transform: translateY(-200%);
-    transition: transform 0.15s ease;
+    transition: transform var(--duration-fast) ease;
     background: var(--color-ink);
     color: var(--color-canvas);
     padding: 0.5rem 0.75rem;
@@ -215,6 +237,17 @@
     font-weight: 500;
   }
 
+/* --- R5 text utilities (defect E extraction; wired into components in R5-5/R5-6) --- */
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-dim);
+    letter-spacing: 0.08em;
+  }
+  .mono {
+    font-family: var(--font-mono);
+  }
+
   /* --- Gradient text utility --- */
   .gradient-text {
     color: var(--color-accent-text);
@@ -226,7 +259,7 @@
     text-decoration: underline;
     text-decoration-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
     text-underline-offset: 4px;
-    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    transition: color var(--duration-fast) ease, text-decoration-color var(--duration-fast) ease;
   }
   .link-accent:hover {
     color: var(--color-accent-text);
@@ -247,7 +280,7 @@
     border-radius: var(--radius-control);
     border: none;
     cursor: pointer;
-    transition: background 0.15s ease, transform 0.1s ease;
+    transition: background var(--duration-fast) ease, transform 0.1s ease;
     text-decoration: none;
   }
   .btn:hover {
@@ -293,24 +326,12 @@
     border-radius: var(--radius-control);
     border: 1px solid var(--color-accent-text); /* readable accent — border alone fails non-text AA on light */
     cursor: pointer;
-    transition: background 0.15s ease, transform 0.1s ease;
+    transition: background var(--duration-fast) ease, transform 0.1s ease;
     text-decoration: none;
   }
   .btn-outline:hover {
     background: var(--color-accent-soft);
     transform: translateY(-1px);
-  }
-
-  /* --- Cards --- */
-  .card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-  .card:hover {
-    background: var(--color-surface-2);
-    transform: translateY(-2px);
   }
 
   /* --- Tech tags --- */
@@ -327,11 +348,84 @@
     letter-spacing: 0.01em;
   }
 
-  /* --- Section divider --- */
-  .section-divider {
-    border: none;
-    border-top: 1px solid var(--color-border);
-    margin-block: 0;
+  /* --- R5 glass surfaces (glass-foundation, §5.1) ---
+     Static glass: blur only via backdrop-filter (never animated — §6). The
+     `.glass` utility is the material; `.glass-panel` / `.glass-card` add the
+     shape (radius) so a panel ≠ a card. Fallback + reduced transparency below. */
+  .glass, .glass-panel, .glass-card {
+    position: relative;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-card);
+  }
+  /* Top-edge "catch light" — cheap, premium, static (no animation). */
+  .glass::before, .glass-panel::before, .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: var(--glass-highlight);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  /* Fallback: no backdrop-filter support → near-opaque surface tint ("today's
+     look"), so content stays readable on any browser (S-9). */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass, .glass-panel, .glass-card {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    .glass::before, .glass-panel::before, .glass-card::before { display: none; }
+  }
+
+  /* OS transparency preference → glass becomes solid (S-9). */
+  @media (prefers-reduced-transparency: reduce) {
+    .glass, .glass-panel, .glass-card {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    .glass::before, .glass-panel::before, .glass-card::before { display: none; }
+  }
+
+  /* R5-4 focus echo: when any control inside a glass surface holds focus, the
+     glass edge tints accent — feedback complementing the global :focus-visible
+     outline (WCAG 2.4.11). Non-motion affordance, so it stays active under
+     prefers-reduced-motion. The compound selector keeps the transition from
+     being overridden by component-level hover transitions (e.g. .work-card
+     transform lift) while composing smoothly with them. */
+  .glass:focus-within,
+  .glass-panel:focus-within,
+  .glass-card:focus-within {
+    border-color: var(--color-accent-text);
+  }
+  .glass:focus-within,
+  .glass-panel:focus-within,
+  .glass-card:focus-within {
+    transition:
+      background-color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      transform var(--duration-base) ease;
+  }
+
+  /* --- Section scaffolding (R5-6: shared by index sections + case pages) ---
+     Moved from the duplicated scoped blocks (index.astro + [slug].astro) into
+     the shared layer so the grid/band recipe lives in one place. */
+  .section-block {
+    padding-block: 5rem;
+  }
+
+  /* --- Hero content layout (R5-6/R5-8a: kept — the identity is now flat over
+     the matrix; no glass plate, so no hero-panel padding rule) --- */
+  .hero-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   /* --- Markdown (case studies) --- */
@@ -385,7 +479,7 @@
     text-decoration: underline;
     text-decoration-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
     text-underline-offset: 4px;
-    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    transition: color var(--duration-fast) ease, text-decoration-color var(--duration-fast) ease;
   }
   .markdown a:hover {
     color: var(--color-accent-light);
@@ -413,23 +507,26 @@
     }
   }
 
-  /* Fade-in animation */
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  /* Blink cursor (terminal effect) */
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+  /* Glass settle-in (R5-4): hero plate fades to crisp with a short rise.
+     Distinct, shorter translate than content reveals (§6 "glass panels vary
+     the translate direction slightly"); gated no-preference so reduced-motion
+     is instant and the plate is simply visible. Transform/opacity only. */
+  @keyframes glass-settle {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .animate-fade-up {
     animation: fade-up 0.6s ease both;
   }
-  .animate-fade-in {
-    animation: fade-in 0.5s ease both;
+  .glass-settle {
+    animation: glass-settle var(--duration-xslow) ease-out both;
   }
 
   /* Staggered delay utilities */
@@ -439,17 +536,13 @@
   .delay-350 { animation-delay: 0.35s; }
   .delay-400 { animation-delay: 0.4s; }
   .delay-500 { animation-delay: 0.5s; }
-  .delay-600 { animation-delay: 0.6s; }
 
-  .glow-pulse {
-    animation: glow-pulse 2s ease-in-out infinite;
-  }
-
-  /* Intersection-observer reveal is enhancement-only: no-JS content remains visible. */
+  /* Intersection-observer reveal is enhancement-only: no-JS content remains visible.
+     R5-4: transition unified to the --duration-slow seed (§5.2 motion sync). */
   .js-reveal .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.55s ease, transform 0.55s ease;
+    transition: opacity var(--duration-slow) ease, transform var(--duration-slow) ease;
   }
   .js-reveal .reveal.is-visible {
     opacity: 1;

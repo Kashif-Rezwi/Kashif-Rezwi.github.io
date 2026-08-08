@@ -1,6 +1,6 @@
 # Kashif Rezwi — Portfolio (Rebuild Project)
 
-This repository hosts Kashif Rezwi's Astro portfolio and its evidence-driven, approval-gated rebuild history. Phase 1 is live; the completed `rebuild-02` branch is now under comparative review for a further owner-directed improvement cycle. The three-version findings and gated plan live in [`docs/rebuild-02/`](./docs/rebuild-02/). No `rebuild-02`/R3 work is deployed without explicit owner approval.
+This repository hosts Kashif Rezwi's Astro portfolio and its evidence-driven, approval-gated rebuild history. The **Rebuild-03** design overhaul is **live** at the production URL (R3 launched 2026-08-06, DL-030/031); R4 refinements + testimonials are merged to `develop` pending deploy. The **R5 glassmorphism evolution** is the active cycle — working branch `evolve-design`; design spec and gated roadmap in [`docs/rebuild-02/11-r5-glassmorphism-design.md`](./docs/rebuild-02/11-r5-glassmorphism-design.md). No cycle work is deployed without explicit owner approval.
 
 **Starting point for any contributor (human or AI):** read [`AGENTS.md`](./AGENTS.md) — the single operating contract that governs all work in this repo — then [`docs/project-status.md`](./docs/project-status.md) for the current state and the next approved action.
 
