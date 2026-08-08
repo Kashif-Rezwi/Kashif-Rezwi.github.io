@@ -88,42 +88,35 @@ const paragraphsHtml = highlighted
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    padding: 1.75rem 1.75rem 1.5rem;
+    padding: 2rem 2rem 1.75rem;
     height: 100%;
-    /* border-color in the base transition (R5-4): lets the glass focus-echo
-       animate through this unlayered rule (the layered global one is overridden) */
-    transition: transform var(--duration-base) ease, border-color var(--duration-fast) ease;
+    border-radius: var(--radius-card);
+    transition: transform var(--duration-base) ease, border-color var(--duration-fast) ease, box-shadow var(--duration-base) ease;
+    overflow: hidden;
   }
-  /* R5-3: glass-card surface per §7 (Testimonials = II); hover lift is a pure
-     transform (the flat `.card` background sweep is not carried over).
-     Backdrop-filter disabled locally: cards float over a smooth ambient band —
-     nothing to blur, so no GPU layer is spent (spec §12). */
   .testimonial-card:hover {
     transform: translateY(-2px);
   }
-  .testimonial-card {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
 
+  /* Low-opacity decorative quotation mark glyph in top right */
   .testimonial-mark {
     position: absolute;
-    top: 0.25rem;
+    top: 0.5rem;
     right: 1.5rem;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 4.75rem;
+    font-family: Georgia, 'Playfair Display', 'Times New Roman', serif;
+    font-size: 6rem;
     line-height: 1;
-    color: var(--color-accent-soft);
+    color: var(--color-accent);
+    opacity: 0.15;
     user-select: none;
     pointer-events: none;
   }
 
   .testimonial-quote {
-    font-size: 1rem;
+    font-size: 1.03125rem;
     line-height: 1.75;
     color: var(--color-ink);
     margin: 0;
-    padding-right: 0.75rem;
     position: relative;
     z-index: 1;
     text-rendering: optimizeLegibility;
@@ -131,29 +124,29 @@ const paragraphsHtml = highlighted
     flex-direction: column;
     gap: 1.125rem;
     font-weight: 400;
-    letter-spacing: 0.01em;
-    text-align: justify;
-    text-justify: inter-word;
+    letter-spacing: 0.005em;
+    text-align: left;
   }
 
   .testimonial-quote :global(p) {
     margin: 0;
   }
 
-  /* Highlighted key phrases: quiet accent treatment — soft fill only */
+  /* Quiet highlight treatment: soft accent fill + subtle underline */
   .testimonial-quote :global(mark.testimonial-highlight),
   .testimonial-quote :global(.testimonial-highlight) {
-    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 14%, transparent);
     color: var(--color-accent-text);
     font-weight: 600;
-    padding: 0.125em 0.25em;
+    padding: 0.125em 0.3em;
     border-radius: 0.25em;
+    border-bottom: 1.5px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
   }
 
   .testimonial-attribution {
     display: flex;
     align-items: center;
-    gap: 0.875rem;
+    gap: 1rem;
     margin-top: auto;
     padding-top: 1.25rem;
     border-top: 1px solid var(--color-border);
@@ -169,12 +162,14 @@ const paragraphsHtml = highlighted
     border-radius: 50%;
     object-fit: cover;
     background-color: var(--color-surface-2);
-    border: 2px solid var(--color-accent);
-    transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+    border: 2px solid var(--color-accent-text);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent);
+    transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease, transform var(--duration-fast) ease;
   }
   .testimonial-photo-link:hover .testimonial-photo {
+    transform: scale(1.05);
     border-color: var(--color-accent-light);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 30%, transparent);
   }
 
   .testimonial-byline {
@@ -191,9 +186,10 @@ const paragraphsHtml = highlighted
     color: var(--color-ink);
     text-decoration: none;
     font-size: 0.9375rem;
+    transition: color var(--duration-fast) ease;
   }
   .testimonial-name:hover {
-    color: var(--color-accent-light);
+    color: var(--color-accent-text);
   }
   .testimonial-role {
     margin: 0;

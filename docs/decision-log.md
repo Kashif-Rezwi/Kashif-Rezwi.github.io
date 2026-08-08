@@ -548,7 +548,18 @@
   3. **Footer anchoring & excess space**: Added sticky flex column layout (`min-height: 100vh`, `main { flex: 1 }`) in `global.css`, removed redundant duplicate `footer-cta` block and 192px dead space, and anchored `footer` seamlessly to the page bottom with a top border.
 - **Files changed:** `src/styles/global.css`, `src/sections/Skills.astro`, `src/components/Footer.astro`.
 - **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes.
+## DL-072 — T3 (R5-8a) Testimonials premium editorial redesign
+
+- **Date:** 2026-08-08
+- **Decision:** Implemented **T3 (Testimonials premium redesign)** per plan §2 (DL-063):
+  - **Editorial Quotation Glyph**: Replaced faint quote mark with a 6rem low-opacity display-serif quotation glyph (`opacity: 0.15`, Georgia/Playfair font stack) as an elegant top-right background motif.
+  - **Quiet Highlight Underlines**: Refined inline `<mark class="testimonial-highlight">` with soft accent fill + subtle accent underline (`border-bottom: 1.5px solid color-mix(in srgb, var(--color-accent) 40%, transparent)`).
+  - **Typography & Alignment**: Set quote body text to `1.03125rem`, `line-height: 1.75`, `text-align: left` (avoiding inter-word justification gaps).
+  - **Photo Ring & Hover Sheen**: Added dual accent ring (`box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent)`) with subtle hover scale (`transform: scale(1.05)`).
+- **Files changed:** `src/components/TestimonialCard.astro`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes; claims and verbatim recommendation quotes byte-identical.
 - **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval.
+
 
 
 
