@@ -134,13 +134,7 @@ import SectionHeader from '../components/SectionHeader.astro';
      through the middle, and ends at alt-blend again (matching Testimonials'
      top). Entirely solid colours — no transparency, no compositing jump. */
   .exp-bg {
-    background: linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 0,
-      var(--color-canvas) 160px,
-      var(--color-canvas) calc(100% - 160px),
-      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 100%
-    );
+    background: color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas));
   }
   .experience-list {
     display: flex;

@@ -489,3 +489,38 @@
 - **Verification:** Build clean (6 pages); dark + light visual audit at all four key boundaries (Work→Skills, Skills→Experience, Experience→Testimonials, Now→Contact) — no visible divider line in either theme.
 - **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval before commit.
 
+## DL-066 — T4 (R5-8a) cursor-driven background lighting removed per owner directive
+
+- **Date:** 2026-08-08
+- **Decision:** Remove the cursor spotlight component, script, and CSS entirely per owner directive ("just remove the cursor spotlight"), while keeping all section background layouts intact.
+  - Removed `src/components/CursorSpotlight.astro` and its layout integration in `Base.astro`.
+  - Removed `#cursor-spotlight` CSS rules from `global.css`.
+- **Files changed:** `src/layouts/Base.astro`, `src/styles/global.css`, `src/components/CursorSpotlight.astro` (deleted).
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes.
+- **Status:** Complete (Cursor Spotlight removed).
+
+## DL-067 — Section background continuity refinement: unified middle content band
+
+- **Date:** 2026-08-08
+- **Decision:** Resolved the remaining abrupt background color boundaries between **Skills → Experience** and **Experience → Testimonials** shown in user audit captures:
+  - Removed the internal `160px` black-canvas gradient stops inside `Experience.astro` (`.exp-bg`) and updated it to solid `color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas))`.
+  - Updated `Work.astro` (`.work-bg`) to a smooth `0% -> 100%` vertical linear gradient fading from `var(--color-canvas)` (Hero) into the solid content tint.
+  - Updated `Now.astro` (`.now-bg`) to a smooth `0% -> 100%` vertical linear gradient fading from the solid content tint into `var(--color-canvas)` (Contact).
+  - The middle content sections (**Skills**, **Experience**, and **Testimonials**) now share a single, 100% continuous background surface with zero color breaks or mid-section dark stripes.
+- **Files changed:** `src/sections/Work.astro`, `src/sections/Experience.astro`, `src/sections/Now.astro`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes; Puppeteer browser audit confirmed 100% seamless visual flow across Skills → Experience and Experience → Testimonials.
+- **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval.
+
+## DL-068 — Hero ambient console-field backdrop glow removed
+
+- **Date:** 2026-08-08
+- **Decision:** Removed the ambient console-field glow backdrop (`.hero-ambience` div and `field-breathe` shimmer animation class) and the `section-fade-bottom` class from `src/sections/Hero.astro` per owner directive ("also remove the backdrop effect from the hero section too").
+  - The hero identity text (name, bio, CTAs) now renders completely flat over the interactive dot matrix canvas with no background glow block.
+- **Files changed:** `src/sections/Hero.astro`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes; verified dot matrix remains visible and readable.
+- **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval.
+
+
+
+
+

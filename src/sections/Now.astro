@@ -17,8 +17,7 @@ interface Props {
 const { links } = Astro.props;
 ---
 
-<section id="now" class="section-block band-host now-bg">
-  <div class="section-band" aria-hidden="true"></div>
+<section id="now" class="section-block now-bg">
   <div class="container-site">
     <SectionHeader label="Now" title="AI journey" />
 
@@ -62,8 +61,7 @@ const { links } = Astro.props;
   .now-bg {
     background: linear-gradient(
       to bottom,
-      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 0,
-      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) calc(100% - 160px),
+      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 0%,
       var(--color-canvas) 100%
     );
   }

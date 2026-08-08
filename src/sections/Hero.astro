@@ -21,12 +21,8 @@ type ImageImport = Parameters<typeof Image>[0]['src'];
 const { email, github, linkedin, devto, portrait } = Astro.props;
 ---
 
-<section class="hero-section section-fade-bottom">
+<section class="hero-section">
   <HeroDotMatrix />
-  <!-- Ambient console-field glow: sits behind the identity so it reads over a lit
-       field, not flat alpha. The identity itself is intentionally flat over the
-       live matrix (T1: no glass card competes with the interactive dot field). -->
-  <div class="hero-ambience field-breathe" aria-hidden="true"></div>
   <div class="container-site hero-inner">
     <!-- Identity block — flat over the matrix (T1): no glass card. Portrait and
          role badge remain owner-locked. Subtle text-legibility treatment via
