@@ -39,7 +39,7 @@ interface Props {
 const { featured, links } = Astro.props;
 ---
 
-<section id="work" class="section-block band-host">
+<section id="work" class="section-block band-host work-bg">
   <div class="section-band" aria-hidden="true"></div>
   <div class="container-site">
     <SectionHeader
@@ -110,6 +110,18 @@ const { featured, links } = Astro.props;
 </section>
 
 <style>
+  /* Gradient background: canvas → alt-blend at the bottom, so the
+     section's bottom edge is already at the section-alt shade when
+     Skills begins. No transparency — solid colours only so there is
+     never a hard compositing edge. */
+  .work-bg {
+    background: linear-gradient(
+      to bottom,
+      var(--color-canvas) 0,
+      var(--color-canvas) calc(100% - 160px),
+      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 100%
+    );
+  }
   /* R5-6: scoped styles moved from index.astro — byte-identical. */
   .work-grid {
     display: grid;

@@ -21,7 +21,7 @@ type ImageImport = Parameters<typeof Image>[0]['src'];
 const { email, github, linkedin, devto, portrait } = Astro.props;
 ---
 
-<section class="hero-section">
+<section class="hero-section section-fade-bottom">
   <HeroDotMatrix />
   <!-- Ambient console-field glow: sits behind the identity so it reads over a lit
        field, not flat alpha. The identity itself is intentionally flat over the

@@ -465,6 +465,59 @@
     background: color-mix(in srgb, var(--color-surface) 40%, transparent);
   }
 
+  /* --- Section edge fade zones (section-transition polish) ----------------
+     Static gradient pseudo-elements that dissolve the boundary between
+     adjacent sections with different backgrounds. Zero JS, zero motion-
+     budget, pointer-events none so interactive content is unaffected.
+
+     Usage:
+       .section-fade-top    → soft gradient at the top of a section
+       .section-fade-bottom → soft gradient at the bottom of a section
+
+     --fade-from / --fade-to default to --color-canvas (dark: #0f0f0f).
+     Override per-section via a scoped custom property when the incoming or
+     outgoing color is the section-alt tint.
+
+     The pseudo-elements sit at z-index 0 so .band-host content (z-index 1)
+     is always above them and glass surfaces are never obscured.          */
+  .section-fade-top {
+    position: relative;
+  }
+  .section-fade-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--fade-height, 120px);
+    background: linear-gradient(
+      to bottom,
+      var(--fade-from, var(--color-canvas)),
+      transparent
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .section-fade-bottom {
+    position: relative;
+  }
+  .section-fade-bottom::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--fade-height, 120px);
+    background: linear-gradient(
+      to top,
+      var(--fade-to, var(--color-canvas)),
+      transparent
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
   /* --- Hero content layout (R5-6/R5-8a: kept — the identity is now flat over
      the matrix; no glass plate, so no hero-panel padding rule) --- */
   .hero-content {

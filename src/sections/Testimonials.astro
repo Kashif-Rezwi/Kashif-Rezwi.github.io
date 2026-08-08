@@ -25,7 +25,7 @@ interface Props {
 const { testimonials } = Astro.props;
 ---
 
-<section id="testimonials" class="section-block section-alt band-host">
+<section id="testimonials" class="section-block band-host testimonials-bg">
   <div class="section-band" aria-hidden="true"></div>
   <div class="container-site">
     <SectionHeader
@@ -55,6 +55,12 @@ const { testimonials } = Astro.props;
 </section>
 
 <style>
+  /* Solid alt-blend background: starts at the same alt-blend shade that
+     Experience's bottom gradient ends at, so the boundary is continuous.
+     Holds solid through to the bottom where Now also starts at alt-blend. */
+  .testimonials-bg {
+    background: color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas));
+  }
   .testimonial-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));

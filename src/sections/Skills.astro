@@ -21,7 +21,7 @@ interface Props {
 const { techStack } = Astro.props;
 ---
 
-<section id="skills" class="section-block section-alt band-host">
+<section id="skills" class="section-block band-host skills-bg">
   <div class="section-band" aria-hidden="true"></div>
   <div class="container-site">
     <SectionHeader label="Tech stack" title="What I work with" />
@@ -47,6 +47,13 @@ const { techStack } = Astro.props;
 </section>
 
 <style>
+  /* Solid alt-blend background: mirrors the visual result of .section-alt
+     (color-mix surface+canvas) but as a solid colour so it can transition
+     cleanly into Work's gradient bottom and Experience's gradient top.
+     No transparency — compositing is off the table. */
+  .skills-bg {
+    background: color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas));
+  }
   /* R5-6: scoped styles moved from index.astro — byte-identical. */
   .tech-grid {
     display: grid;

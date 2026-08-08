@@ -472,3 +472,20 @@
 - **Fixes included:** T1 `.hero-textshadow` text-shadow was leaking onto `.btn` (dark-theme contrast ~1:1). Added scoped reset `.hero-textshadow .btn, .hero-textshadow .hero-social { text-shadow: none; -webkit-text-stroke: 0; }`.
 - **Done-when evidence:** `docs/rebuild-02/26-r5-8a-t2-favicon-evidence.md`.
 - **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval → T3.
+
+## DL-065 — Section background transitions: replace transparent pseudo-element fades with solid-colour gradients
+
+- **Date:** 2026-08-08
+- **Decision:** Replace all `.section-fade-top` / `.section-fade-bottom` pseudo-element overlays with scoped solid-colour `background: linear-gradient(...)` directly on each section container. Each gradient uses only absolute resolved colours — `var(--color-canvas)` and `color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas))` (the "alt-blend") — with **no `transparent` stops**. Sections are now chained so adjacent edges always share the exact same computed colour:
+  - **Hero** → canvas (unchanged)
+  - **Work** → `canvas 0 … canvas (100% − 160px) … alt-blend 100%`
+  - **Skills** → solid alt-blend
+  - **Experience** → `alt-blend 0 … canvas 160px … canvas (100% − 160px) … alt-blend 100%`
+  - **Testimonials** → solid alt-blend
+  - **Now** → `alt-blend 0 … alt-blend (100% − 160px) … canvas 100%`
+  - **Contact** → canvas (unchanged; `section-fade-top` removed as Now already ends at canvas)
+- **Rationale:** `transparent` in `color-mix()` and `linear-gradient()` composes in premultiplied alpha space; when an adjacent section has a non-zero `background-color`, the alpha boundary is rendered as a hard 1-pixel step (the "divider line" the owner reported). Using solid colours throughout eliminates the alpha compositing path entirely — the GPU sees two adjacent rectangles of the same colour at every boundary, so the seam is invisible.
+- **Files changed:** `src/sections/Work.astro`, `src/sections/Skills.astro`, `src/sections/Experience.astro`, `src/sections/Testimonials.astro`, `src/sections/Now.astro`, `src/sections/Contact.astro`.
+- **Verification:** Build clean (6 pages); dark + light visual audit at all four key boundaries (Work→Skills, Skills→Experience, Experience→Testimonials, Now→Contact) — no visible divider line in either theme.
+- **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval before commit.
+

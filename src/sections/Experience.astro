@@ -6,7 +6,7 @@
 import SectionHeader from '../components/SectionHeader.astro';
 ---
 
-<section id="experience" class="section-block">
+<section id="experience" class="section-block exp-bg">
   <div class="container-site">
     <SectionHeader label="Experience" title="Where I've worked" />
 
@@ -129,6 +129,19 @@ import SectionHeader from '../components/SectionHeader.astro';
 </section>
 
 <style>
+  /* Gradient background: alt-blend → canvas → alt-blend.
+     Starts at the alt-blend shade (matching Skills' bottom), holds canvas
+     through the middle, and ends at alt-blend again (matching Testimonials'
+     top). Entirely solid colours — no transparency, no compositing jump. */
+  .exp-bg {
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 0,
+      var(--color-canvas) 160px,
+      var(--color-canvas) calc(100% - 160px),
+      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 100%
+    );
+  }
   .experience-list {
     display: flex;
     flex-direction: column;

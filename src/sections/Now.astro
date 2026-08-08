@@ -17,7 +17,7 @@ interface Props {
 const { links } = Astro.props;
 ---
 
-<section id="now" class="section-block section-alt band-host">
+<section id="now" class="section-block band-host now-bg">
   <div class="section-band" aria-hidden="true"></div>
   <div class="container-site">
     <SectionHeader label="Now" title="AI journey" />
@@ -56,6 +56,17 @@ const { links } = Astro.props;
 </section>
 
 <style>
+  /* Gradient background: holds alt-blend from the top (matching Testimonials’
+     solid bottom), then fades to canvas in the last 160px so Contact’s
+     canvas top is a seamless continuation. Entirely solid colours. */
+  .now-bg {
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 0,
+      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) calc(100% - 160px),
+      var(--color-canvas) 100%
+    );
+  }
   .now-list {
     display: flex;
     flex-direction: column;
