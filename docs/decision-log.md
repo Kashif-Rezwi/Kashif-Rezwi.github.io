@@ -529,7 +529,16 @@
   - Added an uppercase monospace card label `RECENT UPDATES` (`.now-card-label`).
 - **Files changed:** `src/sections/Now.astro`.
 - **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes.
+## DL-070 — Case study page mobile card alignment & global backdrop removal
+
+- **Date:** 2026-08-08
+- **Decision:** Made two portfolio-wide refinements:
+  1. **Removed all backdrop glows (`.section-band`) portfolio-wide**: Disabled `.section-band` glow layers in `src/styles/global.css` and removed `band-host` / `section-band` markup from case study pages ([src/pages/work/[slug].astro](file:///Users/kashifrezwi/Developer/Kashif-Rezwi.github.io/src/pages/work/[slug].astro)).
+  2. **Aligned Case Study cards & mobile gutters**: Unified card container widths and responsive padding (`padding: 1.25rem`) across all case study blocks (`.case-hero-inner`, `.case-cover`, `.case-sidebar-card`), ensuring cards fit within `.container-site` margins on mobile screens without touching edge boundaries.
+- **Files changed:** `src/pages/work/[slug].astro`, `src/styles/global.css`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes.
 - **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval.
+
 
 
 

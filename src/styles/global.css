@@ -442,19 +442,8 @@
   /* R5-3: ambient console-field band behind content surfaces (work, skills,
      testimonials, now). Mirrors the hero ambience recipe (§5.2 .field-backdrop);
      a masked static glow so glass panels read as floating over a lit field. */
-  .band-host {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-  }
   .section-band {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: var(--color-glow);
-    mask-image: radial-gradient(ellipse 75% 70% at 50% 48%, #000 28%, transparent 78%);
-    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 48%, #000 28%, transparent 78%);
+    display: none !important;
   }
   .band-host > .container-site {
     position: relative;
