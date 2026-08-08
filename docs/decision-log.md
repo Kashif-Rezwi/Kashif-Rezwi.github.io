@@ -560,6 +560,13 @@
 - **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes; claims and verbatim recommendation quotes byte-identical.
 - **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval.
 
+## DL-073 — R5-8a Final pre-deploy audit (dead & duplicate code)
+
+- **Date:** 2026-08-08
+- **Decision:** Ran the final pre-deploy audit on `evolve-design` (owner-requested, "check and run the audit"). All three gates pass: `check:contrast` (19/19), `check:glass-contrast` (30/30), `npm run build` (6 pages, clean). Findings — **10 dead CSS blocks** in `src/styles/global.css` (`.label-overline`, `.field-backdrop`, `.section-divider`, `.section-band`/`.band-host`, `.section-alt`, `.section-fade-top/bottom`, `@keyframes field-breathe`, `.field-breathe`, `@keyframes blink`, `.card`) and **1 dead scoped rule** in `src/sections/Hero.astro` (`.hero-ambience`) — all verified zero-usage against every `.astro`/`.ts`/`.mjs` file. **No duplicate code found** (R5-6 SectionHeader/GlassPanel dedup holds; `.btn`/`.btn-outline` exist once in global.css).
+- **Rationale:** Dead styles ship in prod CSS; removing them cuts ~110 lines with zero visual delta, consistent with R5-6 precedent (DL-111) and R5 spec dead-code row.
+- **Approval status:** Approved (owner, 2026-08-08). Deletions applied: 129 lines removed (`src/styles/global.css` −120, `src/sections/Hero.astro` −10, 1 insertion); re-gated `check:contrast` 19/19, `check:glass-contrast` 30/30, `npm run build` 6 pages clean. Evidence: `docs/rebuild-02/26-r5-8a-audit-evidence.md`.
+
 
 
 

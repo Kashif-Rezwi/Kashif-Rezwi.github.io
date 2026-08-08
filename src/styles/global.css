@@ -237,14 +237,7 @@
     font-weight: 500;
   }
 
-  /* --- R5 text utilities (defect E extraction; wired into components in R5-5/R5-6) --- */
-  .label-overline {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
+/* --- R5 text utilities (defect E extraction; wired into components in R5-5/R5-6) --- */
   .meta {
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -341,18 +334,6 @@
     transform: translateY(-1px);
   }
 
-  /* --- Cards --- */
-  .card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-  .card:hover {
-    background: var(--color-surface-2);
-    transform: translateY(-2px);
-  }
-
   /* --- Tech tags --- */
   .tech-tag {
     display: inline-block;
@@ -389,12 +370,6 @@
     border-radius: inherit;
     pointer-events: none;
   }
-  /* Ambient band the matrix / glow sits behind glass (§5.2 .field-backdrop). */
-  .field-backdrop {
-    position: relative;
-    background: var(--color-glow);
-  }
-
   /* Fallback: no backdrop-filter support → near-opaque surface tint ("today's
      look"), so content stays readable on any browser (S-9). */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -436,86 +411,11 @@
       transform var(--duration-base) ease;
   }
 
-  /* --- Section divider --- */
-  .section-divider {
-    border: none;
-    border-top: 1px solid var(--color-border);
-    margin-block: 0;
-  }
-
   /* --- Section scaffolding (R5-6: shared by index sections + case pages) ---
      Moved from the duplicated scoped blocks (index.astro + [slug].astro) into
      the shared layer so the grid/band recipe lives in one place. */
   .section-block {
     padding-block: 5rem;
-  }
-
-  /* R5-3: ambient console-field band behind content surfaces (work, skills,
-     testimonials, now). Mirrors the hero ambience recipe (§5.2 .field-backdrop);
-     a masked static glow so glass panels read as floating over a lit field. */
-  .section-band {
-    display: none !important;
-  }
-  .band-host > .container-site {
-    position: relative;
-    z-index: 1;
-  }
-
-  .section-alt {
-    background: color-mix(in srgb, var(--color-surface) 40%, transparent);
-  }
-
-  /* --- Section edge fade zones (section-transition polish) ----------------
-     Static gradient pseudo-elements that dissolve the boundary between
-     adjacent sections with different backgrounds. Zero JS, zero motion-
-     budget, pointer-events none so interactive content is unaffected.
-
-     Usage:
-       .section-fade-top    → soft gradient at the top of a section
-       .section-fade-bottom → soft gradient at the bottom of a section
-
-     --fade-from / --fade-to default to --color-canvas (dark: #0f0f0f).
-     Override per-section via a scoped custom property when the incoming or
-     outgoing color is the section-alt tint.
-
-     The pseudo-elements sit at z-index 0 so .band-host content (z-index 1)
-     is always above them and glass surfaces are never obscured.          */
-  .section-fade-top {
-    position: relative;
-  }
-  .section-fade-top::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--fade-height, 120px);
-    background: linear-gradient(
-      to bottom,
-      var(--fade-from, var(--color-canvas)),
-      transparent
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .section-fade-bottom {
-    position: relative;
-  }
-  .section-fade-bottom::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: var(--fade-height, 120px);
-    background: linear-gradient(
-      to top,
-      var(--fade-to, var(--color-canvas)),
-      transparent
-    );
-    pointer-events: none;
-    z-index: 0;
   }
 
   /* --- Hero content layout (R5-6/R5-8a: kept — the identity is now flat over
@@ -622,29 +522,11 @@
     }
   }
 
-  /* Field breathe (R5-4): extremely slow luminance shimmer on the hero
-     ambience — the dot backdrop beneath the glass plate (§6). 8s ease-in-out,
-     opacity only (never backdrop-filter); range keeps composite alpha AT/BELOW
-     the verified full-band values so on-glass AA only improves. */
-  @keyframes field-breathe {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.85; }
-  }
-
-  /* Blink cursor (terminal effect) */
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
   .animate-fade-up {
     animation: fade-up 0.6s ease both;
   }
   .glass-settle {
     animation: glass-settle var(--duration-xslow) ease-out both;
-  }
-  .field-breathe {
-    animation: field-breathe 8s ease-in-out infinite;
   }
 
   /* Staggered delay utilities */
