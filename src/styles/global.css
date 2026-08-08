@@ -88,17 +88,19 @@
   --color-accent-soft: #3862c010;
   color-scheme: light;
 
-  /* R5 glass (light recipe): translucent white + cooler tint (OQ-R5-2, option A) */
+  /* R5 glass (light recipe): crisp subtle ink border + soft elevation */
   --glass-saturate: 1.05;
-  --glass-bg: color-mix(in srgb, #ffffff 66%, color-mix(in srgb, var(--color-accent) 6%, transparent));
-  --glass-border: color-mix(in srgb, #ffffff 55%, transparent);
-  --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 40%, transparent), transparent 55%);
+  --glass-bg: color-mix(in srgb, #ffffff 82%, color-mix(in srgb, var(--color-accent) 6%, transparent));
+  --glass-border: color-mix(in srgb, var(--color-ink) 12%, transparent);
+  --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 80%, transparent), transparent 55%);
   --color-glow: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 70%);
 }
 
-:root[data-theme='light'] .tech-item,
-:root[data-theme='light'] .tech-item:hover {
-  --brand-on-dark: var(--brand);
+:root[data-theme='light'] .tech-item {
+  --active-brand: var(--brand);
+  --hover-text: var(--color-ink);
+  --hover-bg-mix: 22%;
+  --hover-border-mix: 60%;
 }
 
 @media (prefers-color-scheme: light) {
@@ -120,15 +122,17 @@
 
     /* R5 glass (light recipe) — mirrors :root[data-theme='light'] */
     --glass-saturate: 1.05;
-    --glass-bg: color-mix(in srgb, #ffffff 66%, color-mix(in srgb, var(--color-accent) 6%, transparent));
-    --glass-border: color-mix(in srgb, #ffffff 55%, transparent);
-    --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 40%, transparent), transparent 55%);
+    --glass-bg: color-mix(in srgb, #ffffff 82%, color-mix(in srgb, var(--color-accent) 6%, transparent));
+    --glass-border: color-mix(in srgb, var(--color-ink) 12%, transparent);
+    --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 80%, transparent), transparent 55%);
     --color-glow: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 70%);
   }
 
-  .tech-item,
-  .tech-item:hover {
-    --brand-on-dark: var(--brand);
+  :root:not([data-theme]) .tech-item {
+    --active-brand: var(--brand);
+    --hover-text: var(--color-ink);
+    --hover-bg-mix: 22%;
+    --hover-border-mix: 60%;
   }
 }
 
@@ -158,6 +162,9 @@
   }
 
   body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     /* Reserve space for the fixed header so content never sits underneath it */
     padding-top: 65px;
     background-color: var(--color-canvas);
@@ -167,6 +174,10 @@
     -moz-osx-font-smoothing: grayscale;
     /* The interactive matrix is intentionally limited to the hero. */
     background-image: none;
+  }
+
+  main {
+    flex: 1;
   }
 
   ::selection {

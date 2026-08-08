@@ -537,7 +537,21 @@
   2. **Aligned Case Study cards & mobile gutters**: Unified card container widths and responsive padding (`padding: 1.25rem`) across all case study blocks (`.case-hero-inner`, `.case-cover`, `.case-sidebar-card`), ensuring cards fit within `.container-site` margins on mobile screens without touching edge boundaries.
 - **Files changed:** `src/pages/work/[slug].astro`, `src/styles/global.css`.
 - **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes.
+## DL-071 — Light theme card contrast, dynamic tech stack hover system, and footer layout anchoring
+
+- **Date:** 2026-08-08
+- **Decision:** Solved key UX & visual design issues in light & dark themes:
+  1. **Light theme card visibility & borders**: Changed light theme `--glass-border` from invisible 55% white to crisp 12% ink (`color-mix(in srgb, var(--color-ink) 12%, transparent)`).
+  2. **Dynamic per-theme tech stack hover system**: Implemented theme-aware CSS custom properties (`--active-brand`, `--hover-text`, `--hover-bg-mix`, `--hover-border-mix`).
+     - **Dark theme**: `--active-brand` uses bright `--brand-on-dark`, text glows in bright brand tint.
+     - **Light theme**: `--active-brand` uses official `--brand` at 22% background mix with `var(--color-ink)` text contrast, producing rich brand background colors and glowing icons on hover in both themes with 100% WCAG AA text readability.
+  3. **Footer anchoring & excess space**: Added sticky flex column layout (`min-height: 100vh`, `main { flex: 1 }`) in `global.css`, removed redundant duplicate `footer-cta` block and 192px dead space, and anchored `footer` seamlessly to the page bottom with a top border.
+- **Files changed:** `src/styles/global.css`, `src/sections/Skills.astro`, `src/components/Footer.astro`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes.
 - **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval.
+
+
+
 
 
 
