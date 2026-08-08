@@ -5,6 +5,7 @@
  */
 import Icon from '../components/Icon.astro';
 import SectionHeader from '../components/SectionHeader.astro';
+import GlassPanel from '../components/GlassPanel.astro';
 
 interface Props {
   links: {
@@ -21,36 +22,39 @@ const { links } = Astro.props;
   <div class="container-site">
     <SectionHeader label="Now" title="AI journey" />
 
-    <div class="now-list">
-      <div class="now-row reveal">
-        <span class="now-row-icon"><Icon name="sparkles" size={17} /></span>
-        <div class="now-row-body">
-          <h3 class="now-row-title">Building</h3>
-          <p class="now-row-desc">
-            Toward AI product engineering and developer tools. Recent personal projects include an AI code-review agent, a cited AI answer engine, and an autonomous i18n agent. <a href="#work" class="link-accent">See the work →</a>
-          </p>
+    <GlassPanel variant="card" class="now-card reveal">
+      <h3 class="now-card-label">Recent Updates</h3>
+      <div class="now-list">
+        <div class="now-row">
+          <span class="now-row-icon"><Icon name="sparkles" size={17} /></span>
+          <div class="now-row-body">
+            <h4 class="now-row-title">Building</h4>
+            <p class="now-row-desc">
+              Toward AI product engineering and developer tools. Recent personal projects include an AI code-review agent, a cited AI answer engine, and an autonomous i18n agent. <a href="#work" class="link-accent">See the work →</a>
+            </p>
+          </div>
+        </div>
+        <div class="now-row">
+          <span class="now-row-icon"><Icon name="writing" size={17} /></span>
+          <div class="now-row-body">
+            <h4 class="now-row-title">Writing</h4>
+            <p class="now-row-desc">
+              <a href={links.devtoArticle} class="link-accent" target="_blank" rel="noopener noreferrer">I Built an AI Agent That Makes Any Landing Page (Next.js App) Multilingual in Minutes</a>
+              <span class="now-row-meta">· LingoAgent build walkthrough on dev.to · Feb 2026</span>
+            </p>
+          </div>
+        </div>
+        <div class="now-row">
+          <span class="now-row-icon"><Icon name="learning" size={17} /></span>
+          <div class="now-row-body">
+            <h4 class="now-row-title">Learning in public</h4>
+            <p class="now-row-desc">
+              <a href={links.aiPlayground} class="link-accent" target="_blank" rel="noopener noreferrer">ai-playground</a> and <a href={links.languagePlayground} class="link-accent" target="_blank" rel="noopener noreferrer">language-playground</a> are open repos of experiments, notes, and rough edges.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="now-row reveal delay-100">
-        <span class="now-row-icon"><Icon name="writing" size={17} /></span>
-        <div class="now-row-body">
-          <h3 class="now-row-title">Writing</h3>
-          <p class="now-row-desc">
-            <a href={links.devtoArticle} class="link-accent" target="_blank" rel="noopener noreferrer">I Built an AI Agent That Makes Any Landing Page (Next.js App) Multilingual in Minutes</a>
-            <span class="now-row-meta">· LingoAgent build walkthrough on dev.to · Feb 2026</span>
-          </p>
-        </div>
-      </div>
-      <div class="now-row reveal delay-200">
-        <span class="now-row-icon"><Icon name="learning" size={17} /></span>
-        <div class="now-row-body">
-          <h3 class="now-row-title">Learning in public</h3>
-          <p class="now-row-desc">
-            <a href={links.aiPlayground} class="link-accent" target="_blank" rel="noopener noreferrer">ai-playground</a> and <a href={links.languagePlayground} class="link-accent" target="_blank" rel="noopener noreferrer">language-playground</a> are open repos of experiments, notes, and rough edges.
-          </p>
-        </div>
-      </div>
-    </div>
+    </GlassPanel>
   </div>
 </section>
 
@@ -65,20 +69,33 @@ const { links } = Astro.props;
       var(--color-canvas) 100%
     );
   }
+  :global(.now-card) {
+    padding: 1.75rem 2rem;
+    position: relative;
+    width: 100%;
+  }
+  @media (max-width: 640px) {
+    :global(.now-card) {
+      padding: 1.25rem 1.5rem;
+    }
+  }
+  .now-card-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-dim-glass);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 1.25rem 0;
+  }
   .now-list {
     display: flex;
     flex-direction: column;
-    max-width: 720px;
+    gap: 1.5rem;
   }
   .now-row {
     display: grid;
     grid-template-columns: 28px 1fr;
     gap: 0 1rem;
-    padding-block: 1.5rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-  .now-row:last-child {
-    border-bottom: none;
   }
   .now-row-icon {
     display: inline-flex;

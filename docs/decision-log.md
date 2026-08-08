@@ -520,6 +520,18 @@
 - **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes; verified dot matrix remains visible and readable.
 - **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval.
 
+## DL-069 — AI Journey (Now section) redesigned into a single GlassPanel card
+
+- **Date:** 2026-08-08
+- **Decision:** Redesigned the **AI journey / Now section** (`src/sections/Now.astro`):
+  - Replaced the plain text list with individual row border dividers by wrapping the items into a single `<GlassPanel variant="card">` matching the design pattern of the "More Projects" card in `Work.astro`.
+  - Removed all `border-bottom` row dividers and replaced them with clean vertical flex gaps (`1.5rem`).
+  - Added an uppercase monospace card label `RECENT UPDATES` (`.now-card-label`).
+- **Files changed:** `src/sections/Now.astro`.
+- **Verification:** Build clean (6 pages); contrast checks 19/19 + 30/30 on-glass AA passed in both themes.
+- **Status:** Complete (uncommitted on `evolve-design`). Stop for owner approval.
+
+
 
 
 
