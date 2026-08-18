@@ -179,7 +179,7 @@ const softItems =
 
   /* Alternating left/right staggered layout:
      Each category is a distinct cluster with its label above the chips.
-     Odd rows align to the left, even rows align to the right (≥640px). */
+     Odd rows align to the left, even rows align to the right on all screen sizes. */
   .tech-grid {
     display: flex;
     flex-direction: column;
@@ -216,17 +216,15 @@ const softItems =
     justify-content: flex-start;
   }
 
-  @media (min-width: 640px) {
-    .tech-group:nth-child(even) {
-      align-self: flex-end;
-    }
-    .tech-group:nth-child(even) .tech-group-label {
-      text-align: right;
-      align-self: flex-end;
-    }
-    .tech-group:nth-child(even) .tech-group-items {
-      justify-content: flex-end;
-    }
+  .tech-group:nth-child(even) {
+    align-self: flex-end;
+  }
+  .tech-group:nth-child(even) .tech-group-label {
+    text-align: right;
+    align-self: flex-end;
+  }
+  .tech-group:nth-child(even) .tech-group-items {
+    justify-content: flex-end;
   }
 
   /* Soft skills items (Clean free-floating cluster without enclosing card) */

@@ -227,6 +227,12 @@
     padding-inline: 1.5rem;
   }
 
+  @media (max-width: 640px) {
+    .container-site {
+      padding-inline: 1rem;
+    }
+  }
+
   /* --- Section label (overline) --- */
   .section-label {
     font-family: var(--font-mono);

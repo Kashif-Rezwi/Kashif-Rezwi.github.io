@@ -38,7 +38,7 @@ const { links } = Astro.props;
           aria-label="GitHub profile"
           title="GitHub"
         >
-          <Icon name="github" size={24} strokeWidth={2.2} />
+          <Icon name="github" size={24} strokeWidth={2} />
         </a>
         <a
           href={links.linkedin}
@@ -48,7 +48,7 @@ const { links } = Astro.props;
           aria-label="LinkedIn profile"
           title="LinkedIn"
         >
-          <Icon name="linkedin" size={30} strokeWidth={2.2} />
+          <Icon name="linkedin" size={24} strokeWidth={2} />
         </a>
         {links.leetcode && (
           <a
@@ -59,7 +59,7 @@ const { links } = Astro.props;
             aria-label="LeetCode profile"
             title="LeetCode"
           >
-            <Icon name="leetcode" size={24} strokeWidth={2.2} />
+            <Icon name="leetcode" size={24} />
           </a>
         )}
         <a
@@ -70,7 +70,7 @@ const { links } = Astro.props;
           aria-label="dev.to blog"
           title="dev.to"
         >
-          <Icon name="devto" size={24} strokeWidth={2.2} />
+          <Icon name="devto" size={24} />
         </a>
       </nav>
 
@@ -659,7 +659,7 @@ const { links } = Astro.props;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1.625rem;
+    gap: 1.25rem;
     flex-shrink: 0;
   }
 
@@ -668,11 +668,18 @@ const { links } = Astro.props;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 32px;
+    height: 32px;
     text-decoration: none;
     background: transparent;
     border: none;
-    padding: 0.25rem;
+    padding: 0;
+    line-height: 1;
     transition: color var(--duration-fast) ease, transform var(--duration-fast) ease, filter var(--duration-fast) ease;
+  }
+
+  .contact-social-btn svg {
+    display: block;
   }
 
   .contact-social-btn:hover {
@@ -751,7 +758,7 @@ const { links } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 320px;
+    min-width: 0;
   }
 
   .contact-ascii-element {
@@ -764,7 +771,7 @@ const { links } = Astro.props;
     cursor: pointer;
     user-select: none;
     padding: 1.5rem 1rem;
-    min-height: 320px;
+    min-height: 280px;
     contain: layout paint;
   }
 
@@ -801,7 +808,7 @@ const { links } = Astro.props;
   .tech-ascii-art {
     margin: 0;
     font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: clamp(0.75rem, 1.2vw, 0.92rem);
+    font-size: clamp(0.58rem, 2.5vw, 0.92rem);
     line-height: 1.05;
     letter-spacing: 0;
     font-variant-numeric: tabular-nums;
@@ -811,6 +818,7 @@ const { links } = Astro.props;
     white-space: pre;
     user-select: none;
     width: 38ch;
+    max-width: 100%;
     height: calc(17 * 1.05em);
     display: block;
     overflow: hidden;
@@ -822,22 +830,39 @@ const { links } = Astro.props;
   @media (max-width: 900px) {
     .contact-inner {
       flex-direction: column-reverse;
-      gap: 3rem;
+      gap: 2.5rem;
     }
 
     .contact-left-layout {
       flex-direction: column;
       gap: 1.25rem;
-      align-items: flex-start;
+      width: 100%;
     }
 
     .contact-social-rail {
       flex-direction: row;
-      gap: 1.125rem;
+      justify-content: center;
+      align-items: center;
+      gap: 1.25rem;
+      width: 100%;
+      margin-bottom: 0.25rem;
     }
 
     .contact-right-element {
       width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-heading {
+      font-size: clamp(1.75rem, 7vw, 2.5rem);
+    }
+    .contact-ctas {
+      flex-wrap: wrap;
+    }
+    .contact-ascii-element {
+      padding: 0.75rem 0.25rem;
+      min-height: 240px;
     }
   }
 </style>
