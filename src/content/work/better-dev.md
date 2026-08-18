@@ -9,6 +9,7 @@ demo: 'https://betterdev.in'
 tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vercel AI SDK', 'NestJS', 'PostgreSQL', 'Groq']
 order: 4
 draft: false
+cover: 'better-dev.png'
 ---
 
 ## Overview
