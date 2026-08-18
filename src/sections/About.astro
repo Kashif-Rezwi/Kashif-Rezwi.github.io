@@ -1,104 +1,417 @@
 ---
 /**
- * About — high-level professional narrative (nav stop #2).
+ * About — Engineering background, core product pillars & career context (nav stop #2).
  *
- * Sits between Home and Skills on plain canvas (section order follows the
- * mandated nav). Copy is assembled only from wording already live
- * and claim-safe on the page (hero bio, Experience, Now); the detailed roles
- * stay in the Experience section, so nothing is duplicated. Layout (2026-08-18,
- * owner-directed): full-width card matching the Now card family, two-column
- * "who I am / where I'm heading" split ≥900px with a lead paragraph, and the
- * resume link as a card footer row — copy is verbatim, layout only. The
- * footer link downloads the PDF directly; the site footer keeps the `/resume/`
- * hub reachable.
+ * Grounded in verified evidence from evidence-ledger.md and positioning.md.
+ * Features:
+ * 1. Primary Full-Stack Product Engineering narrative
+ * 2. 3 Core Engineering Pillars (Workflow UI, Full-Stack Async Systems, AI & Tooling)
+ * 3. Career Ledger & Quick Facts Strip
+ * 4. Interactive Resume Download & Navigation Gateways
  */
-import GlassPanel from '../components/GlassPanel.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import { resumePdf } from '../lib/paths';
+
+interface Props {
+  links?: {
+    email?: string;
+    github?: string;
+    linkedin?: string;
+    devto?: string;
+  };
+}
+
+const { links = {} } = Astro.props;
 ---
 
-<section id="about" class="section-block">
+<section id="about" class="section-block about-bg">
   <div class="container-site">
-    <SectionHeader label="About" title="A bit about me" />
+    <SectionHeader label="About" title="Engineering background & product focus" />
 
-    <GlassPanel variant="card" class="about-card reveal">
-      <div class="about-columns">
-        <p class="about-text about-lead">
-          I'm a frontend-focused full stack engineer with 2+ years building
-          customer-facing SaaS products in startup teams — landing-page builders,
-          CRM, and campaign &amp; workflow automation. I care about shipping
-          reliable, well-crafted interfaces backed by solid full-stack
-          architecture.
-        </p>
-        <p class="about-text">
-          Right now I'm building toward AI product engineering and developer
-          tools — shipping personal projects like an AI code-review agent, a
-          cited answer engine, and an autonomous i18n agent, and writing about
-          the builds in public.
-        </p>
+    <div class="about-layout">
+      <!-- 1. Primary Narrative Card -->
+      <article class="about-card narrative-card reveal">
+        <div class="card-header-bar">
+          <span class="header-dot" aria-hidden="true"></span>
+          <h3 class="card-overline">Professional Background</h3>
+        </div>
+
+        <div class="narrative-content">
+          <p class="about-lead">
+            I'm a frontend-focused full stack engineer with 2+ years of experience building customer-facing SaaS products in startup teams — landing-page builders, CRM platforms, and campaign &amp; workflow automation.
+          </p>
+          <div class="narrative-columns">
+            <p class="about-body">
+              My engineering approach connects visual craft with solid full-stack architecture. At Brand Exponents, I contributed across <strong>Swipe Pages</strong> and <strong>Swipe One</strong>, building visual workflow builders, multi-channel marketing campaigns, shared integration layers across 6+ providers, and platform stability systems through major launch periods.
+            </p>
+            <p class="about-body">
+              Currently, I'm building toward <strong>AI product engineering and developer tools</strong> in public — shipping streamed multi-agent PR analysis systems, cited web-search engines, and AST-driven localization tools while publishing technical walkthroughs on dev.to.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. Core Pillars Bento Grid (3 Cards) -->
+      <div class="pillars-grid">
+        <!-- Pillar 1: Product & Workflow UI -->
+        <article class="about-card pillar-card reveal delay-100">
+          <div class="pillar-header">
+            <div class="pillar-icon-box" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M3 9h18" />
+                <path d="M9 21V9" />
+              </svg>
+            </div>
+            <h4 class="pillar-title">Product &amp; Workflow UI</h4>
+          </div>
+          <p class="pillar-desc">
+            Crafting responsive builder canvases, template discovery libraries, and guided automation flows for non-technical users.
+          </p>
+          <div class="pillar-tags">
+            <span class="tech-tag">Swipe Pages</span>
+            <span class="tech-tag">Swipe One CRM</span>
+            <span class="tech-tag">React / Next.js</span>
+          </div>
+        </article>
+
+        <!-- Pillar 2: Full-Stack & Async Systems -->
+        <article class="about-card pillar-card reveal delay-200">
+          <div class="pillar-header">
+            <div class="pillar-icon-box" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="8" rx="2" />
+                <rect x="2" y="14" width="20" height="8" rx="2" />
+                <line x1="6" y1="6" x2="6.01" y2="6" />
+                <line x1="6" y1="18" x2="6.01" y2="18" />
+                <path d="M18 10v4" />
+              </svg>
+            </div>
+            <h4 class="pillar-title">Full-Stack &amp; Async Systems</h4>
+          </div>
+          <p class="pillar-desc">
+            Developing REST APIs, message queues (BullMQ/RabbitMQ), webhooks, and reusable multi-provider integration engines.
+          </p>
+          <div class="pillar-tags">
+            <span class="tech-tag">Node.js / NestJS</span>
+            <span class="tech-tag">PostgreSQL / Redis</span>
+            <span class="tech-tag">6+ Providers</span>
+          </div>
+        </article>
+
+        <!-- Pillar 3: Practical AI & DevTools -->
+        <article class="about-card pillar-card reveal delay-300">
+          <div class="pillar-header">
+            <div class="pillar-icon-box" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 3 1.2 4.8L18 9l-4.8 1.2L12 15l-1.2-4.8L6 9l4.8-1.2Z" />
+                <path d="m19 15 .6 2.4L22 18l-2.4.6L19 21l-.6-2.4L16 18l2.4-.6Z" />
+              </svg>
+            </div>
+            <h4 class="pillar-title">AI Interfaces &amp; DevTools</h4>
+          </div>
+          <p class="pillar-desc">
+            Engineering multi-agent code analysis, streamed AI interfaces, cited answer retrieval, and autonomous AST code transforms.
+          </p>
+          <div class="pillar-tags">
+            <span class="tech-tag">Code Review Agent</span>
+            <span class="tech-tag">Perplexity Engine</span>
+            <span class="tech-tag">Vercel AI SDK</span>
+          </div>
+        </article>
       </div>
-      <p class="about-resume">
-        For the full picture — experience, skills, and education —{' '}
-        <a href={resumePdf} download class="link-accent">grab my resume</a>.
-      </p>
-    </GlassPanel>
+
+      <!-- 3. Career Ledger & Quick Facts Strip -->
+      <article class="about-card ledger-card reveal delay-400">
+        <div class="facts-grid">
+          <div class="fact-item">
+            <span class="fact-label">Experience</span>
+            <span class="fact-value">2+ Years in SaaS</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">Specialization</span>
+            <span class="fact-value">Builders, CRM &amp; Automation</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">Education</span>
+            <span class="fact-value">BCA (Amity) · Masai School</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">Location / Status</span>
+            <span class="fact-value">Kolkata, India · Open to Roles</span>
+          </div>
+        </div>
+
+        <div class="about-footer-row">
+          <div class="about-ctas">
+            <a href={resumePdf} download class="btn">
+              Download Resume (PDF) ↓
+            </a>
+            <a href="#experience" class="btn-outline">
+              View Experience Timeline →
+            </a>
+          </div>
+          <p class="about-footer-note meta">
+            Verified single source of truth for professional background &amp; credentials.
+          </p>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
 <style>
-  /* Full-width card matching the Now card family (2026-08-18 redesign);
-     copy verbatim, layout only. */
-  :global(.about-card) {
-    padding: 1.75rem 2rem;
+  .about-bg {
+    background: transparent;
+  }
+
+  .about-layout {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
     width: 100%;
   }
+
+  /* --- Shared Glass Card Surface --- */
+  .about-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-card);
+    padding: 1.5rem 1.75rem;
+    position: relative;
+    transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  }
+
+  .about-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: var(--glass-highlight);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .about-card:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--glass-border));
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--color-accent) 8%, transparent);
+  }
+
   @media (max-width: 640px) {
-    :global(.about-card) {
-      padding: 1.25rem 1.5rem;
+    .about-card {
+      padding: 1.25rem 1.375rem;
     }
   }
 
-  /* "Who I am" | "where I'm heading" — two columns on wide screens,
-     one flowing column below. */
-  .about-columns {
+  /* --- 1. Narrative Card --- */
+  .narrative-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .card-header-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent);
+  }
+
+  .header-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 6px var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .card-overline {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-text);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .narrative-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .about-lead {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .narrative-columns {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
   @media (min-width: 900px) {
-    .about-columns {
+    .narrative-columns {
       grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
+      gap: 1.75rem;
     }
   }
 
-  .about-text {
+  .about-body {
     font-size: 0.9375rem;
     line-height: 1.65;
     color: var(--color-ink-muted);
     margin: 0;
   }
 
-  /* Lead treatment: the identity paragraph is the focal point — full ink,
-     slightly larger. Higher contrast than the muted body (ink > ink-muted),
-     so on-glass AA is inherited from the passing ink-muted pair. */
-  .about-lead {
-    font-size: 1.0625rem;
-    line-height: 1.6;
+  .about-body strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  /* --- 2. Pillars Grid (3 Cards) --- */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .pillars-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .pillar-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .pillar-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .pillar-icon-box {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-control);
+    background: var(--color-accent-soft);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+    color: var(--color-accent-text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform var(--duration-fast) ease, background var(--duration-fast) ease;
+  }
+
+  .pillar-card:hover .pillar-icon-box {
+    background: color-mix(in srgb, var(--color-accent) 22%, var(--glass-bg));
+    transform: translateY(-1px);
+  }
+
+  .pillar-title {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .pillar-desc {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+    margin: 0;
+    flex: 1;
+  }
+
+  .pillar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-top: 0.25rem;
+  }
+
+  /* --- 3. Ledger Card & Facts Grid --- */
+  .ledger-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .facts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent);
+  }
+
+  @media (min-width: 520px) {
+    .facts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .facts-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  .fact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .fact-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-text);
+    font-weight: 600;
+  }
+
+  .fact-value {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
     color: var(--color-ink);
   }
 
-  /* Card footer row: closes the card structurally and reads as its CTA
-     (the link downloads — wording and behavior match). */
-  .about-resume {
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    color: var(--color-ink-dim-glass);
+  .about-footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .about-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .about-footer-note {
     margin: 0;
-    padding-top: 1rem;
-    border-top: 1px solid var(--glass-border);
+    font-size: 0.75rem;
   }
 </style>
