@@ -11,6 +11,7 @@ interface Props {
     email: string;
     github: string;
     linkedin: string;
+    leetcode?: string;
     devto: string;
   };
 }
@@ -41,6 +42,7 @@ const { links } = Astro.props;
       <div class="contact-links">
         <a href={links.github} class="contact-link" target="_blank" rel="noopener noreferrer"><Icon name="github" size={16} />GitHub</a>
         <a href={links.linkedin} class="contact-link" target="_blank" rel="noopener noreferrer"><Icon name="linkedin" size={16} />LinkedIn</a>
+        {links.leetcode && <a href={links.leetcode} class="contact-link" target="_blank" rel="noopener noreferrer"><Icon name="leetcode" size={16} />LeetCode</a>}
         <a href={links.devto} class="contact-link" target="_blank" rel="noopener noreferrer"><Icon name="devto" size={16} />dev.to</a>
         <a href={`tel:9883909187`} class="contact-link"><Icon name="phone" size={16} />+91 98839 09187</a>
         <span class="contact-location"><Icon name="location" size={16} />Kolkata, India</span>
