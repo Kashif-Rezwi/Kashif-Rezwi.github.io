@@ -41,3 +41,15 @@ Structural, stylistic, consistency, and UX review of `mandatory-changes` (diff `
 - "Projects" nav label vs "Selected work" section heading — accepted (breadcrumb `← Work` and `#work` deep links preserved).
 - Home nav item duplicates the logo-Home — accepted (mandated order).
 - `order <= 4` featured filter — accepted at current scale (4 entries).
+
+## 5. Follow-up fixes (2026-08-18, DL-075)
+
+Owner-directed after reviewing T1–T5; no commit/push (explicit instruction). Copy verbatim; layout only.
+
+| # | Ask | Fix | Verified in build |
+|---|---|---|---|
+| F1 | Skills groups as rows (Languages, Frontend, …), items flex-row wrap, rows alternate left/right start; chip styles unchanged | `.tech-grid` → flex column; `.tech-group` → inline label + wrapping chips; `:nth-child(2n) { justify-content: flex-end }` ≥640px (mobile left-aligned); added missing `.delay-600` utility | `tech-grid{flex-direction:column…}` + `tech-group:nth-child(2n){justify-content:flex-end}` in `@media (width>=640px)` present |
+| F2 | About section + content didn't look good | Full-width card (Now-family), two-col split ≥900px, lead paragraph (full ink, 1.0625rem), resume link as bordered card footer | `about-columns{grid-template-columns:1fr 1fr}` at `width>=900px`; `about-lead{color:var(--color-ink)…}`; footer `border-top` present; markup in `dist/index.html` |
+| F3 | Nav clicks landed showing neighbouring sections' content | `.section-block { min-height: calc(100svh - 65px); flex column; justify-content: center }` + `scroll-padding-top: 65px` (was 1.25rem) — one section per viewport, anchored tops exact under header | Both rules in `Base.*.css`; scope check: 7 home sections only, Contact matrix absolute → unaffected |
+
+Gates re-run after F1–F3: build **7 pages clean**; `check:contrast` **19/19**; `check:glass-contrast` **30/30**. Owner visual gates still pending (captures at 320/768/1024/1440 × both themes).

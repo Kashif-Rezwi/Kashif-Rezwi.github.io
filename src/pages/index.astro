@@ -37,8 +37,8 @@ const links = {
   languagePlayground: 'https://github.com/Kashif-Rezwi/language-playground',
 };
 
-// Tech stack data (from skills-inventory.md)
-const techStack = [
+// Skills data (technical skills by category + verified soft skills)
+const technicalSkills = [
   {
     category: 'Languages',
     items: [
@@ -83,26 +83,23 @@ const techStack = [
   {
     category: 'AI & Tools',
     items: [
-{ name: 'Vercel AI SDK', color: '#000000', colorLight: '#ffffff', icon: 'vercel' },
+      { name: 'Vercel AI SDK', color: '#000000', colorLight: '#ffffff', icon: 'vercel' },
       { name: 'Prisma', color: '#2D3748', colorLight: '#D3D9E0', icon: 'prisma' },
       { name: 'pgvector', color: '#7b61ff', icon: 'pgvector' },
       { name: 'BullMQ', color: '#e0234e', icon: 'bullmq' },
     ],
   },
-  {
-    // Soft skills — every label is backed by the owner-verified LinkedIn
-    // testimonials on this page (claim safety, AGENTS.md §3). Rendered with
-    // the same chip pattern; hover uses the accent fallback in Skills.astro.
-    category: 'Soft skills',
-    items: [
-      { name: 'Ownership', color: '#6495ed' },
-      { name: 'Collaboration', color: '#6495ed' },
-      { name: 'Communication', color: '#6495ed' },
-      { name: 'Dependability', color: '#6495ed' },
-      { name: 'Solution-oriented', color: '#6495ed' },
-      { name: 'Willingness to learn', color: '#6495ed' },
-    ],
-  },
+];
+
+// Soft skills — every label is backed by the owner-verified LinkedIn
+// testimonials on this page (claim safety, AGENTS.md §3).
+const softSkills = [
+  { name: 'Ownership', color: '#6495ed' },
+  { name: 'Collaboration', color: '#6495ed' },
+  { name: 'Communication', color: '#6495ed' },
+  { name: 'Dependability', color: '#6495ed' },
+  { name: 'Solution-oriented', color: '#6495ed' },
+  { name: 'Willingness to learn', color: '#6495ed' },
 ];
 ---
 
@@ -114,7 +111,7 @@ const techStack = [
   <About />
   <!-- Section order matches the mandated nav (Home · About · Skills · Projects ·
        Contact · Resume), so nav clicks always scroll monotonically down the page. -->
-  <Skills techStack={techStack} />
+  <Skills technicalSkills={technicalSkills} softSkills={softSkills} />
   <Work featured={featured} links={links} />
   <Experience />
   <Testimonials testimonials={testimonials} />

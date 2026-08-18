@@ -581,6 +581,17 @@
 - **Verification:** `npm run build` — **7 pages clean** (incl. new `/work/better-dev/`); `check:contrast` **19/19** PASS; `check:glass-contrast` **30/30** PASS; internal-link sweep of `dist/` — **0 broken**; sitemap includes all 7 routes; `astro preview` smoke — all routes 200 (404 correct, PDF 200/6,984 B); `betterdev.in` live (307 → www 200); built CSS confirms ramp/flat swap and the `width>=1024px` 2-column rule; `data-resume-download` fully absent from output. **Pending owner gates:** Lighthouse/axe/overflow sweep/visual captures (external tooling) and merge toward `develop`.
 - **Status:** Complete on `mandatory-changes` (uncommitted). Stop for owner approval.
 
+## DL-075 — Owner-directed follow-ups: Skills row layout, About redesign, one-section-per-viewport
+
+- **Date:** 2026-08-18
+- **Decision (owner-directed in conversation; no commit/push per explicit instruction):**
+  1. **Skills layout reworked** (layout only; chip styling byte-identical): one category per full row (`Languages`, `Frontend`, `Backend`, `Databases & Infra`, `AI & Tools`, `Soft skills`), label inline with chips, `flex-wrap` rows; even rows start from the right (`:nth-child(2n) { justify-content: flex-end }`) at ≥640px — below 640px all rows left-align (right-aligned wrapped chips scan poorly on narrow screens). Fixes latent no-op: the 6th group's `delay-600` stagger utility now exists in `global.css`.
+  2. **About section redesigned** (copy verbatim; layout/typography only): full-width card matching the Now-card family (was `max-width: 48rem`, floated small), two-column "who I am / where I'm heading" split ≥900px, lead paragraph at full `--color-ink` + `1.0625rem` (focal hierarchy), resume line promoted to card footer (`border-top: 1px solid var(--glass-border)`).
+  3. **One section per viewport** — fixes "clicking a nav item shows other sections' content": `.section-block` gains `min-height: calc(100svh - 65px)` + flex-column centering (short sections center; tall ones grow), and `scroll-padding-top` corrected `1.25rem → 65px` to match the fixed header (anchors land exactly under the bar). Scope verified: `.section-block` is used by the 7 home sections only; Contact's dot matrix is `position: absolute` → unaffected by centering. Scroll-snap considered and rejected (trap-scroll UX, a11y risk). Hero keeps its R5 `clamp(600px, 100svh−65px, 860px)` cap (deliberate design; not a nav target).
+- **Files changed:** `src/styles/global.css`, `src/sections/Skills.astro`, `src/sections/About.astro`, `docs/rebuild-02/27-mandatory-changes-review-evidence.md` (§5), `docs/project-status.md`.
+- **Verification:** `npm run build` — 7 pages clean; `check:contrast` **19/19** PASS; `check:glass-contrast` **30/30** PASS (About lead is `--color-ink` on glass — strictly higher contrast than the passing ink-muted pair); built CSS confirms every rule (scoped `tech-grid` flex-column, `tech-group:nth-child(2n)` flex-end in `@media (width>=640px)`, `section-block` min-height, `scroll-padding-top: 65px`, `about-columns` 2-col at `width>=900px`, `delay-600`); built HTML contains the `about-columns` / `about-lead` markup.
+- **Status:** Complete on `mandatory-changes` (uncommitted; **no commit/push per owner instruction**). Stop for owner approval.
+
 
 
 

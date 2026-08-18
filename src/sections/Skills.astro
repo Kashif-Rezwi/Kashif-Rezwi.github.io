@@ -1,46 +1,89 @@
 ---
 /**
- * R5-6 section partition: Tech stack (was part of index.astro).
- * Styles relocated verbatim from index.astro's scoped block.
+ * R5-6 section partition: Skills (was part of index.astro).
+ * Named 'Skills', divided into two distinct sections:
+ * 1. Technical Skills (staggered alternating left/right layout per category)
+ * 2. Soft Skills (verified professional attributes cluster)
+ * Chip styling is consistent with portfolio glass design system.
  */
 import TechIcon from '../components/TechIcon.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 
-interface Props {
-  techStack: Array<{
-    category: string;
-    items: Array<{
-      name: string;
-      color: string;
-      colorLight?: string;
-      icon?: string;
-    }>;
-  }>;
+interface TechItem {
+  name: string;
+  color?: string;
+  colorLight?: string;
+  icon?: string;
 }
 
-const { techStack } = Astro.props;
+interface TechGroup {
+  category: string;
+  items: TechItem[];
+}
+
+interface Props {
+  techStack?: TechGroup[];
+  technicalSkills?: TechGroup[];
+  softSkills?: TechItem[];
+}
+
+const { techStack = [], technicalSkills: techProp, softSkills: softProp } = Astro.props;
+
+// Separate technical skills and soft skills
+const technicalGroups =
+  techProp || techStack.filter((g) => g.category.toLowerCase() !== 'soft skills');
+
+const softItems =
+  softProp || (techStack.find((g) => g.category.toLowerCase() === 'soft skills')?.items ?? []);
 ---
 
 <section id="skills" class="section-block skills-bg">
   <div class="container-site">
-    <SectionHeader label="Tech stack" title="What I work with" />
-    <div class="tech-grid">
-      {techStack.map((group, i) => (
-        <div class={`tech-group reveal delay-${(i + 1) * 100}`}>
-          <h3 class="tech-group-label">{group.category}</h3>
-          <ul class="tech-group-items" role="list">
-            {group.items.map((item) => (
-              <li
-                class="tech-item"
-                style={`--brand: ${item.color}; --brand-on-dark: ${item.colorLight || item.color}`}
-              >
-                {item.icon && <TechIcon name={item.icon} size={14} />}
-                {item.name}
-              </li>
-            ))}
-          </ul>
+    <SectionHeader label="Skills" title="What I work with" />
+
+    <div class="skills-wrapper">
+      <!-- 1. Technical Skills Subsection -->
+      <div class="skills-subsection">
+        <h3 class="skills-subsection-title">Technical Skills</h3>
+        <div class="tech-grid">
+          {technicalGroups.map((group, i) => (
+            <div class={`tech-group reveal delay-${((i % 5) + 1) * 100}`}>
+              <h4 class="tech-group-label">{group.category}</h4>
+              <ul class="tech-group-items" role="list">
+                {group.items.map((item) => (
+                  <li
+                    class="tech-item"
+                    style={`--brand: ${item.color || 'var(--color-accent)'}; --brand-on-dark: ${item.colorLight || item.color || 'var(--color-accent)'}`}
+                  >
+                    {item.icon && <TechIcon name={item.icon} size={14} />}
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
+
+      <!-- 2. Soft Skills Subsection -->
+      {softItems.length > 0 && (
+        <div class="skills-subsection soft-skills-subsection reveal delay-100">
+          <h3 class="skills-subsection-title">Soft Skills</h3>
+          <div class="soft-skills-card">
+            <ul class="soft-skills-items" role="list">
+              {softItems.map((item) => (
+                <li
+                  class="tech-item soft-item"
+                  style={`--brand: ${item.color || 'var(--color-accent)'}; --brand-on-dark: ${item.colorLight || item.color || 'var(--color-accent)'}`}
+                >
+                  <span class="soft-item-dot" aria-hidden="true"></span>
+                  {item.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   </div>
 </section>
@@ -60,17 +103,57 @@ const { techStack } = Astro.props;
       color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 100%
     );
   }
-  /* R5-6: scoped styles moved from index.astro — byte-identical. */
+
+  .skills-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .skills-subsection {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .skills-subsection-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-accent-text);
+    font-weight: 600;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .skills-subsection-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--glass-border);
+    opacity: 0.6;
+  }
+
+  /* Alternating left/right staggered layout:
+     Each category is a distinct cluster with its label above the chips.
+     Odd rows align to the left, even rows align to the right (≥640px).
+     Below 640px, all groups align to the left for clean mobile reading. */
   .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
   }
+
   .tech-group {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
+    max-width: 100%;
+    align-self: flex-start;
   }
+
   .tech-group-label {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
@@ -79,7 +162,10 @@ const { techStack } = Astro.props;
     color: var(--color-accent);
     font-weight: 500;
     margin: 0;
+    text-align: left;
+    align-self: flex-start;
   }
+
   .tech-group-items {
     display: flex;
     flex-wrap: wrap;
@@ -87,7 +173,55 @@ const { techStack } = Astro.props;
     list-style: none;
     padding: 0;
     margin: 0;
+    justify-content: flex-start;
   }
+
+  @media (min-width: 640px) {
+    .tech-group:nth-child(even) {
+      align-self: flex-end;
+    }
+    .tech-group:nth-child(even) .tech-group-label {
+      text-align: right;
+      align-self: flex-end;
+    }
+    .tech-group:nth-child(even) .tech-group-items {
+      justify-content: flex-end;
+    }
+  }
+
+  /* Soft skills card & items */
+  .soft-skills-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-card);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .soft-skills-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .soft-item-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    opacity: 0.7;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .soft-item:hover .soft-item-dot {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+
+  /* Tech item chips */
   .tech-item {
     font-family: var(--font-mono);
     font-size: 0.8125rem;
@@ -109,11 +243,13 @@ const { techStack } = Astro.props;
     --hover-bg-mix: 16%;
     --hover-border-mix: 45%;
   }
+
   .tech-item svg {
     flex-shrink: 0;
     opacity: 0.75;
     transition: opacity 0.2s ease, color 0.2s ease;
   }
+
   .tech-item:hover {
     color: var(--hover-text);
     background: color-mix(in srgb, var(--active-brand) var(--hover-bg-mix), var(--glass-bg));
@@ -122,6 +258,7 @@ const { techStack } = Astro.props;
     transform: translateY(-2px);
     box-shadow: 0 4px 14px color-mix(in srgb, var(--active-brand) 25%, transparent);
   }
+
   .tech-item:hover svg {
     opacity: 1;
     color: var(--active-brand);

@@ -5,9 +5,12 @@
  * Sits between Home and Skills on plain canvas (section order follows the
  * mandated nav). Copy is assembled only from wording already live
  * and claim-safe on the page (hero bio, Experience, Now); the detailed roles
- * stay in the Experience section, so nothing is duplicated. The closing link
- * downloads the PDF directly (wording "grab" now matches behavior); the
- * footer keeps the `/resume/` hub reachable.
+ * stay in the Experience section, so nothing is duplicated. Layout (2026-08-18,
+ * owner-directed): full-width card matching the Now card family, two-column
+ * "who I am / where I'm heading" split ≥900px with a lead paragraph, and the
+ * resume link as a card footer row — copy is verbatim, layout only. The
+ * footer link downloads the PDF directly; the site footer keeps the `/resume/`
+ * hub reachable.
  */
 import GlassPanel from '../components/GlassPanel.astro';
 import SectionHeader from '../components/SectionHeader.astro';
@@ -19,19 +22,21 @@ import { resumePdf } from '../lib/paths';
     <SectionHeader label="About" title="A bit about me" />
 
     <GlassPanel variant="card" class="about-card reveal">
-      <p class="about-text">
-        I'm a frontend-focused full stack engineer with 2+ years building
-        customer-facing SaaS products in startup teams — landing-page builders,
-        CRM, and campaign &amp; workflow automation. I care about shipping
-        reliable, well-crafted interfaces backed by solid full-stack
-        architecture.
-      </p>
-      <p class="about-text">
-        Right now I'm building toward AI product engineering and developer
-        tools — shipping personal projects like an AI code-review agent, a
-        cited answer engine, and an autonomous i18n agent, and writing about
-        the builds in public.
-      </p>
+      <div class="about-columns">
+        <p class="about-text about-lead">
+          I'm a frontend-focused full stack engineer with 2+ years building
+          customer-facing SaaS products in startup teams — landing-page builders,
+          CRM, and campaign &amp; workflow automation. I care about shipping
+          reliable, well-crafted interfaces backed by solid full-stack
+          architecture.
+        </p>
+        <p class="about-text">
+          Right now I'm building toward AI product engineering and developer
+          tools — shipping personal projects like an AI code-review agent, a
+          cited answer engine, and an autonomous i18n agent, and writing about
+          the builds in public.
+        </p>
+      </div>
       <p class="about-resume">
         For the full picture — experience, skills, and education —{' '}
         <a href={resumePdf} download class="link-accent">grab my resume</a>.
@@ -41,18 +46,32 @@ import { resumePdf } from '../lib/paths';
 </section>
 
 <style>
-  /* Mirrors the Now section's glass-card sizing so About reads as part of
-     the same family. */
+  /* Full-width card matching the Now card family (2026-08-18 redesign);
+     copy verbatim, layout only. */
   :global(.about-card) {
     padding: 1.75rem 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    max-width: 48rem;
+    gap: 1.5rem;
+    width: 100%;
   }
   @media (max-width: 640px) {
     :global(.about-card) {
       padding: 1.25rem 1.5rem;
+    }
+  }
+
+  /* "Who I am" | "where I'm heading" — two columns on wide screens,
+     one flowing column below. */
+  .about-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 900px) {
+    .about-columns {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
     }
   }
 
@@ -61,13 +80,25 @@ import { resumePdf } from '../lib/paths';
     line-height: 1.65;
     color: var(--color-ink-muted);
     margin: 0;
-    max-width: 72ch;
   }
 
+  /* Lead treatment: the identity paragraph is the focal point — full ink,
+     slightly larger. Higher contrast than the muted body (ink > ink-muted),
+     so on-glass AA is inherited from the passing ink-muted pair. */
+  .about-lead {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+  }
+
+  /* Card footer row: closes the card structurally and reads as its CTA
+     (the link downloads — wording and behavior match). */
   .about-resume {
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     color: var(--color-ink-dim-glass);
     margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--glass-border);
   }
 </style>
