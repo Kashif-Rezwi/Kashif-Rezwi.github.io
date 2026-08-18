@@ -3,8 +3,9 @@
  * R5-6 section partition: Skills (was part of index.astro).
  * Named 'Skills', divided into two distinct sections:
  * 1. Technical Skills (staggered alternating left/right layout per category)
- * 2. Soft Skills (verified professional attributes cluster)
+ * 2. Soft Skills (clean chip cluster with semantic SVG icons, no outer card box)
  * Chip styling is consistent with portfolio glass design system.
+ * Vertical spacing optimized with distinct separation between technical and soft skills.
  */
 import TechIcon from '../components/TechIcon.astro';
 import SectionHeader from '../components/SectionHeader.astro';
@@ -55,7 +56,7 @@ const softItems =
                     class="tech-item"
                     style={`--brand: ${item.color || 'var(--color-accent)'}; --brand-on-dark: ${item.colorLight || item.color || 'var(--color-accent)'}`}
                   >
-                    {item.icon && <TechIcon name={item.icon} size={14} />}
+                    {item.icon && <TechIcon name={item.icon} size={13} />}
                     {item.name}
                   </li>
                 ))}
@@ -65,23 +66,66 @@ const softItems =
         </div>
       </div>
 
-      <!-- 2. Soft Skills Subsection -->
+      <!-- 2. Soft Skills Subsection (No enclosing card, distinct vertical gap, semantic SVG icons) -->
       {softItems.length > 0 && (
         <div class="skills-subsection soft-skills-subsection reveal delay-100">
           <h3 class="skills-subsection-title">Soft Skills</h3>
-          <div class="soft-skills-card">
-            <ul class="soft-skills-items" role="list">
-              {softItems.map((item) => (
-                <li
-                  class="tech-item soft-item"
-                  style={`--brand: ${item.color || 'var(--color-accent)'}; --brand-on-dark: ${item.colorLight || item.color || 'var(--color-accent)'}`}
-                >
-                  <span class="soft-item-dot" aria-hidden="true"></span>
-                  {item.name}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul class="soft-skills-items" role="list">
+            {softItems.map((item) => (
+              <li
+                class="tech-item soft-item"
+                style={`--brand: ${item.color || 'var(--color-accent)'}; --brand-on-dark: ${item.colorLight || item.color || 'var(--color-accent)'}`}
+              >
+                {/* 1. Ownership: Target / Bullseye icon */}
+                {item.name.toLowerCase().includes('ownership') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="6" />
+                    <circle cx="12" cy="12" r="2" />
+                  </svg>
+                )}
+                {/* 2. Collaboration: Users Team icon */}
+                {item.name.toLowerCase().includes('collaboration') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                )}
+                {/* 3. Communication: Chat Message icon */}
+                {item.name.toLowerCase().includes('communication') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                )}
+                {/* 4. Dependability: Shield Check icon */}
+                {item.name.toLowerCase().includes('dependability') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <path d="m9 12 2 2 4-4" />
+                  </svg>
+                )}
+                {/* 5. Solution-oriented: Lightbulb icon */}
+                {item.name.toLowerCase().includes('solution') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                    <path d="M9 18h6" />
+                    <path d="M10 22h4" />
+                  </svg>
+                )}
+                {/* 6. Willingness to learn: Book Open icon */}
+                {item.name.toLowerCase().includes('learn') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
+                    <path d="M6 6h10" />
+                    <path d="M6 10h10" />
+                  </svg>
+                )}
+                {item.name}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
@@ -89,13 +133,6 @@ const softItems =
 </section>
 
 <style>
-  /* Solid alt-blend background: mirrors the visual result of .section-alt
-     (color-mix surface+canvas) but as a solid colour so it can transition
-     cleanly into Work's gradient bottom and Experience's gradient top.
-     No transparency — compositing is off the table. */
-  /* Band duty-swap (nav-order fix): Skills now opens the content band, so it
-     carries the fade-in ramp (canvas → band) that Work used to own; Work below
-     is flat band. Solid colours only — no hard compositing edge (DL-065/067). */
   .skills-bg {
     background: linear-gradient(
       to bottom,
@@ -107,7 +144,7 @@ const softItems =
   .skills-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 2.25rem;
   }
 
   .skills-subsection {
@@ -115,14 +152,18 @@ const softItems =
     flex-direction: column;
   }
 
+  .soft-skills-subsection {
+    margin-top: 0.5rem;
+  }
+
   .skills-subsection-title {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--color-accent-text);
     font-weight: 600;
-    margin: 0 0 1.25rem 0;
+    margin: 0 0 0.875rem 0;
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -138,25 +179,24 @@ const softItems =
 
   /* Alternating left/right staggered layout:
      Each category is a distinct cluster with its label above the chips.
-     Odd rows align to the left, even rows align to the right (≥640px).
-     Below 640px, all groups align to the left for clean mobile reading. */
+     Odd rows align to the left, even rows align to the right (≥640px). */
   .tech-grid {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.875rem;
   }
 
   .tech-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.25rem;
     max-width: 100%;
     align-self: flex-start;
   }
 
   .tech-group-label {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--color-accent);
@@ -169,7 +209,7 @@ const softItems =
   .tech-group-items {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.375rem;
+    gap: 0.3125rem;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -189,54 +229,30 @@ const softItems =
     }
   }
 
-  /* Soft skills card & items */
-  .soft-skills-card {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-card);
-    padding: 1.25rem 1.5rem;
-  }
-
+  /* Soft skills items (Clean free-floating cluster without enclosing card) */
   .soft-skills-items {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.45rem;
     list-style: none;
     padding: 0;
     margin: 0;
   }
 
-  .soft-item-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-accent);
-    opacity: 0.7;
-    flex-shrink: 0;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-
-  .soft-item:hover .soft-item-dot {
-    opacity: 1;
-    transform: scale(1.25);
-  }
-
-  /* Tech item chips */
+  /* Tech & soft item chips */
   .tech-item {
     font-family: var(--font-mono);
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     color: var(--color-ink-muted);
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    padding: 0.25rem 0.625rem;
+    padding: 0.2rem 0.55rem;
     border-radius: var(--radius-control);
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
     transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     cursor: default;
-    /* Default brand for chips without an inline --brand (e.g. the soft-skill
-       chips); inline styles still override this. */
     --brand: var(--color-accent);
     --active-brand: var(--brand-on-dark, var(--brand));
     --hover-text: var(--active-brand);
@@ -255,8 +271,8 @@ const softItems =
     background: color-mix(in srgb, var(--active-brand) var(--hover-bg-mix), var(--glass-bg));
     border-color: color-mix(in srgb, var(--active-brand) var(--hover-border-mix), var(--glass-border));
     border-radius: var(--radius-control);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 14px color-mix(in srgb, var(--active-brand) 25%, transparent);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px color-mix(in srgb, var(--active-brand) 25%, transparent);
   }
 
   .tech-item:hover svg {

@@ -415,7 +415,7 @@
      Moved from the duplicated scoped blocks (index.astro + [slug].astro) into
      the shared layer so the grid/band recipe lives in one place. */
   .section-block {
-    padding-block: 5rem;
+    padding-block: clamp(2rem, 3.5vh, 2.75rem);
     /* One section per viewport (owner-directed): nav targets fill the screen
        so neighbouring sections never peek in after a nav click. Short
        sections center their content; tall ones simply grow. 65px = fixed
