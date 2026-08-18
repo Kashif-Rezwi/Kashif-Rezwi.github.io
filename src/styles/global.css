@@ -340,6 +340,12 @@
     transform: translateY(-1px);
   }
 
+  /* Compact button variant for cards & footer */
+  .btn-compact {
+    padding: 0.375rem 0.875rem;
+    font-size: 0.75rem;
+  }
+
   /* --- Tech tags --- */
   .tech-tag {
     display: inline-block;

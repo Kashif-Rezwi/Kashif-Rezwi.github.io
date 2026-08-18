@@ -178,12 +178,23 @@ const links = [
     width: 100%;
   }
 
-  /* Resume accent on desktop mirrors the drawer's existing accent link. */
+  /* Resume badge styling on desktop — subtle outline pill with clear CTA hierarchy */
   .nav-link.accent {
-    color: var(--color-accent-light);
+    color: var(--color-accent-text);
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-control);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    background: var(--color-accent-soft);
+    transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease, color var(--duration-fast) ease, transform 0.1s ease;
+  }
+  .nav-link.accent::after {
+    display: none;
   }
   .nav-link.accent:hover {
-    color: var(--color-accent-text);
+    color: var(--color-ink);
+    background: color-mix(in srgb, var(--color-accent) 25%, transparent);
+    border-color: var(--color-accent-light);
+    transform: translateY(-1px);
   }
 
   .nav-tools {

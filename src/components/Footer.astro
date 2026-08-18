@@ -87,12 +87,16 @@ const socials = [
   .footer-social-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.35rem;
     font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--color-ink-dim);
     text-decoration: none;
     transition: color var(--duration-fast) ease;
+  }
+  .footer-social-link svg {
+    display: block;
+    flex-shrink: 0;
   }
   .footer-social-link:hover {
     color: var(--color-accent-text);

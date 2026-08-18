@@ -264,19 +264,21 @@ const { links = {} } = Astro.props;
 
   .about-lead {
     font-size: 0.9375rem;
-    line-height: 1.5;
+    line-height: 1.55;
     color: var(--color-ink);
     font-weight: 500;
     margin: 0;
-    text-align: justify;
+    text-align: left;
+    text-wrap: pretty;
   }
 
   .about-body {
     font-size: 0.875rem;
-    line-height: 1.5;
+    line-height: 1.55;
     color: var(--color-ink-muted);
     margin: 0;
-    text-align: justify;
+    text-align: left;
+    text-wrap: pretty;
   }
 
   .about-body strong {
@@ -300,8 +302,10 @@ const { links = {} } = Astro.props;
   .pillar-card {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    justify-content: space-between;
+    gap: 0.75rem;
     padding: 0.875rem 1.125rem;
+    height: 100%;
   }
 
   .pillar-header {
@@ -332,18 +336,20 @@ const { links = {} } = Astro.props;
 
   .pillar-desc {
     font-size: 0.8125rem;
-    line-height: 1.45;
+    line-height: 1.5;
     color: var(--color-ink-muted);
     margin: 0;
     flex: 1;
-    text-align: justify;
+    text-align: left;
+    text-wrap: pretty;
   }
 
   .pillar-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.3125rem;
-    margin-top: 0.125rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
   }
 
   .pillar-tags .tech-tag {
