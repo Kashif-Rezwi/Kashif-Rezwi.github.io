@@ -108,9 +108,10 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
             class="btn"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="View resume (PDF, opens in a new tab)"
+            download
+            aria-label="Download resume (PDF, opens in a new tab)"
           >
-            View Resume
+            Resume (PDF) ↓
           </a>
           <a href={`mailto:${email}`} class="btn-outline">Email me</a>
         </div>

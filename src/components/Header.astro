@@ -33,8 +33,10 @@ const links = [
             <a
               href={link.href}
               class:list={['nav-link', { accent: link.resume }]}
-              download={link.resume}
-              aria-label={link.resume ? 'Resume (PDF, downloads)' : undefined}
+              download={link.resume ? '' : undefined}
+              target={link.resume ? '_blank' : undefined}
+              rel={link.resume ? 'noopener noreferrer' : undefined}
+              aria-label={link.resume ? 'Resume (PDF, opens in new tab & downloads)' : undefined}
             >
               {link.label}
             </a>
@@ -68,8 +70,10 @@ const links = [
             <a
               href={link.href}
               class:list={['mobile-nav-link', { accent: link.resume }]}
-              download={link.resume}
-              aria-label={link.resume ? 'Resume (PDF, downloads)' : undefined}
+              download={link.resume ? '' : undefined}
+              target={link.resume ? '_blank' : undefined}
+              rel={link.resume ? 'noopener noreferrer' : undefined}
+              aria-label={link.resume ? 'Resume (PDF, opens in new tab & downloads)' : undefined}
             >
               {link.label}
             </a>
