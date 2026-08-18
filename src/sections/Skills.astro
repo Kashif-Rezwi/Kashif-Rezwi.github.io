@@ -50,8 +50,15 @@ const { techStack } = Astro.props;
      (color-mix surface+canvas) but as a solid colour so it can transition
      cleanly into Work's gradient bottom and Experience's gradient top.
      No transparency — compositing is off the table. */
+  /* Band duty-swap (nav-order fix): Skills now opens the content band, so it
+     carries the fade-in ramp (canvas → band) that Work used to own; Work below
+     is flat band. Solid colours only — no hard compositing edge (DL-065/067). */
   .skills-bg {
-    background: color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas));
+    background: linear-gradient(
+      to bottom,
+      var(--color-canvas) 0%,
+      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 100%
+    );
   }
   /* R5-6: scoped styles moved from index.astro — byte-identical. */
   .tech-grid {

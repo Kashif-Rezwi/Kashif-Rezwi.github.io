@@ -2,15 +2,16 @@
 /**
  * About — high-level professional narrative (nav stop #2).
  *
- * Sits between Home and Work on plain canvas so the Hero→Work background
- * continuity is untouched. Copy is assembled only from wording already live
+ * Sits between Home and Skills on plain canvas (section order follows the
+ * mandated nav). Copy is assembled only from wording already live
  * and claim-safe on the page (hero bio, Experience, Now); the detailed roles
  * stay in the Experience section, so nothing is duplicated. The closing link
- * keeps the `/resume/` hub discoverable.
+ * downloads the PDF directly (wording "grab" now matches behavior); the
+ * footer keeps the `/resume/` hub reachable.
  */
 import GlassPanel from '../components/GlassPanel.astro';
 import SectionHeader from '../components/SectionHeader.astro';
-import { withBase } from '../lib/paths';
+import { resumePdf } from '../lib/paths';
 ---
 
 <section id="about" class="section-block">
@@ -33,7 +34,7 @@ import { withBase } from '../lib/paths';
       </p>
       <p class="about-resume">
         For the full picture — experience, skills, and education —{' '}
-        <a href={withBase('resume/')} class="link-accent">grab my resume</a>.
+        <a href={resumePdf} download class="link-accent">grab my resume</a>.
       </p>
     </GlassPanel>
   </div>

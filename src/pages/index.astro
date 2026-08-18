@@ -112,8 +112,10 @@ const techStack = [
 >
   <Hero email={links.email} github={links.github} linkedin={links.linkedin} devto={links.devto} portrait={portrait} />
   <About />
-  <Work featured={featured} links={links} />
+  <!-- Section order matches the mandated nav (Home · About · Skills · Projects ·
+       Contact · Resume), so nav clicks always scroll monotonically down the page. -->
   <Skills techStack={techStack} />
+  <Work featured={featured} links={links} />
   <Experience />
   <Testimonials testimonials={testimonials} />
   <Now links={links} />

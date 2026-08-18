@@ -1,101 +1,9 @@
 {
   "ok": true,
   "username": "Kashif-Rezwi",
-  "fetchedAt": "2026-08-08T02:40:58.602Z",
-  "totalContributions": 1753,
+  "fetchedAt": "2026-08-18T12:13:36.054Z",
+  "totalContributions": 1908,
   "weeks": [
-    {
-      "days": [
-        {
-          "date": "2025-08-03",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 0
-        },
-        {
-          "date": "2025-08-04",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 1
-        },
-        {
-          "date": "2025-08-05",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 2
-        },
-        {
-          "date": "2025-08-06",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 3
-        },
-        {
-          "date": "2025-08-07",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 4
-        },
-        {
-          "date": "2025-08-08",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 5
-        },
-        {
-          "date": "2025-08-09",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 6
-        }
-      ]
-    },
-    {
-      "days": [
-        {
-          "date": "2025-08-10",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 0
-        },
-        {
-          "date": "2025-08-11",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 1
-        },
-        {
-          "date": "2025-08-12",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 2
-        },
-        {
-          "date": "2025-08-13",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 3
-        },
-        {
-          "date": "2025-08-14",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 4
-        },
-        {
-          "date": "2025-08-15",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 5
-        },
-        {
-          "date": "2025-08-16",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 6
-        }
-      ]
-    },
     {
       "days": [
         {
@@ -2384,7 +2292,7 @@
         },
         {
           "date": "2026-07-31",
-          "count": 11,
+          "count": 10,
           "level": "FIRST_QUARTILE",
           "weekday": 5
         },
@@ -2430,15 +2338,83 @@
         },
         {
           "date": "2026-08-07",
-          "count": 6,
-          "level": "FIRST_QUARTILE",
+          "count": 14,
+          "level": "SECOND_QUARTILE",
           "weekday": 5
         },
         {
           "date": "2026-08-08",
-          "count": 0,
-          "level": "NONE",
+          "count": 27,
+          "level": "SECOND_QUARTILE",
           "weekday": 6
+        }
+      ]
+    },
+    {
+      "days": [
+        {
+          "date": "2026-08-09",
+          "count": 8,
+          "level": "FIRST_QUARTILE",
+          "weekday": 0
+        },
+        {
+          "date": "2026-08-10",
+          "count": 9,
+          "level": "FIRST_QUARTILE",
+          "weekday": 1
+        },
+        {
+          "date": "2026-08-11",
+          "count": 13,
+          "level": "FIRST_QUARTILE",
+          "weekday": 2
+        },
+        {
+          "date": "2026-08-12",
+          "count": 29,
+          "level": "THIRD_QUARTILE",
+          "weekday": 3
+        },
+        {
+          "date": "2026-08-13",
+          "count": 25,
+          "level": "SECOND_QUARTILE",
+          "weekday": 4
+        },
+        {
+          "date": "2026-08-14",
+          "count": 9,
+          "level": "FIRST_QUARTILE",
+          "weekday": 5
+        },
+        {
+          "date": "2026-08-15",
+          "count": 18,
+          "level": "SECOND_QUARTILE",
+          "weekday": 6
+        }
+      ]
+    },
+    {
+      "days": [
+        {
+          "date": "2026-08-16",
+          "count": 2,
+          "level": "FIRST_QUARTILE",
+          "weekday": 0
+        },
+        {
+          "date": "2026-08-17",
+          "count": 5,
+          "level": "FIRST_QUARTILE",
+          "weekday": 1
+        },
+        {
+          "date": "2026-08-18",
+          "count": 3,
+          "level": "FIRST_QUARTILE",
+          "weekday": 2
         }
       ]
     }
