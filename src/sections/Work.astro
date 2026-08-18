@@ -25,9 +25,6 @@ interface Props {
     id: string;
   }>;
   links: {
-    betterDevUi: string;
-    betterDevApi: string;
-    betterDevDemo: string;
     looplens: string;
     looplensDemo: string;
     archive: string;
@@ -70,17 +67,6 @@ const { featured, links } = Astro.props;
     <div class="more-projects reveal">
       <h3 class="more-projects-label">More projects</h3>
       <ul class="more-projects-list">
-        <ProjectRow
-          name="Better DEV"
-          typeLabel="Personal"
-          links={[
-            { href: links.betterDevUi, label: 'UI repo', icon: 'repository' },
-            { href: links.betterDevApi, label: 'API repo', icon: 'repository' },
-            { href: links.betterDevDemo, label: 'Live', icon: 'external' },
-          ]}
-        >
-          AI chat platform with streaming UI, visible tool calls, NestJS API with JWT auth and web search integration.
-        </ProjectRow>
         <ProjectRow
           name="LoopLens"
           typeLabel="Hackathon · TestSprite S3"

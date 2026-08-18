@@ -1,9 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-import { withBase } from '../lib/paths';
+import { withBase, resumePdf } from '../lib/paths';
 
 // /resume — single source of truth for the resume (owner decision OQ-05; resolves C-08).
-const pdfHref = withBase('resume/Kashif-Rezwi-Resume.pdf');
+// The PDF path itself now lives in src/lib/paths.ts (`resumePdf`) and is shared
+// with the hero CTA and the navbar Resume item.
+const pdfHref = resumePdf;
 ---
 
 <Base

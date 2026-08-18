@@ -1,12 +1,20 @@
 ---
-import { base, withBase } from '../lib/paths';
+import { base, withBase, resumePdf } from '../lib/paths';
 import ThemeControl from './ThemeControl.astro';
 
-const resumeHref = withBase('resume/');
+// Required nav order: Home · About · Skills · Projects · Contact · Resume.
+// This single array drives BOTH the desktop list and the mobile drawer.
+// "Projects" points at the existing #work section id (kept so the case-study
+// "← Work" breadcrumb and the Now section's "See the work →" link keep
+// working); the Resume entry carries a `resume` flag for its new-tab +
+// auto-download behavior (see the script below).
 const links = [
-  { href: withBase('#work'), label: 'Work' },
-  { href: withBase('#experience'), label: 'Experience' },
-  { href: withBase('#contact'), label: 'Contact' },
+  { href: withBase('#home'), label: 'Home', resume: false },
+  { href: withBase('#about'), label: 'About', resume: false },
+  { href: withBase('#skills'), label: 'Skills', resume: false },
+  { href: withBase('#work'), label: 'Projects', resume: false },
+  { href: withBase('#contact'), label: 'Contact', resume: false },
+  { href: resumePdf, label: 'Resume', resume: true },
 ];
 ---
 
@@ -21,7 +29,18 @@ const links = [
       {
         links.map((link) => (
           <li>
-            <a href={link.href} class="nav-link">
+            <a
+              href={link.href}
+              class:list={['nav-link', { accent: link.resume }]}
+              target={link.resume ? '_blank' : undefined}
+              rel={link.resume ? 'noopener noreferrer' : undefined}
+              aria-label={
+                link.resume
+                  ? 'Resume (PDF, opens in a new tab and downloads)'
+                  : undefined
+              }
+              {...(link.resume ? { 'data-resume-download': '' } : {})}
+            >
               {link.label}
             </a>
           </li>
@@ -51,15 +70,23 @@ const links = [
       {
         links.map((link) => (
           <li>
-            <a href={link.href} class="mobile-nav-link">
+            <a
+              href={link.href}
+              class:list={['mobile-nav-link', { accent: link.resume }]}
+              target={link.resume ? '_blank' : undefined}
+              rel={link.resume ? 'noopener noreferrer' : undefined}
+              aria-label={
+                link.resume
+                  ? 'Resume (PDF, opens in a new tab and downloads)'
+                  : undefined
+              }
+              {...(link.resume ? { 'data-resume-download': '' } : {})}
+            >
               {link.label}
             </a>
           </li>
         ))
       }
-      <li>
-        <a href={resumeHref} class="mobile-nav-link accent">Resume</a>
-      </li>
     </ul>
     <div class="mobile-nav-theme">
       <ThemeControl idPrefix="menu-" />
@@ -158,6 +185,14 @@ const links = [
     width: 100%;
   }
 
+  /* Resume accent on desktop mirrors the drawer's existing accent link. */
+  .nav-link.accent {
+    color: var(--color-accent-light);
+  }
+  .nav-link.accent:hover {
+    color: var(--color-accent-text);
+  }
+
   .nav-tools {
     margin-left: auto;
     display: flex;
@@ -215,7 +250,9 @@ const links = [
     }
   }
   .mobile-nav.is-open {
-    max-height: 300px;
+    /* Six links + list padding + theme row need more room than the old
+       4-item drawer; oversized on purpose so nothing clips. */
+    max-height: 26rem;
     visibility: visible;
   }
   .mobile-nav ul {
@@ -263,6 +300,17 @@ const links = [
     transform: translateY(-7px) rotate(-45deg);
   }
 
+  /* Tablet: six links + logo + theme control is tight in 641–768px —
+     tighten gaps only (no label/layout changes). */
+  @media (min-width: 641px) and (max-width: 768px) {
+    nav {
+      gap: 1rem;
+    }
+    .nav-links {
+      gap: 0.875rem;
+    }
+  }
+
   @media (max-width: 640px) {
     .nav-links {
       display: none;
@@ -300,6 +348,23 @@ const links = [
       nav.classList.remove('is-open');
       btn?.setAttribute('aria-expanded', 'false');
       nav.inert = true;
+    });
+  });
+
+  // Navbar Resume (desktop + drawer): the anchor's default behavior opens
+  // the PDF in a new tab (target="_blank"); within the same user gesture we
+  // additionally trigger the download via a temporary same-origin anchor
+  // carrying `download` (the PDF is same-origin on production and preview
+  // builds, so the attribute is honoured). No-JS fallback: the link still
+  // opens the resume in a new tab.
+  document.querySelectorAll('[data-resume-download]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const temp = document.createElement('a');
+      temp.href = link.getAttribute('href') ?? '';
+      temp.download = 'Kashif-Rezwi-Resume.pdf';
+      document.body.appendChild(temp);
+      temp.click();
+      temp.remove();
     });
   });
 </script>

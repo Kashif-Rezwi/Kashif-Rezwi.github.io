@@ -15,3 +15,11 @@ export const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
 export function withBase(path: string): string {
   return `${base}${path.replace(/^\/+/, '')}`;
 }
+
+/**
+ * Single source of truth for the resume PDF (owner decision OQ-05).
+ * Same-origin on both production (`/`) and preview (`/portfolio-preview/`)
+ * builds, so the HTML `download` attribute is honoured by every modern
+ * browser. Used by the hero CTA, the navbar Resume item, and `/resume/`.
+ */
+export const resumePdf = withBase('resume/Kashif-Rezwi-Resume.pdf');

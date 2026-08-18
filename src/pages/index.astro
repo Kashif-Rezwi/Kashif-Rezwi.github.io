@@ -4,6 +4,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../sections/Hero.astro';
+import About from '../sections/About.astro';
 import Work from '../sections/Work.astro';
 import Skills from '../sections/Skills.astro';
 import Experience from '../sections/Experience.astro';
@@ -16,7 +17,7 @@ const description =
   'Frontend-focused Full Stack Engineer with 2+ years building customer-facing SaaS products in startup teams: landing-page builders, CRM, and campaign & workflow automation. Currently building AI products and developer tools.';
 
 const featured = (await getCollection('work'))
-  .filter((e) => e.data.order <= 3)
+  .filter((e) => e.data.order <= 4)
   .sort((a, b) => a.data.order - b.data.order);
 
 const testimonials = (await getCollection('testimonials')).sort(
@@ -30,9 +31,6 @@ const links = {
   devto: 'https://dev.to/kashifrezwi',
   devtoArticle: 'https://dev.to/kashifrezwi/i-built-an-ai-agent-that-makes-any-nextjs-app-multilingual-in-3-minutes-4bdm',
   archive: 'https://github.com/Kashif-Rezwi?tab=repositories',
-  betterDevUi: 'https://github.com/Kashif-Rezwi/better-dev-ui',
-  betterDevApi: 'https://github.com/Kashif-Rezwi/better-dev-api',
-  betterDevDemo: 'https://betterdev.in',
   looplens: 'https://github.com/Kashif-Rezwi/looplens',
   looplensDemo: 'https://looplens-rho.vercel.app',
   aiPlayground: 'https://github.com/Kashif-Rezwi/ai-playground',
@@ -91,6 +89,20 @@ const techStack = [
       { name: 'BullMQ', color: '#e0234e', icon: 'bullmq' },
     ],
   },
+  {
+    // Soft skills — every label is backed by the owner-verified LinkedIn
+    // testimonials on this page (claim safety, AGENTS.md §3). Rendered with
+    // the same chip pattern; hover uses the accent fallback in Skills.astro.
+    category: 'Soft skills',
+    items: [
+      { name: 'Ownership', color: '#6495ed' },
+      { name: 'Collaboration', color: '#6495ed' },
+      { name: 'Communication', color: '#6495ed' },
+      { name: 'Dependability', color: '#6495ed' },
+      { name: 'Solution-oriented', color: '#6495ed' },
+      { name: 'Willingness to learn', color: '#6495ed' },
+    ],
+  },
 ];
 ---
 
@@ -99,6 +111,7 @@ const techStack = [
   description={description}
 >
   <Hero email={links.email} github={links.github} linkedin={links.linkedin} devto={links.devto} portrait={portrait} />
+  <About />
   <Work featured={featured} links={links} />
   <Skills techStack={techStack} />
   <Experience />

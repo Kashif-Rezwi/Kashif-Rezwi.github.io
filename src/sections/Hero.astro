@@ -6,7 +6,7 @@
 import { Image } from 'astro:assets';
 import HeroDotMatrix from '../components/HeroDotMatrix.astro';
 import Icon from '../components/Icon.astro';
-import { withBase } from '../lib/paths';
+import { resumePdf } from '../lib/paths';
 
 interface Props {
   email: string;
@@ -21,7 +21,7 @@ type ImageImport = Parameters<typeof Image>[0]['src'];
 const { email, github, linkedin, devto, portrait } = Astro.props;
 ---
 
-<section class="hero-section">
+<section id="home" class="hero-section">
   <HeroDotMatrix />
   <div class="container-site hero-inner">
     <!-- Identity block — flat over the matrix (T1): no glass card. Portrait and
@@ -59,7 +59,15 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
 
       <!-- CTA row -->
       <div class="hero-ctas delay-500 animate-fade-up">
-        <a href={withBase('resume/')} class="btn">View Resume</a>
+        <a
+          href={resumePdf}
+          class="btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View resume (PDF, opens in a new tab)"
+        >
+          View Resume
+        </a>
         <a href={`mailto:${email}`} class="btn-outline">Email me</a>
         <div class="hero-social-links">
           <a href={github} class="hero-social" target="_blank" rel="noopener noreferrer"><Icon name="github" size={15} />GitHub</a>

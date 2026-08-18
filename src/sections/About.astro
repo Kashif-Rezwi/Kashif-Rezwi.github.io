@@ -1,0 +1,72 @@
+---
+/**
+ * About — high-level professional narrative (nav stop #2).
+ *
+ * Sits between Home and Work on plain canvas so the Hero→Work background
+ * continuity is untouched. Copy is assembled only from wording already live
+ * and claim-safe on the page (hero bio, Experience, Now); the detailed roles
+ * stay in the Experience section, so nothing is duplicated. The closing link
+ * keeps the `/resume/` hub discoverable.
+ */
+import GlassPanel from '../components/GlassPanel.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { withBase } from '../lib/paths';
+---
+
+<section id="about" class="section-block">
+  <div class="container-site">
+    <SectionHeader label="About" title="A bit about me" />
+
+    <GlassPanel variant="card" class="about-card reveal">
+      <p class="about-text">
+        I'm a frontend-focused full stack engineer with 2+ years building
+        customer-facing SaaS products in startup teams — landing-page builders,
+        CRM, and campaign &amp; workflow automation. I care about shipping
+        reliable, well-crafted interfaces backed by solid full-stack
+        architecture.
+      </p>
+      <p class="about-text">
+        Right now I'm building toward AI product engineering and developer
+        tools — shipping personal projects like an AI code-review agent, a
+        cited answer engine, and an autonomous i18n agent, and writing about
+        the builds in public.
+      </p>
+      <p class="about-resume">
+        For the full picture — experience, skills, and education —{' '}
+        <a href={withBase('resume/')} class="link-accent">grab my resume</a>.
+      </p>
+    </GlassPanel>
+  </div>
+</section>
+
+<style>
+  /* Mirrors the Now section's glass-card sizing so About reads as part of
+     the same family. */
+  :global(.about-card) {
+    padding: 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 48rem;
+  }
+  @media (max-width: 640px) {
+    :global(.about-card) {
+      padding: 1.25rem 1.5rem;
+    }
+  }
+
+  .about-text {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--color-ink-muted);
+    margin: 0;
+    max-width: 72ch;
+  }
+
+  .about-resume {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-ink-dim-glass);
+    margin: 0;
+  }
+</style>

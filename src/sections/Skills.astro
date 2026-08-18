@@ -94,6 +94,9 @@ const { techStack } = Astro.props;
     gap: 0.375rem;
     transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     cursor: default;
+    /* Default brand for chips without an inline --brand (e.g. the soft-skill
+       chips); inline styles still override this. */
+    --brand: var(--color-accent);
     --active-brand: var(--brand-on-dark, var(--brand));
     --hover-text: var(--active-brand);
     --hover-bg-mix: 16%;
