@@ -10,16 +10,16 @@ import ThemeControl from './ThemeControl.astro';
 // working); the Resume entry carries a `resume` flag for its native
 // `download` behavior — direct PDF download, no new tab, no JS needed.
 const links = [
-  { href: withBase('#home'), label: 'Home', resume: false },
-  { href: withBase('#about'), label: 'About', resume: false },
-  { href: withBase('#skills'), label: 'Skills', resume: false },
-  { href: withBase('#work'), label: 'Projects', resume: false },
-  { href: withBase('#contact'), label: 'Contact', resume: false },
-  { href: resumePdf, label: 'Resume', resume: true },
+  { href: withBase('#home'), label: 'Home', section: 'home', resume: false },
+  { href: withBase('#about'), label: 'About', section: 'about', resume: false },
+  { href: withBase('#skills'), label: 'Skills', section: 'skills', resume: false },
+  { href: withBase('#work'), label: 'Projects', section: 'work', resume: false },
+  { href: withBase('#contact'), label: 'Contact', section: 'contact', resume: false },
+  { href: resumePdf, label: 'Resume', section: undefined, resume: true },
 ];
 ---
 
-<header id="site-header">
+<header id="site-header" class="glass-role-utility">
   <nav aria-label="Primary">
     <a href={base} class="logo" aria-label="Kashif Rezwi home">
       Kashif Rezwi
@@ -36,6 +36,7 @@ const links = [
               download={link.resume ? '' : undefined}
               target={link.resume ? '_blank' : undefined}
               rel={link.resume ? 'noopener noreferrer' : undefined}
+              data-nav-section={link.section}
               aria-label={link.resume ? 'Resume (PDF, opens in new tab & downloads)' : undefined}
             >
               {link.label}
@@ -73,6 +74,7 @@ const links = [
               download={link.resume ? '' : undefined}
               target={link.resume ? '_blank' : undefined}
               rel={link.resume ? 'noopener noreferrer' : undefined}
+              data-nav-section={link.section}
               aria-label={link.resume ? 'Resume (PDF, opens in new tab & downloads)' : undefined}
             >
               {link.label}
@@ -88,23 +90,32 @@ const links = [
 </header>
 
 <style>
-  header {
+  header.glass-role-utility {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 50;
     /* R5 glass (spec §5.1): the navbar's historical frost becomes the token recipe. */
-    background: var(--glass-bg);
+    background: var(--glass-utility-bg);
     -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    border-bottom: 1px solid var(--glass-border);
+    /* Utility glass is a pinned navigation plane, not a card. Keep the
+       established single bottom divider; the role's generic all-edge border
+       made an unintended blue frame around the header while a control held
+       focus. */
+    border: 0;
+    border-bottom: 1px solid var(--glass-utility-border);
     transition: background var(--duration-base) ease, border-color var(--duration-base) ease;
+  }
+
+  header.glass-role-utility::before {
+    display: none;
   }
 
   /* Fallback: no backdrop-filter support → near-opaque surface (S-9). */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    header {
+    header.glass-role-utility {
       background: var(--glass-bg-solid);
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
@@ -113,7 +124,7 @@ const links = [
 
   /* OS transparency preference → solid (S-9). */
   @media (prefers-reduced-transparency: reduce) {
-    header {
+    header.glass-role-utility {
       background: var(--glass-bg-solid);
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
@@ -177,6 +188,12 @@ const links = [
   .nav-link:hover::after {
     width: 100%;
   }
+  .nav-link.is-active {
+    color: var(--color-accent-text);
+  }
+  .nav-link.is-active::after {
+    width: 100%;
+  }
 
   /* Resume badge styling on desktop — subtle outline pill with clear CTA hierarchy */
   .nav-link.accent {
@@ -238,6 +255,7 @@ const links = [
     -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
     border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
   }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .mobile-nav {
@@ -278,6 +296,7 @@ const links = [
     transition: color var(--duration-fast) ease;
   }
   .mobile-nav-link:hover,
+  .mobile-nav-link.is-active,
   .mobile-nav-link.accent {
     color: var(--color-accent-light);
   }
@@ -354,4 +373,54 @@ const links = [
       nav.inert = true;
     });
   });
+
+  // Signal Field navigation state: active section is a quiet orientation cue,
+  // shared by desktop and drawer navigation. Case studies inherit Projects.
+  const sectionLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-nav-section]'));
+  const setActiveSection = (sectionId?: string) => {
+    sectionLinks.forEach((link) => {
+      const isActive = Boolean(sectionId && link.dataset.navSection === sectionId);
+      link.classList.toggle('is-active', isActive);
+      if (isActive) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+
+  const homeSections = ['home', 'about', 'skills', 'work', 'contact']
+    .map((id) => document.getElementById(id))
+    .filter((section): section is HTMLElement => Boolean(section));
+
+  if (homeSections.length) {
+    const syncHash = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash && homeSections.some((section) => section.id === hash)) setActiveSection(hash);
+    };
+    // Pick the most recent nav target above a stable reading line. An
+    // IntersectionObserver callback only contains entries that changed in that
+    // frame, which can otherwise select the upcoming section prematurely.
+    const syncScrollPosition = () => {
+      const readingLine = 65 + window.innerHeight * 0.25;
+      let current = homeSections[0]?.id;
+      for (const section of homeSections) {
+        if (section.getBoundingClientRect().top <= readingLine) current = section.id;
+        else break;
+      }
+      setActiveSection(current);
+    };
+    let scrollFrame = 0;
+    const requestSync = () => {
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(() => {
+        scrollFrame = 0;
+        syncScrollPosition();
+      });
+    };
+    syncHash();
+    syncScrollPosition();
+    window.addEventListener('scroll', requestSync, { passive: true });
+    window.addEventListener('resize', requestSync);
+    window.addEventListener('hashchange', syncHash);
+  } else if (window.location.pathname.includes('/work/')) {
+    setActiveSection('work');
+  }
 </script>
