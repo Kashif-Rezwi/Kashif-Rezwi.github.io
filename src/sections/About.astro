@@ -1,0 +1,446 @@
+---
+/**
+ * About — Engineering background, core product pillars & career context (nav stop #2).
+ *
+ * Grounded in verified evidence from evidence-ledger.md and positioning.md.
+ * Features:
+ * 1. Primary Full-Stack Product Engineering narrative
+ * 2. 3 Core Engineering Pillars (Workflow UI, Full-Stack Async Systems, AI & Tooling)
+ * 3. Career Ledger & Quick Facts Strip
+ * 4. Interactive Resume Download & Navigation Gateways
+ *
+ * Vertical alignment and spacing tuned for balanced, unclipped viewport presentation.
+ * Icons are clean and consistent without bounding box/backgrounds.
+ */
+import SectionHeader from '../components/SectionHeader.astro';
+import { resumePdf } from '../lib/paths';
+
+interface Props {
+  links?: {
+    email?: string;
+    github?: string;
+    linkedin?: string;
+    devto?: string;
+  };
+}
+
+const { links = {} } = Astro.props;
+---
+
+<section id="about" class="section-block about-bg">
+  <div class="container-site">
+    <SectionHeader label="About" title="Engineering background & product focus" />
+
+    <div class="about-layout">
+      <!-- 1. Primary Narrative Card -->
+      <article class="about-card narrative-card reveal">
+        <div class="card-header-bar">
+          <svg class="header-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <h3 class="card-overline">Professional Background</h3>
+        </div>
+
+        <div class="narrative-content">
+          <p class="about-lead">
+            I'm a frontend-focused full stack engineer with 2+ years of experience building customer-facing SaaS products in startup teams, focusing on landing-page builders, CRM platforms, and campaign &amp; workflow automation.
+          </p>
+          <p class="about-body">
+            My engineering approach connects visual craft with solid full-stack architecture. At Brand Exponents, I contributed across <strong>Swipe Pages</strong> and <strong>Swipe One</strong>, building visual workflow builders, multi-channel marketing campaigns, shared integration layers across 6+ providers, and platform stability systems through major launch periods.
+          </p>
+          <p class="about-body">
+            Currently, I'm building toward <strong>AI product engineering and developer tools</strong> in public by shipping streamed multi-agent PR analysis systems, cited web-search engines, and AST-driven localization tools while publishing technical walkthroughs on dev.to.
+          </p>
+        </div>
+      </article>
+
+      <!-- 2. Core Pillars Bento Grid (3 Cards) -->
+      <div class="pillars-grid">
+        <!-- Pillar 1: Product & Workflow UI -->
+        <article class="about-card pillar-card reveal delay-100">
+          <div class="pillar-header">
+            <svg class="pillar-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M3 9h18" />
+              <path d="M9 21V9" />
+            </svg>
+            <h4 class="pillar-title">Product &amp; Workflow UI</h4>
+          </div>
+          <p class="pillar-desc">
+            Crafting responsive builder canvases, template discovery libraries, and guided automation flows for non-technical users.
+          </p>
+          <div class="pillar-tags">
+            <span class="tech-tag">Swipe Pages</span>
+            <span class="tech-tag">Swipe One CRM</span>
+            <span class="tech-tag">React / Next.js</span>
+          </div>
+        </article>
+
+        <!-- Pillar 2: Full-Stack & Async Systems -->
+        <article class="about-card pillar-card reveal delay-200">
+          <div class="pillar-header">
+            <svg class="pillar-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="8" rx="2" />
+              <rect x="2" y="14" width="20" height="8" rx="2" />
+              <line x1="6" y1="6" x2="6.01" y2="6" />
+              <line x1="6" y1="18" x2="6.01" y2="18" />
+              <path d="M18 10v4" />
+            </svg>
+            <h4 class="pillar-title">Full-Stack &amp; Async Systems</h4>
+          </div>
+          <p class="pillar-desc">
+            Developing REST APIs, message queues (BullMQ/RabbitMQ), webhooks, and reusable multi-provider integration engines.
+          </p>
+          <div class="pillar-tags">
+            <span class="tech-tag">Node.js / NestJS</span>
+            <span class="tech-tag">PostgreSQL / Redis</span>
+            <span class="tech-tag">6+ Providers</span>
+          </div>
+        </article>
+
+        <!-- Pillar 3: Practical AI & DevTools -->
+        <article class="about-card pillar-card reveal delay-300">
+          <div class="pillar-header">
+            <svg class="pillar-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m12 3 1.2 4.8L18 9l-4.8 1.2L12 15l-1.2-4.8L6 9l4.8-1.2Z" />
+              <path d="m19 15 .6 2.4L22 18l-2.4.6L19 21l-.6-2.4L16 18l2.4-.6Z" />
+            </svg>
+            <h4 class="pillar-title">AI Interfaces &amp; DevTools</h4>
+          </div>
+          <p class="pillar-desc">
+            Engineering multi-agent code analysis, streamed AI interfaces, cited answer retrieval, and autonomous AST code transforms.
+          </p>
+          <div class="pillar-tags">
+            <span class="tech-tag">Code Review Agent</span>
+            <span class="tech-tag">Perplexity Engine</span>
+            <span class="tech-tag">Vercel AI SDK</span>
+          </div>
+        </article>
+      </div>
+
+      <!-- 3. Career Ledger & Quick Facts Strip -->
+      <article class="about-card ledger-card reveal delay-400">
+        <div class="facts-grid">
+          <div class="fact-item">
+            <span class="fact-label">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="14" x="2" y="7" rx="2"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
+              Experience
+            </span>
+            <span class="fact-value">2+ Years in SaaS</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m12 2 10 5-10 5L2 7z"/>
+                <path d="m2 17 10 5 10-5"/>
+                <path d="m2 12 10 5 10-5"/>
+              </svg>
+              Specialization
+            </span>
+            <span class="fact-value">Builders, CRM &amp; Automation</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+              </svg>
+              Education
+            </span>
+            <span class="fact-value">BCA (Amity) · Masai School</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Location / Status
+            </span>
+            <span class="fact-value">Kolkata, India · Open to Roles</span>
+          </div>
+        </div>
+
+        <div class="about-footer-row">
+          <div class="about-ctas">
+            <a href={resumePdf} download target="_blank" rel="noopener noreferrer" class="btn">
+              Download Resume (PDF) ↓
+            </a>
+            <a href="#experience" class="btn-outline">
+              View Experience Timeline →
+            </a>
+          </div>
+          <p class="about-footer-note meta">
+            Verified single source of truth for professional background &amp; credentials.
+          </p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-bg {
+    background: transparent;
+  }
+
+  .about-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  /* --- Shared Glass Card Surface --- */
+  .about-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-card);
+    padding: 1.25rem 1.5rem;
+    position: relative;
+    transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  }
+
+  .about-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: var(--glass-highlight);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .about-card:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--glass-border));
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--color-accent) 8%, transparent);
+  }
+
+  @media (max-width: 640px) {
+    .about-card {
+      padding: 1rem 1.125rem;
+    }
+  }
+
+  /* --- 1. Narrative Card --- */
+  .narrative-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .card-header-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent);
+  }
+
+  .header-icon {
+    color: var(--color-accent-text);
+    flex-shrink: 0;
+  }
+
+  .card-overline {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-text);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .narrative-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .about-lead {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-ink);
+    font-weight: 500;
+    margin: 0;
+    text-align: left;
+    text-wrap: pretty;
+  }
+
+  .about-body {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-ink-muted);
+    margin: 0;
+    text-align: left;
+    text-wrap: pretty;
+  }
+
+  .about-body strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  /* --- 2. Pillars Grid (3 Cards) --- */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+
+  @media (min-width: 768px) {
+    .pillars-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .pillar-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1.125rem 1.25rem;
+    height: 100%;
+  }
+
+  .pillar-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pillar-icon {
+    color: var(--color-accent-text);
+    flex-shrink: 0;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .pillar-card:hover .pillar-icon,
+  .pillar-card:hover .pillar-title {
+    color: var(--color-accent-light);
+  }
+
+  .pillar-title {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-text);
+    font-weight: 600;
+    margin: 0;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .pillar-desc {
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+    margin: 0;
+    flex: 1;
+    text-align: left;
+    text-wrap: pretty;
+  }
+
+  .pillar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  .pillar-tags .tech-tag {
+    font-size: 0.6875rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  /* --- 3. Ledger Card & Facts Grid --- */
+  .ledger-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 1.125rem 1.5rem;
+  }
+
+  .facts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+    padding-bottom: 0.875rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent);
+  }
+
+  @media (min-width: 520px) {
+    .facts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .facts-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  .fact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .fact-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-text);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .fact-label svg {
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+
+  .fact-value {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .about-footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .about-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .about-ctas .btn,
+  .about-ctas .btn-outline {
+    padding: 0.375rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+
+  .about-footer-note {
+    margin: 0;
+    font-size: 0.6875rem;
+  }
+</style>

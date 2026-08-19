@@ -156,9 +156,9 @@
     scroll-behavior: smooth;
     /* Prevent layout shift from scrollbar appearance */
     scrollbar-gutter: stable;
-    /* Keep anchored sections clear of the fixed header; sections carry their
-       own top padding, so this only needs to clear the bar, not add more. */
-    scroll-padding-top: 1.25rem;
+    /* Keep anchored sections clear of the fixed header. 65px = header height
+       (body padding-top) — anchors land exactly under the bar, top-aligned. */
+    scroll-padding-top: 65px;
   }
 
   body {
@@ -225,6 +225,12 @@
     width: 100%;
     max-width: 72rem;  /* 1152px */
     padding-inline: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .container-site {
+      padding-inline: 1rem;
+    }
   }
 
   /* --- Section label (overline) --- */
@@ -334,6 +340,12 @@
     transform: translateY(-1px);
   }
 
+  /* Compact button variant for cards & footer */
+  .btn-compact {
+    padding: 0.375rem 0.875rem;
+    font-size: 0.75rem;
+  }
+
   /* --- Tech tags --- */
   .tech-tag {
     display: inline-block;
@@ -415,7 +427,17 @@
      Moved from the duplicated scoped blocks (index.astro + [slug].astro) into
      the shared layer so the grid/band recipe lives in one place. */
   .section-block {
-    padding-block: 5rem;
+    padding-block: clamp(2rem, 3.5vh, 2.75rem);
+    /* One section per viewport (owner-directed): nav targets fill the screen
+       so neighbouring sections never peek in after a nav click. Short
+       sections center their content; tall ones simply grow. 65px = fixed
+       header height (body padding-top); svh matches the hero's mobile-safe
+       precedent. The single in-flow child is .container-site (Contact's
+       dot matrix is position:absolute → unaffected by the centering). */
+    min-height: calc(100svh - 65px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   /* --- Hero content layout (R5-6/R5-8a: kept — the identity is now flat over
@@ -536,6 +558,7 @@
   .delay-350 { animation-delay: 0.35s; }
   .delay-400 { animation-delay: 0.4s; }
   .delay-500 { animation-delay: 0.5s; }
+  .delay-600 { animation-delay: 0.6s; }
 
   /* Intersection-observer reveal is enhancement-only: no-JS content remains visible.
      R5-4: transition unified to the --duration-slow seed (§5.2 motion sync). */

@@ -100,21 +100,12 @@ const paragraphsHtml = highlighted
 
   /* Low-opacity decorative quotation mark glyph in top right */
   .testimonial-mark {
-    position: absolute;
-    top: 0.5rem;
-    right: 1.5rem;
-    font-family: Georgia, 'Playfair Display', 'Times New Roman', serif;
-    font-size: 6rem;
-    line-height: 1;
-    color: var(--color-accent);
-    opacity: 0.15;
-    user-select: none;
-    pointer-events: none;
+    display: none;
   }
 
   .testimonial-quote {
-    font-size: 1.03125rem;
-    line-height: 1.75;
+    font-size: 0.95rem;
+    line-height: 1.7;
     color: var(--color-ink);
     margin: 0;
     position: relative;
@@ -122,11 +113,12 @@ const paragraphsHtml = highlighted
     text-rendering: optimizeLegibility;
     display: flex;
     flex-direction: column;
-    gap: 1.125rem;
+    gap: 1rem;
     font-weight: 400;
-    letter-spacing: 0.005em;
-    text-align: justify;
-    hyphens: auto;
+    letter-spacing: 0;
+    text-align: left;
+    text-wrap: pretty;
+    hyphens: none;
   }
 
   .testimonial-quote :global(p) {
@@ -139,9 +131,11 @@ const paragraphsHtml = highlighted
     background: color-mix(in srgb, var(--color-accent) 14%, transparent);
     color: var(--color-accent-text);
     font-weight: 600;
-    padding: 0.125em 0.3em;
+    padding: 0.1em 0.3em;
     border-radius: 0.25em;
     border-bottom: 1.5px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 
   .testimonial-attribution {

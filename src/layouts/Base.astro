@@ -80,6 +80,25 @@ const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
         );
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
       }
+
+      // Resume action: always opens in a new tab & automatically downloads
+      document.addEventListener('click', (e) => {
+        const target = (e.target as HTMLElement)?.closest('a');
+        if (!target) return;
+        const href = target.getAttribute('href');
+        if (href && (href.endsWith('.pdf') || target.hasAttribute('data-resume-link'))) {
+          e.preventDefault();
+          // 1. Open PDF in a new tab for reading
+          window.open(href, '_blank', 'noopener,noreferrer');
+          // 2. Trigger automatic download of the PDF
+          const downloadAnchor = document.createElement('a');
+          downloadAnchor.href = href;
+          downloadAnchor.download = 'Kashif-Rezwi-Resume.pdf';
+          document.body.appendChild(downloadAnchor);
+          downloadAnchor.click();
+          downloadAnchor.remove();
+        }
+      });
     </script>
   </body>
 </html>

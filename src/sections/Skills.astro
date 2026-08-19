@@ -1,117 +1,279 @@
 ---
 /**
- * R5-6 section partition: Tech stack (was part of index.astro).
- * Styles relocated verbatim from index.astro's scoped block.
+ * R5-6 section partition: Skills (was part of index.astro).
+ * Named 'Skills', divided into two distinct sections:
+ * 1. Technical Skills (staggered alternating left/right layout per category)
+ * 2. Soft Skills (clean chip cluster with semantic SVG icons, no outer card box)
+ * Chip styling is consistent with portfolio glass design system.
+ * Vertical spacing optimized with distinct separation between technical and soft skills.
  */
 import TechIcon from '../components/TechIcon.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 
-interface Props {
-  techStack: Array<{
-    category: string;
-    items: Array<{
-      name: string;
-      color: string;
-      colorLight?: string;
-      icon?: string;
-    }>;
-  }>;
+interface TechItem {
+  name: string;
+  color?: string;
+  colorLight?: string;
+  icon?: string;
 }
 
-const { techStack } = Astro.props;
+interface TechGroup {
+  category: string;
+  items: TechItem[];
+}
+
+interface Props {
+  techStack?: TechGroup[];
+  technicalSkills?: TechGroup[];
+  softSkills?: TechItem[];
+}
+
+const { techStack = [], technicalSkills: techProp, softSkills: softProp } = Astro.props;
+
+// Separate technical skills and soft skills
+const technicalGroups =
+  techProp || techStack.filter((g) => g.category.toLowerCase() !== 'soft skills');
+
+const softItems =
+  softProp || (techStack.find((g) => g.category.toLowerCase() === 'soft skills')?.items ?? []);
 ---
 
 <section id="skills" class="section-block skills-bg">
   <div class="container-site">
-    <SectionHeader label="Tech stack" title="What I work with" />
-    <div class="tech-grid">
-      {techStack.map((group, i) => (
-        <div class={`tech-group reveal delay-${(i + 1) * 100}`}>
-          <h3 class="tech-group-label">{group.category}</h3>
-          <ul class="tech-group-items" role="list">
-            {group.items.map((item) => (
+    <SectionHeader label="Skills" title="What I work with" />
+
+    <div class="skills-wrapper">
+      <!-- 1. Technical Skills Subsection -->
+      <div class="skills-subsection">
+        <h3 class="skills-subsection-title">Technical Skills</h3>
+        <div class="tech-grid">
+          {technicalGroups.map((group, i) => (
+            <div class={`tech-group reveal delay-${((i % 5) + 1) * 100}`}>
+              <h4 class="tech-group-label">{group.category}</h4>
+              <ul class="tech-group-items" role="list">
+                {group.items.map((item) => (
+                  <li
+                    class="tech-item"
+                    style={`--brand: ${item.color || 'var(--color-accent)'}; --brand-on-dark: ${item.colorLight || item.color || 'var(--color-accent)'}`}
+                  >
+                    {item.icon && <TechIcon name={item.icon} size={13} />}
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 2. Soft Skills Subsection (No enclosing card, distinct vertical gap, semantic SVG icons) -->
+      {softItems.length > 0 && (
+        <div class="skills-subsection soft-skills-subsection reveal delay-100">
+          <h3 class="skills-subsection-title">Soft Skills</h3>
+          <ul class="soft-skills-items" role="list">
+            {softItems.map((item) => (
               <li
-                class="tech-item"
-                style={`--brand: ${item.color}; --brand-on-dark: ${item.colorLight || item.color}`}
+                class="tech-item soft-item"
+                style={`--brand: ${item.color || 'var(--color-accent)'}; --brand-on-dark: ${item.colorLight || item.color || 'var(--color-accent)'}`}
               >
-                {item.icon && <TechIcon name={item.icon} size={14} />}
+                {/* 1. Ownership: Target / Bullseye icon */}
+                {item.name.toLowerCase().includes('ownership') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="6" />
+                    <circle cx="12" cy="12" r="2" />
+                  </svg>
+                )}
+                {/* 2. Collaboration: Users Team icon */}
+                {item.name.toLowerCase().includes('collaboration') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                )}
+                {/* 3. Communication: Chat Message icon */}
+                {item.name.toLowerCase().includes('communication') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                )}
+                {/* 4. Dependability: Shield Check icon */}
+                {item.name.toLowerCase().includes('dependability') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <path d="m9 12 2 2 4-4" />
+                  </svg>
+                )}
+                {/* 5. Solution-oriented: Lightbulb icon */}
+                {item.name.toLowerCase().includes('solution') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                    <path d="M9 18h6" />
+                    <path d="M10 22h4" />
+                  </svg>
+                )}
+                {/* 6. Willingness to learn: Book Open icon */}
+                {item.name.toLowerCase().includes('learn') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
+                    <path d="M6 6h10" />
+                    <path d="M6 10h10" />
+                  </svg>
+                )}
                 {item.name}
               </li>
             ))}
           </ul>
         </div>
-      ))}
+      )}
     </div>
   </div>
 </section>
 
 <style>
-  /* Solid alt-blend background: mirrors the visual result of .section-alt
-     (color-mix surface+canvas) but as a solid colour so it can transition
-     cleanly into Work's gradient bottom and Experience's gradient top.
-     No transparency — compositing is off the table. */
   .skills-bg {
-    background: color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas));
+    background: linear-gradient(
+      to bottom,
+      var(--color-canvas) 0%,
+      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 100%
+    );
   }
-  /* R5-6: scoped styles moved from index.astro — byte-identical. */
+
+  .skills-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .skills-subsection {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .soft-skills-subsection {
+    margin-top: 0.75rem;
+  }
+
+  .skills-subsection-title {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-accent-text);
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .skills-subsection-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--glass-border);
+    opacity: 0.35;
+  }
+
+  /* Alternating left/right staggered layout:
+     Each category is a distinct cluster with its label above the chips.
+     Odd rows align to the left, even rows align to the right on all screen sizes. */
   .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
   }
+
   .tech-group {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.4rem;
+    max-width: min(100%, 820px);
+    align-self: flex-start;
   }
+
   .tech-group-label {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-accent);
-    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--color-accent-text);
+    font-weight: 600;
     margin: 0;
+    text-align: left;
+    align-self: flex-start;
   }
+
   .tech-group-items {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.375rem;
+    gap: 0.45rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: flex-start;
+  }
+
+  .tech-group:nth-child(even) {
+    align-self: flex-end;
+  }
+  .tech-group:nth-child(even) .tech-group-label {
+    text-align: right;
+    align-self: flex-end;
+  }
+  .tech-group:nth-child(even) .tech-group-items {
+    justify-content: flex-end;
+  }
+
+  /* Soft skills items (Clean free-floating cluster without enclosing card) */
+  .soft-skills-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     list-style: none;
     padding: 0;
     margin: 0;
   }
+
+  /* Tech & soft item chips */
   .tech-item {
     font-family: var(--font-mono);
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     color: var(--color-ink-muted);
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    padding: 0.25rem 0.625rem;
+    padding: 0.25rem 0.65rem;
     border-radius: var(--radius-control);
     display: inline-flex;
     align-items: center;
-    gap: 0.375rem;
+    gap: 0.45rem;
     transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     cursor: default;
+    --brand: var(--color-accent);
     --active-brand: var(--brand-on-dark, var(--brand));
     --hover-text: var(--active-brand);
     --hover-bg-mix: 16%;
     --hover-border-mix: 45%;
   }
+
   .tech-item svg {
     flex-shrink: 0;
     opacity: 0.75;
     transition: opacity 0.2s ease, color 0.2s ease;
   }
+
   .tech-item:hover {
     color: var(--hover-text);
     background: color-mix(in srgb, var(--active-brand) var(--hover-bg-mix), var(--glass-bg));
     border-color: color-mix(in srgb, var(--active-brand) var(--hover-border-mix), var(--glass-border));
     border-radius: var(--radius-control);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 14px color-mix(in srgb, var(--active-brand) 25%, transparent);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px color-mix(in srgb, var(--active-brand) 25%, transparent);
   }
+
   .tech-item:hover svg {
     opacity: 1;
     color: var(--active-brand);

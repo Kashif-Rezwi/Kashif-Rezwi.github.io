@@ -1,9 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-import { withBase } from '../lib/paths';
+import { withBase, resumePdf } from '../lib/paths';
 
 // /resume — single source of truth for the resume (owner decision OQ-05; resolves C-08).
-const pdfHref = withBase('resume/Kashif-Rezwi-Resume.pdf');
+// The PDF path itself now lives in src/lib/paths.ts (`resumePdf`) and is shared
+// with the hero CTA and the navbar Resume item.
+const pdfHref = resumePdf;
 ---
 
 <Base
@@ -20,7 +22,7 @@ const pdfHref = withBase('resume/Kashif-Rezwi-Resume.pdf');
       The experience section on the home page mirrors it.
     </p>
     <div class="resume-actions">
-      <a href={pdfHref} target="_blank" rel="noopener" class="btn">Open PDF →</a>
+      <a href={pdfHref} target="_blank" rel="noopener noreferrer" class="btn">Open PDF →</a>
       <a href={pdfHref} download class="btn-outline">Download</a>
       <a href={withBase('')} class="resume-back">← Back home</a>
     </div>

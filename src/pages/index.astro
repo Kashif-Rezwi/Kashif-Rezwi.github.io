@@ -4,6 +4,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../sections/Hero.astro';
+import About from '../sections/About.astro';
 import Work from '../sections/Work.astro';
 import Skills from '../sections/Skills.astro';
 import Experience from '../sections/Experience.astro';
@@ -16,7 +17,7 @@ const description =
   'Frontend-focused Full Stack Engineer with 2+ years building customer-facing SaaS products in startup teams: landing-page builders, CRM, and campaign & workflow automation. Currently building AI products and developer tools.';
 
 const featured = (await getCollection('work'))
-  .filter((e) => e.data.order <= 3)
+  .filter((e) => e.data.order <= 4)
   .sort((a, b) => a.data.order - b.data.order);
 
 const testimonials = (await getCollection('testimonials')).sort(
@@ -27,20 +28,18 @@ const links = {
   email: 'kashifrezwi850@gmail.com',
   github: 'https://github.com/Kashif-Rezwi',
   linkedin: 'https://www.linkedin.com/in/kashif-rezwi-149372216/',
+  leetcode: 'https://leetcode.com/u/Kashif-Rezwi/',
   devto: 'https://dev.to/kashifrezwi',
   devtoArticle: 'https://dev.to/kashifrezwi/i-built-an-ai-agent-that-makes-any-nextjs-app-multilingual-in-3-minutes-4bdm',
   archive: 'https://github.com/Kashif-Rezwi?tab=repositories',
-  betterDevUi: 'https://github.com/Kashif-Rezwi/better-dev-ui',
-  betterDevApi: 'https://github.com/Kashif-Rezwi/better-dev-api',
-  betterDevDemo: 'https://betterdev.in',
   looplens: 'https://github.com/Kashif-Rezwi/looplens',
   looplensDemo: 'https://looplens-rho.vercel.app',
   aiPlayground: 'https://github.com/Kashif-Rezwi/ai-playground',
   languagePlayground: 'https://github.com/Kashif-Rezwi/language-playground',
 };
 
-// Tech stack data (from skills-inventory.md)
-const techStack = [
+// Skills data (technical skills by category + verified soft skills)
+const technicalSkills = [
   {
     category: 'Languages',
     items: [
@@ -85,12 +84,23 @@ const techStack = [
   {
     category: 'AI & Tools',
     items: [
-{ name: 'Vercel AI SDK', color: '#000000', colorLight: '#ffffff', icon: 'vercel' },
+      { name: 'Vercel AI SDK', color: '#000000', colorLight: '#ffffff', icon: 'vercel' },
       { name: 'Prisma', color: '#2D3748', colorLight: '#D3D9E0', icon: 'prisma' },
       { name: 'pgvector', color: '#7b61ff', icon: 'pgvector' },
       { name: 'BullMQ', color: '#e0234e', icon: 'bullmq' },
     ],
   },
+];
+
+// Soft skills — every label is backed by the owner-verified LinkedIn
+// testimonials on this page (claim safety, AGENTS.md §3).
+const softSkills = [
+  { name: 'Ownership', color: '#6495ed' },
+  { name: 'Collaboration', color: '#6495ed' },
+  { name: 'Communication', color: '#6495ed' },
+  { name: 'Dependability', color: '#6495ed' },
+  { name: 'Solution-oriented', color: '#6495ed' },
+  { name: 'Willingness to learn', color: '#6495ed' },
 ];
 ---
 
@@ -98,9 +108,12 @@ const techStack = [
     title="Kashif Rezwi · Portfolio",
   description={description}
 >
-  <Hero email={links.email} github={links.github} linkedin={links.linkedin} devto={links.devto} portrait={portrait} />
+  <Hero email={links.email} github={links.github} linkedin={links.linkedin} leetcode={links.leetcode} devto={links.devto} portrait={portrait} />
+  <About links={links} />
+  <!-- Section order matches the mandated nav (Home · About · Skills · Projects ·
+       Contact · Resume), so nav clicks always scroll monotonically down the page. -->
+  <Skills technicalSkills={technicalSkills} softSkills={softSkills} />
   <Work featured={featured} links={links} />
-  <Skills techStack={techStack} />
   <Experience />
   <Testimonials testimonials={testimonials} />
   <Now links={links} />
