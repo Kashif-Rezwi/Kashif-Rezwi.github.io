@@ -2,9 +2,12 @@
 /**
  * R5-6 section partition: Home hero (was part of index.astro).
  * Updated to place social profiles in a dedicated vertical rail on the left of text content.
+ * Role line: typographic ASCII cycler (HeroRoleCycler) — replaces the R4 skewed badge
+ * per owner direction (2026-08-19); canonical headline preserved in meta + sr-only text.
  */
 import { Image } from 'astro:assets';
 import HeroDotMatrix from '../components/HeroDotMatrix.astro';
+import HeroRoleCycler from '../components/HeroRoleCycler.astro';
 import Icon from '../components/Icon.astro';
 import { resumePdf } from '../lib/paths';
 
@@ -80,12 +83,9 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
           Kashif Rezwi
         </h1>
 
-        <!-- Role line (consistent with title/meta/positioning) — skewed accent badge -->
-        <p class="hero-role delay-300 animate-fade-up">
-          <span class="hero-role-badge">
-            <span class="hero-role-text-inner">Frontend-focused Full Stack Engineer</span>
-          </span>
-        </p>
+        <!-- Role titles — typographic ASCII cycler (canonical headline preserved
+             in title/meta/OG + visually-hidden text inside the component) -->
+        <HeroRoleCycler />
 
         <!-- Direction — old deployed accent style restored -->
         <p class="hero-direction delay-350 animate-fade-up">
@@ -230,29 +230,6 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
     margin: 0;
   }
 
-  .hero-role {
-    margin: 0.5rem 0 0;
-  }
-
-  .hero-role-badge {
-    display: inline-block;
-    padding: 0.45rem 0.9rem 0.45rem 1.1rem;
-    background: var(--color-accent-badge);
-    border-radius: 0;
-    transform: skewX(-8deg);
-    transform-origin: center;
-    box-shadow: 0 2px 0 color-mix(in srgb, var(--color-accent) 55%, transparent);
-  }
-  .hero-role-text-inner {
-    display: inline-block;
-    transform: skewX(8deg);
-    font-size: clamp(1.05rem, 3vw, 1.75rem);
-    font-weight: 500;
-    line-height: 1.3;
-    color: #fff;
-    letter-spacing: -0.01em;
-  }
-
   .hero-direction {
     font-size: clamp(1.05rem, 3vw, 1.75rem);
     font-weight: 500;
@@ -281,6 +258,11 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
     flex-shrink: 0;
   }
   .portrait-wrapper {
+    /* Signal Field signature: a fixed print-like extrusion, not simulated
+       lighting. The foreground moves up-left as its accent plate resolves
+       down-right, giving the portrait deliberate geometric depth. */
+    --portrait-front-shift: -6px, -6px;
+    --portrait-plate-shift: 10px, 12px;
     position: relative;
     width: 220px;
     height: 220px;
@@ -292,12 +274,8 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
     inset: -8px;
     background: var(--color-accent);
     clip-path: polygon(30% 4%, 70% 4%, 88% 18%, 100% 48%, 86% 78%, 50% 100%, 24% 90%, 10% 76%, 3% 56%, 6% 34%, 18% 12%);
-    transition: inset 0.35s ease, transform 0.35s ease;
+    transition: inset var(--duration-slow) ease, transform var(--duration-slow) ease;
     pointer-events: none;
-  }
-  .hero-portrait:hover .portrait-wrapper::after {
-    inset: 0;
-    transform: translate(10px, 12px);
   }
   .portrait-img {
     position: relative;
@@ -307,10 +285,19 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
     object-fit: cover;
     background-color: #a9c8ff;
     clip-path: polygon(30% 4%, 70% 4%, 88% 18%, 100% 48%, 86% 78%, 50% 100%, 24% 90%, 10% 76%, 3% 56%, 6% 34%, 18% 12%);
-    transition: transform 0.35s ease;
+    transition: transform var(--duration-slow) ease;
   }
-  .hero-portrait:hover .portrait-img {
-    transform: translate(-6px, -6px);
+
+  /* Keep this tactile effect to devices that actually hover. Touch layouts
+     retain the composed resting shape, and reduced-motion avoids a jump. */
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .hero-portrait:hover .portrait-wrapper::after {
+      inset: 0;
+      transform: translate(var(--portrait-plate-shift));
+    }
+    .hero-portrait:hover .portrait-img {
+      transform: translate(var(--portrait-front-shift));
+    }
   }
 
   @media (min-width: 1024px) {

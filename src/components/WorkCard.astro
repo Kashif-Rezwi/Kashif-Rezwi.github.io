@@ -34,7 +34,7 @@ const visibleTech = tech.slice(0, VISIBLE_TECH);
 const hiddenTechCount = tech.length - visibleTech.length;
 ---
 
-<article class="work-card glass-card">
+<article class="work-card glass-card glass-role-surface">
   {
     coverSrc && (
       <div class="work-card-cover" style={`background-image: url('${coverSrc.src}')`}>
@@ -105,14 +105,14 @@ const hiddenTechCount = tech.length - visibleTech.length;
     height: 100%;
     /* border-color in the base transition (R5-4): lets the glass focus-echo
        animate through this unlayered rule instead of the layered global one */
-    transition: transform var(--duration-base) ease, border-color var(--duration-fast) ease;
+    transition: transform var(--duration-base) ease, border-color var(--duration-slow) ease, background var(--duration-slow) ease;
   }
   /* R5-3: glass-card replaces the flat `.card`; hover is a pure transform lift
      (the old background sweep is gone — glass does the depth, §7 row Work cards).
      Backdrop-filter is disabled locally: the cards float over a smooth ambient
      band (nothing to blur), so keeping it would only add GPU layers (spec §12). */
   .work-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(var(--interaction-lift));
   }
   .work-card {
     -webkit-backdrop-filter: none;

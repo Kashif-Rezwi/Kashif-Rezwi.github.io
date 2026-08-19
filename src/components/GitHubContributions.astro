@@ -140,8 +140,14 @@ const username = (snapshot as any)?.username ?? 'Kashif-Rezwi';
     border-radius: var(--radius-card, 0.75rem);
     padding: 1.5rem 1.5rem 1.25rem;
     position: relative;
+    transition: background var(--duration-slow) ease, border-color var(--duration-slow) ease;
     /* No backdrop-filter: the card sits on the smooth work-section ambient
        band — nothing to blur, so no GPU layer is spent (spec §12). */
+  }
+  /* Hover-only primary tint, matching every other card on the site. */
+  .gh-contrib-card:hover {
+    background: var(--glass-primary-bg);
+    border-color: var(--glass-primary-border);
   }
   /* R5-3: top-edge catch light matches the shared glass vocabulary (kept local
      here; R5-6 may promote to the utility). */

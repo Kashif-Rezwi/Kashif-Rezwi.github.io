@@ -56,7 +56,7 @@ const paragraphsHtml = highlighted
   .join('');
 ---
 
-<figure class="testimonial-card glass-card">
+<figure class="testimonial-card glass-card glass-role-surface">
   <span class="testimonial-mark" aria-hidden="true">“</span>
 
   <blockquote class="testimonial-quote" set:html={paragraphsHtml}></blockquote>
@@ -91,11 +91,11 @@ const paragraphsHtml = highlighted
     padding: 2rem 2rem 1.75rem;
     height: 100%;
     border-radius: var(--radius-card);
-    transition: transform var(--duration-base) ease, border-color var(--duration-fast) ease, box-shadow var(--duration-base) ease;
+    transition: transform var(--duration-base) ease, border-color var(--duration-slow) ease, box-shadow var(--duration-base) ease, background var(--duration-slow) ease;
     overflow: hidden;
   }
   .testimonial-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(var(--interaction-lift));
   }
 
   /* Low-opacity decorative quotation mark glyph in top right */
@@ -125,17 +125,28 @@ const paragraphsHtml = highlighted
     margin: 0;
   }
 
-  /* Quiet highlight treatment: soft accent fill + subtle underline */
+  /* Quiet highlight treatment: typography stays dominant; the accent is an
+     editorial underline rather than a repeated set of blue text blocks. */
   .testimonial-quote :global(mark.testimonial-highlight),
   .testimonial-quote :global(.testimonial-highlight) {
-    background: color-mix(in srgb, var(--color-accent) 14%, transparent);
-    color: var(--color-accent-text);
+    background: transparent;
+    color: var(--color-ink);
     font-weight: 600;
-    padding: 0.1em 0.3em;
-    border-radius: 0.25em;
-    border-bottom: 1.5px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+    padding: 0;
+    border-radius: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 44%, transparent);
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
+    transition: background var(--duration-slow) ease, border-color var(--duration-slow) ease;
+  }
+
+  /* Card hover: the editorial underline blooms into a soft marker wash with a
+     full-strength accent underline, so the key phrases are easier to pick out.
+     Colors only — no padding change, so the quote never reflows on hover. */
+  .testimonial-card:hover :global(mark.testimonial-highlight),
+  .testimonial-card:hover :global(.testimonial-highlight) {
+    background: var(--color-accent-soft);
+    border-bottom-color: var(--color-accent);
   }
 
   .testimonial-attribution {

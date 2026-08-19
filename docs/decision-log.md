@@ -605,8 +605,42 @@
 - **Files changed:** `src/sections/Experience.astro`, `src/sections/About.astro`.
 - **Verification:** `npm run build` — 7 pages built cleanly.
 
+## DL-077 — Signal Field visual-system implementation approved
 
+- **Date:** 2026-08-19
+- **Decision:** The owner approved implementation of the final UI/UX audit recommendations. The selected direction is **Signal Field**: preserve the cornflower Responsive Engineering Field, geometric portrait, Hero/Contact social rails, selective glass, Hero/Contact dot matrix, and Contact ASCII renderer; improve hierarchy, rhythm, cross-page consistency, and motion restraint.
+- **Scope:** Primary/surface/utility glass roles; fixed directional portrait extrusion; active navigation state; mobile Contact CTA-first order; hierarchy refinements for About, Skills, Work, Experience, Testimonials, Now, case studies, Resume, and 404. ASCII remains singular in Contact.
+- **Exclusions:** No claims/copy, routes, dependencies, technical stack, backend, SEO, deployment, global cursor effect, global parallax, extra animated ASCII, or generic redesign work.
+- **Plan:** `docs/rebuild-02/28-signal-field-implementation-plan.md`.
 
+## DL-078 — Signal Field implementation complete and locally verified
+
+- **Date:** 2026-08-19
+- **Decision:** Implemented the approved Signal Field plan without changing public copy, claims, routes, dependencies, or deployment behavior.
+- **Delivered:** Tokenized primary/surface/utility glass roles; fixed-direction Hero portrait extrusion; active navigation state; Contact CTA-first mobile order; restrained hierarchy refinements across About, Skills, Work, Experience, Testimonials, Now, case studies, Resume, and 404. The ASCII renderer remains singular in Contact.
+- **Verification:** Astro production build completed all **7 pages**; `check:contrast` **19/19**; `check:glass-contrast` **30/30**; visual checks at 320/768/1024/1440px, light/dark, desktop/mobile, reduced motion, zero horizontal overflow, active navigation, and portrait hover passed; browser error/console checks clean. Evidence: `docs/rebuild-02/29-signal-field-implementation-evidence.md`.
+- **Status:** Local changes are uncommitted. No push or deployment was performed; next action is owner review/authorization for any commit or promotion.
+
+## DL-079 — Signal Field screenshot-review corrections
+
+- **Date:** 2026-08-19
+- **Context:** The owner requested a final cross-check of the approved Signal Field implementation and supplied two visual screenshots. The screenshots are visual evidence only; no external instruction source was followed.
+- **Decision:** Correct four implementation defects found through source inspection and responsive reproduction:
+  1. `Contact.astro` passed `contact-content` into the child `GlassPanel` component, but the parent-scoped CSS did not apply to that component root. The class is now targeted intentionally with `:global(.contact-content)`, restoring the planned panel padding, flex layout, and width cap.
+  2. The planned 900px Contact switch was too late for the complete rail + panel + ASCII composition at intermediate desktop widths. The stacked, CTA-first layout now engages at 1100px and below, preserving the desktop split only where it has adequate visual room.
+  3. Header utility glass inherited the generic focus-within all-edge border, yielding the unintended full blue Header frame shown in the screenshot when the theme control held focus. The Header now keeps its deliberate bottom divider only; the theme choice retains its accessible local focus outline.
+  4. The ASCII renderer's CSS obeyed reduced motion but its JavaScript timer still cycled. It now remains static when `prefers-reduced-motion: reduce` is active, including preference changes while the page is open.
+- **Additional refinement:** Role-based catch light applies only to role-only surfaces, avoiding redundant decoration on cards/panels that already use the shared glass shape utility.
+- **Verification:** `npm run build` — 7 pages clean; `check:contrast` — 19/19 PASS; `check:glass-contrast` — 30/30 PASS; `git diff --check` clean. Visual QA: Contact correct at 320px light, 390px dark, 960px dark, and 1440px dark; focused Header correct at 2880px; all four case-study pages, Resume, and 404 have no overflow; portrait hover yields foreground `translate(-6px, -6px)` and plate `translate(10px, 12px)` only on hover-capable desktop; reduced-motion ASCII remains static; browser errors and console are clean.
+- **Status:** Local changes remain uncommitted. No push or deployment was performed.
+
+## DL-080 — Hero role line becomes a typographic ASCII cycler
+
+- **Date:** 2026-08-19
+- **Context:** Owner directive in conversation: bring the Contact ASCII design into the Hero left content column, cycling four role titles — Full Stack Engineer, MERN Stack Engineer, Product Engineer, Frontend Engineer. Owner revision mid-implementation: each full role title renders on a **single visual line**. This supersedes the DL-077/078 constraint "ASCII remains singular in Contact"; the four titles are owner-specified (claim-source tier 1; "Product Engineer" is the approved resume-variant title per positioning.md §2).
+- **Decision:** Replace the R4 skewed role badge (DL-043/045) with `src/components/HeroRoleCycler.astro` — a single-line block-glyph ASCII strip (76ch × 3 rows, frames precomputed in `src/lib/ascii-roles.ts`) auto-cycling the four roles with the Contact renderer's 320ms diagonal wavefront morph. Differentiation from Contact (no dilution): hero = pure type in the single theme accent (`--color-accent-text`); Contact = icon + per-brand colors. Canonical headline "Frontend-focused Full Stack Engineer" preserved in title/meta/OG + new `.visually-hidden` text; `<pre>` is `aria-hidden`; SSR initial frame keeps no-JS identical. Container-driven font (`container-type: inline-size` + `min(0.95rem, 2.1cqw)`) guarantees the 76ch line never overflows; reduced-motion static; click-to-cycle; hover/off-screen/tab-hidden pause. Contact renderer untouched; dead badge styles removed; `--color-accent-badge` token + its contrast-check row retained for potential badge restoration.
+- **Verification:** Build 7 pages clean; `check:contrast` 19/19; `check:glass-contrast` 30/30; frame integrity (4 frames ≤ 76ch) via node; auto-cycle + shimmer + click-to-cycle + reduced-motion static verified in browser; horizontal overflow 0 at 375/768/1440; dark/light captures legible; console/errors clean. Evidence: `docs/rebuild-02/31-hero-role-ascii-evidence.md`; plan: `docs/rebuild-02/30-hero-role-ascii-plan.md`.
+- **Status:** Local changes are uncommitted. No push or deployment was performed; next action is owner review/authorization for any commit or promotion.
 
 
 

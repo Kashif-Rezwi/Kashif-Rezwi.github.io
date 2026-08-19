@@ -64,7 +64,7 @@ const { featured, links } = Astro.props;
     </div>
 
     <!-- More projects compact list -->
-    <div class="more-projects reveal">
+    <div class="more-projects reveal glass-role-surface">
       <h3 class="more-projects-label">More projects</h3>
       <ul class="more-projects-list">
         <ProjectRow
@@ -119,8 +119,8 @@ const { featured, links } = Astro.props;
   }
 
   .more-projects {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    /* bg + border come from the shared .glass-role-surface recipe so the
+       global primary-tint hover applies. */
     border-radius: var(--radius-card);
     padding: 1.5rem;
     position: relative;

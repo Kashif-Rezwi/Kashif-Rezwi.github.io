@@ -2,8 +2,12 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-18 (**`mandatory-changes` review fixes complete** — home sections reordered to the mandated nav order (About → Skills → Work), content-band duty-swap preserving the seamless band, 2×2 work grid at ≥1024px, resume-link semantics unified (one behavior per intent; JS shim deleted) — DL-074; **owner-directed follow-ups also complete** — Skills reworked to one-category-per-row with alternating left/right start (≥640px), About redesigned (full-width card, two-col split, lead paragraph, resume footer row), one-section-per-viewport (`min-height: 100svh−65px` + centered content + `scroll-padding-top: 65px` so nav clicks no longer show neighbouring sections) — DL-075, evidence `docs/rebuild-02/27-mandatory-changes-review-evidence.md`; build 7 pages, contrast 19/19 + 30/30; **no commit/push per owner instruction**; **owner gates pending:** visual captures/Lighthouse/axe/overflow + merge toward `develop`; Better DEV cover → OQ-14. **R5 active** — R3 live on `gh-pages`; R4 code + testimonials **merged to `develop`**, deploy owner-gated; R5-1…R5-6 + **R5-7 full QA** complete/verified on `evolve-design`; **R5-8a pre-deploy polish cycle (DL-063) in progress** — T1 complete (uncommitted), T2 complete (uncommitted), T3 complete (DL-072, uncommitted), section background continuity fixed (DL-065 & DL-067, unified content band, uncommitted), spotlight removed (DL-066), hero ambience removed (DL-068), AI journey card padding & width 100% polished (DL-069), backdrops removed & case study mobile width aligned (DL-070), light theme card contrast, tech stack hover readability, and sticky footer anchoring complete (DL-071), **T4 next**, awaiting **owner R5-8 deploy go/no-go** after the polish cycle)
+- **Last updated:** 2026-08-19 (**Hero role ASCII cycler complete locally** — owner-directed (DL-080): the hero role badge is replaced by a single-line block-glyph ASCII strip cycling Full Stack / MERN Stack / Product / Frontend Engineer with the 320ms diagonal wavefront morph; canonical headline preserved in meta + sr-only text; **7-page Astro build**, contrast **19/19 + 30/30**, zero overflow at 375/768/1440, reduced-motion static, console clean — evidence `docs/rebuild-02/31-hero-role-ascii-evidence.md`; **no commit, push, or deploy**)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
+
+## Current Signal Field status
+
+The owner-approved Signal Field visual-system implementation and screenshot-review correction pass are complete in the local `develop` working tree. It preserves the Responsive Engineering Field identity while making glass roles, navigation orientation, responsive Contact hierarchy, interaction restraint, and inner-page consistency explicit. The verified next decision is owner review and authorization for any commit, branch promotion, or deployment.
 
 ## Current phase
 
@@ -59,6 +63,8 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 - Owner directive: `temp/career-ops-workspace` is the **temporary knowledge base for Phase 0 only** — its extracted markdown (profile, strategy, evidence, resume content) is the input Phase 1 consumes; it is not a live authority going forward (DL-007).
 
 ## Next approved action
+
+- **Signal Field (DL-079):** local implementation, evidence, and screenshot-review corrections are complete. Review the uncommitted changes and explicitly authorize a commit before any promotion or deployment.
 
 - **R4 improvement cycle — code merged, QA + deploy owner-gated.**
 

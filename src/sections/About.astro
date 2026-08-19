@@ -197,12 +197,12 @@ const { links = {} } = Astro.props;
 
   /* --- Shared Glass Card Surface --- */
   .about-card {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    background: var(--glass-surface-bg);
+    border: 1px solid var(--glass-surface-border);
     border-radius: var(--radius-card);
     padding: 1.25rem 1.5rem;
     position: relative;
-    transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+    transition: border-color var(--duration-slow) ease, background var(--duration-slow) ease;
   }
 
   .about-card::before {
@@ -215,9 +215,11 @@ const { links = {} } = Astro.props;
     pointer-events: none;
   }
 
+  /* Hover-only primary tint: every About card rests in the shared surface
+     recipe and warms to the primary glass tint under the cursor. */
   .about-card:hover {
-    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--glass-border));
-    box-shadow: 0 4px 20px color-mix(in srgb, var(--color-accent) 8%, transparent);
+    background: var(--glass-primary-bg);
+    border-color: var(--glass-primary-border);
   }
 
   @media (max-width: 640px) {
@@ -231,6 +233,7 @@ const { links = {} } = Astro.props;
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
+    padding: 1.5rem;
   }
 
   .card-header-bar {
@@ -306,6 +309,7 @@ const { links = {} } = Astro.props;
     gap: 0.75rem;
     padding: 1.125rem 1.25rem;
     height: 100%;
+    background: color-mix(in srgb, var(--glass-surface-bg) 92%, var(--color-canvas));
   }
 
   .pillar-header {

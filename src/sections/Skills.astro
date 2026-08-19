@@ -177,13 +177,13 @@ const softItems =
     opacity: 0.35;
   }
 
-  /* Alternating left/right staggered layout:
-     Each category is a distinct cluster with its label above the chips.
-     Odd rows align to the left, even rows align to the right on all screen sizes. */
+  /* Alternating left/right staggered layout: the offset gives Skills a
+     measured rhythm on wide screens without turning every category into a
+     full-width banner. Narrow screens retain a single calm reading edge. */
   .tech-grid {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.5rem;
     width: 100%;
   }
 
@@ -191,7 +191,7 @@ const softItems =
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    max-width: min(100%, 820px);
+    max-width: min(100%, 900px);
     align-self: flex-start;
   }
 
@@ -217,15 +217,17 @@ const softItems =
     justify-content: flex-start;
   }
 
-  .tech-group:nth-child(even) {
-    align-self: flex-end;
-  }
-  .tech-group:nth-child(even) .tech-group-label {
-    text-align: right;
-    align-self: flex-end;
-  }
-  .tech-group:nth-child(even) .tech-group-items {
-    justify-content: flex-end;
+  @media (min-width: 640px) {
+    .tech-group:nth-child(even) {
+      align-self: flex-end;
+    }
+    .tech-group:nth-child(even) .tech-group-label {
+      text-align: right;
+      align-self: flex-end;
+    }
+    .tech-group:nth-child(even) .tech-group-items {
+      justify-content: flex-end;
+    }
   }
 
   /* Soft skills items (Clean free-floating cluster without enclosing card) */
@@ -250,7 +252,7 @@ const softItems =
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    transition: color var(--duration-fast) ease, background var(--duration-fast) ease, border-color var(--duration-fast) ease, transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
     cursor: default;
     --brand: var(--color-accent);
     --active-brand: var(--brand-on-dark, var(--brand));
@@ -271,7 +273,7 @@ const softItems =
     border-color: color-mix(in srgb, var(--active-brand) var(--hover-border-mix), var(--glass-border));
     border-radius: var(--radius-control);
     transform: translateY(-1px);
-    box-shadow: 0 3px 10px color-mix(in srgb, var(--active-brand) 25%, transparent);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--active-brand) 14%, transparent);
   }
 
   .tech-item:hover svg {

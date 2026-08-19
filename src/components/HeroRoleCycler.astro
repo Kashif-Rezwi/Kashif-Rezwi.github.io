@@ -1,0 +1,230 @@
+---
+/**
+ * Hero role cycler — a typographic ASCII block that morphs through the owner's
+ * role titles (Full Stack / MERN Stack / Product / Frontend Engineer), each
+ * rendered as one single-line block-glyph strip.
+ *
+ * Signal Field discipline (owner-directed 2026-08-19): the hero variant of the
+ * Contact ASCII motif is deliberately *pure type* in the single theme accent —
+ * no icons, no brand colors — so the two ASCII elements read as related but
+ * distinct species. Reuses the mini block font + 320ms diagonal wavefront morph
+ * from the Contact renderer (frames precomputed in src/lib/ascii-roles.ts);
+ * adds no dependencies.
+ *
+ * Claim safety: "Frontend-focused Full Stack Engineer" remains the single site
+ * headline in title/meta/OG and is preserved here as visually-hidden text next
+ * to the decorative, aria-hidden ASCII display. Reduced motion renders a
+ * static first frame; no-JS shows the same server-rendered frame.
+ */
+import { ROLE_FRAMES } from '../lib/ascii-roles';
+---
+
+<div
+  class="hero-role-cycler delay-300 animate-fade-up"
+  id="hero-role-cycler"
+  title="Click to cycle role"
+>
+  <pre id="hero-role-display" class="hero-role-ascii" aria-hidden="true">{ROLE_FRAMES[0]}</pre>
+  <span class="visually-hidden">Frontend-focused Full Stack Engineer</span>
+</div>
+
+<script>
+  import { ROLE_FRAMES, ASCII_COLS, ASCII_ROWS } from '../lib/ascii-roles';
+
+  const zone = document.getElementById('hero-role-cycler');
+  const display = document.getElementById('hero-role-display');
+
+  if (zone && display) {
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const CYCLE_TIME = 3200; // Comfortable auto-cycle pacing
+    const FIRST_CYCLE_DELAY = 3200; // Let the entrance animation read first
+
+    // Precomputed 2D threshold matrix for a diagonal morph wavefront
+    // (zero per-frame allocation, same field as the Contact renderer).
+    const THRESHOLDS = Array.from({ length: ASCII_ROWS }, (_, r) =>
+      Array.from({ length: ASCII_COLS }, (_, c) => (c / ASCII_COLS) * 0.65 + (r / ASCII_ROWS) * 0.35)
+    );
+    const morphRunes = ['█', '▓', '▒', '░', '▄', '▀', '▌', '▐', '■', '#', '*', '+', '='];
+    const morphRunesLen = morphRunes.length;
+
+    let currentIndex = 0;
+    let cycleTimeout: number | null = null;
+    let animFrameId: number | null = null;
+    let isHovering = false;
+    let isInView = true;
+
+    function morphTo(targetAscii: string) {
+      if (animFrameId !== null) cancelAnimationFrame(animFrameId);
+
+      // Reduced motion: static swap — the motif stays, the animation goes.
+      if (reducedMotionQuery.matches) {
+        display.textContent = targetAscii;
+        animFrameId = null;
+        return;
+      }
+
+      const currentLines = (display.textContent || targetAscii).split('\n');
+      const targetLines = targetAscii.split('\n');
+      const duration = 320; // 320ms visible, graceful wave
+      let startTime: number | null = null;
+
+      function frame(timestamp: number) {
+        if (startTime === null) startTime = timestamp;
+        const progress = Math.min(1, (timestamp - startTime) / duration);
+
+        const outputLines = new Array<string>(ASCII_ROWS);
+        for (let r = 0; r < ASCII_ROWS; r++) {
+          const curLine = currentLines[r] || '';
+          const tgtLine = targetLines[r] || '';
+          const threshRow = THRESHOLDS[r];
+          let newLine = '';
+
+          for (let c = 0; c < ASCII_COLS; c++) {
+            const curChar = curLine[c] || ' ';
+            const tgtChar = tgtLine[c] || ' ';
+            const threshold = threshRow[c];
+
+            // Distinct wave with full-width particle shimmer band
+            if (progress > threshold + 0.22) {
+              newLine += tgtChar;
+            } else if (progress > threshold - 0.16) {
+              newLine += tgtChar !== ' ' || curChar !== ' '
+                ? morphRunes[(Math.random() * morphRunesLen) | 0]
+                : ' ';
+            } else {
+              newLine += curChar;
+            }
+          }
+          outputLines[r] = newLine;
+        }
+
+        display.textContent = outputLines.join('\n');
+
+        if (progress < 1) {
+          animFrameId = requestAnimationFrame(frame);
+        } else {
+          display.textContent = targetAscii;
+          animFrameId = null;
+        }
+      }
+
+      animFrameId = requestAnimationFrame(frame);
+    }
+
+    function switchRole(idx: number) {
+      currentIndex = (idx + ROLE_FRAMES.length) % ROLE_FRAMES.length;
+      morphTo(ROLE_FRAMES[currentIndex]);
+    }
+
+    function stopCycle() {
+      if (cycleTimeout !== null) {
+        clearTimeout(cycleTimeout);
+        cycleTimeout = null;
+      }
+    }
+
+    // Recursive-timeout scheduler: each switch restarts the wait, so a manual
+    // click never collides with the next auto-cycle.
+    function scheduleNext(delay: number) {
+      if (reducedMotionQuery.matches || isHovering || !isInView || document.hidden) return;
+      stopCycle();
+      cycleTimeout = window.setTimeout(() => {
+        cycleTimeout = null;
+        switchRole(currentIndex + 1);
+        scheduleNext(CYCLE_TIME);
+      }, delay);
+    }
+
+    // Zero-latency click to cycle (interrupts any in-flight morph)
+    zone.addEventListener('click', () => {
+      switchRole(currentIndex + 1);
+      scheduleNext(CYCLE_TIME);
+    });
+
+    zone.addEventListener('mouseenter', () => {
+      isHovering = true;
+      stopCycle();
+    });
+    zone.addEventListener('mouseleave', () => {
+      isHovering = false;
+      scheduleNext(CYCLE_TIME);
+    });
+
+    // Pause when the hero is scrolled out of view
+    new IntersectionObserver(([entry]) => {
+      isInView = entry.isIntersecting;
+      if (isInView) {
+        scheduleNext(CYCLE_TIME);
+      } else {
+        stopCycle();
+        if (animFrameId !== null) cancelAnimationFrame(animFrameId);
+        animFrameId = null;
+      }
+    }).observe(zone);
+
+    // Pause when the tab is hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopCycle();
+        if (animFrameId !== null) cancelAnimationFrame(animFrameId);
+        animFrameId = null;
+      } else {
+        scheduleNext(CYCLE_TIME);
+      }
+    });
+
+    // Live reduced-motion preference changes
+    reducedMotionQuery.addEventListener('change', (event) => {
+      if (event.matches) {
+        stopCycle();
+        if (animFrameId !== null) cancelAnimationFrame(animFrameId);
+        animFrameId = null;
+        display.textContent = ROLE_FRAMES[currentIndex];
+      } else {
+        scheduleNext(CYCLE_TIME);
+      }
+    });
+
+    scheduleNext(FIRST_CYCLE_DELAY);
+  }
+</script>
+
+<style>
+  .hero-role-cycler {
+    margin: 0.85rem 0 0;
+    cursor: pointer;
+    user-select: none;
+    /* Container-driven sizing: the strip's font scales with the inline space
+       actually available, so the 76ch single-line role never overflows at any
+       viewport (see the cqw font-size below). */
+    container-type: inline-size;
+  }
+
+  .hero-role-ascii {
+    margin: 0;
+    font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: clamp(0.42rem, 1.1vw, 0.95rem); /* fallback where cqw is unsupported */
+    font-size: min(0.95rem, 2.1cqw); /* 76ch ≈ 45.6em ⇒ 100/45.6 ≈ 2.19cqw fills the container */
+    line-height: 1.05;
+    letter-spacing: 0;
+    font-weight: 900;
+    color: var(--color-accent-text);
+    text-align: left;
+    white-space: pre;
+    user-select: none;
+    width: 76ch;
+    max-width: 100%;
+    height: calc(3 * 1.05em);
+    display: block;
+    overflow: hidden;
+    box-sizing: content-box;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-accent) 32%, transparent));
+    transition: filter 0.3s ease;
+  }
+
+  .hero-role-cycler:hover .hero-role-ascii {
+    filter: drop-shadow(0 0 14px color-mix(in srgb, var(--color-accent) 55%, transparent));
+  }
+</style>
+

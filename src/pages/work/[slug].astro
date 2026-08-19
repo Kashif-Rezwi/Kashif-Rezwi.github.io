@@ -48,7 +48,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     ========================================================= -->
     <div class="case-hero">
       <div class="container-site">
-        <div class="case-hero-inner glass-band">
+        <div class="case-hero-inner glass-band glass-role-surface">
         <!-- Breadcrumb + role label -->
         <div class="case-hero-meta glass-settle">
           <a href={withBase('/#work')} class="case-back">← Work</a>
@@ -115,7 +115,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
       <!-- Sidebar (labelled region — avoids nesting a complementary `<aside>` inside <main>) -->
       <div class="case-sidebar" role="region" aria-label="Project details">
         <!-- Tech stack -->
-        <div class="case-sidebar-card reveal glass-card">
+        <div class="case-sidebar-card reveal glass-card glass-role-surface">
           <h2 class="case-sidebar-label">Tech stack</h2>
           <ul class="case-sidebar-tech">
             {tech.map((t) => <li class="tech-tag">{t}</li>)}
@@ -123,7 +123,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
         </div>
 
         <!-- Links -->
-        <div class="case-sidebar-card reveal delay-100 glass-card">
+        <div class="case-sidebar-card reveal delay-100 glass-card glass-role-surface">
           <h2 class="case-sidebar-label">Links</h2>
           <ul class="case-sidebar-links">
             <li>
@@ -190,8 +190,8 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    /* bg + border come from the shared .glass-role-surface recipe so the
+       global primary-tint hover applies — primary is hover-only now. */
     border-radius: var(--radius-card);
     padding: 2rem;
   }
@@ -273,7 +273,7 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     border-radius: var(--radius-card);
     overflow: hidden;
     border: 1px solid var(--glass-border);
-    background: var(--glass-bg);
+    background: var(--glass-surface-bg);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
@@ -308,8 +308,9 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
   }
 
   .case-sidebar-card {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    /* bg + border come from the shared .glass-card/.glass-role-surface recipe
+       so the global primary-tint hover applies; only the no-blur override
+       stays local (flat canvas behind, §12). */
     border-radius: var(--radius-card);
     padding: 1.25rem;
     display: flex;

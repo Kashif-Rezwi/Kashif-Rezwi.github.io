@@ -37,6 +37,13 @@ import { withBase } from '../lib/paths';
     gap: 1rem;
     max-width: 480px;
   }
+  .not-found-inner::before {
+    content: '';
+    width: 2px;
+    height: 2.75rem;
+    background: var(--color-accent);
+    border-radius: var(--radius-control);
+  }
 
   .not-found-code {
     font-size: 0.75rem;

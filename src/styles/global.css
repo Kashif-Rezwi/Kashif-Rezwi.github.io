@@ -55,11 +55,22 @@
   --glass-bg-solid: var(--color-surface);            /* fallback / reduced-transparency floor */
   --color-glow: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 70%);
 
+  /* Signal Field material roles. Glass is a controlled material hierarchy:
+     primary surfaces sit over the live field, surface glass supports content
+     on quiet bands, and utility glass keeps controls visually lightweight. */
+  --glass-primary-bg: color-mix(in srgb, var(--color-canvas) 54%, color-mix(in srgb, var(--color-accent) 12%, transparent));
+  --glass-primary-border: color-mix(in srgb, #ffffff 17%, transparent);
+  --glass-surface-bg: color-mix(in srgb, var(--color-canvas) 74%, color-mix(in srgb, var(--color-accent) 5%, transparent));
+  --glass-surface-border: color-mix(in srgb, #ffffff 11%, transparent);
+  --glass-utility-bg: var(--glass-bg);
+  --glass-utility-border: var(--glass-border);
+
   /* ── Motion + elevation seeds (R5) — no default depth ── */
   --duration-fast: 150ms;
   --duration-base: 250ms;
   --duration-slow: 400ms;
   --duration-xslow: 700ms;
+  --interaction-lift: -2px;
 }
 
 /* ---------------------------------------------------------------------------
@@ -94,6 +105,12 @@
   --glass-border: color-mix(in srgb, var(--color-ink) 12%, transparent);
   --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 80%, transparent), transparent 55%);
   --color-glow: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 70%);
+  --glass-primary-bg: color-mix(in srgb, #ffffff 88%, color-mix(in srgb, var(--color-accent) 5%, transparent));
+  --glass-primary-border: color-mix(in srgb, var(--color-ink) 14%, transparent);
+  --glass-surface-bg: color-mix(in srgb, #ffffff 94%, color-mix(in srgb, var(--color-accent) 3%, transparent));
+  --glass-surface-border: color-mix(in srgb, var(--color-ink) 10%, transparent);
+  --glass-utility-bg: var(--glass-bg);
+  --glass-utility-border: var(--glass-border);
 }
 
 :root[data-theme='light'] .tech-item {
@@ -126,6 +143,12 @@
     --glass-border: color-mix(in srgb, var(--color-ink) 12%, transparent);
     --glass-highlight: linear-gradient(180deg, color-mix(in srgb, #ffffff 80%, transparent), transparent 55%);
     --color-glow: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 70%);
+    --glass-primary-bg: color-mix(in srgb, #ffffff 88%, color-mix(in srgb, var(--color-accent) 5%, transparent));
+    --glass-primary-border: color-mix(in srgb, var(--color-ink) 14%, transparent);
+    --glass-surface-bg: color-mix(in srgb, #ffffff 94%, color-mix(in srgb, var(--color-accent) 3%, transparent));
+    --glass-surface-border: color-mix(in srgb, var(--color-ink) 10%, transparent);
+    --glass-utility-bg: var(--glass-bg);
+    --glass-utility-border: var(--glass-border);
   }
 
   :root:not([data-theme]) .tech-item {
@@ -259,6 +282,20 @@
     color: var(--color-accent-text);
   }
 
+  /* --- Visually hidden (screen-reader-only) --- */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
   /* --- Links --- */
   .link-accent {
     color: var(--color-accent-text);
@@ -372,6 +409,58 @@
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-card);
   }
+
+  /* Signal Field glass roles. These modifiers deliberately stay separate from
+     shape classes so any surface switches recipe by swapping one class. The
+     primary recipe is hover-only feedback on cards — nothing rests in it. */
+  .glass-role-primary,
+  .glass-role-surface,
+  .glass-role-utility {
+    position: relative;
+    border: 1px solid var(--glass-role-border);
+    background: var(--glass-role-bg);
+    /* Hover tint fades at the slow seed (400ms) — a soft bloom, not a snap. */
+    transition: background var(--duration-slow) ease, border-color var(--duration-slow) ease;
+  }
+  .glass-role-primary,
+  .glass-role-utility {
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  }
+  .glass-role-primary {
+    --glass-role-bg: var(--glass-primary-bg);
+    --glass-role-border: var(--glass-primary-border);
+  }
+  .glass-role-surface {
+    --glass-role-bg: var(--glass-surface-bg);
+    --glass-role-border: var(--glass-surface-border);
+  }
+  .glass-role-utility {
+    --glass-role-bg: var(--glass-utility-bg);
+    --glass-role-border: var(--glass-utility-border);
+  }
+  /* Hover-only primary tint (owner-directed): every glass card rests in the
+     quieter surface recipe and warms to the primary glass tint under the
+     cursor. Utility is excluded — it styles the site header, not a card.
+     Custom-property swap only, so the solid fallbacks below stay unaffected. */
+  .glass-role-surface:hover {
+    --glass-role-bg: var(--glass-primary-bg);
+    --glass-role-border: var(--glass-primary-border);
+  }
+  /* Shape utilities already supply this static catch light. Add it only to
+     role-only surfaces (the case hero and More Projects), rather than
+     painting the same highlight twice on every role + card combination. */
+  .glass-role-primary:not(.glass):not(.glass-panel):not(.glass-card)::before,
+  .glass-role-surface:not(.glass):not(.glass-panel):not(.glass-card)::before,
+  .glass-role-utility:not(.glass):not(.glass-panel):not(.glass-card)::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: var(--glass-highlight);
+    border-radius: inherit;
+    pointer-events: none;
+  }
   /* Top-edge "catch light" — cheap, premium, static (no animation). */
   .glass::before, .glass-panel::before, .glass-card::before {
     content: '';
@@ -391,6 +480,16 @@
       backdrop-filter: none;
     }
     .glass::before, .glass-panel::before, .glass-card::before { display: none; }
+    .glass-role-primary,
+    .glass-role-surface,
+    .glass-role-utility {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    .glass-role-primary::before,
+    .glass-role-surface::before,
+    .glass-role-utility::before { display: none; }
   }
 
   /* OS transparency preference → glass becomes solid (S-9). */
@@ -401,6 +500,16 @@
       backdrop-filter: none;
     }
     .glass::before, .glass-panel::before, .glass-card::before { display: none; }
+    .glass-role-primary,
+    .glass-role-surface,
+    .glass-role-utility {
+      background: var(--glass-bg-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    .glass-role-primary::before,
+    .glass-role-surface::before,
+    .glass-role-utility::before { display: none; }
   }
 
   /* R5-4 focus echo: when any control inside a glass surface holds focus, the
@@ -412,6 +521,11 @@
   .glass:focus-within,
   .glass-panel:focus-within,
   .glass-card:focus-within {
+    border-color: var(--color-accent-text);
+  }
+  .glass-role-primary:focus-within,
+  .glass-role-surface:focus-within,
+  .glass-role-utility:focus-within {
     border-color: var(--color-accent-text);
   }
   .glass:focus-within,
@@ -565,7 +679,10 @@
   .js-reveal .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity var(--duration-slow) ease, transform var(--duration-slow) ease;
+    /* background/border-color ride along so glass cards keep a smooth
+       hover-tint fade — this rule's transition shorthand otherwise overrides
+       the layered glass-role transition and the tint would snap instantly. */
+    transition: opacity var(--duration-slow) ease, transform var(--duration-slow) ease, background var(--duration-slow) ease, border-color var(--duration-slow) ease;
   }
   .js-reveal .reveal.is-visible {
     opacity: 1;

@@ -31,10 +31,20 @@ const pdfHref = resumePdf;
 
 <style>
   .resume-page {
-    padding-block: 4rem 5rem;
+    min-height: calc(100svh - 65px);
+    padding-block: 4rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1rem;
+    position: relative;
+  }
+  .resume-page::before {
+    content: '';
+    width: 2px;
+    height: 2.75rem;
+    background: var(--color-accent);
+    border-radius: var(--radius-control);
   }
 
   .resume-title {
