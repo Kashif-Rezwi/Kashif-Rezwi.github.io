@@ -859,9 +859,9 @@ const { links } = Astro.props;
 
   @media (max-width: 1100px) {
     .contact-inner {
-      /* Action and contact context lead on narrow screens; the ASCII emitter
-         remains the signature, but no longer pushes the CTA below the fold. */
-      flex-direction: column;
+      /* ASCII visual element leads on narrow screens (symmetric with Hero portrait),
+         followed by the social rail and contact card. */
+      flex-direction: column-reverse;
       gap: 2.5rem;
     }
 
