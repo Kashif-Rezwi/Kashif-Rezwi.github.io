@@ -2,9 +2,12 @@
 /**
  * R5-6 section partition: Home hero (was part of index.astro).
  * Updated to place social profiles in a dedicated vertical rail on the left of text content.
+ * Role line: typographic ASCII cycler (HeroRoleCycler) — replaces the R4 skewed badge
+ * per owner direction (2026-08-19); canonical headline preserved in meta + sr-only text.
  */
 import { Image } from 'astro:assets';
 import HeroDotMatrix from '../components/HeroDotMatrix.astro';
+import HeroRoleCycler from '../components/HeroRoleCycler.astro';
 import Icon from '../components/Icon.astro';
 import { resumePdf } from '../lib/paths';
 
@@ -80,12 +83,9 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
           Kashif Rezwi
         </h1>
 
-        <!-- Role line (consistent with title/meta/positioning) — skewed accent badge -->
-        <p class="hero-role delay-300 animate-fade-up">
-          <span class="hero-role-badge">
-            <span class="hero-role-text-inner">Frontend-focused Full Stack Engineer</span>
-          </span>
-        </p>
+        <!-- Role titles — typographic ASCII cycler (canonical headline preserved
+             in title/meta/OG + visually-hidden text inside the component) -->
+        <HeroRoleCycler />
 
         <!-- Direction — old deployed accent style restored -->
         <p class="hero-direction delay-350 animate-fade-up">
@@ -228,29 +228,6 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
     line-height: 1;
     color: var(--color-ink);
     margin: 0;
-  }
-
-  .hero-role {
-    margin: 0.5rem 0 0;
-  }
-
-  .hero-role-badge {
-    display: inline-block;
-    padding: 0.45rem 0.9rem 0.45rem 1.1rem;
-    background: var(--color-accent-badge);
-    border-radius: 0;
-    transform: skewX(-8deg);
-    transform-origin: center;
-    box-shadow: 0 2px 0 color-mix(in srgb, var(--color-accent) 55%, transparent);
-  }
-  .hero-role-text-inner {
-    display: inline-block;
-    transform: skewX(8deg);
-    font-size: clamp(1.05rem, 3vw, 1.75rem);
-    font-weight: 500;
-    line-height: 1.3;
-    color: #fff;
-    letter-spacing: -0.01em;
   }
 
   .hero-direction {

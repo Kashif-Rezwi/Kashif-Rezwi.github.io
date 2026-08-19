@@ -2,7 +2,7 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-08-19 (**Signal Field screenshot-review correction pass complete locally** — confirmed Contact component scoping, intermediate-width composition, Header focus framing, and ASCII reduced-motion defects corrected; **7-page Astro build**, contrast **19/19 + 30/30**, responsive/theme/reduced-motion/overflow visual checks passed — DL-079; evidence `docs/rebuild-02/29-signal-field-implementation-evidence.md`; **no commit, push, or deploy**)
+- **Last updated:** 2026-08-19 (**Hero role ASCII cycler complete locally** — owner-directed (DL-080): the hero role badge is replaced by a single-line block-glyph ASCII strip cycling Full Stack / MERN Stack / Product / Frontend Engineer with the 320ms diagonal wavefront morph; canonical headline preserved in meta + sr-only text; **7-page Astro build**, contrast **19/19 + 30/30**, zero overflow at 375/768/1440, reduced-motion static, console clean — evidence `docs/rebuild-02/31-hero-role-ascii-evidence.md`; **no commit, push, or deploy**)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [open-questions.md](./open-questions.md) · [decision-log.md](./decision-log.md)
 
 ## Current Signal Field status

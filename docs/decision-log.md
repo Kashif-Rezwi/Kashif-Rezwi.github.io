@@ -634,6 +634,14 @@
 - **Verification:** `npm run build` — 7 pages clean; `check:contrast` — 19/19 PASS; `check:glass-contrast` — 30/30 PASS; `git diff --check` clean. Visual QA: Contact correct at 320px light, 390px dark, 960px dark, and 1440px dark; focused Header correct at 2880px; all four case-study pages, Resume, and 404 have no overflow; portrait hover yields foreground `translate(-6px, -6px)` and plate `translate(10px, 12px)` only on hover-capable desktop; reduced-motion ASCII remains static; browser errors and console are clean.
 - **Status:** Local changes remain uncommitted. No push or deployment was performed.
 
+## DL-080 — Hero role line becomes a typographic ASCII cycler
+
+- **Date:** 2026-08-19
+- **Context:** Owner directive in conversation: bring the Contact ASCII design into the Hero left content column, cycling four role titles — Full Stack Engineer, MERN Stack Engineer, Product Engineer, Frontend Engineer. Owner revision mid-implementation: each full role title renders on a **single visual line**. This supersedes the DL-077/078 constraint "ASCII remains singular in Contact"; the four titles are owner-specified (claim-source tier 1; "Product Engineer" is the approved resume-variant title per positioning.md §2).
+- **Decision:** Replace the R4 skewed role badge (DL-043/045) with `src/components/HeroRoleCycler.astro` — a single-line block-glyph ASCII strip (76ch × 3 rows, frames precomputed in `src/lib/ascii-roles.ts`) auto-cycling the four roles with the Contact renderer's 320ms diagonal wavefront morph. Differentiation from Contact (no dilution): hero = pure type in the single theme accent (`--color-accent-text`); Contact = icon + per-brand colors. Canonical headline "Frontend-focused Full Stack Engineer" preserved in title/meta/OG + new `.visually-hidden` text; `<pre>` is `aria-hidden`; SSR initial frame keeps no-JS identical. Container-driven font (`container-type: inline-size` + `min(0.95rem, 2.1cqw)`) guarantees the 76ch line never overflows; reduced-motion static; click-to-cycle; hover/off-screen/tab-hidden pause. Contact renderer untouched; dead badge styles removed; `--color-accent-badge` token + its contrast-check row retained for potential badge restoration.
+- **Verification:** Build 7 pages clean; `check:contrast` 19/19; `check:glass-contrast` 30/30; frame integrity (4 frames ≤ 76ch) via node; auto-cycle + shimmer + click-to-cycle + reduced-motion static verified in browser; horizontal overflow 0 at 375/768/1440; dark/light captures legible; console/errors clean. Evidence: `docs/rebuild-02/31-hero-role-ascii-evidence.md`; plan: `docs/rebuild-02/30-hero-role-ascii-plan.md`.
+- **Status:** Local changes are uncommitted. No push or deployment was performed; next action is owner review/authorization for any commit or promotion.
+
 
 
 
