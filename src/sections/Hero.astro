@@ -281,6 +281,11 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
     flex-shrink: 0;
   }
   .portrait-wrapper {
+    /* Signal Field signature: a fixed print-like extrusion, not simulated
+       lighting. The foreground moves up-left as its accent plate resolves
+       down-right, giving the portrait deliberate geometric depth. */
+    --portrait-front-shift: -6px, -6px;
+    --portrait-plate-shift: 10px, 12px;
     position: relative;
     width: 220px;
     height: 220px;
@@ -292,12 +297,8 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
     inset: -8px;
     background: var(--color-accent);
     clip-path: polygon(30% 4%, 70% 4%, 88% 18%, 100% 48%, 86% 78%, 50% 100%, 24% 90%, 10% 76%, 3% 56%, 6% 34%, 18% 12%);
-    transition: inset 0.35s ease, transform 0.35s ease;
+    transition: inset var(--duration-slow) ease, transform var(--duration-slow) ease;
     pointer-events: none;
-  }
-  .hero-portrait:hover .portrait-wrapper::after {
-    inset: 0;
-    transform: translate(10px, 12px);
   }
   .portrait-img {
     position: relative;
@@ -307,10 +308,19 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
     object-fit: cover;
     background-color: #a9c8ff;
     clip-path: polygon(30% 4%, 70% 4%, 88% 18%, 100% 48%, 86% 78%, 50% 100%, 24% 90%, 10% 76%, 3% 56%, 6% 34%, 18% 12%);
-    transition: transform 0.35s ease;
+    transition: transform var(--duration-slow) ease;
   }
-  .hero-portrait:hover .portrait-img {
-    transform: translate(-6px, -6px);
+
+  /* Keep this tactile effect to devices that actually hover. Touch layouts
+     retain the composed resting shape, and reduced-motion avoids a jump. */
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .hero-portrait:hover .portrait-wrapper::after {
+      inset: 0;
+      transform: translate(var(--portrait-plate-shift));
+    }
+    .hero-portrait:hover .portrait-img {
+      transform: translate(var(--portrait-front-shift));
+    }
   }
 
   @media (min-width: 1024px) {

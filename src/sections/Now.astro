@@ -22,7 +22,7 @@ const { links } = Astro.props;
   <div class="container-site">
     <SectionHeader label="Now" title="AI journey" />
 
-    <GlassPanel variant="card" class="now-card reveal">
+    <GlassPanel variant="card" class="now-card reveal glass-role-surface">
       <h3 class="now-card-label">Recent Updates</h3>
       <div class="now-list">
         <div class="now-row">
@@ -72,7 +72,8 @@ const { links } = Astro.props;
   :global(.now-card) {
     padding: 1.75rem 2rem;
     position: relative;
-    width: 100%;
+    width: min(100%, 60rem);
+    margin-right: auto;
   }
   @media (max-width: 640px) {
     :global(.now-card) {
