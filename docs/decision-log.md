@@ -592,6 +592,20 @@
 - **Verification:** `npm run build` — 7 pages clean; `check:contrast` **19/19** PASS; `check:glass-contrast` **30/30** PASS (About lead is `--color-ink` on glass — strictly higher contrast than the passing ink-muted pair); built CSS confirms every rule (scoped `tech-grid` flex-column, `tech-group:nth-child(2n)` flex-end in `@media (width>=640px)`, `section-block` min-height, `scroll-padding-top: 65px`, `about-columns` 2-col at `width>=900px`, `delay-600`); built HTML contains the `about-columns` / `about-lead` markup.
 - **Status:** Complete on `mandatory-changes` (uncommitted; **no commit/push per owner instruction**). Stop for owner approval.
 
+## DL-076 — Brand Exponents professional experience tech stack correction
+
+- **Date:** 2026-08-19
+- **Decision (owner-directed):** Corrected and sequenced the technologies listed for **Brand Exponents Creatives Pvt Ltd** (Swipe Pages / Swipe One) in `src/sections/Experience.astro` and `src/sections/About.astro`:
+  - Removed `PostgreSQL` (which was erroneously associated with Brand Exponents; PostgreSQL belongs to Kashif's personal AI projects: Code Review Agent, Perplexity, Better DEV).
+  - Added `RabbitMQ` and sequenced the tech chips logically from **Frontend → Backend → Databases/Queues/Storage → Tools/DevOps/Testing**:
+    - **Frontend & UI**: `React`, `Next.js`, `TypeScript`, `Tailwind CSS`, `Redux`, `TanStack Query`, `React Flow`, `Ant Design`, `Radix UI`
+    - **Backend & APIs**: `Node.js`, `Express`, `REST APIs`
+    - **Data, Storage & Queues**: `MongoDB`, `ClickHouse`, `Redis`, `RabbitMQ`, `DigitalOcean S3`
+    - **Infra, Testing & Observability**: `Docker`, `Jest`, `Cypress`, `Sentry`
+- **Files changed:** `src/sections/Experience.astro`, `src/sections/About.astro`.
+- **Verification:** `npm run build` — 7 pages built cleanly.
+
+
 
 
 
