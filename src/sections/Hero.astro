@@ -1,70 +1,119 @@
 ---
 /**
  * R5-6 section partition: Home hero (was part of index.astro).
- * Styles relocated verbatim from index.astro's scoped block.
+ * Updated to place social profiles in a dedicated vertical rail on the left of text content.
  */
 import { Image } from 'astro:assets';
 import HeroDotMatrix from '../components/HeroDotMatrix.astro';
 import Icon from '../components/Icon.astro';
-import { withBase } from '../lib/paths';
+import { resumePdf } from '../lib/paths';
 
 interface Props {
   email: string;
   github: string;
   linkedin: string;
+  leetcode?: string;
   devto: string;
   portrait: ImageImport;
 }
 
 type ImageImport = Parameters<typeof Image>[0]['src'];
 
-const { email, github, linkedin, devto, portrait } = Astro.props;
+const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
 ---
 
-<section class="hero-section">
+<section id="home" class="hero-section">
   <HeroDotMatrix />
   <div class="container-site hero-inner">
-    <!-- Identity block — flat over the matrix (T1): no glass card. Portrait and
-         role badge remain owner-locked. Subtle text-legibility treatment via
-         .hero-textshadow so the name reads crisply over the live dots. -->
-    <div class="hero-content hero-textshadow">
-      <!-- Label -->
-      <p class="section-label delay-100 animate-fade-up">Portfolio</p>
+    <!-- Main Left Column: Vertical Social Rail + Text Content -->
+    <div class="hero-left-layout">
+      <!-- Vertical Social Links Rail -->
+      <nav class="hero-social-rail delay-200 animate-fade-up" aria-label="Social and coding profiles">
+        <a
+          href={github}
+          class="hero-social-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub profile"
+          title="GitHub"
+        >
+          <Icon name="github" size={24} strokeWidth={2.2} />
+        </a>
+        <a
+          href={linkedin}
+          class="hero-social-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn profile"
+          title="LinkedIn"
+        >
+          <Icon name="linkedin" size={30} strokeWidth={2.2} />
+        </a>
+        {leetcode && (
+          <a
+            href={leetcode}
+            class="hero-social-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LeetCode profile"
+            title="LeetCode"
+          >
+            <Icon name="leetcode" size={24} strokeWidth={2.2} />
+          </a>
+        )}
+        <a
+          href={devto}
+          class="hero-social-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="dev.to blog"
+          title="dev.to"
+        >
+          <Icon name="devto" size={24} strokeWidth={2.2} />
+        </a>
+      </nav>
 
-      <!-- Name — single line -->
-      <h1 class="hero-name delay-200 animate-fade-up">
-        Kashif Rezwi
-      </h1>
+      <!-- Identity text block -->
+      <div class="hero-content hero-textshadow">
+        <!-- Name — single line -->
+        <h1 class="hero-name delay-100 animate-fade-up">
+          Kashif Rezwi
+        </h1>
 
-      <!-- Role line (consistent with title/meta/positioning) — skewed accent badge -->
-      <p class="hero-role delay-300 animate-fade-up">
-        <span class="hero-role-badge">
-          <span class="hero-role-text-inner">Frontend-focused Full Stack Engineer</span>
-        </span>
-      </p>
+        <!-- Role line (consistent with title/meta/positioning) — skewed accent badge -->
+        <p class="hero-role delay-300 animate-fade-up">
+          <span class="hero-role-badge">
+            <span class="hero-role-text-inner">Frontend-focused Full Stack Engineer</span>
+          </span>
+        </p>
 
-      <!-- Direction — old deployed accent style restored -->
-      <p class="hero-direction delay-350 animate-fade-up">
-        <span class="gradient-text">Building toward AI product engineering</span>
-        <br />
-        and developer tools
-      </p>
+        <!-- Direction — old deployed accent style restored -->
+        <p class="hero-direction delay-350 animate-fade-up">
+          <span class="gradient-text">Building toward AI product engineering</span>
+          <br />
+          and developer tools
+        </p>
 
-      <!-- Bio -->
-      <p class="hero-bio delay-400 animate-fade-up">
-        2+ years building customer-facing SaaS products in startup teams:
-        landing-page builders, CRM, and campaign &amp; workflow automation.
-        Currently building AI products and developer tools.
-      </p>
+        <!-- Bio -->
+        <p class="hero-bio delay-400 animate-fade-up">
+          2+ years building customer-facing SaaS products in startup teams:
+          landing-page builders, CRM, and campaign &amp; workflow automation.
+          Currently building AI products and developer tools.
+        </p>
 
-      <!-- CTA row -->
-      <div class="hero-ctas delay-500 animate-fade-up">
-        <a href={withBase('resume/')} class="btn">View Resume</a>
-        <a href={`mailto:${email}`} class="btn-outline">Email me</a>
-        <div class="hero-social-links">
-          <a href={github} class="hero-social" target="_blank" rel="noopener noreferrer"><Icon name="github" size={15} />GitHub</a>
-          <a href={linkedin} class="hero-social" target="_blank" rel="noopener noreferrer"><Icon name="linkedin" size={15} />LinkedIn</a>
-          <a href={devto} class="hero-social" target="_blank" rel="noopener noreferrer"><Icon name="devto" size={15} />dev.to</a>
+        <!-- CTA row -->
+        <div class="hero-ctas delay-500 animate-fade-up">
+          <a
+            href={resumePdf}
+            class="btn"
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+            aria-label="Download resume (PDF, opens in a new tab)"
+          >
+            Resume (PDF) ↓
+          </a>
+          <a href={`mailto:${email}`} class="btn-outline">Email me</a>
         </div>
       </div>
     </div>
@@ -89,7 +138,6 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
 </section>
 
 <style>
-  /* R5-6: scoped styles moved from index.astro — byte-identical. */
   .hero-section {
     min-height: clamp(600px, calc(100svh - 65px), 860px);
     padding-block: 5rem 4rem;
@@ -102,32 +150,79 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
   .hero-inner {
     display: flex;
     align-items: center;
-    gap: 3rem;
+    justify-content: space-between;
+    gap: 2.5rem;
     position: relative;
     z-index: 1;
     margin-top: -4.5rem;
   }
 
-    /* T1 (R5-8a): subtle text-legibility treatment over the live dot matrix —
-     a soft, theme-adaptive text shadow so the identity reads crisply without
-     a glass card. Not a card; no background/blur. Scope: identity text only;
-     interactive children (buttons/social links) reset their own text-shadow
-     so it doesn't leak (would otherwise tank dark-theme button contrast). */
+  .hero-left-layout {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hero-social-rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .hero-social-btn {
+    color: var(--color-ink-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    line-height: 1;
+    transition: color var(--duration-fast) ease, transform var(--duration-fast) ease, filter var(--duration-fast) ease;
+  }
+
+  .hero-social-btn svg {
+    display: block;
+  }
+
+  .hero-social-btn:hover {
+    color: var(--color-accent-light);
+    transform: translateY(-2px) scale(1.12);
+    filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-accent) 45%, transparent));
+  }
+
+  /* T1 (R5-8a): subtle text-legibility treatment over the live dot matrix */
   .hero-textshadow {
     text-shadow:
       0 1px 2px color-mix(in srgb, var(--color-canvas) 55%, transparent),
       0 0 18px color-mix(in srgb, var(--color-canvas) 40%, transparent);
     -webkit-text-stroke: 0.5px color-mix(in srgb, var(--color-canvas) 22%, transparent);
   }
-  /* Reset inherited shadow on interactive children — they paint their own bg. */
+  /* Reset inherited shadow on interactive children */
   .hero-textshadow .btn,
-  .hero-textshadow .hero-social {
+  .hero-social-btn {
     text-shadow: none;
     -webkit-text-stroke: 0;
   }
 
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+    min-width: 0;
+  }
+
   .hero-name {
-    font-size: clamp(2.75rem, 7vw, 4.5rem);
+    font-size: clamp(2.25rem, 6.5vw, 4.5rem);
     font-weight: 700;
     letter-spacing: -0.04em;
     line-height: 1;
@@ -151,7 +246,7 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
   .hero-role-text-inner {
     display: inline-block;
     transform: skewX(8deg);
-    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-size: clamp(1.05rem, 3vw, 1.75rem);
     font-weight: 500;
     line-height: 1.3;
     color: #fff;
@@ -159,11 +254,11 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
   }
 
   .hero-direction {
-    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-size: clamp(1.05rem, 3vw, 1.75rem);
     font-weight: 500;
     line-height: 1.3;
     color: var(--color-ink-muted);
-    margin: 0;
+    margin: 0.75rem 0 0;
   }
 
   .hero-bio {
@@ -171,7 +266,7 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
     line-height: 1.7;
     color: var(--color-ink-muted);
     max-width: 58ch;
-    margin: 0;
+    margin: 0.75rem 0 0;
   }
 
   .hero-ctas {
@@ -179,26 +274,7 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.75rem;
-  }
-
-  .hero-social-links {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-left: 0.25rem;
-  }
-  .hero-social {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    color: var(--color-ink-dim-glass);
-    text-decoration: none;
-    transition: color var(--duration-fast) ease;
-  }
-  .hero-social:hover {
-    color: var(--color-accent-light);
+    margin-top: 1.25rem;
   }
 
   .hero-portrait {
@@ -247,7 +323,7 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
 
   @media (min-width: 769px) and (max-width: 1023px) {
     .hero-inner {
-      margin-top: -2rem; /* tablet: lighter uplift than desktop */
+      margin-top: -2rem;
     }
   }
 
@@ -256,6 +332,15 @@ const { email, github, linkedin, devto, portrait } = Astro.props;
       flex-direction: column-reverse;
       gap: 2rem;
       margin-top: 0;
+    }
+    .hero-left-layout {
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .hero-social-rail {
+      flex-direction: row;
+      padding-top: 0;
+      gap: 1.125rem;
     }
     .portrait-wrapper {
       width: 160px;

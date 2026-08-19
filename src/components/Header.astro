@@ -1,12 +1,21 @@
 ---
-import { base, withBase } from '../lib/paths';
+import { base, withBase, resumePdf } from '../lib/paths';
 import ThemeControl from './ThemeControl.astro';
 
-const resumeHref = withBase('resume/');
+// Required nav order: Home · About · Skills · Projects · Contact · Resume.
+// This single array drives BOTH the desktop list and the mobile drawer, and the
+// home page renders sections in this same order (monotonic scrolling).
+// "Projects" points at the existing #work section id (kept so the case-study
+// "← Work" breadcrumb and the Now section's "See the work →" link keep
+// working); the Resume entry carries a `resume` flag for its native
+// `download` behavior — direct PDF download, no new tab, no JS needed.
 const links = [
-  { href: withBase('#work'), label: 'Work' },
-  { href: withBase('#experience'), label: 'Experience' },
-  { href: withBase('#contact'), label: 'Contact' },
+  { href: withBase('#home'), label: 'Home', resume: false },
+  { href: withBase('#about'), label: 'About', resume: false },
+  { href: withBase('#skills'), label: 'Skills', resume: false },
+  { href: withBase('#work'), label: 'Projects', resume: false },
+  { href: withBase('#contact'), label: 'Contact', resume: false },
+  { href: resumePdf, label: 'Resume', resume: true },
 ];
 ---
 
@@ -21,7 +30,14 @@ const links = [
       {
         links.map((link) => (
           <li>
-            <a href={link.href} class="nav-link">
+            <a
+              href={link.href}
+              class:list={['nav-link', { accent: link.resume }]}
+              download={link.resume ? '' : undefined}
+              target={link.resume ? '_blank' : undefined}
+              rel={link.resume ? 'noopener noreferrer' : undefined}
+              aria-label={link.resume ? 'Resume (PDF, opens in new tab & downloads)' : undefined}
+            >
               {link.label}
             </a>
           </li>
@@ -51,15 +67,19 @@ const links = [
       {
         links.map((link) => (
           <li>
-            <a href={link.href} class="mobile-nav-link">
+            <a
+              href={link.href}
+              class:list={['mobile-nav-link', { accent: link.resume }]}
+              download={link.resume ? '' : undefined}
+              target={link.resume ? '_blank' : undefined}
+              rel={link.resume ? 'noopener noreferrer' : undefined}
+              aria-label={link.resume ? 'Resume (PDF, opens in new tab & downloads)' : undefined}
+            >
               {link.label}
             </a>
           </li>
         ))
       }
-      <li>
-        <a href={resumeHref} class="mobile-nav-link accent">Resume</a>
-      </li>
     </ul>
     <div class="mobile-nav-theme">
       <ThemeControl idPrefix="menu-" />
@@ -158,6 +178,25 @@ const links = [
     width: 100%;
   }
 
+  /* Resume badge styling on desktop — subtle outline pill with clear CTA hierarchy */
+  .nav-link.accent {
+    color: var(--color-accent-text);
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-control);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    background: var(--color-accent-soft);
+    transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease, color var(--duration-fast) ease, transform 0.1s ease;
+  }
+  .nav-link.accent::after {
+    display: none;
+  }
+  .nav-link.accent:hover {
+    color: var(--color-ink);
+    background: color-mix(in srgb, var(--color-accent) 25%, transparent);
+    border-color: var(--color-accent-light);
+    transform: translateY(-1px);
+  }
+
   .nav-tools {
     margin-left: auto;
     display: flex;
@@ -215,7 +254,9 @@ const links = [
     }
   }
   .mobile-nav.is-open {
-    max-height: 300px;
+    /* Six links + list padding + theme row need more room than the old
+       4-item drawer; oversized on purpose so nothing clips. */
+    max-height: 26rem;
     visibility: visible;
   }
   .mobile-nav ul {
@@ -261,6 +302,17 @@ const links = [
   }
   .mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Tablet: six links + logo + theme control is tight in 641–768px —
+     tighten gaps only (no label/layout changes). */
+  @media (min-width: 641px) and (max-width: 768px) {
+    nav {
+      gap: 1rem;
+    }
+    .nav-links {
+      gap: 0.875rem;
+    }
   }
 
   @media (max-width: 640px) {

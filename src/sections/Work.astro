@@ -25,9 +25,6 @@ interface Props {
     id: string;
   }>;
   links: {
-    betterDevUi: string;
-    betterDevApi: string;
-    betterDevDemo: string;
     looplens: string;
     looplensDemo: string;
     archive: string;
@@ -42,7 +39,7 @@ const { featured, links } = Astro.props;
 <section id="work" class="section-block work-bg">
   <div class="container-site">
     <SectionHeader
-      label="Selected work"
+      label="Projects"
       title="Things I've built"
       subtitle="AI products and developer tools, built as personal projects with live demos."
     />
@@ -71,17 +68,6 @@ const { featured, links } = Astro.props;
       <h3 class="more-projects-label">More projects</h3>
       <ul class="more-projects-list">
         <ProjectRow
-          name="Better DEV"
-          typeLabel="Personal"
-          links={[
-            { href: links.betterDevUi, label: 'UI repo', icon: 'repository' },
-            { href: links.betterDevApi, label: 'API repo', icon: 'repository' },
-            { href: links.betterDevDemo, label: 'Live', icon: 'external' },
-          ]}
-        >
-          AI chat platform with streaming UI, visible tool calls, NestJS API with JWT auth and web search integration.
-        </ProjectRow>
-        <ProjectRow
           name="LoopLens"
           typeLabel="Hackathon · TestSprite S3"
           links={[
@@ -109,16 +95,11 @@ const { featured, links } = Astro.props;
 </section>
 
 <style>
-  /* Gradient background: canvas → alt-blend at the bottom, so the
-     section's bottom edge is already at the section-alt shade when
-     Skills begins. No transparency — solid colours only so there is
-     never a hard compositing edge. */
+  /* Band duty-swap (nav-order fix): the fade-in ramp moved to Skills (which now
+     opens the band); Work is flat band so the band runs Skills → Work →
+     Experience → Testimonials → Now uninterrupted. */
   .work-bg {
-    background: linear-gradient(
-      to bottom,
-      var(--color-canvas) 0%,
-      color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas)) 100%
-    );
+    background: color-mix(in srgb, var(--color-surface) 40%, var(--color-canvas));
   }
   /* R5-6: scoped styles moved from index.astro — byte-identical. */
   .work-grid {
@@ -126,6 +107,15 @@ const { featured, links } = Astro.props;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
     gap: 1.25rem;
     margin-bottom: 2.5rem;
+  }
+  /* Four featured cards: auto-fill yields a 3+1 orphan at desktop widths
+     (4 tracks need ~1420px; the container offers ~1104px). Two equal
+     columns ≥1024px give a balanced 2×2; narrower widths keep auto-fill
+     (2-up tablet, 1-up mobile) — no orphan row at any width. */
+  @media (min-width: 1024px) {
+    .work-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .more-projects {

@@ -567,6 +567,31 @@
 - **Rationale:** Dead styles ship in prod CSS; removing them cuts ~110 lines with zero visual delta, consistent with R5-6 precedent (DL-111) and R5 spec dead-code row.
 - **Approval status:** Approved (owner, 2026-08-08). Deletions applied: 129 lines removed (`src/styles/global.css` −120, `src/sections/Hero.astro` −10, 1 insertion); re-gated `check:contrast` 19/19, `check:glass-contrast` 30/30, `npm run build` 6 pages clean. Evidence: `docs/rebuild-02/26-r5-8a-audit-evidence.md`.
 
+## DL-074 — Mandatory-changes review: nav/page order alignment, band duty-swap, 2×2 work grid, unified resume-link semantics
+
+- **Date:** 2026-08-18
+- **Context:** Owner branch `mandatory-changes` (`4611d8d`, on `develop`) added the About section, a 6-item nav (Home · About · Skills · Projects · Contact · Resume), promoted Better DEV to a 4th featured card via a new content entry (`/work/better-dev/`), and pointed nav/hero at the resume PDF directly. A full review (structural, stylistic, consistency, UX) found: nav order contradicting page order (non-monotonic scrolling), a 3+1 orphan card row at desktop widths, Better DEV as the only cover-less card, three divergent resume-link behaviors (new-tab+JS-download vs new-tab vs hub-page interstitial), and a double-artifact open-tab-and-download UX.
+- **Decision (owner ratified):**
+  1. **Nav order is mandated** → home sections reordered to match: Hero → About → **Skills** → **Work(Projects)** → Experience → Testimonials → Now → Contact (page renders `about, skills, work, …` — verified in built HTML).
+  2. **Band duty-swap** to preserve the R5-8a seamless content band under the new adjacency: `.skills-bg` now carries the fade-in ramp (canvas → band) Work used to own; `.work-bg` is flat band. Solid colours only (DL-065/067 anti-seam rule upheld).
+  3. **2×2 work grid ≥1024px** (`repeat(2, 1fr)`): auto-fill yielded a 3+1 orphan (4 tracks need ~1420px vs ~1104px container). Narrower widths keep auto-fill (2-up tablet, 1-up mobile).
+  4. **Resume links unified to one semantic per intent:** nav (desktop + drawer) and About "grab my resume" use the native `download` attribute (no new tab, no JS — the `data-resume-download` shim was deleted); hero "View Resume" keeps view-in-new-tab; footer gains a `Resume` entry (relative href → in-tab download) so `/resume/` stays reachable; `resume.astro` `rel` completed to `noopener noreferrer`.
+  5. **Deferred:** Better DEV cover screenshot → OQ-14 (owner action).
+- **Files changed:** `src/pages/index.astro`, `src/sections/Skills.astro`, `src/sections/Work.astro`, `src/sections/About.astro`, `src/components/Header.astro`, `src/components/Footer.astro`, `src/pages/resume.astro`, `src/lib/paths.ts` (comment), `docs/open-questions.md`, `docs/project-status.md`, `docs/rebuild-02/27-mandatory-changes-review-evidence.md`.
+- **Verification:** `npm run build` — **7 pages clean** (incl. new `/work/better-dev/`); `check:contrast` **19/19** PASS; `check:glass-contrast` **30/30** PASS; internal-link sweep of `dist/` — **0 broken**; sitemap includes all 7 routes; `astro preview` smoke — all routes 200 (404 correct, PDF 200/6,984 B); `betterdev.in` live (307 → www 200); built CSS confirms ramp/flat swap and the `width>=1024px` 2-column rule; `data-resume-download` fully absent from output. **Pending owner gates:** Lighthouse/axe/overflow sweep/visual captures (external tooling) and merge toward `develop`.
+- **Status:** Complete on `mandatory-changes` (uncommitted). Stop for owner approval.
+
+## DL-075 — Owner-directed follow-ups: Skills row layout, About redesign, one-section-per-viewport
+
+- **Date:** 2026-08-18
+- **Decision (owner-directed in conversation; no commit/push per explicit instruction):**
+  1. **Skills layout reworked** (layout only; chip styling byte-identical): one category per full row (`Languages`, `Frontend`, `Backend`, `Databases & Infra`, `AI & Tools`, `Soft skills`), label inline with chips, `flex-wrap` rows; even rows start from the right (`:nth-child(2n) { justify-content: flex-end }`) at ≥640px — below 640px all rows left-align (right-aligned wrapped chips scan poorly on narrow screens). Fixes latent no-op: the 6th group's `delay-600` stagger utility now exists in `global.css`.
+  2. **About section redesigned** (copy verbatim; layout/typography only): full-width card matching the Now-card family (was `max-width: 48rem`, floated small), two-column "who I am / where I'm heading" split ≥900px, lead paragraph at full `--color-ink` + `1.0625rem` (focal hierarchy), resume line promoted to card footer (`border-top: 1px solid var(--glass-border)`).
+  3. **One section per viewport** — fixes "clicking a nav item shows other sections' content": `.section-block` gains `min-height: calc(100svh - 65px)` + flex-column centering (short sections center; tall ones grow), and `scroll-padding-top` corrected `1.25rem → 65px` to match the fixed header (anchors land exactly under the bar). Scope verified: `.section-block` is used by the 7 home sections only; Contact's dot matrix is `position: absolute` → unaffected by centering. Scroll-snap considered and rejected (trap-scroll UX, a11y risk). Hero keeps its R5 `clamp(600px, 100svh−65px, 860px)` cap (deliberate design; not a nav target).
+- **Files changed:** `src/styles/global.css`, `src/sections/Skills.astro`, `src/sections/About.astro`, `docs/rebuild-02/27-mandatory-changes-review-evidence.md` (§5), `docs/project-status.md`.
+- **Verification:** `npm run build` — 7 pages clean; `check:contrast` **19/19** PASS; `check:glass-contrast` **30/30** PASS (About lead is `--color-ink` on glass — strictly higher contrast than the passing ink-muted pair); built CSS confirms every rule (scoped `tech-grid` flex-column, `tech-group:nth-child(2n)` flex-end in `@media (width>=640px)`, `section-block` min-height, `scroll-padding-top: 65px`, `about-columns` 2-col at `width>=900px`, `delay-600`); built HTML contains the `about-columns` / `about-lead` markup.
+- **Status:** Complete on `mandatory-changes` (uncommitted; **no commit/push per owner instruction**). Stop for owner approval.
+
 
 
 
