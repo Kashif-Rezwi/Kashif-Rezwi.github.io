@@ -2,7 +2,7 @@
 
 - **Purpose:** Deep-dive evidence for the shortlisted projects from [github-project-triage.md](./github-project-triage.md): problem & user, Kashif's contribution, key engineering decisions, real challenges (source-backed only), verified outcomes, visuals/demo/code links, and content gaps or approvals needed before public display.
 - **Authority:** Compiled 2026-08-05 from repository READMEs (fetched raw from the GitHub API), the ledger's project records (SRC-13 projects.md), and live-demo HTTP checks. All five are **personal projects** — never presented as professional employment or production-scale commercial systems.
-- **Last updated:** 2026-08-05
+- **Last updated:** 2026-08-22 (Better DEV §4 deepened via verified code inspection — DL-082)
 - **Related:** [github-project-triage.md](./github-project-triage.md) · [evidence-ledger.md](./evidence-ledger.md) · [open-questions.md](../open-questions.md)
 
 ## 1. Code Review Agent (featured)
@@ -40,13 +40,13 @@
 
 ## 4. Better DEV — better-dev-ui + better-dev-api (secondary)
 
-- **Repos:** github.com/Kashif-Rezwi/better-dev-ui · better-dev-api · **Demo:** betterdev.in (HTTP 200, verified 2026-08-05) · **Classification:** personal project (two repos, one platform)
-- **Problem & user:** a modern AI chat interface that shows how the AI works — streaming tokens, visible tool calls (web search), conversation management.
+- **Repos:** `github.com/Kashif-Rezwi/better-dev-ui` · `better-dev-api` · **Demo:** `better-dev-ui.vercel.app` (2026-08-22, DL-081: frontend moved from `betterdev.in`; API + `/health` at `better-dev-api.onrender.com`) · **Classification:** personal project (two repos, one platform)
+- **Problem & user:** a modern AI chat interface that shows how the AI works — streaming tokens, visible tool calls (web search), conversation management. Design goal (owner-framed, case-study session 2026-08-22): trust through visibility — treat the assistant's reasoning process as a first-class UI element.
 - **Contribution:** sole builder across frontend and backend.
-- **Key engineering decisions (READMEs):** React 19 + Vite 7 + Tailwind 4 + AI SDK v5 UI with dark theme, smart scrolling, operational modes (Fast/Thinking/Auto), per-conversation system prompts, persistent history; NestJS API with JWT auth, an extensible tool-calling system (web search), streaming responses, multi-model support via Groq (Llama), PostgreSQL, Docker, documented high-level architecture.
-- **Real challenges (source-backed):** none documented beyond README scope; tool-call visibility + streaming UX is the stated focus. Deeper challenge narrative not recorded — `OPEN QUESTION` if wanted.
-- **Verified outcomes:** live platform reachable. No user/scale claims.
-- **Gaps/approvals:** README contains a leftover `[Your Frontend URL]` placeholder — fix before featuring. READMEs say "production-ready"; portfolio copy must not repeat that (no commercial use evidenced).
+- **Key engineering decisions (READMEs + verified code inspection 2026-08-22 — ledger CL-16/CL-21/CL-22/CL-23):** React 19 + Vite 7 + Tailwind 4 + AI SDK v5 UI with smart scrolling, operational modes (Fast `gpt-oss-20b` 500 tokens / Thinking `gpt-oss-120b` 4000 tokens / Auto), optimistic CRUD, documented one-way architecture (`ARCHITECTURE.md`); NestJS 11 API with stateless JWT auth (bcrypt), model-per-role routing on Groq, layered Auto classifier, Tavily web search with server-side citation extraction, SSE streaming with client-disconnect cancellation, multi-modal pipeline (PDF/DOCX/image → pdf-parse, mammoth, tesseract.js OCR + sharp thumbnails → token-budgeted context), provider-parameterized S3-compatible storage with local fallback — **deployed on Supabase Object Storage** (owner 2026-08-22: Cloudflare R2 was the original plan, dropped for cost; R2/s3/Spaces remain documented compatibility targets), composite indexes + `DISTINCT ON` sidebar query, five Jest unit spec files, GitHub Actions CI build verification.
+- **Real challenges (source-backed, code-grounded — resolved 2026-08-22, previously "not recorded"):** (1) AI SDK v5 `convertToModelMessages()` strips image content → deliberate post-conversion rehydration step (`FIX` comment in `ai.service.ts`); (2) Groq free tier retired the Llama vision models → server-side OCR text injection fallback + lineup refreshed to `gpt-oss-120b/20b` (rationale recorded in `model.config.ts`); (3) SSE-vs-JSON error conflict → global filter short-circuits on `headersSent`; (4) wasted tokens on disconnected clients → `req.on('close')` cancels the reader; (5) classification cost/latency → heuristic → MD5 cache → timed AI ladder with fail-safe Fast; (6) storage fragmentation (R2 rejects ACLs, Supabase path-style, Spaces CDN) → one parameterized storage service; (7) sidebar N+1 → `DISTINCT ON` batched query; (8) context-window overflow → 32k document-token budget + five-image cap with `[Previous Image Omitted]`. Full narrative: `src/content/work/better-dev.md` ("The hard parts").
+- **Verified outcomes:** live platform reachable (UI + API `/health`). No user/scale/adoption claims.
+- **Gaps/approvals:** README `[Your Frontend URL]` placeholder is fixed (verified 2026-08-22 — no placeholder remains in either README). READMEs still say "production-ready"/"production-grade" — portfolio copy must not mirror that (CL-16; owner gate 2026-08-22: "production-shaped practices" wording instead, DL-082). Fresh live screenshot / short screen recording of the tool-call flow remains an optional owner asset (OQ-14, OQ-15).
 
 ## 5. LoopLens (secondary)
 
