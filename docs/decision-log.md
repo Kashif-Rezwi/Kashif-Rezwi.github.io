@@ -647,6 +647,13 @@
 
 
 
+## DL-081 — Better DEV live demo link updated (owner-directed)
+
+- **Date:** 2026-08-22
+- **Decision:** Per owner directive in conversation, the Better DEV live demo link in `src/content/work/better-dev.md` (`demo:` frontmatter) is updated from `https://betterdev.in` → `https://better-dev-ui.vercel.app`. Better DEV's frontend deployment now lives at the new Vercel URL (project: `Kashif-Rezwi/better-dev-ui`); both the home-page card and the `/work/better-dev/` case study render it as the **Live** link. Date-stamped verification/Q&A records that cite `betterdev.in` (`docs/engineering/qa-report.md`, `docs/research/*`, `docs/rebuild-02/*` evidence) are intentionally preserved as accurate point-in-time records.
+- **Files changed:** `src/content/work/better-dev.md`, `docs/open-questions.md` (OQ-14 screenshot-source reference aligned to the current live URL), `docs/project-status.md` (snapshot), this log.
+- **Verification:** `npm run build` — 7 pages clean; rendered `dist/index.html` and `dist/work/better-dev/index.html` emit `https://better-dev-ui.vercel.app` as the Better DEV Live link; `grep -rl betterdev.in dist/` → none.
+- **Status:** Working-tree change uncommitted. **No commit, push, or deployment was performed** (owner convention); next action is owner authorization for commit and promotion toward `gh-pages`.
 
 
 

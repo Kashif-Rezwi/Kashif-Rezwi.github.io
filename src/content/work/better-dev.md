@@ -5,7 +5,7 @@ period: '2026'
 status: 'Live'
 summary: 'AI chat platform with streaming UI, visible tool calls, NestJS API with JWT auth and web search integration.'
 repo: 'https://github.com/Kashif-Rezwi/better-dev-ui'
-demo: 'https://betterdev.in'
+demo: 'https://better-dev-ui.vercel.app'
 tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vercel AI SDK', 'NestJS', 'PostgreSQL', 'Groq']
 order: 4
 draft: false
