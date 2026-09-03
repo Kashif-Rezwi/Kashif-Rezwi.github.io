@@ -700,5 +700,37 @@
 - **Verification:** `npm run build` clean; rendered page contains all key numbers; zero Supabase/production-grade/market-inversion phrases.
 - **Status:** Working-tree changes uncommitted. **No commit, push, or deployment was performed** (owner convention).
 
+## DL-087 — Code Review Agent case-study overhaul: full architecture + Razorpay credit system
+
+- **Date:** 2026-09-02
+- **Context:** Owner request: overhaul the Code Review Agent case study in `src/content/work/code-review-agent.md` following the completion of the Razorpay integration and credit-based billing system. The case study must be human-written in Kashif's authentic first-person voice, easy to understand, well-structured, show pragmatic engineering across the app, and follow the best practices established in the Better DEV case study (DL-086).
+- **Verification (2026-09-02):** The `Kashif-Rezwi/code-review-agent` repository was inspected across all modules, migrations, tests, and documentation. Verified technical elements: Next.js 16 (App Router) + NestJS 11 monorepo; prepaid credit wallet powered by Razorpay (1 credit = ₹1 inference value, stored in integer hundredths `CREDIT_SCALE = 100` to prevent floating-point drift in PostgreSQL transactions); reserve-and-settle token billing (upfront worst-case reservation, exact model token cost settlement via Vercel AI Gateway list price + 20% safety margin, atomic `SETTLEMENT` refund on completion, full refund on failure); authoritative webhook settlement (HMAC-SHA256 over raw body buffer with `crypto.timingSafeEqual` before JSON parsing, idempotent by unique `PaymentEvent.razorpayEventId` constraint); hidden ₹1 dev smoke-test pack (`dev1`) gated by `x-dev-pack` header; transactional outbox pattern (`Review` + `ReviewDispatch` in single Prisma tx, 2s polling dispatcher with 30s leases); BullMQ queue with single-worker concurrency cap and 5-minute hard deadline; Redis Streams event log (`XADD`, 24h retention, ~5000 maxlen) with resumable SSE streaming (`Last-Event-ID`) and Postgres terminal reconstruction fallback; coverage-safe multi-agent PR review (untrusted planner reconciliation, deterministic path-affinity fallback, 3-worker concurrency pool, hunk-aware patch limits, exact `PARTIAL` coverage guarantees); RAG over uploaded team coding standards (PDF/Markdown/text, 1536-dim embeddings, Neon PostgreSQL `pgvector`); server-side in-process ESLint runner exposed as an AI tool.
+- **Decision:** Rewrote `src/content/work/code-review-agent.md` from its 51-line stub into a complete, human-written case study matching the DL-086 standard:
+  1. Frontmatter: added `Razorpay` to `tech` tags, updated `summary` to reflect the complete scope (streamed feedback, multi-agent PR analysis, team standard RAG, and Razorpay prepaid credit wallet).
+  2. Overview: clear explanation of the platform, the full-stack split, and the core operational thesis (moving 45–90s multi-agent reviews off the synchronous HTTP path and into a cost-passthrough prepaid wallet).
+  3. What I built: five plain, decision-led groups covering the prepaid credit wallet, reserve-and-settle token billing, authoritative webhook settlement, transactional outbox pipeline, Redis Streams SSE replay, multi-agent PR clustering, and RAG/ESLint tooling.
+  4. Challenges: six problem→decision→trade-off narratives (floating-point billing drift, charging long-running AI streams, webhook duplicate retries, HTTP timeout wall, network flicker token drops, hallucinated PR review files).
+  5. Engineering practices: five bullets covering atomic ledger accounting, defensive authentication/inputs, strict cost ceilings, graceful degradation, and honest testing scope (168 monorepo unit tests, sandbox payment / live DB load documented as manual gates).
+  6. Outcomes: live platform URLs, verifiable numbers in code (₹5/₹10/₹50 packs, ₹1 dev pack, 25 signup credits, 5-minute timeout, 24-hour stream retention, 1 worker concurrency), and an explicit no-metrics personal project framing.
+- **Files changed:** `src/content/work/code-review-agent.md`; `docs/research/featured-project-research.md` (§1 updated); this log.
+- **Verification:** `npm run build` — 7 pages clean; `dist/work/code-review-agent/index.html` renders all new sections; tech sidebar includes Razorpay; zero marketing buzzwords; internal evidence notes remain hidden.
+- **Status:** Working-tree changes uncommitted. No commit, push, or deployment was performed (owner convention).
+
+## DL-088 — Code Review Agent case-study audit: metric synchronization & live URL correction
+
+- **Date:** 2026-09-04
+- **Context:** Owner requested a final thorough review of the Code Review Agent case study against the `Kashif-Rezwi/code-review-agent` repository, available architecture docs, and live infrastructure before pushing to main.
+- **Audit Findings:**
+  1. *Free credits:* Case study copy stated "25 free signup credits (500 hundredths)". In `credit-cost.policy.ts`, `CREDIT_SCALE = 100` and `FREE_CREDIT_AMOUNT = 500` hundredths, which equals 5 credits (₹5), formatted as "5" in `format-credits.ts`. "25" was the legacy pre-passthrough unit. Corrected to "5 free signup credits (500 hundredths, or ₹5)".
+  2. *Render API URL:* `code-review-agent.onrender.com` is suspended. Active, healthy production API URL verified live at `code-review-agent-api-685g.onrender.com` (HTTP 200, all health checks valid).
+  3. *Retired interceptor:* Copy mentioned "an interceptor automatically refunds reserved credits". `credit-refund.interceptor.ts` was retired and deleted in ADR-001 / RZC-004. Mid-run worker failures are caught by `ReviewService.runForQueue` and transitioned atomically via `ReviewRepository.markFailedAndRefund` (calling `PaymentsRepository.refundCreditsInTx`) in a single Prisma transaction.
+  4. *Unit test counts:* Updated from 31 server suites (152 tests) and 10 client files (16 tests) to current verified count: 32 server suites (192 tests), 11 client test files (22 tests) = 214 total unit tests passed.
+  5. *Razorpay test-mode status:* Verified that happy path payment, checkout, and webhook capture was proven live end-to-end against real Razorpay test-mode infrastructure (`docs/audit/razorpay-integration-audit.md`), with concurrent DB race conditions under heavy production load documented as pre-production gates.
+- **Decision:** Updated `src/content/work/code-review-agent.md` and `docs/research/featured-project-research.md` with the verified facts.
+- **Files changed:** `src/content/work/code-review-agent.md`, `docs/research/featured-project-research.md`, `docs/decision-log.md`.
+- **Verification:** `npm run build` clean (7 pages); `dist/work/code-review-agent/index.html` verified; live health endpoint verified.
+- **Status:** Working-tree changes ready for owner review.
+
+
 
 

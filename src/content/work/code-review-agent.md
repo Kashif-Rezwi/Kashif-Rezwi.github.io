@@ -3,10 +3,10 @@ title: 'Code Review Agent'
 roleLabel: 'Personal project'
 period: '2026'
 status: 'Live'
-summary: 'AI code review with streamed structured feedback, multi-agent PR analysis, ESLint tooling, and RAG over team coding standards.'
+summary: 'An AI code review platform with streamed structured feedback, multi-agent PR analysis, team standard RAG, and a Razorpay prepaid credit wallet.'
 repo: 'https://github.com/Kashif-Rezwi/code-review-agent'
 demo: 'https://code-review-agent-client.vercel.app'
-tech: ['Next.js', 'NestJS', 'TypeScript', 'Vercel AI SDK', 'PostgreSQL', 'pgvector', 'Prisma', 'BullMQ', 'Redis', 'SSE', 'GitHub OAuth']
+tech: ['Next.js', 'NestJS', 'TypeScript', 'Vercel AI SDK', 'Razorpay', 'PostgreSQL', 'pgvector', 'Prisma', 'BullMQ', 'Redis', 'SSE', 'GitHub OAuth']
 order: 1
 draft: false
 cover: 'code-review-agent.png'
@@ -14,38 +14,43 @@ cover: 'code-review-agent.png'
 
 ## Overview
 
-For developers who want fast, structured code review: paste a snippet or point
-at a public GitHub PR and get bugs and correctness issues with file/line
-locations, security findings with severity, performance and style observations,
-plus a 1–10 quality score. Reviews persist and support follow-up chat.
+Code Review Agent is an automated code review platform built for developers who want fast, thorough, and structured feedback. You sign in with GitHub, paste a code snippet or paste a public GitHub Pull Request URL, and receive real-time streamed analysis: bugs and correctness issues with exact file/line numbers, security vulnerabilities with severity ratings, performance and style suggestions, genuine strengths in the code, and an overall 1–10 quality score. Every review is saved to your history, and you can open an interactive follow-up chat to ask questions about any specific finding.
+
+It is a full-stack platform split across two applications in a pnpm monorepo: a Next.js 16 App Router client deployed on Vercel and a NestJS 11 API deployed on Render, backed by Neon PostgreSQL (with pgvector) and Redis. I built and run both alone.
+
+Reviewing a 30-file pull request with multiple AI models takes anywhere from 45 to 90 seconds and consumes tens of thousands of tokens. If you run that inside a standard HTTP request, serverless reverse proxies kill the connection at 15–30 seconds. And if you charge arbitrary flat subscription fees, large reviews quickly make the system run at a loss while short snippet reviews overcharge the user. Most of the engineering here went into two things: moving long-running reviews entirely into a resilient, replayable background pipeline (outbox + BullMQ + Redis Streams), and building a secure, cost-passthrough credit wallet powered by Razorpay so users pay only for the exact inference tokens they consume.
 
 ## What I built
 
-A full-stack application (Next.js client and NestJS API) that treats code
-review as a structured, streamed pipeline:
+A full-stack code review platform with background orchestration, multi-agent analysis, and an end-to-end prepaid credit billing system:
 
-- **SSE streaming with replay**, so a late-connecting client still receives the
-  full review stream.
-- **Multi-agent clustered review**: large PRs are split into domain clusters
-  (Auth, DB, API…) that parallel agents review and a synthesizer folds into one
-  report.
-- **ESLint exposed as a server-side tool** the AI can invoke during review.
-- **RAG over uploaded team coding standards** (PDF/text/Markdown), vectorized
-  into the review context.
-- **BullMQ + Redis** buffer long AI runs off the HTTP request path.
-- **GitHub OAuth** as the auth credential; **Postgres** persistence of reviews,
-  trace logs, and scores.
+- **Prepaid credit wallet with Razorpay.** Instead of recurring subscriptions or arbitrary flat fees, the app runs on a prepaid credit wallet where 1 credit equals ₹1 of AI inference value. Top-up packs (₹5, ₹10, and ₹50) are purchased via Razorpay Checkout. To make sub-cent operations exact (a follow-up chat costs around ₹0.03) and avoid rounding errors, all credits are stored and calculated in integer hundredths ("credit-paise", 100 hundredths = 1 credit). Every balance update in PostgreSQL is an atomic integer increment or decrement.
+- **Reserve-and-settle token billing.** Because AI generation cost depends on actual token output, the server uses a reserve-and-settle lifecycle. When you start a review or send a chat message, the server checks your balance and places an upfront worst-case reservation (1.00 credit for snippets, 5.00 for PRs, 0.10 for chat) guarded by an atomic database check. When generation finishes, the server reads the exact token counts from the AI gateway response, computes the actual cost at list price plus a 20% safety buffer, and immediately refunds the unused balance back to your wallet with an audit-logged settlement entry. If a review fails or aborts early, the entire reservation is refunded.
+- **Authoritative webhook settlement & dev pack.** The client opens Razorpay Checkout.js with an order ID created by the server. The client never tells the server that a payment succeeded; credits are added only when an HMAC-SHA256 verified webhook arrives from Razorpay. The signature is checked against the raw request buffer in constant time before any JSON parsing occurs. A unique database index on the payment event ID prevents duplicate credit grants on retried webhooks. For live production testing, a hidden ₹1 package is unlocked via an operator header, allowing live checkout and webhook delivery verification without paying full top-up fees.
+- **Queue-backed pipeline with transactional outbox.** Reviews run completely decoupled from HTTP requests. When you submit a review, one database transaction creates both the pending review and an outbox record, returning a review ID to the client in milliseconds. A background dispatcher service polls the outbox with 30-second leases and exponential backoff, enqueuing jobs to a BullMQ queue. A crash between request creation and worker pickup can never drop a review. Worker concurrency is strictly capped at one job per instance as an intentional ceiling on parallel LLM expenses.
+- **Redis Streams event log with SSE replay.** Worker progress events are written to a Redis Stream with a 24-hour retention window. The browser connects to a Server-Sent Events endpoint that tails the stream using blocking reads. If a user refreshes the page or has a connection hiccup, the client sends its last received event ID and the server resumes the stream from that exact entry without re-running any AI work. If a client reconnects after the stream expires, the final review state is reconstructed directly from PostgreSQL. Heartbeats sent every 15 seconds keep intermediate proxies from dropping the connection.
+- **Coverage-safe multi-agent PR review.** Small PRs are reviewed by a single agent. For PRs with more than three files, an AI planner divides the files into 2 to 4 domain clusters (like Auth, Database, or API). The server treats planner output as untrusted: it validates that every file in the PR snapshot is accounted for, repairs duplicates, assigns omitted files by shared directory prefix, and falls back to a deterministic path-affinity algorithm if the planner output fails. Up to three worker agents review clusters in parallel with hunk-aware patch limits, and a synthesizer agent merges their findings into one unified report. If any cluster fails, the review is marked as partial, explicitly listing which files were unreviewed.
+- **Team coding standards (RAG) and ESLint tools.** Users can upload team guidelines as PDFs, Markdown, or plain text. Documents are chunked and vectorized using 1,536-dimensional embeddings stored in PostgreSQL with pgvector. Relevant standards are retrieved via cosine similarity and injected into the review prompt. The AI can also dynamically invoke a server-side ESLint runner as a tool to inspect syntax and style issues directly.
 
 ## Challenges
 
-The README documents the queue + SSE-replay design and the clustered-review
-synthesis as the hard parts. Beyond the README, no deeper narrative is
-recorded.
+- **Floating-point billing drift in database transactions.** AI models charge fractions of a cent per thousand tokens. Storing credits as floats or decimals caused rounding errors and race conditions in concurrent balance updates. I scaled all credits to integer hundredths (100 hundredths = 1 credit = ₹1). Every balance change is an atomic integer update in PostgreSQL. Trade-off: the frontend and serializers must divide by 100 for display, but database math and ledger accounting remain exact.
+- **Charging long-running AI streams before knowing token usage.** Charging after generation risks unpaid provider costs if a wallet empties mid-stream; charging flat fees overcharges small reviews or loses money on large PRs. I built a reserve-and-settle lifecycle: hold a worst-case reservation upfront, calculate actual token consumption on completion from gateway response metadata, and refund the difference as an atomic settlement. If generation fails or is cancelled, the full reservation is refunded. Trade-off: users must hold enough credits for the worst-case reservation to begin, even if the final charge is only a fraction of that amount.
+- **Webhook retries causing duplicate credit grants.** Network blips cause Razorpay to retry webhooks, risking double-crediting if handled naively. Webhooks are verified using HMAC-SHA256 signatures over raw body buffers before JSON parsing, followed by an atomic insert against a unique event ID constraint. Retried deliveries hit a unique constraint conflict, are logged, and return HTTP 200 without modifying user balances. Trade-off: webhook processing runs synchronously in the request path rather than on a background queue, but because database transactions take under 10 milliseconds, it avoids queue retries multiplying credit grants.
+- **The HTTP timeout wall on long AI reviews.** A multi-agent PR review takes 45 to 90 seconds. Vercel and reverse proxies kill HTTP requests after 15 to 30 seconds. I decoupled review creation from execution using a transactional outbox, BullMQ, and Redis Streams. The HTTP endpoint returns in 50 milliseconds with a review ID, and the client connects to an SSE stream that tails Redis. Trade-off: running a managed Redis instance and an outbox polling service adds moving parts compared to a single synchronous route.
+- **Dropped tokens on mobile network flicker.** When a user leaves the page or has a momentary network drop, standard SSE pub/sub drops all in-flight events. I used Redis Streams as a durable event log. The client reconnects with its last seen event ID, and the server replays from that point forward using blocking stream reads. If a user returns after the 24-hour stream window expires, the terminal review state is reconstructed directly from PostgreSQL. Trade-off: Redis holds stream memory for 24 hours, though capping stream length at approximately 5,000 entries per review keeps footprint predictable.
+- **Hallucinated files in multi-agent PR reviews.** Asking an LLM to group dozens of changed files into review clusters frequently resulted in hallucinated file paths or silently omitted files. The server treats planner output as untrusted suggestions: it checks every filename against the initial GitHub PR snapshot, deduplicates assignments, assigns omitted files by longest common directory prefix, and falls back to a deterministic path-affinity algorithm if validation fails. Trade-off: fallback clustering is based on directory paths rather than semantic understanding, but it guarantees 100% file coverage accountability.
+
+## Engineering practices
+
+- **Atomic ledger accounting.** Every balance change (free signup grant, purchase, reservation, settlement refund) is paired with an append-only ledger entry inside a Prisma transaction, recording the resulting balance snapshot directly from the database.
+- **Defensive authentication and inputs.** GitHub OAuth access tokens are validated with in-memory caching; payment routes explicitly disallow query-parameter token fallbacks; webhooks reject payloads larger than 1 MB and require valid 64-character hexadecimal HMAC signatures.
+- **Strict cost ceilings.** BullMQ worker concurrency is fixed at one to prevent uncontrolled parallel LLM costs; reviews enforce a 5-minute hard execution deadline; patch context is capped at 40,000 characters per cluster and 8,000 characters per file; raw diffs are limited to 2 MB; and order creation and webhooks are rate-limited via NestJS throttlers.
+- **Graceful degradation.** If the GitHub Files API fails or rate-limits, the server falls back to parsing raw public unified diffs; if AI cluster planning fails, it falls back to deterministic clustering; if vector search finds no matching standards, it proceeds with general review; and if generation fails mid-run, the worker catch block transitions the review to failed and automatically refunds reserved credits in an atomic transaction.
+- **Honest testing scope.** The monorepo runs a full verification loop covering shared package builds, TypeScript checks across four workspaces, 32 server test suites (192 unit tests), 11 client test files (22 tests), and ESLint. Payment tests cover HMAC verification, replay deduplication, currency mismatches, and status guards. The payment flow is verified end-to-end against real Razorpay test-mode infrastructure, while concurrent database race conditions under heavy production load remain documented as manual pre-production gates.
 
 ## Outcomes
 
-Live demo reachable; listed on the approved master resume; pinned on GitHub.
-No user, scale, or accuracy claims are made for the tool.
+The platform is live: Next.js frontend at `code-review-agent-client.vercel.app` and NestJS API at `code-review-agent-api-685g.onrender.com` with an unauthenticated `/health` endpoint checking PostgreSQL and Redis Streams. It runs with deliberate limits defined in code: ₹5, ₹10, and ₹50 top-up packs, a ₹1 smoke-test pack, 5 free signup credits (500 hundredths, or ₹5), a 5-minute review deadline, 24-hour stream retention, and single-worker concurrency. There are no user or scale claims here — this project is about how to build a resilient, multi-agent AI pipeline and a secure payment wallet that you can inspect and trust.
 
-> Narrative sources: `docs/research/featured-project-research.md` §1 + evidence
-> ledger CL-14. Capabilities only; never framed as SaaS/commercial.
+> Sources: `docs/research/featured-project-research.md` §1 (updated 2026-09-02) + verified code inspection of `Kashif-Rezwi/code-review-agent` (2026-09-02). Architecture, features, and engineering decisions only; never framed as commercial or production-scale.
