@@ -716,6 +716,21 @@
 - **Verification:** `npm run build` — 7 pages clean; `dist/work/code-review-agent/index.html` renders all new sections; tech sidebar includes Razorpay; zero marketing buzzwords; internal evidence notes remain hidden.
 - **Status:** Working-tree changes uncommitted. No commit, push, or deployment was performed (owner convention).
 
+## DL-088 — Code Review Agent case-study audit: metric synchronization & live URL correction
+
+- **Date:** 2026-09-04
+- **Context:** Owner requested a final thorough review of the Code Review Agent case study against the `Kashif-Rezwi/code-review-agent` repository, available architecture docs, and live infrastructure before pushing to main.
+- **Audit Findings:**
+  1. *Free credits:* Case study copy stated "25 free signup credits (500 hundredths)". In `credit-cost.policy.ts`, `CREDIT_SCALE = 100` and `FREE_CREDIT_AMOUNT = 500` hundredths, which equals 5 credits (₹5), formatted as "5" in `format-credits.ts`. "25" was the legacy pre-passthrough unit. Corrected to "5 free signup credits (500 hundredths, or ₹5)".
+  2. *Render API URL:* `code-review-agent.onrender.com` is suspended. Active, healthy production API URL verified live at `code-review-agent-api-685g.onrender.com` (HTTP 200, all health checks valid).
+  3. *Retired interceptor:* Copy mentioned "an interceptor automatically refunds reserved credits". `credit-refund.interceptor.ts` was retired and deleted in ADR-001 / RZC-004. Mid-run worker failures are caught by `ReviewService.runForQueue` and transitioned atomically via `ReviewRepository.markFailedAndRefund` (calling `PaymentsRepository.refundCreditsInTx`) in a single Prisma transaction.
+  4. *Unit test counts:* Updated from 31 server suites (152 tests) and 10 client files (16 tests) to current verified count: 32 server suites (192 tests), 11 client test files (22 tests) = 214 total unit tests passed.
+  5. *Razorpay test-mode status:* Verified that happy path payment, checkout, and webhook capture was proven live end-to-end against real Razorpay test-mode infrastructure (`docs/audit/razorpay-integration-audit.md`), with concurrent DB race conditions under heavy production load documented as pre-production gates.
+- **Decision:** Updated `src/content/work/code-review-agent.md` and `docs/research/featured-project-research.md` with the verified facts.
+- **Files changed:** `src/content/work/code-review-agent.md`, `docs/research/featured-project-research.md`, `docs/decision-log.md`.
+- **Verification:** `npm run build` clean (7 pages); `dist/work/code-review-agent/index.html` verified; live health endpoint verified.
+- **Status:** Working-tree changes ready for owner review.
+
 
 
 
