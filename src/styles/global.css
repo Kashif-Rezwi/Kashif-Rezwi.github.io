@@ -602,6 +602,54 @@
     border-radius: var(--radius-control);
     border: 1px solid color-mix(in srgb, var(--color-accent) 15%, transparent);
   }
+  .markdown pre {
+    margin-top: 0.75rem;
+    padding: 1rem;
+    background: var(--color-accent-soft);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 15%, transparent);
+    border-radius: var(--radius-card);
+    overflow-x: auto;
+    line-height: 1.5;
+  }
+  /* Reset the inline-code treatment inside fenced blocks (LingoAgent case
+     study: README architecture diagram + 7-step pipeline table). */
+  .markdown pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    font-size: 0.8125rem;
+    color: var(--color-ink);
+  }
+  .markdown table {
+    margin-top: 0.75rem;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+  .markdown th,
+  .markdown td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+  }
+  .markdown th {
+    font-weight: 600;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+  }
+  /* Wide tables scroll inside their own box on small screens instead of
+     overflowing the page. */
+  @media (max-width: 640px) {
+    .markdown table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
   .markdown blockquote {
     margin-top: 0.75rem;
     border-left: 2px solid var(--color-border);
