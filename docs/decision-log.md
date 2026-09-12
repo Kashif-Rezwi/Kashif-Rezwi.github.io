@@ -751,7 +751,19 @@
   - Custom AST line-break scanner: 0 broken lines detected across all work content and root README.
 - **Status:** Committed to `develop` per owner directive.
 
+## DL-090 — Code Review Agent: final case-study audit & server-status integration
 
-
-
+- **Date:** 2026-09-12
+- **Context:** Owner directed a comprehensive quality review and cross-check of the Code Review Agent project representation against the live GitHub repository (`Kashif-Rezwi/code-review-agent`), package manifests, deployed production infrastructure, and test suites.
+- **Audit Findings:**
+  1. *Server wake-up indicator:* Verified integration of `server-active-indicator` package (commit `16006d7` in `code-review-agent`), which mounts a global `<ServerStatus />` banner detecting cold-starts and suspensions across all routes (1.5s reveal delay, 60s active check interval).
+  2. *Client test count synchronization:* Synchronized client test metrics from 11 test files (22 tests) to 12 test files (26 tests) across `src/content/work/code-review-agent.md` and `docs/research/featured-project-research.md`, accounting for `server-status.spec.tsx` and bringing total monorepo unit tests to 218.
+  3. *Live infrastructure verification:* Re-verified live production client (`code-review-agent-client.vercel.app`, HTTP 307 → `/review` → `/login` → 200) and live Render backend API (`code-review-agent-api-685g.onrender.com/health`, HTTP 200 with all database and Redis services healthy).
+- **Decision:** Updated `src/content/work/code-review-agent.md` and `docs/research/featured-project-research.md` with verified facts, and committed changes to `develop`.
+- **Files changed:** `src/content/work/code-review-agent.md`, `docs/research/featured-project-research.md`, `docs/project-status.md`, `docs/decision-log.md`.
+- **Verification:**
+  - `npm run check:contrast`: 19/19 checks PASS.
+  - `npm run check:glass-contrast`: 30/30 checks PASS.
+  - `npm run build`: 7 pages compiled cleanly in under 500ms.
+- **Status:** Committed to `develop` per owner directive.
 
