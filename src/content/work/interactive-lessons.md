@@ -3,7 +3,7 @@ title: 'Interactive Lessons'
 roleLabel: 'Personal project'
 period: '2026'
 status: 'In progress'
-summary: 'A documentation-first, agent-governed pipeline called Learning OS that turns technical course material into rigorously evaluated, interactive HTML lessons — every run recorded, every decision in an ADR.'
+summary: 'A documentation-first pipeline that turns technical course notes into rigorously evaluated, interactive HTML lessons — governed by versioned prompts, append-only evidence records, and a six-audit adversarial evaluation gate.'
 repo: 'https://github.com/Kashif-Rezwi/interactive-lessons'
 tech: ['Python', 'Markdown', 'HTML']
 order: 5
@@ -12,7 +12,7 @@ draft: false
 
 ## Overview
 
-Interactive Lessons is a system for turning raw technical course material into interactive, rigorously evaluated HTML lessons. It is not a web app: it lives as a documentation-first repository called **Learning OS**, where the documentation is the product. The pipeline's contracts, workflows, and quality gates are written down before implementation exists, so humans and AI agents share one durable source of truth for how a lesson gets built and what "good" means — every generation step, evaluation, and decision is traceable to written records.
+Interactive Lessons is a system for turning raw technical course material into interactive, rigorously evaluated HTML lessons. It is not a web app: it lives as a documentation-first repository called **Learning OS**, where the documentation is the product. The pipeline's contracts, workflows, and quality gates are written down before implementation exists, so humans and AI agents share one durable source of truth for how a lesson gets built and what "good" means — and the generated lessons are the governed artifacts it ships.
 
 The repository is at **Stage 2 — reproducible workflow automation** on its capability roadmap. The workflow already produces real artifacts: a governed P0–P6 lesson-generation pipeline has generated 13 interactive lesson versions across three classes of an AIML-4 module, each with full lineage from source capture to evaluation. The current reference candidate is a self-contained, dependency-free interactive HTML lesson, versioned against a frozen benchmark.
 
@@ -20,11 +20,13 @@ The repository is at **Stage 2 — reproducible workflow automation** on its cap
 
 - **A governed P0–P6 lesson-generation workflow.** Each class runs its own pipeline: source package → concept model → learning plan → experience specification → generation → evaluation. Gate P5 runs six audits plus an adversarial gate (coverage, math, dependency order, interaction, accessibility, rendered output); P6 produces the evaluation record, then human release judgment, then curated memory. A stage may not consume an unapproved upstream artifact, and generation cannot self-certify release.
 
-- **Append-only evidence records.** `records/` holds 69 cross-linked records: 12 generation runs, 13 evaluations, 11 learning plans, 11 experience specifications, 10 concept models, 6 curated memory items, and 1 frozen benchmark. Every claim about a lesson traces back to a generation-run ledger and an evaluation record.
-
-- **Architecture decision records and versioned prompt cards.** 13 ADRs capture durable choices — including the benchmark/artifact-change protocol and the canvas engineering standard that fixed a responsiveness-and-design drift regression class — plus an executable QA rubric and a lesson-pattern catalog. Seven versioned prompt cards (`@0.5.0` → `@0.6.0`) make the generator's contract evolve deliberately rather than silently.
-
 - **An autonomous agent skill.** The workflow is encoded as an agent skill at `.agents/skills/generate-lesson/SKILL.md` that executes generation end to end. AI agents are first-class participants, but high-impact decisions remain human-reviewable.
+
+- **Lessons that ship as static files.** Generated lessons are self-contained HTML with no build step and no external dependencies — they open directly in a browser. The current reference candidate, `linear-algebra-foundations-v10.html`, is a full-verification reproduction run that completed live rendered-output verification and repaired four inherited defect classes (title identity, per-element slider encapsulation, body-font floor, 320px overflow).
+
+- **Append-only evidence records.** `records/` holds 69 cross-linked records: 12 generation runs, 13 evaluations, 11 learning plans, 11 experience specifications, 10 concept models, 6 curated memory items, 3 source-intake records, 2 governed experiments, and 1 frozen benchmark. Every claim about a lesson traces back to a generation-run ledger and an evaluation record.
+
+- **Architecture decision records and versioned prompt cards.** 14 ADRs capture durable choices — including the benchmark/artifact-change protocol and the canvas engineering standard that fixed a responsiveness-and-design drift regression class — plus an executable QA rubric and a lesson-pattern catalog. Seven versioned prompt cards (`@0.1.0` → `@0.6.0`) make the generator's contract evolve deliberately rather than silently.
 
 - **Dependency-free verification tooling.** Two Python 3.8+ standard-library tools (no installs): `check-repo.py` enforces repository hygiene — links, provenance hashes, rubric weights, status vocabularies, naming, ADR index — and must exit 0 before any commit to governed surfaces; `verify-candidate.py` mechanically verifies a generated lesson candidate.
 
@@ -41,15 +43,14 @@ The repository is at **Stage 2 — reproducible workflow automation** on its cap
 ## Engineering practices
 
 - **Evidence traceability.** Claims, scores, outputs, and decisions must be traceable to their evidence. A candidate's lineage runs from source-capture record → concept model → learning plan → experience specification → generation-run ledger → evaluation, all cross-linked.
-- **Append-only records.** Records are append-only; durable architectural choices become ADRs (13 to date, covering the content-package convention, benchmark definition and artifact-change protocol, and the canvas engineering standard).
+- **Append-only records.** Records are append-only; durable architectural choices become ADRs (14 to date, covering the content-package convention, benchmark definition and artifact-change protocol, and the canvas engineering standard) — even the 2026 artifact-brand rename left every historical record and generated lesson byte-for-byte intact.
 - **Versioned prompts as contracts.** Prompt cards carry versions, and changes to them are themselves ADR-tracked — so a generation behavior change is a deliberate, reviewable event rather than a silent drift.
 - **Reproducible automation.** The agent skill executes the workflow end to end; the v10 reference run was executed as a full-verification reproduction under an unchanged prompt card, repairing a known defect class while reproducing the validated design.
 
 ## Outcomes
 
-The pipeline is real and measurable inside its own guardrails: 13 lesson versions across three AIML-4 classes, 69 cross-linked evidence records, 13 ADRs, 7 versioned prompt cards, and two dependency-free verification tools. The current reference candidate v10 completed its full-verification reproduction run and closed `private-pilot-complete` under non-independent review.
+The pipeline is real and measurable inside its own guardrails: 13 lesson versions across three AIML-4 classes, 69 cross-linked evidence records, 14 ADRs, 7 versioned prompt cards, and two dependency-free verification tools. The current reference candidate v10 completed its full-verification reproduction run and closed `private-pilot-complete` under non-independent review.
 
 There are deliberately no public credentials yet: no license selected, no live demo, no release or efficacy claims. The project is engineering a trustworthy generation pipeline first, with product implementation and platform governance as explicit roadmap stages that only proceed when the foundation documents authorize them.
 
 > Sources: `Kashif-Rezwi/interactive-lessons` README, module README, and repo inspection (2026-09-13). Features and decisions only; never framed as commercial, released, or production-scale.
-- **Lessons that ship as static files.** Generated lessons are self-contained HTML with no build step and no external dependencies — they open directly in a browser. The current reference candidate, `linear-algebra-foundations-v10.html`, is a full-verification reproduction run that completed live rendered-output verification and repaired four inherited defect classes (title identity, per-element slider encapsulation, body-font floor, 320px overflow).
