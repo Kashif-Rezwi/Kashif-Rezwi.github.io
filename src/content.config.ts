@@ -33,6 +33,8 @@ const work = defineCollection({
     /** Optional cover image filename inside src/assets/work/<slug> (README-screenshot
         visuals, owner-approved DL-011). Absent => no cover (honest text-only page). */
     cover: z.string().optional(),
+    /** Optional ASCII architecture diagram displayed in the cover frame (for doc-first projects) */
+    coverAscii: z.string().optional(),
     /** Keep an entry out of case-study listing while its copy is unfinished */
     draft: z.boolean().default(false),
   }),

@@ -24,16 +24,9 @@ interface Props {
     };
     id: string;
   }>;
-  links: {
-    looplens: string;
-    looplensDemo: string;
-    archive: string;
-    aiPlayground: string;
-    languagePlayground: string;
-  };
 }
 
-const { featured, links } = Astro.props;
+const { featured } = Astro.props;
 ---
 
 <section id="work" class="section-block work-bg">
@@ -68,23 +61,25 @@ const { featured, links } = Astro.props;
       <h3 class="more-projects-label">More projects</h3>
       <ul class="more-projects-list">
         <ProjectRow
-          name="LoopLens"
-          typeLabel="Hackathon · TestSprite S3"
+          name="Interactive Lessons"
+          typeLabel="Personal project"
           links={[
-            { href: links.looplens, label: 'Repo', icon: 'repository' },
-            { href: links.looplensDemo, label: 'Live', icon: 'external' },
+            { href: withBase('work/interactive-lessons/'), label: 'Read case study', icon: 'case-study', internal: true },
+            { href: 'https://github.com/Kashif-Rezwi/interactive-lessons', label: 'Repo', icon: 'repository' },
           ]}
         >
-          Proof-of-work dashboard that turns AI-coding-loop evidence into a shareable engineering timeline.
+          Documentation-first, agent-governed pipeline that turns technical course material into rigorously evaluated, interactive HTML lessons.
         </ProjectRow>
         <ProjectRow
-          name="Learning in public"
-          typeLabel="Open repos"
-          links={[{ href: links.archive, label: 'Full archive →', icon: 'repository' }]}
+          name="LingoAgent"
+          typeLabel="Personal project"
+          links={[
+            { href: withBase('work/lingo-agent/'), label: 'Read case study', icon: 'case-study', internal: true },
+            { href: 'https://github.com/Kashif-Rezwi/lingo-agent', label: 'Repo', icon: 'repository' },
+            { href: 'https://lingo-agent.vercel.app', label: 'Live', icon: 'external' },
+          ]}
         >
-          <a href={links.aiPlayground} class="link-accent" target="_blank" rel="noopener noreferrer">ai-playground</a> and{' '}
-          <a href={links.languagePlayground} class="link-accent" target="_blank" rel="noopener noreferrer">language-playground</a>
-          are open experiments and notes.
+          Full-stack AI agent pipeline for Next.js App Router repos — 7 deterministic tools, E2B sandbox execution, Babel AST extraction, auto PR with preview deploy.
         </ProjectRow>
       </ul>
     </div>
