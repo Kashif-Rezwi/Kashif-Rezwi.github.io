@@ -7,7 +7,7 @@ summary: 'Autonomous i18n agent that turns Next.js App Router apps multilingual:
 repo: 'https://github.com/Kashif-Rezwi/lingo-agent'
 demo: 'https://lingo-agent.vercel.app'
 tech: ['TypeScript', 'Next.js', 'Babel AST', 'E2B Sandboxes', 'Lingo.dev', 'GitHub API', 'Vercel']
-order: 3
+order: 6
 draft: false
 cover: 'lingo-agent.png'
 ---

@@ -28,6 +28,16 @@ const covers = import.meta.glob('../assets/work/*', {
 }) as Record<string, { src: string; width: number; height: number }>;
 const coverSrc = cover ? covers[`../assets/work/${cover}`] : undefined;
 
+// 16:9 cover frame. Covers at/above frame aspect keep the default
+// contain + blurred-filler letterbox. Covers taller than the frame (e.g.
+// the 4:3 Server Active Indicator capture) fill the frame edge-to-edge by
+// cropping from the bottom only — the top of the screenshot (header/banner
+// region) stays fully visible with no bars. The case-study page always
+// renders the full image; this fit policy is card-only.
+const FRAME_ASPECT = 16 / 9;
+const ASPECT_TOLERANCE = 0.02;
+const cropToFrame = coverSrc !== undefined && coverSrc.width / coverSrc.height < FRAME_ASPECT - ASPECT_TOLERANCE;
+
 // Keep the tech block to one row everywhere: fewer tags on narrow cards.
 const VISIBLE_TECH = 3;
 const visibleTech = tech.slice(0, VISIBLE_TECH);
@@ -37,7 +47,7 @@ const hiddenTechCount = tech.length - visibleTech.length;
 <article class="work-card glass-card glass-role-surface">
   {
     coverSrc && (
-      <div class="work-card-cover" style={`background-image: url('${coverSrc.src}')`}>
+      <div class={`work-card-cover${cropToFrame ? ' work-card-cover--fit' : ''}`} style={`background-image: url('${coverSrc.src}')`}>
         <img src={coverSrc.src} alt={`${title} screenshot`} loading="lazy" width={coverSrc.width} height={coverSrc.height} />
       </div>
     )
@@ -189,6 +199,18 @@ const hiddenTechCount = tech.length - visibleTech.length;
     .work-card:hover .work-card-cover img {
       transform: none;
     }
+  }
+  /* Taller-than-frame covers (e.g. the 4:3 Server Active Indicator capture):
+     fill the frame edge-to-edge by cropping from the bottom only — the top of
+     the image (header/banner region) stays fully visible, and no letterbox or
+     blurred filler bars are ever rendered. Card-only policy: the case-study
+     page renders the full uncropped image. */
+  .work-card-cover--fit::before {
+    display: none;
+  }
+  .work-card-cover--fit img {
+    object-fit: cover;
+    object-position: top center;
   }
 
   .work-card-body {

@@ -10,7 +10,9 @@ import Icon from './Icon.astro';
 interface RowLink {
   href: string;
   label: string;
-  icon?: 'repository' | 'external';
+  icon?: 'repository' | 'external' | 'case-study';
+  /** Same-site link (e.g. a case study): rendered without target=_blank. */
+  internal?: boolean;
 }
 
 interface Props {
@@ -34,8 +36,7 @@ const { name, typeLabel, links } = Astro.props;
         <a
           href={link.href}
           class="link-accent project-row-link"
-          target="_blank"
-          rel="noopener noreferrer"
+          {...(link.internal ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
         >
           {link.icon && <Icon name={link.icon} size={14} />}
           {link.label}
