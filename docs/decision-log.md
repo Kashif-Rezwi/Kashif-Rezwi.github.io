@@ -731,6 +731,27 @@
 - **Verification:** `npm run build` clean (7 pages); `dist/work/code-review-agent/index.html` verified; live health endpoint verified.
 - **Status:** Working-tree changes ready for owner review.
 
+## DL-089 — Repository audit: README overhaul, ASCII architecture diagram & markdown line-break unwrapping
+
+- **Date:** 2026-09-12
+- **Context:** Owner directed a comprehensive repository and documentation audit across GitHub metadata, documentation consistency, architecture visualization, and line-break formatting across all markdown documents.
+- **Audit Findings:**
+  1. *README stub:* `README.md` was previously a 9-line internal reference stub pointing to internal rebuild docs, lacking technical architecture, technology stack breakdown, local development instructions, test references, and project structure.
+  2. *GitHub metadata drift:* GitHub description claimed legacy "React development" and topics included obsolete `chakra-ui` and `react`. Recommended exact, high-signal metadata for Astro 7, Tailwind v4, and TypeScript.
+  3. *Prose line-break fragmentation:* Markdown case studies (`src/content/work/better-dev.md`, `lingo-agent.md`, and `perplexity.md`) contained hard wraps (53, 10, and 9 premature mid-sentence line breaks respectively).
+- **Decision:**
+  1. Overhauled `README.md` into a production-standard technical specification featuring status badges, core engineering characteristics (zero-JS core, CSS-first design tokens, build-time GraphQL harvesting), an annotated project structure tree, executable local development commands, and quality gate references.
+  2. Designed an expanded, spacious 78-column ASCII architecture diagram clearly delineating four phases: Build-Time Data Aggregation, Astro Static Compilation, Static Assets & Routing, and Deployment & Runtime Delivery.
+  3. Unwrapped all prematurely broken lines across `better-dev.md`, `lingo-agent.md`, and `perplexity.md`, ensuring all paragraphs and bullet items occupy continuous logical lines without altering wording or claims.
+- **Files changed:** `README.md`, `src/content/work/better-dev.md`, `src/content/work/lingo-agent.md`, `src/content/work/perplexity.md`, `docs/project-status.md`, `docs/decision-log.md`.
+- **Verification:**
+  - `npm run check:contrast`: 19/19 checks PASS.
+  - `npm run check:glass-contrast`: 30/30 checks PASS.
+  - `npm run build`: 7 pages compiled cleanly in under 600ms.
+  - Custom AST line-break scanner: 0 broken lines detected across all work content and root README.
+- **Status:** Committed to `develop` per owner directive.
+
+
 
 
 
