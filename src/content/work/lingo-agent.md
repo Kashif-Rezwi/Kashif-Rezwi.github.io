@@ -16,108 +16,41 @@ cover: 'lingo-agent.png'
 
 LingoAgent is a full-stack AI agent built for **Next.js 14+ App Router** repositories. Point it at a GitHub repository URL, select target languages, and it returns a ready-to-merge pull request with a live Vercel preview — without writing any code yourself.
 
-The frontend is a **Next.js 14 App Router** dashboard with GitHub OAuth (NextAuth.js). Behind it sits a **NestJS 11 API** that orchestrates the entire pipeline. All repository operations execute inside a **throwaway E2B cloud sandbox** — the server never touches the filesystem directly. Translation runs through the **Lingo.dev SDK** (with MCP for dynamic setup instructions). Git operations use **Octokit**. The LLM planner is **Llama 3.3 70B via Groq** (Vercel AI SDK). Job state lives in **Neon PostgreSQL** via Prisma.
+The system is built as a monorepo split across two applications: a Next.js 14 App Router dashboard with GitHub OAuth (NextAuth.js) deployed on Vercel, and a NestJS 11 orchestration API deployed on Render, backed by Neon PostgreSQL via Prisma. Repository modifications execute inside throwaway E2B cloud micro-VM sandboxes, translation runs through the Lingo.dev SDK with MCP integration, Git operations run via Octokit, and planning is driven by Llama 3.3 70B on Groq via the Vercel AI SDK.
 
-Live: frontend at [lingo-agent.vercel.app](https://lingo-agent.vercel.app) · API docs at [lingo-agent.onrender.com/docs](https://lingo-agent.onrender.com/docs)
+Adding i18n support to an existing web app is not a translation problem — it is an orchestration problem. Reading library documentation, setting up locale routing, discovering and extracting hardcoded JSX strings, writing dictionary JSON files, injecting context providers, and configuring language switchers add up to 3–5 hours of repetitive setup. LingoAgent automates that entire sequence into a deterministic, single-run agent pipeline.
 
-## The Problem
+## What I built
 
-Adding i18n support to an existing Next.js app is not a translation problem — it is an orchestration problem. The individual steps are simple; the sequence is the bottleneck:
+A full-stack AI agent pipeline that takes a repository from monolithic English to verified multilingual in one autonomous run:
 
-- Reading i18n library documentation and configuring locale routing
-- Finding and extracting every hardcoded string across dozens of JSX components
-- Writing and maintaining per-locale dictionary files
-- Modifying the root layout to inject context providers and a language switcher
-- Creating a branch, pushing changes, opening a PR, and verifying the preview
+- **Sequential 7-step execution pipeline.** The agent executes seven typed tools in strict order: cloning the target repo (`clone_repo`), verifying Next.js App Router structure (`detect_framework`), scanning JSX and existing i18n configs (`analyze_repo`), generating and injecting the runtime provider (`setup_lingo`), extracting strings and translating dictionaries (`install_and_translate`), committing and opening a GitHub PR (`commit_and_push`), and polling a live Vercel preview deployment (`trigger_preview`). The LLM is constrained to one typed tool schema per step, preventing hallucination or out-of-order execution.
+- **Isolated cloud sandbox execution with E2B.** All repository operations — git clone, npm install, code transformations, and file generation — run inside an ephemeral E2B micro-VM. The NestJS server never touches the host filesystem or executes untrusted third-party code. Sandboxes are immediately destroyed on job completion, failure, or cancellation.
+- **Dynamic Babel AST extraction with regex fallback.** Rather than shipping a fixed parser dependency on the server, the extraction script dynamically imports `@babel/parser` and `@babel/traverse` from the target project's own sandbox `node_modules`. This guarantees the parser version matches the target project's Next.js release and syntax features. If dynamic AST import fails, the pipeline automatically falls back to a regex-based text scanner so translations are never silently dropped.
+- **Zero-dependency runtime injection.** The agent injects a lightweight, self-contained i18n runtime (`LanguageProvider`, `TextTranslator`, and `LanguageSwitcher`) into the target's root layout. SDK setup instructions are fetched dynamically at runtime from Lingo.dev's MCP server rather than hardcoded into the agent, ensuring the injected configuration matches the latest SDK standards.
+- **Real-time SSE event log with replay.** Every phase transition, shell command, and translation batch emits structured events over Server-Sent Events. An in-memory RxJS `ReplaySubject` on the NestJS backend caches the event history per job, so users can refresh the dashboard or reconnect mid-run without losing logs or progress.
+- **Automated Git and preview lifecycle.** Changes are committed atomically to a dedicated branch (`lingo/i18n-setup`), pushed to GitHub, and submitted as an open PR via Octokit. The agent then triggers a Vercel preview deployment and monitors build status until ready, returning both the PR and preview URLs on the job completion card.
 
-Each step is minutes of routine work; together they add up to 3–5 hours of repetitive setup before any real translation work begins (estimate from project documentation).
+## Challenges
 
-LingoAgent automates that entire sequence as a single agent pipeline.
+- **Preventing hallucination and misordering in autonomous pipelines.** In an autonomous pipeline with seven sequential phases, presenting the LLM with all tool schemas at once risks out-of-order execution, skipped checks, or hallucinated arguments. I constrained the planner by presenting only a single typed tool schema corresponding to the current step. The LLM decides the tool arguments and evaluates progression, while the NestJS backend strictly controls execution sequence. Trade-off: the agent cannot dynamically alter its step ordering or invent ad-hoc recovery sequences, but execution order is guaranteed to be 100% deterministic.
+- **Executing untrusted repository code safely.** Cloning arbitrary public repositories and running `npm install` exposes the orchestrator to malicious postinstall hooks, filesystem corruption, or resource exhaustion. I isolated all repository operations inside disposable E2B micro-VM sandboxes that are immediately terminated upon completion or failure. Trade-off: spinning up and tearing down isolated cloud VMs adds latency (10–20 seconds per run) and an external infrastructure dependency, but the core API process is completely immune to hostile repo contents.
+- **Babel AST parser version mismatches across Next.js releases.** Bundling a fixed `@babel/parser` version in the backend caused syntax parsing errors when target repositories used newer or custom JSX/TSX syntax features. The extraction script dynamically imports Babel directly from the target project's own sandbox `node_modules`, matching the repository's exact compiler environment. A regex scanner serves as a defensive fallback if dynamic imports fail. Trade-off: dynamic imports depend on the target repository having Babel installed, and the regex fallback is less semantically precise for complex expressions, but parsing rarely fails outright.
+- **Connection drops during long-running agent execution.** Transforming an entire repository takes several minutes. Standard SSE streams lose in-flight logs if the browser reconnects or encounters network turbulence. I backed each job's event stream with an in-memory RxJS `ReplaySubject` on the server. When the dashboard reconnects, it immediately replays the full historical event buffer from step 1. Trade-off: server memory holds event buffers for active jobs, meaning server restarts lose active stream replay unless persistent event logs (like Redis Streams) are used.
+- **Keeping SDK configuration in sync without code churn.** Hardcoding setup code templates inside the agent risked breakage as Lingo.dev evolved its SDK APIs. Rather than static templates, the agent connects to the Lingo.dev MCP server to fetch up-to-date configuration instructions dynamically before injecting providers and translation hooks. Trade-off: runtime setup depends on the availability of the external MCP server, but the codebase requires zero maintenance when SDK conventions update.
 
-## Architecture
+## Engineering practices
 
-The system is a monorepo with two applications — `client/` (Next.js 14) and `server/` (NestJS 11):
-
-```text
-┌─────────────────────────────────────────────────────────────────┐
-│                          Browser (User)                         │
-│                                                                 │
-│   Next.js 14 App Router Client (:3000 / Vercel)                 │
-│   ├── /login           (GitHub OAuth via NextAuth.js)           │
-│   ├── /dashboard       (Job submission, history, API keys)      │
-│   └── /jobs/[jobId]    (Real-time log stream & result card)     │
-└────────────────────────────────┬────────────────────────────────┘
-                                 │
-                                 │ HTTP REST (JSON) + SSE (text/event-stream)
-                                 ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    NestJS API Server (:3001 / Render)           │
-│                                                                 │
-│   ├── Global Prefix: /api                                       │
-│   ├── Swagger OpenAPI: /docs                                    │
-│   ├── AuthGuard: Bearer token validation (GitHub OAuth token)   │
-│   ├── AgentController & AgentService                            │
-│   ├── JobsService (Prisma ORM 7)                                │
-│   └── Per-Job SSE Broker (RxJS ReplaySubject)                   │
-└───────┬────────────────┬────────────────┬────────────────┬──────┘
-        │                │                │                │
-        ▼                ▼                ▼                ▼
-┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐
-│  Neon Cloud  │ │  E2B Cloud   │ │  Groq Cloud  │ │  External    │
-│  PostgreSQL  │ │  Sandbox     │ │  LLM Engine  │ │  Services    │
-│              │ │              │ │              │ │              │
-│  - Job state │ │  - git clone │ │  - Llama 3.3 │ │  - Lingo.dev │
-│  - Log cache │ │  - Babel AST │ │    70B tool  │ │    SDK & MCP │
-│  - Run URLs  │ │  - i18n run  │ │    planner   │ │  - GitHub API│
-│              │ │  - Isolated  │ │              │ │  - Vercel API│
-└──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘
-```
-
-## How It Works: The 7-Step Pipeline
-
-The agent executes 7 tools in strict sequential order. Groq selects which tool to call and with what parameters; the NestJS backend controls all actual execution. To prevent hallucination and tool misordering, the LLM is presented with only **one tool schema at a time** — it cannot issue arbitrary commands, only invoke the single typed tool offered for the current step.
-
-| Step | Tool | What happens |
-|------|------|--------------|
-| 1 | `clone_repo` | Clone the target repository into a fresh E2B micro-VM sandbox |
-| 2 | `detect_framework` | Inspect `package.json`, directory structure, and App Router paths; stop if the project is not Next.js App Router |
-| 3 | `analyze_repo` | Inventory JSX files and check for existing i18n configuration; stop if a conflicting i18n library is found |
-| 4 | `setup_lingo` | Query the Lingo.dev MCP server for setup instructions, write the zero-dependency i18n runtime (LanguageProvider + TextTranslator + LanguageSwitcher), and inject it into the root layout |
-| 5 | `install_and_translate` | Run `npm install`, extract JSX strings via Babel AST, translate via the Lingo.dev SDK, and write `public/locales/*.json` |
-| 6 | `commit_and_push` | Commit all changes atomically to a new branch, push, and open a ready-to-merge GitHub PR via Octokit |
-| 7 | `trigger_preview` | Trigger a Vercel preview deployment and poll until it is ready |
-
-Every step emits structured log events over SSE. The frontend receives them in real time via a `ReplaySubject<SseEvent>` — late connections or page refreshes replay the full event history.
-
-## Engineering Decisions
-
-**LLM as planner, not executor.** The LLM's job is to select parameters and decide tool sequence — not to write files or run commands. All actual execution is controlled by typed NestJS tools with deterministic inputs and outputs. This means the system behaves predictably: the LLM cannot hallucinate a shell command and have it run.
-
-**E2B sandbox for process isolation.** Every job clones and processes the target repository inside a throwaway E2B cloud micro-VM. The NestJS server never writes to the filesystem. When a job completes, fails, or is cancelled, the server immediately terminates the sandbox VM. A malformed `package.json` postinstall or an unexpectedly large `node_modules` cannot affect the server process.
-
-**Babel loaded from the target repo's node_modules.** The Babel AST extraction script does not ship `@babel/parser` as a server dependency. Instead, it installs the target repo's own dependencies inside the sandbox and dynamically imports `@babel/parser` and `@babel/traverse` from that `node_modules/`. This means the parser version always matches the repo's actual environment — avoiding version mismatch errors across different Next.js versions.
-
-**Regex fallback when Babel fails.** If the dynamic Babel import fails (because the target repo doesn't include Babel, or the import resolution fails), the pipeline falls back to a regex-based text scanner. No translation work is silently dropped.
-
-**RxJS ReplaySubject per job.** Each job gets a dedicated `ReplaySubject<SseEvent>` stored server-side. Subscribers that connect late receive all previously emitted events immediately. A page refresh or network hiccup does not lose pipeline progress — the frontend reconnects and receives the full history without re-running any work.
-
-**MCP for dynamic setup instructions.** Rather than hardcoding Lingo.dev SDK setup steps, the agent queries the Lingo.dev MCP server at runtime to retrieve current configuration instructions. This keeps the pipeline correct against SDK updates without requiring code changes.
-
-## Known Limitations
-
-These are documented, deliberate scope decisions — not bugs:
-
-- **Next.js App Router only.** Pages Router, Vite, and Remix are not supported. The analysis and injection logic is specific to App Router conventions.
-- **JSX strings only.** Strings inside JavaScript logic, variables, error messages, and API response payloads are not extracted. The pipeline targets UI-visible text.
-- **No CI/CD configuration** in this repository.
-- **Personal project.** No production usage, no multi-tenant billing, no SLA claims.
+- **LLM as planner, not executor.** The model selects parameters and confirms step completion; all actual filesystem modifications, AST manipulations, and git operations run through typed, deterministic NestJS services.
+- **Defensive fallback chains.** If AST parsing via dynamic Babel imports fails or hits unrecognized syntax, execution drops cleanly to regex pattern extraction rather than aborting the job.
+- **Strict environment isolation.** Ephemeral cloud sandboxes ensure zero state leakage between successive job runs, with hard timeouts preventing runaway sandbox compute.
+- **Structured observability.** Every pipeline transition produces a typed SSE event payload, giving the user visibility into exact terminal commands and file mutations without exposing raw server internals.
+- **Explicit scope boundaries.** The system restricts itself to Next.js App Router repositories and JSX text extraction, declining unsupported frameworks upfront rather than producing corrupted layouts.
 
 ## Outcomes
 
-The system is live at personal scale:
+The platform is live: Next.js frontend at `lingo-agent.vercel.app` and NestJS API at `lingo-agent.onrender.com` with Swagger OpenAPI documentation at `/docs`. It was written up on dev.to: ["I built an AI agent that makes any Next.js app multilingual in 3 minutes"](https://dev.to/kashifrezwi/i-built-an-ai-agent-that-makes-any-nextjs-app-multilingual-in-3-minutes-4bdm).
 
-- **Frontend:** [lingo-agent.vercel.app](https://lingo-agent.vercel.app)
-- **API (Swagger docs):** [lingo-agent.onrender.com/docs](https://lingo-agent.onrender.com/docs)
-- **Written up on dev.to:** ["I built an AI agent that makes any Next.js app multilingual in 3 minutes"](https://dev.to/kashifrezwi/i-built-an-ai-agent-that-makes-any-nextjs-app-multilingual-in-3-minutes-4bdm)
+The system operates within deliberate scope limits: Next.js App Router only (Pages Router, Vite, and Remix are excluded), JSX text extraction only (backend strings, dynamic variables, and API responses are omitted), and personal-scale execution without multi-tenant billing or SLAs. There are no production user counts or benchmarked performance metrics — the author's README estimate of ~3 minutes automated vs. 3–5 hours manual is a design benchmark from project documentation, not an independently measured result.
 
-No production-scale metrics, no user counts, no benchmarked performance numbers. The README estimates a ~3-minute automated run vs. 3–5 hours manual — that is the author's stated estimate in project documentation, not an independently measured result.
+> Sources: `Kashif-Rezwi/lingo-agent` README, repository inspection (`client/` and `server/` workspaces), and author write-up (2026-09-13). Features and decisions only; never framed as commercial or production-scale.

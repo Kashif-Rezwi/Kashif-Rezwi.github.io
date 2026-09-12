@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-09-13 (DL-093)
+- **Last updated:** 2026-09-13 (DL-100)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -906,3 +906,15 @@
 - **Verification:** `npm run build` clean — 9 pages; rendered `dist/work/lingo-agent/index.html`: **0 `<hr>` tags**, all 7 sections + table + diagram present, More row and links unchanged; `check:contrast` **19/19** PASS; `check:glass-contrast` **30/30** PASS.
 - **Files changed:** `src/content/work/lingo-agent.md` · `docs/decision-log.md` · `docs/project-status.md`.
 - **Status:** Committed to `develop` per owner directive (2026-09-13, DL-098–099). Not pushed; deployment remains owner-gated (AGENTS.md §7).
+
+## DL-100 — Case study consistency overhaul (LingoAgent) & native ASCII architecture cover (Interactive Lessons)
+
+- **Date:** 2026-09-13
+- **Context:** Owner directed a thorough consistency review comparing LingoAgent against all other case studies, and requested an end-to-end architecture diagram for Interactive Lessons that solves the missing cover image without introducing raster PNG images, positioned above Overview and stretching edge-to-edge across the canvas.
+- **Implementation:**
+  1. **LingoAgent case study standardization (`src/content/work/lingo-agent.md`):** Restructured into the 5 canonical sections matching `code-review-agent.md`, `perplexity.md`, and `better-dev.md` (Overview with merged problem statement, What I built with 6 structured feature bullets, Challenges with explicit `Trade-off:` endings on all 5 items, Engineering practices with 5 core principles, Outcomes with honest scope boundaries and dev.to article link, and formal `> Sources:` attribution blockquote). Removed raw ASCII diagram from the body to match other case studies with screenshot covers.
+  2. **Schema support for ASCII covers (`src/content.config.ts`):** Added optional `coverAscii: z.string().optional()` to the work collection schema.
+  3. **Case study cover rendering (`src/pages/work/[slug].astro`):** Implemented native ASCII architecture cover support in the full-width `<figure class="case-cover case-cover--ascii">` slot above `## Overview`. Uses CSS container queries (`container-type: inline-size; font-size: clamp(0.5rem, 1.42cqi, 0.94rem); line-height: 1.34;`) and centered layout so the monospace diagram stretches edge-to-edge across ~98% of the available container width on all viewports with zero empty space on the right.
+  4. **Interactive Lessons 115-character architecture diagram (`src/content/work/interactive-lessons.md`):** Added 115-character wide ASCII diagram to frontmatter (`coverAscii: |`), covering Input (AIML-4 notes & syllabus with SHA-256 lock) → 01 Specification Pipeline (P0–P3) → 02 Autonomous Agent Engine (P4 generator skill, 7 prompt cards `@0.1.0` → `@0.6.0`, 12 runs, frozen benchmark v10) → 03 Six-Audit Evaluation Gate (P5 adversarial audits, P6 release gate) → Bottom split: Shipped Artifact (v10 HTML Lesson) and Governed Evidence Ledger (69 records, 14 ADRs, `check-repo.py` / `verify-candidate.py`). Added explicit `Trade-off:` statements to all 4 Challenges bullets. Removed all raster images.
+- **Verification:** `npm run build` passes with 0 errors across all 9 pages; rendered output verified in `dist/work/interactive-lessons/index.html` and `dist/work/lingo-agent/index.html`; dev server active on `http://localhost:4321`.
+- **Status:** Committed to `develop` per owner directive (2026-09-13, DL-100).

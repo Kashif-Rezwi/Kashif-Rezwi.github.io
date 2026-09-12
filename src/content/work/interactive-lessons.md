@@ -8,6 +8,46 @@ repo: 'https://github.com/Kashif-Rezwi/interactive-lessons'
 tech: ['Python', 'Markdown', 'HTML']
 order: 5
 draft: false
+coverAscii: |
+  ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │  LEARNING OS  ·  END-TO-END LESSON GENERATION PIPELINE                                      STAGE 2: AUTOMATION │
+  ├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │                                                                                                                 │
+  │  [ INPUT ] ────▶  AIML-4 Module Notes & Curriculum Syllabus  (SHA-256 Provenance-Verified Intake)               │
+  │                                                                                                                 │
+  │  ┌─────────────────────────────┐       ┌───────────────────────────────┐       ┌─────────────────────────────┐  │
+  │  │ 01 · SPECIFICATION PIPELINE │       │ 02 · AUTONOMOUS AGENT ENGINE  │       │ 03 · SIX-AUDIT EVALUATION   │  │
+  │  ├─────────────────────────────┤       ├───────────────────────────────┤       ├─────────────────────────────┤  │
+  │  │ P0  Source Package Intake   │       │ P4  Lesson Generator Engine   │       │ P5  Adversarial Audit Gate  │  │
+  │  │     Provenance SHA-256 lock │       │     generate-lesson skill     │       │     1. Syllabus Coverage    │  │
+  │  │              │              │       │     7 Versioned Prompt Cards  │       │     2. Mathematical Truth   │  │
+  │  │              ▼              │ ────▶ │     (@0.1.0 → @0.6.0)         │ ────▶ │     3. DAG Dependency Order │  │
+  │  │ P1  Concept Model           │       │                               │       │     4. Interaction State    │  │
+  │  │     Domain entity graph     │       │ • 12 Autonomous runs executed │       │     5. A11y & 320px Floor   │  │
+  │  │              │              │       │ • Frozen benchmark v10 checked│       │     6. Live Render Audit    │  │
+  │  │              ▼              │       │ • Zero external build deps    │       │              │              │  │
+  │  │ P2  Learning Plan           │       └───────────────────────────────┘       │              ▼              │  │
+  │  │     Pedagogic progression   │                       │                       │ P6  Release Gate & Memory   │  │
+  │  │              │              │                       │                       │     Evaluation record log   │  │
+  │  │              ▼              │                       │                       │     Human release sign-off  │  │
+  │  │ P3  Experience Spec         │                       │                       └─────────────────────────────┘  │
+  │  │     Widgets & canvas rules  │                       │                                      │                 │
+  │  └─────────────────────────────┘                       │                                      │                 │
+  │                 │                                      │                                      │                 │
+  │                 └──────────────────────────────────────┴──────────────────────────────────────┘                 │
+  │                                                        │                                                        │
+  │                                                        ▼                                                        │
+  │  ┌─────────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐  │
+  │  │  SHIPPED ARTIFACT: INTERACTIVE HTML LESSON (v10)    │  GOVERNED EVIDENCE & AUDIT TRAIL                    │  │
+  │  ├─────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤  │
+  │  │  • linear-algebra-foundations-v10.html              │  • 69 Cross-linked append-only records              │  │
+  │  │  • Zero runtime or external build dependencies      │  • 14 Durable architecture decision records (ADRs)  │  │
+  │  │  • Standalone HTML + native browser canvas graphics │  • 13 Evaluated candidate versions with lineage     │  │
+  │  │  • Encapsulated slider state & 320px responsive base│  • check-repo.py (blocks unverified commits)        │  │
+  │  │  • Release status: private-pilot-complete           │  • verify-candidate.py (mechanical rubric check)    │  │
+  │  └─────────────────────────────────────────────────────┴─────────────────────────────────────────────────────┘  │
+  │                                                                                                                 │
+  └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ---
 
 ## Overview
@@ -32,13 +72,13 @@ The repository is at **Stage 2 — reproducible workflow automation** on its cap
 
 ## Challenges
 
-- **Documentation precedes implementation.** A proposed code change needs a linked decision, contract, and acceptance criteria before it may land — the repository deliberately contains no learner-facing application until the roadmap authorizes it. This makes the repo slower to "ship" but keeps every capability grounded in a written intent that agents and humans share.
+- **Documentation precedes implementation.** A proposed code change needs a linked decision, contract, and acceptance criteria before it may land — the repository deliberately contains no learner-facing application until the roadmap authorizes it. This makes the repo slower to "ship" but keeps every capability grounded in a written intent that agents and humans share. Trade-off: moving deliberately through documentation gates makes initial capability shipping slower, but eliminates regressions and ungrounded agent drift.
 
-- **Verification must not trust itself.** Generation inside an AI loop cannot self-certify its own output. Every candidate must pass six audits plus an adversarial gate, an evaluation record, and then human release judgment before anything is considered releasable. The latest reference candidate closed `private-pilot-complete` under a non-independent review — it is explicitly not a public release, benchmark result, or efficacy claim.
+- **Verification must not trust itself.** Generation inside an AI loop cannot self-certify its own output. Every candidate must pass six audits plus an adversarial gate, an evaluation record, and then human release judgment before anything is considered releasable. The latest reference candidate closed `private-pilot-complete` under a non-independent review — it is explicitly not a public release, benchmark result, or efficacy claim. Trade-off: multi-tier adversarial audits and human release gates prevent autonomous continuous deployment, but ensure no self-certified hallucinations ship.
 
-- **Quality enforced locally, not by CI.** There is no CI pipeline yet — documented in the README as a known gap. Quality is instead enforced by the repository checker (`check-repo.py` blocks commits to governed surfaces), the mechanical candidate verifier, and a live-browser rendered-output audit. It works, but it depends on contributor discipline.
+- **Quality enforced locally, not by CI.** There is no CI pipeline yet — documented in the README as a known gap. Quality is instead enforced by the repository checker (`check-repo.py` blocks commits to governed surfaces), the mechanical candidate verifier, and a live-browser rendered-output audit. It works, but it depends on contributor discipline. Trade-off: running verification scripts locally removes cloud CI dependencies, but requires strict contributor discipline before commits.
 
-- **Honest boundaries.** No license has been selected yet (default copyright applies until one is added), and there is no public demo or hosted deployment. The project's credibility comes from its evidence trail, not from user-facing exports.
+- **Honest boundaries.** No license has been selected yet (default copyright applies until one is added), and there is no public demo or hosted deployment. The project's credibility comes from its evidence trail, not from user-facing exports. Trade-off: withholding public exports until roadmap authorization limits early external user feedback, but protects the integrity of the evidence ledger.
 
 ## Engineering practices
 
