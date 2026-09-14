@@ -52,7 +52,15 @@ The owner subsequently approved a freelance-project invitation and public `Kolka
 | Bullet 2 — CRM features + workflow-builder redesign | CL-04 · CL-05 | "Helped build"; approved feature name (workflow UX redesign) |
 | Bullet 3 — AI-assisted features, NL workflow generation, original Swipe Genie | CL-06 · CL-07 | "Contributed"; "original" guards against attributing a colleague's later agent rewrite (CL-07) |
 | Bullet 4 — async systems, Template Library, infinite-pagination, production stability | CL-08 · CL-10 · CL-11 · CL-09 | No metrics/outcome claims; "helped keep production stable" (CL-09) |
-| Nexus Software Solutions, Frontend Developer Intern, Jun–Aug 2023; UBMe | CL-12 | Internship framing; no quantified performance |
+| Nexus Software Solutions, Frontend Developer Intern, Jun–Aug 2023 | No claim | Factual from ledger §1 (VERIFIED) |
+| UBMe badge — event-management platform (one of 2–3 client-facing apps) | CL-12 | Product name approved (OQ-08); 2–3-app scope verified 2026-08-17 |
+| Bullet 1 — responsive React UI (hooks + Redux) across 2–3 client-facing applications, primarily UBMe | EXP-NEXUS-01 · 02 | Collaborative ("Contributed"); no metrics |
+| Bullet 1 — WebSocket real-time features incl. in-product chat | EXP-NEXUS-03 | Chat framing verified 2026-09-08; no metrics |
+| Bullet 2 — API integration (Axios/Fetch) + CRUD across booking/scheduling flows | EXP-NEXUS-01 · 02 | No "REST" label (inferred, not recorded); no metrics |
+| Bullet 2 — designers/senior engineers, reusable components, UI libraries, interface patterns | EXP-NEXUS-01 · 02 | Collaborative ("Worked with") |
+| Bullet 3 — timezone-aware scheduling (Day.js/Moment.js) | EXP-NEXUS-05 | Verified 2026-09-08; qualitative only |
+| Bullet 3 — reusable custom calendar component | EXP-NEXUS-06 | Verified 2026-09-08; no duplication metric |
+| Bullet 4 — refactored frontend code | EXP-NEXUS-04 | No quantified performance result |
 | Education: Masai School bootcamp (2022) · BCA Amity (in progress) | No claim | Factual from ledger §1 (VERIFIED) |
 
 ## AI journey / now
