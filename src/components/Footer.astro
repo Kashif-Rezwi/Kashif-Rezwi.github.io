@@ -29,7 +29,7 @@ const socials = [
         {socials.map((s) => (
           <li>
             <a href={s.href} class="footer-social-link" target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
-              <Icon name={s.icon} size={14} />
+              <Icon name={s.icon} size={s.icon === 'linkedin' ? 20 : 14} />
               {s.label}
             </a>
           </li>
