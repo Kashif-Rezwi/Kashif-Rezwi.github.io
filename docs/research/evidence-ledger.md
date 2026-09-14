@@ -2,7 +2,7 @@
 
 - **Purpose:** The single canonical record of Phase 0B evidence-backed findings. Every proposed public claim records supporting source IDs, confidence, a claim-safety label, and safe public wording.
 - **Authority:** Compiled 2026-08-05 from sources listed in [source-register.md](../source-register.md), under the claim-safety and source-hierarchy rules of [AGENTS.md](../../AGENTS.md). Owner statements in conversation outrank this document. Workspace proof IDs (`EXP-*`, `PROJECT-*`) come from `temp/career-ops-workspace/profile/proof-points.md` and are referenced as evidence pointers only.
-- **Last updated:** 2026-08-05
+- **Last updated:** 2026-09-14 (Nexus internship reconciled to the knowledge base — DL-101)
 - **Related:** [AGENTS.md](../../AGENTS.md) · [current-portfolio-audit.md](./current-portfolio-audit.md) · [github-project-triage.md](./github-project-triage.md) · [featured-project-research.md](./featured-project-research.md) · [open-questions.md](../open-questions.md)
 
 ## Labels
@@ -19,7 +19,7 @@ Rules: no invented metrics, scale, outcomes, or seniority. Professional / person
 | Period | Role / phase | Classification | Sources | Label |
 |---|---|---|---|---|
 | Feb 2022 – Nov 2022 | Full-stack web development bootcamp, Masai School (Bangalore) | Learning | SRC-05, SRC-13 PROFILE.md, SRC-14 | VERIFIED |
-| Jun 2023 – Aug 2023 | Frontend Developer Intern, Nexus Software Solutions — UBMe event-management product; React, Redux, WebSockets, responsive UI | Professional | SRC-05, SRC-10 (EXP-NEXUS-01..04), SRC-06 | VERIFIED |
+| Jun 2023 – Aug 2023 | Frontend Developer Intern, Nexus Software Solutions — UBMe event-management platform (one of 2–3 client-facing applications); responsive React UI (hooks + Redux); WebSocket real-time features incl. in-product chat; timezone-aware scheduling (Day.js/Moment.js); reusable custom calendar component; API integration (Axios/Fetch); refactoring | Professional | SRC-05, SRC-10 (EXP-NEXUS-01..06), SRC-06 | VERIFIED |
 | Oct 2023 – Aug 2025 | Full Stack Developer, Brand Exponents Creatives Pvt Ltd — Swipe Pages (no-code landing-page + workflow-automation SaaS) and Swipe One (AI-powered CRM). Collaborative team contributions | Professional | SRC-05, SRC-13, SRC-10 (EXP-BRAND-01..09), SRC-06 | VERIFIED |
 | Jul 2025 – present | Bachelor of Computer Applications, Amity University, Noida (online/distance) | Education | SRC-05, SRC-13 | VERIFIED |
 | Aug 2025 – present | Job search; personal AI / developer-tools projects (perplexity, code-review-agent, better-dev, lingo-agent, looplens) | Personal projects — not production-scale/commercial | SRC-05, SRC-09, SRC-13 projects.md | VERIFIED |
@@ -74,7 +74,7 @@ Every clause maps to the claim table below (CL-01…CL-20).
 | CL-09 | Production delivery: iteration, debugging, deployments, monitoring, hotfixes, customer-facing issues; first stable release + two AppSumo campaign periods | SRC-08 EXP-BRAND-07/08; SRC-10 | High | VERIFIED | No campaign-result claims (unverified) |
 | CL-10 | Shared Template Library end to end: frontend, completed backend, REST integration, builder handoff, S3-compatible storage | SRC-10; SRC-05 | High | VERIFIED | "contributed end to end"; one of first full-stack features |
 | CL-11 | Reusable infinite-pagination system across four product surfaces (observer lifecycle, TanStack Query guards) | SRC-10 | High | VERIFIED | As stated |
-| CL-12 | Nexus internship: responsive React UI (hooks + Redux), WebSocket real-time features, UBMe product, refactoring | SRC-08 EXP-NEXUS-01..04; SRC-10 | High | VERIFIED | Internship framing; no quantified performance claims |
+| CL-12 | Nexus internship: responsive React UI (hooks + Redux) across 2–3 client-facing applications primarily UBMe (event-management platform); WebSocket real-time features incl. in-product chat (verified 2026-09-08); timezone-aware scheduling with Day.js/Moment.js; reusable custom calendar component; API integration (Axios/Fetch); refactoring | SRC-08 EXP-NEXUS-01..06; SRC-10 | High | VERIFIED | Internship framing; collaborative voice; no quantified performance claims; 2–3-app scope verified 2026-08-17 |
 | CL-13 | Perplexity Clone — personal full-stack AI answer engine: web-context retrieval, cited answers, threaded follow-ups; V2 single-user scope | SRC-13 PROJECT-SEARCH-01; SRC-09 README | High | VERIFIED | projects.md safe claim verbatim; no production/commercial claims |
 | CL-14 | Code Review Agent — personal full-stack AI code review: streamed structured feedback, multi-agent PR analysis, ESLint tooling, RAG coding standards | SRC-13 PROJECT-CODE-REVIEW-01; SRC-09 README | High | VERIFIED | projects.md safe claim verbatim; no production/commercial claims |
 | CL-15 | LingoAgent — autonomous i18n agent: Babel AST extraction, E2B sandbox execution, auto PR + Vercel preview; published dev.to article | SRC-09 README; SRC-11 | High | VERIFIED | Personal project; keep documented limitations honest. **Owner directive (2026-08-05, DL-004 condition): excluded from the positioning statement; must never ship as verified work experience** |

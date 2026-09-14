@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-09-13 (DL-100)
+- **Last updated:** 2026-09-14 (DL-102)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -918,3 +918,34 @@
   4. **Interactive Lessons 115-character architecture diagram (`src/content/work/interactive-lessons.md`):** Added 115-character wide ASCII diagram to frontmatter (`coverAscii: |`), covering Input (AIML-4 notes & syllabus with SHA-256 lock) → 01 Specification Pipeline (P0–P3) → 02 Autonomous Agent Engine (P4 generator skill, 7 prompt cards `@0.1.0` → `@0.6.0`, 12 runs, frozen benchmark v10) → 03 Six-Audit Evaluation Gate (P5 adversarial audits, P6 release gate) → Bottom split: Shipped Artifact (v10 HTML Lesson) and Governed Evidence Ledger (69 records, 14 ADRs, `check-repo.py` / `verify-candidate.py`). Added explicit `Trade-off:` statements to all 4 Challenges bullets. Removed all raster images.
 - **Verification:** `npm run build` passes with 0 errors across all 9 pages; rendered output verified in `dist/work/interactive-lessons/index.html` and `dist/work/lingo-agent/index.html`; dev server active on `http://localhost:4321`.
 - **Status:** Committed to `develop` per owner directive (2026-09-13, DL-100).
+## DL-101 — Nexus internship reconciled to the knowledge base (2–3 apps scope, real-time chat, timezone & calendar work)
+
+- **Date:** 2026-09-14
+- **Context:** The knowledge-base repository (`Kashif-Rezwi/career-ops-workspace`, re-fetched at `origin/main` `ff59e26`) added new verified Nexus internship facts (EXP-NEXUS-05/06 and the 2026-09-08 real-time chat verification). The portfolio's internship entry was reconciled against those records.
+- **Decision:** Replace the Nexus internship block in `src/sections/Experience.astro` with KB-reconciled copy —
+  1. **Event-management product:** contributed responsive React UI (hooks + Redux) across 2–3 client-facing applications, primarily UBMe (event-management platform); WebSocket real-time features included in-product chat.
+  2. **Features & integration:** integrated APIs (Axios/Fetch) and common CRUD interactions across booking and scheduling flows; worked with designers and senior engineers on reusable components, UI libraries, and consistent interface patterns.
+  3. **Timezone-aware scheduling:** implemented timezone-aware scheduling with Day.js and Moment.js; built a reusable custom calendar component, removing duplicated styling and configuration.
+  4. **Code quality:** refactored existing frontend code for readability, maintainability, and performance.
+  Tech tags: React, Redux, WebSocket, JavaScript (kept) + owner-approved optional Day.js, Axios; **Moment.js** added at final owner review (2026-09-14) — KB-verified internship-era tech (EXP-NEXUS-05; Notion export tech table: "Moment.js | Beginner–Intermediate | Date/time and timezone handling").
+- **Rationale:** Every sentence maps to EXP-NEXUS-01..06 (verified 2026-08-17 / 2026-09-08). Collaborative voice retained ("Contributed", "Worked with"); "Built" appears only inside an explicitly intern-scoped bullet. No metrics, no "REST" label (inferred, not recorded), no Redux Toolkit/TypeScript/Next.js/Git/app names/Internshala/compensation/manager details. Dates unchanged (Jun 2023 – Aug 2023) — preserves the "2+ years" cumulative claim boundary (ledger §1, CL-02). KB re-fetch cross-check on the final copy: no conflicts.
+- **Governing-doc updates:** `docs/research/evidence-ledger.md` (§1 internship row + CL-12; sources EXP-NEXUS-01..06) · `docs/strategy/home-copy-claim-map.md` (Nexus rows) · `docs/decision-log.md` (this entry) · `docs/project-status.md` (status note).
+- **Verification:** `npm run build` clean (9 pages) · `npm run check:contrast` 19/19 · `npm run check:glass-contrast` 30/30 · mobile ≤768px timeline behavior unchanged · no unrelated files modified.
+- **Approval status:** PENDING OWNER — implemented locally; NOT committed, pushed, merged, deployed, or published.
+
+## DL-102 — Restructure "AI Journey" section into "Current Focus"
+
+- **Date:** 2026-09-14
+- **Context:** Following a comprehensive strategic review of the portfolio narrative, the "AI Journey" section was audited and found to introduce several weak signals: the "AI Journey" title sounded like a junior/student transition narrative rather than an established engineer; the "Building" row duplicated work already showcased in the featured project grid; "Learning in public" pointed to experimental repositories described as having "rough edges"; and the "Recent Updates" header was a generic changelog title without engineering character.
+- **Decision:** Restructure the section into **"Current Focus"** per the owner-approved implementation plan:
+  1. **Section header:** Renamed title from `"AI journey"` to `"Current Focus"`; preserved `label="Now"` and `#now` anchor.
+  2. **Frame statement:** Replaced generic uppercase `"Recent Updates"` label with an evergreen methodology statement in sentence case: *"I develop new capabilities by building complete systems with them — then writing about the decisions that shaped how they work."*
+  3. **Row 1 (Building):** Replaced repetitive summary with forward-looking work on the **Interactive Lessons** pipeline (the only in-progress project in the portfolio), linking directly to its case study (`/work/interactive-lessons/`) via Astro's `withBase()` helper.
+  4. **Row 2 (Recently shipped):** Shifted row order to place the concrete shipped artifact second; replaced the dev.to article with the **`server-active-indicator`** published npm package (`v0.3.2`, MIT, 5-state FSM, React adapter built on `useSyncExternalStore`, zero dependencies).
+  5. **Row 3 (Studying):** Replaced the "Learning in public" rough-edge repo links with focused study of **AI evaluation methodology** and adversarial quality gates, directly connected to the Interactive Lessons pipeline.
+  6. **Interface cleanup:** Removed `devtoArticle`, `aiPlayground`, and `languagePlayground` from `Now.astro` `Props` interface and `index.astro` `links` object; added `npmPackage`.
+- **Rationale:** Answers "What are you doing right now?" with forward-looking, verified artifacts and methodology rather than echoing already-featured projects or signaling student-level side work. Zero new CSS, zero layout alterations, 100% style reuse.
+- **Governing-doc updates:** `docs/decision-log.md` (this entry) · `docs/project-status.md` (working tree note).
+- **Verification:** `npx astro build` clean (9 pages, ~500ms) · `npm run check:contrast` 19/19 PASS · `npm run check:glass-contrast` 30/30 PASS · rendered dev server HTML verified at `http://localhost:4321/`.
+- **Approval status:** PENDING OWNER — implemented locally; NOT committed, pushed, merged, deployed, or published.
+
