@@ -29,7 +29,9 @@ const socials = [
         {socials.map((s) => (
           <li>
             <a href={s.href} class="footer-social-link" target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
-              <Icon name={s.icon} size={s.icon === 'linkedin' ? 20 : 14} />
+              <span class="footer-icon">
+                <Icon name={s.icon} size={s.icon === 'linkedin' ? 20 : 14} />
+              </span>
               {s.label}
             </a>
           </li>
@@ -84,17 +86,31 @@ const socials = [
     padding: 0;
   }
 
+  .footer-socials li {
+    display: flex;
+    align-items: center;
+  }
+
   .footer-social-link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 0.35rem;
     font-family: var(--font-mono);
     font-size: 0.75rem;
+    line-height: 1;
     color: var(--color-ink-dim);
     text-decoration: none;
     transition: color var(--duration-fast) ease;
   }
-  .footer-social-link svg {
+  .footer-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  .footer-icon svg {
     display: block;
     flex-shrink: 0;
   }
