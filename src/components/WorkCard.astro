@@ -92,7 +92,10 @@ const hiddenTechCount = tech.length - visibleTech.length;
         <Icon name="repository" size={14} />Repo
       </a>
       {
-        demo && (
+        /* Live slot always renders (DL-104): enabled when `demo` exists,
+           otherwise a dimmed non-interactive span — a demo-less card can never
+           produce a ragged actions row. */
+        demo ? (
           <a
             href={demo}
             class="work-card-link link-accent"
@@ -101,6 +104,10 @@ const hiddenTechCount = tech.length - visibleTech.length;
           >
             <Icon name="external" size={14} />Live
           </a>
+        ) : (
+          <span class="work-card-link is-disabled" aria-disabled="true" title="Not deployed yet">
+            <Icon name="external" size={14} />Live
+          </span>
         )
       }
     </footer>
@@ -341,6 +348,12 @@ const hiddenTechCount = tech.length - visibleTech.length;
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     white-space: nowrap;
+  }
+  /* Disabled Live slot (no demo URL yet): non-focusable span, dimmed, no
+   * hover — keeps every card's actions row the same anatomy. */
+  .work-card-link.is-disabled {
+    color: var(--color-ink-dim-glass);
+    cursor: not-allowed;
   }
 
   /* Narrow cards: intentional two-tier layout — full-width primary button,

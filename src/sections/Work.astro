@@ -66,6 +66,9 @@ const { featured } = Astro.props;
           links={[
             { href: withBase('work/interactive-lessons/'), label: 'Read case study', icon: 'case-study', internal: true },
             { href: 'https://github.com/Kashif-Rezwi/interactive-lessons', label: 'Repo', icon: 'repository' },
+            // No public demo yet (case study: "no public demo or hosted
+            // deployment") — disabled slot keeps the row anatomy consistent.
+            { label: 'Live', icon: 'external', disabled: true },
           ]}
         >
           Documentation-first, agent-governed pipeline that turns technical course material into rigorously evaluated, interactive HTML lessons.

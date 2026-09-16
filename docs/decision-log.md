@@ -2,7 +2,7 @@
 
 - **Purpose:** Append-only record of project decisions. New entries are appended; existing entries are never silently rewritten (a status may be updated with a dated note).
 - **Authority:** Entries record owner-approved decisions; each states rationale and approval status.
-- **Last updated:** 2026-09-14 (DL-102)
+- **Last updated:** 2026-09-16 (DL-104)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md)
 
 ## DL-001 — Run the project as three gated Phase-0 sub-phases before any implementation
@@ -948,4 +948,14 @@
 - **Governing-doc updates:** `docs/decision-log.md` (this entry) · `docs/project-status.md` (working tree note).
 - **Verification:** `npx astro build` clean (9 pages, ~500ms) · `npm run check:contrast` 19/19 PASS · `npm run check:glass-contrast` 30/30 PASS · rendered dev server HTML verified at `http://localhost:4321/`.
 - **Approval status:** PENDING OWNER — implemented locally; NOT committed, pushed, merged, deployed, or published.
+
+## DL-104 — Disabled "Live" slot pattern for projects without a demo URL
+
+- **Date:** 2026-09-16
+- **Context:** Interactive Lessons has deliberately no public demo yet (case study: "no public demo or hosted deployment"), so its "More projects" row had one fewer link than LingoAgent's and its case-study page omitted the Live controls — an inconsistent component anatomy. The owner directed: add the Live button/link with icon for Interactive Lessons in a disabled state so the components stay consistent and robust.
+- **Decision:** Every Live slot now always renders; absence of the optional `demo` frontmatter field is the disabled signal (no schema change — adding `demo:` later enables all surfaces automatically). Disabled renders a non-focusable `<span>` (never a dead anchor) with the existing `external` icon + label, `aria-disabled="true"`, `title="Not deployed yet"` tooltip, dimmed `--color-ink-dim-glass` color, `cursor: not-allowed`, hover neutralized. No badge text (owner choice — strictly factual tooltip instead of a forward-looking "soon"). Applied to four surfaces: `ProjectRow.astro` (new `disabled?: boolean` on `RowLink`; `href` now optional), `Work.astro` (IL row gains `{ label: 'Live', icon: 'external', disabled: true }`), `[slug].astro` (hero `.btn` + sidebar link always-render), and `WorkCard.astro` (always-render; zero visible change today — all four grid cards have demos — but a demo-less card can never produce a ragged actions row again).
+- **Rationale:** Consistency and robustness per owner direction; claim-safe per AGENTS.md §3 — the tooltip wording matches the case study's own "no public demo" statement; disabled controls are exempt from WCAG contrast minimums and stay out of keyboard tab order.
+- **Governing-doc updates:** `docs/decision-log.md` (this entry) · `docs/project-status.md` (working-tree note).
+- **Verification:** `npm run build` clean (9 pages) · rendered HTML checked — `/` More-projects IL row has the disabled Live span; `/work/interactive-lessons/` hero + sidebar render disabled spans; the five demo-enabled projects' anchors unchanged · `npm run check:contrast` 19/19 PASS · `npm run check:glass-contrast` 30/30 PASS.
+- **Approval status:** PENDING OWNER — implemented directly on `develop`; NOT committed or pushed.
 
