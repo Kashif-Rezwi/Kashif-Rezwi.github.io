@@ -81,19 +81,25 @@ const ogImageUrl = ogImage ?? new URL(withBase('og.png'), Astro.site).href;
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
       }
 
-      // Resume action: always opens in a new tab & automatically downloads
+      // Resume action: always opens in a new tab & automatically downloads.
+      // Resume anchors carry `data-resume-link` (href = Drive viewer URL) and
+      // `data-resume-download` (Drive export URL). The download needs no
+      // `download` attribute — Drive responds `Content-Disposition:
+      // attachment`, and cross-origin `download` attributes are ignored
+      // anyway. The downloaded filename comes from the Drive file name.
       document.addEventListener('click', (e) => {
-        const target = (e.target as HTMLElement)?.closest('a');
+        const target = (e.target as HTMLElement)?.closest('a[data-resume-link]');
         if (!target) return;
         const href = target.getAttribute('href');
-        if (href && (href.endsWith('.pdf') || target.hasAttribute('data-resume-link'))) {
-          e.preventDefault();
-          // 1. Open PDF in a new tab for reading
-          window.open(href, '_blank', 'noopener,noreferrer');
-          // 2. Trigger automatic download of the PDF
+        if (!href) return;
+        e.preventDefault();
+        // 1. Open the resume (Drive viewer) in a new tab for reading
+        window.open(href, '_blank', 'noopener,noreferrer');
+        // 2. Trigger automatic download of the PDF
+        const downloadUrl = target.getAttribute('data-resume-download');
+        if (downloadUrl) {
           const downloadAnchor = document.createElement('a');
-          downloadAnchor.href = href;
-          downloadAnchor.download = 'Kashif-Rezwi-Resume.pdf';
+          downloadAnchor.href = downloadUrl;
           document.body.appendChild(downloadAnchor);
           downloadAnchor.click();
           downloadAnchor.remove();

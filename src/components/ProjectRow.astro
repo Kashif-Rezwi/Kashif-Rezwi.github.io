@@ -8,11 +8,15 @@
 import Icon from './Icon.astro';
 
 interface RowLink {
-  href: string;
+  /** Optional: a `disabled` link has no destination yet. */
+  href?: string;
   label: string;
   icon?: 'repository' | 'external' | 'case-study';
   /** Same-site link (e.g. a case study): rendered without target=_blank. */
   internal?: boolean;
+  /** No destination yet (e.g. Live before a deployment exists): rendered as a
+      dimmed, non-interactive span so the row's link anatomy stays consistent. */
+  disabled?: boolean;
 }
 
 interface Props {
@@ -32,16 +36,23 @@ const { name, typeLabel, links } = Astro.props;
   <p class="project-row-desc"><slot /></p>
   <div class="project-row-links">
     {
-      links.map((link) => (
-        <a
-          href={link.href}
-          class="link-accent project-row-link"
-          {...(link.internal ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
-        >
-          {link.icon && <Icon name={link.icon} size={14} />}
-          {link.label}
-        </a>
-      ))
+      links.map((link) =>
+        link.disabled || !link.href ? (
+          <span class="project-row-link is-disabled" aria-disabled="true" title="Not deployed yet">
+            {link.icon && <Icon name={link.icon} size={14} />}
+            {link.label}
+          </span>
+        ) : (
+          <a
+            href={link.href}
+            class="link-accent project-row-link"
+            {...(link.internal ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+          >
+            {link.icon && <Icon name={link.icon} size={14} />}
+            {link.label}
+          </a>
+        ),
+      )
     }
   </div>
 </li>
@@ -91,5 +102,11 @@ const { name, typeLabel, links } = Astro.props;
     gap: 0.375rem;
     font-family: var(--font-mono);
     font-size: 0.8125rem;
+  }
+  /* Disabled slot: non-focusable span, dimmed, no hover — reads as
+   * unavailable without implying a broken anchor. */
+  .project-row-link.is-disabled {
+    color: var(--color-ink-dim-glass);
+    cursor: not-allowed;
   }
 </style>

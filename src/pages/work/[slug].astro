@@ -69,11 +69,20 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
           <a href={repo} class="btn-outline" target="_blank" rel="noopener noreferrer">
             View repo →
           </a>
-          {demo && (
-            <a href={demo} class="btn" target="_blank" rel="noopener noreferrer">
-              Live demo →
-            </a>
-          )}
+          {
+            /* Live slot always renders: enabled when `demo` exists, otherwise a
+               dimmed non-interactive span (aria-disabled + tooltip) so the
+               actions-row anatomy is identical across case studies. */
+            demo ? (
+              <a href={demo} class="btn" target="_blank" rel="noopener noreferrer">
+                Live demo →
+              </a>
+            ) : (
+              <span class="btn is-disabled" aria-disabled="true" title="Not deployed yet">
+                Live demo
+              </span>
+            )
+          }
         </div>
       </div>
     </div>
@@ -140,12 +149,19 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
                 Repository
               </a>
             </li>
-            {demo && (
+            {demo ? (
               <li>
                 <a href={demo} class="case-sidebar-link" target="_blank" rel="noopener noreferrer">
                   <span class="case-sidebar-link-icon"><Icon name="external" size={16} /></span>
                   Live demo
                 </a>
+              </li>
+            ) : (
+              <li>
+                <span class="case-sidebar-link is-disabled" aria-disabled="true" title="Not deployed yet">
+                  <span class="case-sidebar-link-icon"><Icon name="external" size={16} /></span>
+                  Live demo
+                </span>
               </li>
             )}
           </ul>
@@ -271,6 +287,16 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
     gap: 0.75rem;
     flex-wrap: wrap;
     margin-top: 0.25rem;
+  }
+  /* Disabled Live slot (no demo URL yet): muted fill + dim label in both
+   * themes, hover/active neutralized (out-specifies the global .btn:hover). */
+  .btn.is-disabled,
+  .btn.is-disabled:hover,
+  .btn.is-disabled:active {
+    background: var(--color-accent-soft);
+    color: var(--color-ink-dim-glass);
+    cursor: not-allowed;
+    transform: none;
   }
 
   /* ----------------------------------------------------------------
@@ -411,6 +437,14 @@ const next = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1]
   }
   .case-sidebar-link:hover {
     color: var(--color-accent-light);
+  }
+  .case-sidebar-link.is-disabled,
+  .case-sidebar-link.is-disabled:hover {
+    color: var(--color-ink-dim-glass);
+    cursor: not-allowed;
+  }
+  .case-sidebar-link.is-disabled .case-sidebar-link-icon {
+    color: inherit;
   }
   .case-sidebar-link-icon {
     display: inline-flex;

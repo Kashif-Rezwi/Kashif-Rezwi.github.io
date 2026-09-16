@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { resumePdf } from '../lib/paths';
+import { resumeViewUrl, resumeDownloadUrl } from '../lib/paths';
 
 const year = new Date().getFullYear();
 const repoUrl = 'https://github.com/Kashif-Rezwi/Kashif-Rezwi.github.io';
@@ -10,10 +10,10 @@ const socials = [
   { label: 'LeetCode', href: 'https://leetcode.com/u/Kashif-Rezwi/', icon: 'leetcode' as const },
   { label: 'dev.to', href: 'https://dev.to/kashifrezwi', icon: 'devto' as const },
   { label: 'Email', href: 'mailto:kashifrezwi850@gmail.com', icon: 'mail' as const },
-  // Same-origin relative href → no target/rel (below), so it downloads in-tab.
-  // Keeps the /resume/ hub reachable from every page now that nav + hero
-  // link the PDF directly.
-  { label: 'Resume', href: resumePdf, icon: 'resume' as const },
+  // External Drive href → the template below auto-adds target/rel. With JS,
+  // the global interceptor in Base.astro opens the Drive viewer in a new tab
+  // AND downloads the PDF (data-resume-link / data-resume-download).
+  { label: 'Resume', href: resumeViewUrl, icon: 'resume' as const, downloadHref: resumeDownloadUrl },
 ];
 ---
 
@@ -28,7 +28,7 @@ const socials = [
       <ul class="footer-socials" role="list">
         {socials.map((s) => (
           <li>
-            <a href={s.href} class="footer-social-link" target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+            <a href={s.href} class="footer-social-link" target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined} data-resume-link={'downloadHref' in s ? '' : undefined} data-resume-download={'downloadHref' in s ? s.downloadHref : undefined}>
               <span class="footer-icon">
                 <Icon name={s.icon} size={s.icon === 'linkedin' ? 20 : 14} />
               </span>
