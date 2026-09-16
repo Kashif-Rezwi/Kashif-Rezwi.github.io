@@ -1,11 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
-import { withBase, resumePdf } from '../lib/paths';
+import { withBase, resumeViewUrl, resumeDownloadUrl } from '../lib/paths';
 
-// /resume — single source of truth for the resume (owner decision OQ-05; resolves C-08).
-// The PDF path itself now lives in src/lib/paths.ts (`resumePdf`) and is shared
-// with the hero CTA and the navbar Resume item.
-const pdfHref = resumePdf;
+// /resume — hub for the resume. The resume itself lives in Google Drive as
+// the single source of truth (owner decision DL-103, superseding OQ-05);
+// the Drive file ID and derived URLs live in src/lib/paths.ts and are shared
+// with the hero CTA and the navbar Resume item. Both actions below behave
+// like the rest of the site: open the Drive viewer in a new tab AND download.
 ---
 
 <Base
@@ -22,8 +23,8 @@ const pdfHref = resumePdf;
       The experience section on the home page mirrors it.
     </p>
     <div class="resume-actions">
-      <a href={pdfHref} target="_blank" rel="noopener noreferrer" class="btn">Open PDF →</a>
-      <a href={pdfHref} download class="btn-outline">Download</a>
+      <a href={resumeViewUrl} target="_blank" rel="noopener noreferrer" data-resume-link data-resume-download={resumeDownloadUrl} class="btn">Open PDF →</a>
+      <a href={resumeViewUrl} target="_blank" rel="noopener noreferrer" data-resume-link data-resume-download={resumeDownloadUrl} class="btn-outline">Download</a>
       <a href={withBase('')} class="resume-back">← Back home</a>
     </div>
   </div>
