@@ -2,7 +2,7 @@
 
 - **Purpose:** The single canonical inventory of every source for the portfolio rebuild, with verified accessibility, privacy classification, and verification dates. Deep reading of content is deferred to Phase 0B.
 - **Authority:** Populated from actual access attempts during Phase 0A (2026-08-05). Statuses reflect what was verified, never what is assumed.
-- **Last updated:** 2026-08-05 (three-version comparative review)
+- **Last updated:** 2026-09-16 (SRC-17 added — resume moved to Google Drive, DL-103)
 - **Related:** [AGENTS.md](../AGENTS.md) · [project-status.md](./project-status.md) · [open-questions.md](./open-questions.md)
 
 ## Register
@@ -26,6 +26,7 @@
 | SRC-14 | Loose journey note — *added: temp inventory* | temp/My Journey 29514423768080598af2c688ba00748a.md | Local | No | 2026-08-05 | Available |
 | SRC-15 | Three portfolio implementation refs | local/public git refs: `origin/master` (archived CRA), `develop` (first Astro rebuild/live lineage), `rebuild-02` (second rebuild) | Public + Local | Review | 2026-08-05 | Available |
 | SRC-16 | Google Antigravity home — interaction reference only | https://antigravity.google/ | Public | Visual reference only | 2026-08-05 | Available |
+| SRC-17 | Live resume PDF — single source of truth (DL-103, supersedes OQ-05 local-PDF decision) | https://drive.google.com/file/d/13lXkje4gkeewEEel2amsvXtRmjPLmUEG/view | Public (anyone with link) | Yes | 2026-09-16 | Available |
 
 ## Verification notes
 
@@ -44,5 +45,6 @@
 
 ## Privacy flags
 
-- `src/Components/Home/resume/Kashif-Rezwi-Resume.pdf` is **tracked in this public repository** and served by the live site. Appears intentional (the site offers the resume), but requires owner confirmation — see OQ-05.
+- ~~A copy of the resume PDF is tracked in this public repository~~ **Resolved 2026-09-16 (DL-103):** the local PDF (`public/resume/Kashif-Rezwi-Resume.pdf`) was removed; the resume is now served from Google Drive (SRC-17) as the single source of truth. The Drive file is intentionally public ("anyone with the link").
+- **SRC-17:** View URL verified 200 (Drive preview viewer) and the export endpoint `https://drive.google.com/uc?export=download&id=13lXkje4gkeewEEel2amsvXtRmjPLmUEG` verified 303→200 with `Content-Disposition: attachment; filename="Kashif-Rezwi-Resume.pdf"` (123,686 bytes) via response-header checks on 2026-09-16.
 - All rows marked `No` under Public-safe must never be committed to this repo; they are readable only from the local, gitignored `temp/` workspace.

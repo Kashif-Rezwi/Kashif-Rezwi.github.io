@@ -9,7 +9,7 @@ import { Image } from 'astro:assets';
 import HeroDotMatrix from '../components/HeroDotMatrix.astro';
 import HeroRoleCycler from '../components/HeroRoleCycler.astro';
 import Icon from '../components/Icon.astro';
-import { resumePdf } from '../lib/paths';
+import { resumeViewUrl, resumeDownloadUrl } from '../lib/paths';
 
 interface Props {
   email: string;
@@ -104,11 +104,12 @@ const { email, github, linkedin, leetcode, devto, portrait } = Astro.props;
         <!-- CTA row -->
         <div class="hero-ctas delay-500 animate-fade-up">
           <a
-            href={resumePdf}
+            href={resumeViewUrl}
             class="btn"
             target="_blank"
             rel="noopener noreferrer"
-            download
+            data-resume-link
+            data-resume-download={resumeDownloadUrl}
             aria-label="Download resume (PDF, opens in a new tab)"
           >
             Resume (PDF) ↓

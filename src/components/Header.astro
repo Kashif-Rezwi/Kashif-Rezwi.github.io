@@ -1,5 +1,5 @@
 ---
-import { base, withBase, resumePdf } from '../lib/paths';
+import { base, withBase, resumeViewUrl, resumeDownloadUrl } from '../lib/paths';
 import ThemeControl from './ThemeControl.astro';
 
 // Required nav order: Home · About · Skills · Projects · Contact · Resume.
@@ -7,15 +7,16 @@ import ThemeControl from './ThemeControl.astro';
 // home page renders sections in this same order (monotonic scrolling).
 // "Projects" points at the existing #work section id (kept so the case-study
 // "← Work" breadcrumb and the Now section's "See the work →" link keep
-// working); the Resume entry carries a `resume` flag for its native
-// `download` behavior — direct PDF download, no new tab, no JS needed.
+// working); the Resume entry carries a `resume` flag — with JS, the global
+// interceptor in Base.astro opens the Drive viewer in a new tab AND downloads
+// the PDF; without JS it opens the Drive viewer in a new tab.
 const links = [
-  { href: withBase('#home'), label: 'Home', section: 'home', resume: false },
-  { href: withBase('#about'), label: 'About', section: 'about', resume: false },
-  { href: withBase('#skills'), label: 'Skills', section: 'skills', resume: false },
-  { href: withBase('#work'), label: 'Projects', section: 'work', resume: false },
-  { href: withBase('#contact'), label: 'Contact', section: 'contact', resume: false },
-  { href: resumePdf, label: 'Resume', section: undefined, resume: true },
+  { href: withBase('#home'), label: 'Home', section: 'home', resume: false, downloadHref: undefined },
+  { href: withBase('#about'), label: 'About', section: 'about', resume: false, downloadHref: undefined },
+  { href: withBase('#skills'), label: 'Skills', section: 'skills', resume: false, downloadHref: undefined },
+  { href: withBase('#work'), label: 'Projects', section: 'work', resume: false, downloadHref: undefined },
+  { href: withBase('#contact'), label: 'Contact', section: 'contact', resume: false, downloadHref: undefined },
+  { href: resumeViewUrl, label: 'Resume', section: undefined, resume: true, downloadHref: resumeDownloadUrl },
 ];
 ---
 
@@ -33,7 +34,8 @@ const links = [
             <a
               href={link.href}
               class:list={['nav-link', { accent: link.resume }]}
-              download={link.resume ? '' : undefined}
+              data-resume-link={link.resume ? '' : undefined}
+              data-resume-download={link.resume ? link.downloadHref : undefined}
               target={link.resume ? '_blank' : undefined}
               rel={link.resume ? 'noopener noreferrer' : undefined}
               data-nav-section={link.section}
@@ -71,7 +73,8 @@ const links = [
             <a
               href={link.href}
               class:list={['mobile-nav-link', { accent: link.resume }]}
-              download={link.resume ? '' : undefined}
+              data-resume-link={link.resume ? '' : undefined}
+              data-resume-download={link.resume ? link.downloadHref : undefined}
               target={link.resume ? '_blank' : undefined}
               rel={link.resume ? 'noopener noreferrer' : undefined}
               data-nav-section={link.section}

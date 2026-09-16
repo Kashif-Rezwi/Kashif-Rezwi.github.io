@@ -13,7 +13,7 @@
  * Icons are clean and consistent without bounding box/backgrounds.
  */
 import SectionHeader from '../components/SectionHeader.astro';
-import { resumePdf } from '../lib/paths';
+import { resumeViewUrl, resumeDownloadUrl } from '../lib/paths';
 
 interface Props {
   links?: {
@@ -167,7 +167,7 @@ const { links = {} } = Astro.props;
 
         <div class="about-footer-row">
           <div class="about-ctas">
-            <a href={resumePdf} download target="_blank" rel="noopener noreferrer" class="btn">
+            <a href={resumeViewUrl} target="_blank" rel="noopener noreferrer" data-resume-link data-resume-download={resumeDownloadUrl} class="btn">
               Download Resume (PDF) ↓
             </a>
             <a href="#experience" class="btn-outline">

@@ -6,7 +6,7 @@
   "engines": {
     "node": ">=22"
   },
-    "scripts": {
+  "scripts": {
     "dev": "astro dev",
     "fetch:github": "node scripts/fetch-github-contributions.mjs",
     "favicon": "node scripts/make-favicon.mjs",
@@ -17,9 +17,9 @@
     "check:glass-contrast": "node scripts/check-glass-contrast.mjs"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.1.6",
+    "astro": "^7.3.2",
     "tailwindcss": "^4.3.3"
   }
 }
