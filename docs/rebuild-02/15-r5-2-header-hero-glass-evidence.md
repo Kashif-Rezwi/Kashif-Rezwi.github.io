@@ -40,7 +40,7 @@ Grep-verified: `glass` classes now **only** on real surfaces (header + hero), no
 
 **A11y close-out (OQ-R5-9, owner fix):** At review, Lighthouse registered a11y = 96 from the R4-origin role badge (`white` on cornflower `#6495ed` = 2.97:1). Per owner direction, the badge fill moved to a new token `--color-accent-badge: #3f63c9` (white **5.47:1**, both themes); parallelogram lock (DL-043/045), skew, shadow, and white text untouched. Row added to `check:contrast` (now 17/17). Re-audited: Lighthouse a11y = **100** (mobile), axe **0** dark + light.
 
-**B) Motion:** no new motion introduced here (plate + ambience are static; reveal/ambience animation deferred to R5-4 per spec). `prefers-reduced-motion` unaffected.
+**B. Motion:** no new motion introduced here (plate + ambience are static; reveal/ambience animation deferred to R5-4 per spec). `prefers-reduced-motion` unaffected.
 
 ## 4. Docs-vs-code-vs-git consistency
 

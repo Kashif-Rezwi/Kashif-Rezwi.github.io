@@ -77,8 +77,8 @@ Owner decision: **one canonical role string, used consistently** — also applie
 
 ### 3.4 Open choice (owner, quick)
 
-A) Role-only: name → role (cleanest, most "identity first").
-B) Name → role → direction tagline ("building toward AI product engineering & developer tools") → bio.
+A. Role-only: name → role (cleanest, most "identity first").
+B. Name → role → direction tagline ("building toward AI product engineering & developer tools") → bio.
 
 Recommend **B** (keeps the human direction while adding the role), but only if it doesn't crowd the hero; else **A** with the direction folded into the bio.
 
@@ -94,7 +94,7 @@ Recommend **B** (keeps the human direction while adding the role), but only if i
 
 1. **Extend the motif across the portfolio**, not just the hero. Two candidate approaches (owner pick):
    - **(B1) Subtle site-wide fixed grid backdrop** — a near-invisible static dot grid on the body (a CSS `radial-gradient` background layer, respecting reduced-motion and no-JS) so the texture colours every page, with the hero keeping the only *interactive* canvas. Cheapest, most cohesive, no perf hit.
-   - **B2) Reuse the interactive canvas on a second section** (e.g. the contact/CTA band) via a prop so the component is generic. More impressive but more animation surface + risk; likely only if B1 feels too flat.
+   - **(B2) Reuse the interactive canvas on a second section** (e.g. the contact/CTA band) via a prop so the component is generic. More impressive but more animation surface + risk; likely only if B1 feels too flat.
 2. Support both themes equivalently (dark: cornflower palette; light: deeper accent set already present) and keep `prefers-reduced-motion` → static fallback; keep `matrix-ready` fallback retirement flow.
 
 ### 4.3 Constraint guard
