@@ -958,6 +958,7 @@
 - **Governing-doc updates:** `docs/decision-log.md` (this entry) · `docs/project-status.md` (working-tree note).
 - **Verification:** `npm run build` clean (9 pages) · rendered HTML checked — `/` More-projects IL row has the disabled Live span; `/work/interactive-lessons/` hero + sidebar render disabled spans; the five demo-enabled projects' anchors unchanged · `npm run check:contrast` 19/19 PASS · `npm run check:glass-contrast` 30/30 PASS.
 - **Approval status:** PENDING OWNER — implemented directly on `develop`; NOT committed or pushed.
+
 ## DL-103 — Resume single source of truth moved to Google Drive (supersedes the OQ-05 local-PDF decision)
 
 - **Date:** 2026-09-16
