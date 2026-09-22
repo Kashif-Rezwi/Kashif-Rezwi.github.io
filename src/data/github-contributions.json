@@ -1,55 +1,9 @@
 {
   "ok": true,
   "username": "Kashif-Rezwi",
-  "fetchedAt": "2026-09-16T11:44:34.195Z",
-  "totalContributions": 2547,
+  "fetchedAt": "2026-09-22T18:12:07.035Z",
+  "totalContributions": 2553,
   "weeks": [
-    {
-      "days": [
-        {
-          "date": "2025-09-14",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 0
-        },
-        {
-          "date": "2025-09-15",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 1
-        },
-        {
-          "date": "2025-09-16",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 2
-        },
-        {
-          "date": "2025-09-17",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 3
-        },
-        {
-          "date": "2025-09-18",
-          "count": 0,
-          "level": "NONE",
-          "weekday": 4
-        },
-        {
-          "date": "2025-09-19",
-          "count": 2,
-          "level": "FIRST_QUARTILE",
-          "weekday": 5
-        },
-        {
-          "date": "2025-09-20",
-          "count": 4,
-          "level": "FIRST_QUARTILE",
-          "weekday": 6
-        }
-      ]
-    },
     {
       "days": [
         {
@@ -2418,9 +2372,49 @@
         },
         {
           "date": "2026-09-16",
-          "count": 10,
+          "count": 11,
           "level": "FIRST_QUARTILE",
           "weekday": 3
+        },
+        {
+          "date": "2026-09-17",
+          "count": 2,
+          "level": "FIRST_QUARTILE",
+          "weekday": 4
+        },
+        {
+          "date": "2026-09-18",
+          "count": 3,
+          "level": "FIRST_QUARTILE",
+          "weekday": 5
+        },
+        {
+          "date": "2026-09-19",
+          "count": 4,
+          "level": "FIRST_QUARTILE",
+          "weekday": 6
+        }
+      ]
+    },
+    {
+      "days": [
+        {
+          "date": "2026-09-20",
+          "count": 1,
+          "level": "FIRST_QUARTILE",
+          "weekday": 0
+        },
+        {
+          "date": "2026-09-21",
+          "count": 1,
+          "level": "FIRST_QUARTILE",
+          "weekday": 1
+        },
+        {
+          "date": "2026-09-22",
+          "count": 0,
+          "level": "NONE",
+          "weekday": 2
         }
       ]
     }
