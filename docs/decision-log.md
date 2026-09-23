@@ -970,3 +970,14 @@
 - **Verification:** live header checks on both Drive URLs (viewer 200; export endpoint 303→200 attachment, 123 KB) · `npm run build` clean · no `Kashif-Rezwi-Resume.pdf` / `resumePdf` references remain in `src/` or `dist/`.
 - **Approval status:** PENDING OWNER — implemented on branch `resume-drive-link`; NOT merged, pushed, deployed, or published.
 
+
+## DL-105 — Add Bosscoder Academy AI & ML program to Education
+
+- **Date:** 2026-09-23
+- **Context:** Owner directed adding his current upskilling course to the Education block. Owner-supplied facts (source-hierarchy tier 1): enrolled in Bosscoder Academy's AIML Engineer course, started Jun 2026, 9-month duration, 8–9 modules. Cross-checked against the official course page (`bosscoderacademy.com/genai-ml-engineer-course`), which confirms the official program name **"Advanced AI & ML Engineering Program"** (marketed as the GenAI & ML Engineer course) and the **9-month, live, mentor-led** format — both match the owner's statement.
+- **Decision:** Added a new first entry (newest first) to the `exp-edu-list` in `src/sections/Experience.astro`: **Bosscoder Academy** — *Advanced AI & ML Engineering Program · Jun 2026 – present (expected Mar 2027)* (Jun 2026 + 9 months). Classification: **Learning**, label **VERIFIED** (owner statement + official page). Module names are not listed on the site, matching the existing minimal entry style (Masai, Amity).
+- **Rationale:** Claim-safe per AGENTS.md §3 — course-title wording only; no implied ML-engineer seniority or outcome claims.
+- **Files changed:** `src/sections/Experience.astro` · `docs/decision-log.md` (this entry).
+- **Verification:** `npm run build` clean (9 pages).
+- **Approval status:** PENDING OWNER — implemented directly on `develop`; NOT committed or pushed.
+
