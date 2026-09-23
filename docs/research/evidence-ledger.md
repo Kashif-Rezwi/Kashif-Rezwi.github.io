@@ -21,7 +21,7 @@ Rules: no invented metrics, scale, outcomes, or seniority. Professional / person
 | Feb 2022 – Nov 2022 | Full-stack web development bootcamp, Masai School (Bangalore) | Learning | SRC-05, SRC-13 PROFILE.md, SRC-14 | VERIFIED |
 | Jun 2023 – Aug 2023 | Frontend Developer Intern, Nexus Software Solutions — UBMe event-management platform (one of 2–3 client-facing applications); responsive React UI (hooks + Redux); WebSocket real-time features incl. in-product chat; timezone-aware scheduling (Day.js/Moment.js); reusable custom calendar component; API integration (Axios/Fetch); refactoring | Professional | SRC-05, SRC-10 (EXP-NEXUS-01..06), SRC-06 | VERIFIED |
 | Oct 2023 – Aug 2025 | Full Stack Developer, Brand Exponents Creatives Pvt Ltd — Swipe Pages (no-code landing-page + workflow-automation SaaS) and Swipe One (AI-powered CRM). Collaborative team contributions | Professional | SRC-05, SRC-13, SRC-10 (EXP-BRAND-01..09), SRC-06 | VERIFIED |
-| Jul 2025 – present | Bachelor of Computer Applications, Amity University, Noida (online/distance) | Education | SRC-05, SRC-13 | VERIFIED |
+| Apr 2025 – present | Bachelor of Computer Applications, Amity University, Noida (online/distance) | Education | SRC-05, SRC-13; start month corrected to Apr 2025 by owner 2026-09-23 (DL-105) | VERIFIED |
 | Aug 2025 – present | Job search; personal AI / developer-tools projects (perplexity, code-review-agent, better-dev, lingo-agent, looplens) | Personal projects — not production-scale/commercial | SRC-05, SRC-09, SRC-13 projects.md | VERIFIED |
 
 **Boundary note:** "2+ years of experience" is the approved resume wording (it includes the internship; the full-time full-stack role alone is ~22 months). Keep the approved wording; do not amplify it.
