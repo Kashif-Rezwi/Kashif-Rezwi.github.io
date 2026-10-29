@@ -59,7 +59,7 @@ Independent engineering audit completed 2026-08-05 (verdict: proceed after minor
 ## Blocked
 
 - Nothing blocked. R3 launch complete (DL-030/031). Remaining items are owner spot-checks, not blockers: LinkedIn click-through (OQ-06), 320/1440 visual captures, resume-PDF review.
-- General availability wording remains blocked/omitted because the owner marked it undecided. Freelance invitation and Kolkata display are owner-approved (DL-020).
+- General availability wording remains blocked/omitted because the owner marked it undecided. Freelance invitation and Bengaluru display are owner-approved (DL-020, DL-106).
 - All Phase 0 open questions remain closed.
 
 ## Phase 0 gate outcome (2026-08-05)
