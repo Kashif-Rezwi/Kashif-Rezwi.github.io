@@ -17,7 +17,7 @@
 
 ## R3-A owner-approved contact update (2026-08-05)
 
-The owner subsequently approved a freelance-project invitation and public `Kolkata, India` location display (DL-020). General availability remains intentionally omitted because the owner marked it undecided. The GitHub contribution view and project-link proof are approved direction for R3-D only and are not yet public.
+The owner subsequently approved a freelance-project invitation and public location display (DL-020; updated to `Bengaluru, India` in DL-106). General availability remains intentionally omitted because the owner marked it undecided. The GitHub contribution view and project-link proof are approved direction for R3-D only and are not yet public.
 
 ## Hero
 
@@ -80,7 +80,7 @@ The owner subsequently approved a freelance-project invitation and public `Kolka
 | Email `kashifrezwi850@gmail.com` | No claim | `[owner]`-confirmed active value (also on live site + dev.to profile) |
 | Phone `9883909187` | No claim | `[owner, DL-009]` — owner requested inclusion; commented-out alternatives (C-12) never used |
 | GitHub / LinkedIn / dev.to | No claim | LinkedIn canonical `[OQ-06]` |
-| Kolkata, India | `[owner, DL-020]` | Owner-approved public location display |
+| Bengaluru, India | `[owner, DL-106]` | Owner-approved public location display (updated from `Kolkata, India` via DL-106) |
 
 ## Footer / Resume page
 

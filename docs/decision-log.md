@@ -981,3 +981,13 @@
 - **Verification:** `npm run build` clean (9 pages).
 - **Approval status:** PENDING OWNER — implemented directly on `develop`; NOT committed or pushed.
 
+## DL-106 — Location display updated to Bengaluru, India
+
+- **Date:** 2026-10-29
+- **Context:** Owner directed updating current location from Kolkata to Bangalore / Bengaluru (Karnataka, India) with explicit instruction: *"do not add, commit or push anything please!"*.
+- **Decision:** Updated location display in `src/sections/About.astro` (Location/Status fact item) and `src/sections/Contact.astro` (Contact metadata row) to **`Bengaluru, India`**, preserving the canonical `{City}, {Country}` pattern established in DL-020.
+- **Rationale:** Source-hierarchy tier 1 (owner direct statement). "Bengaluru, India" aligns with official nomenclature and existing site pattern.
+- **Files changed:** `src/sections/About.astro`, `src/sections/Contact.astro`, `docs/strategy/home-copy-claim-map.md`, `docs/project-status.md`, `docs/decision-log.md`.
+- **Verification:** Built cleanly; no git add/commit/push performed per owner directive.
+- **Approval status:** PENDING OWNER — implemented directly on `develop`; NOT committed or pushed.
+
