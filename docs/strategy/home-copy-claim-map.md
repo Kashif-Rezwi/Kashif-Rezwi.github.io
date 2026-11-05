@@ -52,7 +52,7 @@ The owner subsequently approved a freelance-project invitation and public locati
 | Bullet 2 — CRM features + workflow-builder redesign | CL-04 · CL-05 | "Helped build"; approved feature name (workflow UX redesign) |
 | Bullet 3 — AI-assisted features, NL workflow generation, original Swipe Genie | CL-06 · CL-07 | "Contributed"; "original" guards against attributing a colleague's later agent rewrite (CL-07) |
 | Bullet 4 — async systems, Template Library, infinite-pagination, production stability | CL-08 · CL-10 · CL-11 · CL-09 | No metrics/outcome claims; "helped keep production stable" (CL-09) |
-| Nexus Software Solutions, Frontend Developer Intern, Jun–Aug 2023 | No claim | Factual from ledger §1 (VERIFIED) |
+| Nexus Software Solutions, Frontend Developer, Jun–Aug 2023 | No claim | Factual from ledger §1 (VERIFIED) |
 | UBMe badge — event-management platform (one of 2–3 client-facing apps) | CL-12 | Product name approved (OQ-08); 2–3-app scope verified 2026-08-17 |
 | Bullet 1 — responsive React UI (hooks + Redux) across 2–3 client-facing applications, primarily UBMe | EXP-NEXUS-01 · 02 | Collaborative ("Contributed"); no metrics |
 | Bullet 1 — WebSocket real-time features incl. in-product chat | EXP-NEXUS-03 | Chat framing verified 2026-09-08; no metrics |
