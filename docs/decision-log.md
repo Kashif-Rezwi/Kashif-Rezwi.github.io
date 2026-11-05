@@ -991,3 +991,10 @@
 - **Verification:** Built cleanly; no git add/commit/push performed per owner directive.
 - **Approval status:** PENDING OWNER — implemented directly on `develop`; NOT committed or pushed.
 
+
+## DL-107 — Nexus role updated to full-time; "Intern" removed from entire portfolio (2026-11-05)
+
+- **Owner directive:** Remove all public-facing instances of "internship" / "Intern" from the portfolio; update the Nexus Software Solutions role to full-time.
+- **Decision:** Changed `<h3 class="exp-title">Frontend Developer Intern</h3>` → `Frontend Developer` in `src/sections/Experience.astro` (line 96). No other public-facing source files (`src/`) contained the word "intern". Internal working docs (`docs/`) updated for consistency: `docs/strategy/home-copy-claim-map.md` and `docs/strategy/product-and-design-brief.md`.
+- **Build:** Clean (`npm run build` ✓, 9 pages, 654 ms).
+- **Scope:** Source-only change. No deployment action taken — owner to approve and merge/deploy per standard gate.
