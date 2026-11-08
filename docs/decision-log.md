@@ -998,3 +998,148 @@
 - **Decision:** Changed `<h3 class="exp-title">Frontend Developer Intern</h3>` → `Frontend Developer` in `src/sections/Experience.astro` (line 96). No other public-facing source files (`src/`) contained the word "intern". Internal working docs (`docs/`) updated for consistency: `docs/strategy/home-copy-claim-map.md` and `docs/strategy/product-and-design-brief.md`.
 - **Build:** Clean (`npm run build` ✓, 9 pages, 654 ms).
 - **Scope:** Source-only change. No deployment action taken — owner to approve and merge/deploy per standard gate.
+
+
+## DL-108 — Home, About and Experience evidence-backed copy update
+
+- **Date:** 2026-11-08
+- **Authority:** Owner explicitly requested implementation, authorized routine editorial decisions, and excluded resume changes, commits, pushes, publication and deployment. This authorizes the bounded source work without another wording gate.
+- **VERIFIED — Git truth:** Started clean on `develop` at `0e0650b`, matching `origin/develop` and `git ls-remote`; remote `main` at `113e3ef`, `gh-pages` at `b04e6e0`. Reused the existing checkout; no branch movement or merge. Live Home/About/Experience copy matched the initial source despite older branch-state prose.
+- **VERIFIED — Evidence:** Owner-confirmed facts were corroborated against accessible core career facts, contribution evidence, proof points, feature boundaries and manifest-selected 2026-11-08 v3 master resumes. Private evidence was read in place; only owner-authorized public copy is reproduced here.
+- **Decision:** Use one static “FULL STACK ENGINEER” ASCII headline, frontend-focused SaaS/workflow supporting copy and concise React/Next.js/TypeScript/Node.js introduction. About expands delivery style and team collaboration, replaces vague architecture/async language with concrete APIs/data/integration work, and explicitly separates personal AI applications and developer tools. Remove the internal credibility footer. Experience groups five Swipe One contributions before five Swipe Pages contributions, followed by Nexus calendar/timezones, React/live UI and API integration. Retain the exact selected Recharts/Node.js/ClickHouse analytics wording; no unconfirmed metrics, aggregation or ingestion details. Attribute 4,000+ users to the first campaign in a separate sentence. Clearly bound Swipe Genie to its original Swipe Pages version and pagination to both products. Shorten employer technology tags.
+- **Alternatives:** Simple sentence replacement would preserve confusing mixed-product paragraphs. Product grouping with short feature labels was selected without introducing disclosure UI. Static ASCII keeps the visual identity while avoiding conflicting rotating titles. The existing component filename is retained to minimize integration churn.
+- **Nexus correction:** The owner explicitly confirmed canonical internship employment while preserving the existing public “Frontend Developer” display. This supersedes DL-107's full-time implication; no official title correction or full-time claim is made.
+- **Small scoped accessibility changes:** About capability cards are sibling level-three headings; product headings are level four under the role. Experience badges and About hover headings use the existing accessible accent-text token after the light-theme audit exposed insufficient badge contrast. Other section markup and Education are unchanged.
+- **Resume status:** Existing viewer returns HTTP 200; export redirects to a valid attachment and is SHA-256 identical to the supplied active MERN v3 master. Shared link target unchanged; no resume files edited or added to tracked files.
+- **Verification:** Nine-page build; standard contrast 19/19 and glass contrast 30/30; final scoped axe 0 violations across five widths (320/390/768/1024/1440) × two themes; zero horizontal overflow or clipped inspected text; visual review of Home/About/product groups/Nexus. Serial Lighthouse mobile-dark and desktop-light: performance 100, accessibility 98, best practices 100, SEO 100, TBT 0 ms, CLS 0. The sole Lighthouse accessibility finding is the unchanged Current Focus H2→H4 heading order, reported separately. SSR copy, employer dates, product/technology attribution, personal-project wording, shared resume actions and byte-identical Education checked. Detailed navigation results are in the review artifact.
+- **Records:** [Plan, full before/after copy and verification](./rebuild-02/32-home-about-experience-copy-review.md); current claim map and status updated. OQ-17 retains analytics unknowns; OQ-18 records the out-of-scope BCA start-date discrepancy; OQ-19 records the unchanged Current Focus heading hierarchy.
+- **Status:** Implemented locally for owner review. No commit, push, merge, deployment or publication performed or authorized by this task. Build-generated contribution-data changes were restored to the initial bytes to keep unrelated content unchanged.
+
+
+## DL-109 — Restore and order Brand Exponents technology tags
+
+- **Date / Authority:** 2026-11-08, owner follow-up explicitly requests a fuller employer technology list and any supported omissions.
+- **VERIFIED:** Owner's direct request confirms Brand attribution for GitHub Actions, CI/CD, Vercel AI SDK and LLM/tool-call integration. Earlier records established these broadly or for personal projects; the present confirmation supplies the employer context. No pipeline ownership or ML-training claim is introduced.
+- **Decision:** Expand nine tags to 27 in the existing wrapping component. Order frontend, backend/API, data/storage, AI integration, then delivery/monitoring. Restore requested frontend libraries; add documented background jobs, webhooks and Sentry. Use professional capitalization and “LLM Inference Integration” / “Tool Calling”; omit vague “etc.” and unconfirmed employer-specific testing tools. This supersedes DL-108's reduced-tag choice only.
+- **Scope:** `src/sections/Experience.astro` and canonical review/claim/status documentation. Preserve all existing staged changes; no staging, commits, pushes or deployment.
+- **Plan/evidence:** [Copy review follow-up](./rebuild-02/32-home-about-experience-copy-review.md#employer-technology-tags--owner-follow-up-2026-11-08).
+
+- **Verification:** `npx astro build` passed (9 pages); `git diff --check` clean. Browser and screenshot checks at 320px and 1440px confirm all 27 tags, natural wrapping, zero page overflow and zero clipped tags. Existing staged changes preserved; follow-up edits remain unstaged. No commit, push or deployment.
+
+
+## DL-110 — Add owner-confirmed MUI to Nexus
+
+- **Date / Authority:** 2026-11-08, direct owner request confirms Nexus MUI attribution.
+- **VERIFIED — Decision:** Add “MUI” after React in Nexus technology tags, preserving all employer prose, dates and title. Reuse existing tag markup/styles; no dependencies added.
+- **Naming review:** Official TanStack React documentation still uses React Query and `@tanstack/react-query`; recommend the dual label “TanStack Query (React Query)” for visible technology labels in a later requested pass. Query wording remains unchanged because the owner asked for a recommendation, not an immediate portfolio-wide replacement.
+- **Scope:** Experience source plus canonical review, claim map and status. Existing staged/unstaged work preserved. No staging, commit, push or deployment.
+
+- **Verification:** Nine-page Astro build and `git diff --check` pass. At 320px the eight Nexus tags include MUI after React, with zero overflow or clipped tags; screenshot inspected. No Query labels changed, no staging/commit/push/deployment.
+
+
+## DL-111 — Use React Query throughout visitor-facing copy
+
+- **Date / authority:** 2026-11-08, owner explicitly chose “React Query” across the portfolio, superseding DL-110's dual-label recommendation.
+- **VERIFIED:** Updated the Skills label, About and Brand tags, pagination contribution, and Better DEV/Perplexity shared project technology lists. Updated the Contact source comment for consistency. Internal icon identifiers and actual package names are unchanged. The official React documentation uses React Query for this library.
+- **Scope:** Copy and the canonical claim/status/review records only. Existing staged changes are preserved; no staging, commit, push or deployment.
+
+- **Verification:** Nine-page Astro build, both contrast checks and `git diff --check` pass. Rendered Home, Better DEV and Perplexity contain “React Query” and no old label; source audit found no remaining “TanStack Query”. At 320px the visible tags have no clipping and the page has no horizontal overflow. No staging, commit, push or deployment.
+
+
+## DL-112 — Clarify the hero introduction
+
+- **Date / authority:** 2026-11-08, owner-provided hero wording and request for grammatical review.
+- **VERIFIED:** Preserve the owner-listed CRM, email/WhatsApp campaigns, workflow and landing-page builders, workflow analytics, API work and production support; capitalize WhatsApp and use parallel phrasing. These topics match the previously confirmed professional evidence.
+- **Decision:** Use “With 2+ years of professional experience, I’ve worked on CRM, email and WhatsApp campaigns, workflow and landing-page builders, and workflow analytics—from product UI and APIs to production support.” Existing staged work is preserved.
+
+- **Verification:** Nine-page Astro build passed; final hero text checked in rendered HTML; `git diff --check` passed. No staging, commit, push or deployment.
+
+
+## DL-113 — Refine hero hierarchy and spacing
+
+- **Date / authority:** 2026-11-08, owner approved the proposed hero hierarchy and copy refinement.
+- **VERIFIED — Decision:** Retain the name, ASCII role and existing palette; use the shorter “Frontend-focused SaaS & workflow engineering” line and a concise introduction covering confirmed frontend, CRM, campaign, workflow, API and production-support work. Increase spacing after the role and before actions, narrow and brighten the bio with existing color tokens, and give the desktop social rail more space. A nonbreaking space keeps the ampersand with SaaS on mobile.
+- **Alternatives:** A forced desktop line break was rejected for responsive layout; the shorter, naturally balanced line was selected. No changes to contact actions, experience detail or the underlying visual system.
+- **Verification:** Nine-page Astro build, standard and glass contrast checks, and `git diff --check` pass. Browser checks at 320/390/768/1024/1440 in light and dark found no overflow or clipped hero text. Desktop and mobile screenshots inspected; final 390px wrap rechecked after the spacing fix. Existing staged work preserved; no commit, push or deployment.
+
+
+## DL-114 — Expand the hero introduction with approved detail
+
+- **Date / authority:** 2026-11-08, owner approved the revised hero introduction.
+- **VERIFIED — Decision:** Add MongoDB and specify CRM, email and WhatsApp campaigns, workflow and landing-page builders, analytics, and AI-assisted features, using “contributed” to preserve collaboration. Product interfaces, APIs and production support remain the delivery range. AI-assisted features refer to confirmed Swipe One work; the original Swipe Genie is described separately in Experience.
+- **Alternatives:** Enumerating every feature and Genie by name would make the hero denser and require context; the approved grouped wording retains specifics while remaining readable.
+- **Scope:** Hero copy and canonical claim, status and review documentation. Preserve all pre-existing staged changes; no staging, commit, push or deployment.
+
+- **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 390 and 1440px found no horizontal overflow or clipped hero text; mobile screenshot inspected. Existing staged changes preserved; no commit, push or deployment.
+
+
+## DL-115 — Add evidence-backed context to Swipe One contributions
+
+- **Date / authority:** 2026-11-08, owner requested a less visually sparse Swipe One section while retaining the existing contributions and avoiding forced padding.
+- **VERIFIED — Decision:** Add the centralized template dashboard, chat-based assistant, customer-record and outreach context, and answering product questions during launch support. These are supported by the existing owner-confirmed career evidence; no metrics or implementation details were invented. The owner-selected analytics sentence remains unchanged.
+- **Alternatives:** Padding every entry to three lines would vary across viewports and weaken clarity. Selective meaningful detail preserves scanability and lets wrapping respond naturally.
+- **Scope:** Swipe One contribution wording and canonical review, status and claim records. No deployment, commit or push.
+
+- **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 390, 768 and 1440px show no horizontal overflow or clipped contribution text. At desktop width, three of five entries occupy three lines; the exact selected analytics sentence and the concise launch entry remain two. No commit, push or deployment.
+
+
+## DL-116 — Refresh soft skills
+
+- **Date / authority:** 2026-11-09, owner asked to remove Dependability and adopt the discussed alternatives.
+- **Decision:** Keep Ownership, Collaboration and Communication; replace Dependability, Solution-oriented and Willingness to learn with Problem-solving, Adaptability and Prioritization. The latter was among the alternatives offered and preserves a concise six-chip list after Dependability was explicitly removed. Use matching decorative icons in the existing component.
+- **Evidence / boundaries:** Problem-solving is supported by the existing solution-oriented testimonial and production-debugging record. Adaptability and prioritization are owner-selected professional qualities informed by the described cross-functional and launch-support work; no specific unverified incidents or seniority claims were added.
+- **Alternatives:** Keeping five chips would omit Prioritization, one of the proposed relevant alternatives. Restoring Dependability would conflict with the owner's explicit request.
+- **Scope:** Soft-skill labels/icons and canonical task records; preserve technical skills, current work, staging and deployment state.
+
+- **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 768 and 1440px confirmed all six labels have icons, with no clipped chips or horizontal overflow; mobile screenshot inspected. No commit, push or deployment.
+
+
+## DL-117 — Regroup technical skills around engineering work
+
+- **Date / authority:** 2026-11-09, owner approved the technical-skills review and requested implementation.
+- **VERIFIED — Decision:** Replace the prior five categories with Frontend & UI, Backend & APIs, Data & Storage, Async & Messaging, AI Applications, and Testing & Delivery. Add the owner-approved, evidence-backed UI, testing, integration, async and delivery skills; move Prisma and BullMQ to meaningful categories. Keep the established React Query wording and retain Python as working knowledge based on verification scripts. Clearly label ClickHouse and RabbitMQ as working knowledge.
+- **Evidence / boundaries:** Manifest-selected master resumes, canonical skills inventory, owner-confirmed employer details, contribution evidence and personal-project records underpin the groups. Technologies are general skills across professional and personal work; this update does not assign personal-project details to employers or imply infrastructure ownership, ML training or invented proficiency. pgvector remains in the existing personal project case study rather than the overview, per the approved review.
+- **Design:** Preserve the existing alternating chip layout and soft skills. Reuse existing brand glyphs where available and a neutral decorative code glyph elsewhere; no dependencies or new logo assets.
+- **Alternatives:** Keeping the previous five categories leaves tests missing and places data/queue tools in AI. The approved six-group structure makes use and delivery responsibilities easier to scan.
+- **Verification:** Nine-page Astro build, standard contrast (19/19), glass contrast (30/30), and `git diff --check` pass. Browser checks across 320/390/768/1024/1440px in light and dark found six groups, all icons present, and zero clipped chips or horizontal overflow. Scoped axe on Skills reports zero violations in both themes; color-contrast has incomplete items, supplemented by the contrast scripts and visual inspection. Desktop and mobile screenshots inspected. Existing soft-skills and other prior changes preserved; no commit, push or deployment.
+
+
+## DL-118 — Use full skill-row width and review owner edits
+
+- **Date / authority:** 2026-11-09, owner requested full use of the existing Skills-section width and a review of their additions and removals.
+- **VERIFIED — Decision:** Replace the 900px technical-group cap with full available container width. Keep flex wrapping, left/right category alignment, the existing design system and all owner edits intact. The global site container remains unchanged.
+- **VERIFIED — Inventory review:** Relative to the previously approved proposal, MUI, Jest, Cypress and Sentry were removed from the Skills overview; the owner’s choice is preserved, and their prior evidence is not erased. “Context Management” and the revised “LLM Inference integration” label reflect the owner’s additions. Personal-project records support conversation context, retrieval and integration with model providers; they do not establish model-serving infrastructure ownership. More precise optional labels are “Conversation context” and “LLM API integration.”
+- **Alternatives:** Widening the shared site container would affect unrelated sections; changing only each category’s width meets the request while preserving other layouts. Skill labels were reviewed rather than silently rewritten or restored.
+- **Verification:** Nine-page Astro build, standard contrast (19/19), glass contrast (30/30), and `git diff --check` pass. Browser checks at 320/390/768/1024/1440px in both themes confirmed no clipped chips, no horizontal overflow and no premature wrapping (within half-pixel tolerance); desktop row width exceeds the prior 900px cap. Desktop and mobile screenshots inspected. No staging, commit, push or deployment.
+
+
+## DL-119 — Specific, brand-colored skills icons
+
+- **Date / authority:** 2026-11-09, owner requested individual icons and official brand colors for skills that previously used the generic code glyph.
+- **VERIFIED — Decision:** Replace 13 generic icons: HTML5, CSS, Vitest and Testing Library use [Simple Icons](https://simpleicons.org/) brand marks; React Flow uses the [actual React Flow site icon](https://reactflow.dev/icon.svg). Eight non-brand concepts use distinct [Lucide](https://lucide.dev/icons/) symbols with the existing theme-aware accent. The exact skill labels and existing non-generic icons are unchanged.
+- **Color / licensing:** Use the official HTML #E34F26, CSS #663399, React Flow #FF0072 (also preserving its official multicolor SVG), Vitest #00FF74, and Testing Library #E33332 colors. The CSS and Vitest marks have small contrasting plates so their exact colors remain visible. Brand badge surfaces/borders are lightly tinted; concept badges use the accessible theme accent. Simple Icons marks are CC0; Lucide ISC copyright and permission terms are included in the concept component. SVGs are locally served and the React Flow asset respects preview base paths.
+- **Alternatives:** A new icon library dependency adds unnecessary weight; mapping concepts to unrelated vendor logos would misrepresent them. Local marks and distinct concept symbols were selected.
+- **Verification:** Nine-page Astro production and preview-base builds pass; React Flow asset exists under the correct preview path. Standard contrast 19/19, glass contrast 30/30 and `git diff --check` pass. Browser checks in both themes at 320/390/768/1024/1440px confirm all 13 replacements, expected exact brand colors, no missing local asset, no clipping and no overflow. Scoped axe reports zero violations in both themes (color-contrast incomplete items supplemented by other checks). Browser-composited badge-text contrast against both Skills-section endpoint backgrounds is at least 4.56:1; desktop/mobile screenshots inspected. Existing non-generic skill icons and owner content remain untouched. No commit, push or deployment.
+
+
+## DL-120 — Restore neutral resting badges and hover colors
+
+- **Date / authority:** 2026-11-09, owner clarified that the new skill icons must follow the existing neutral-at-rest, brand-colored-on-hover interaction.
+- **Decision:** Remove the persistent colored fills, borders and icon colors introduced by DL-119. The existing `.tech-item:hover` treatment supplies badge colors; the 13 newly identified icons inherit neutral ink at rest and show their own brand or theme-accent colors on hover. The official multicolor React Flow SVG is grayscale at rest and restores its original colors on hover. CSS and Vitest icon plates appear only on hover; dark-theme badge text uses lighter brand variants where needed for readability, while the marks retain their official colors.
+- **Scope:** Only previously generic skill icons and their color metadata; existing skill copy, non-generic icons and user edits remain intact. No dependency, staging, commit, push or deployment.
+- **Verification:** Nine-page Astro build, standard contrast (19/19), glass contrast (30/30) and `git diff --check` pass. Browser checks at 320/390/768/1024/1440px in both themes verified neutral matching backgrounds, borders and text at rest, no clipping/overflow, and grayscale React Flow. Each of 13 desktop hover states was checked in both themes, including exact brand icon colors and hover-only contrast plates. Desktop/mobile and representative hover screenshots inspected.
+
+
+## DL-121 — Remove CSS icon backing and audit skill icons
+
+- **Date / authority:** 2026-11-09, owner requested the CSS icon’s white backing be removed and a final review of all Skills icons and architecture.
+- **Decision:** Remove the CSS-only backing and padding; its mark now uses the existing theme-aware `--active-brand` hover color with a transparent SVG background. Retain the dark Vitest hover plate for its bright green icon. Route every named skill icon through the existing `TechIcon` entry point, including the React Flow asset and Lucide concept icons; forward the existing class and size interface. Preserve neutral-at-rest styling, hover interaction, accessible decorative semantics and preview base paths.
+- **VERIFIED — Audit finding and correction:** The pre-existing BullMQ path extended above its `0 0 24 24` viewBox and was clipped. Replaced it with a correctly bounded, current-color BullMQ bull vector adapted from [TechIcons](https://github.com/gui-bus/TechIcons/blob/main/Dark/BullMQ.svg), preserving the existing neutral/hover badge behavior. TechIcons’ MIT notice is included in `TechIcon.astro`; Simple Icons and Lucide source/attribution remain documented.
+- **Alternatives:** Merely deleting the CSS plate would leave the new icon renderer split across multiple branches and the older clipped BullMQ geometry untouched. Consolidating through `TechIcon` and repairing the evidenced geometry follows the existing architecture.
+- **Verification:** Nine-page Astro build, preview-base build, local React Flow asset resolution, standard contrast 19/19, glass contrast 30/30 and `git diff --check` pass. All 37 technical icons rendered as decorative marks; every SVG geometry fits its own viewBox. Five widths (320/390/768/1024/1440) in both themes had no clipping or overflow. All 13 updated icon hover states were checked in both themes; CSS background is transparent with zero plate padding, React Flow restores its source colors, and the Vitest hover plate remains limited to Vitest. Composited hover text ratios for the updated badges were at least 6.64:1 against the tested Skills endpoint background. Scoped axe reports zero violations in both themes; color-contrast incomplete items were supplemented by contrast scripts and composited tests. Brand path/source and license checks passed; dark/light and mobile/desktop screenshots inspected. No staging, commit, push or deployment.
+
+## DL-122 — Make React Flow neutral without image filters
+
+- **Date / authority:** 2026-11-09, owner reported the React Flow icon appearing colored without hover.
+- **Decision:** Replace the filter-dependent resting image with a current-color SVG based on the official mark's geometry; the original local multicolor mark is hidden by default and shown only on badge hover. Keep rendering in `TechIcon` and use the existing Skills hover treatment. This supersedes DL-120's grayscale-image approach.
+- **Verification:** Production build and both contrast checks pass. Browser checks on the built site confirmed the neutral and brand layers switch correctly at rest and hover in dark desktop and light mobile views; mobile had no horizontal overflow. No staging, commit, push or deployment.

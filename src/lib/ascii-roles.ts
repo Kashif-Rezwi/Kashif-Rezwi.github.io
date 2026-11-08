@@ -1,11 +1,6 @@
 /**
- * ASCII role frames for the Hero role cycler (typographic ASCII, "Approach A").
- *
- * Shared by the component frontmatter (server-rendered initial frame) and the
- * client-side morph engine, so SSR output and the first JS frame are
- * byte-identical by construction. Every frame has identical dimensions
- * (ASCII_COLS x ASCII_ROWS) so the diagonal wavefront morph can diff cells
- * without any layout shift.
+ * Server-rendered ASCII role headline using the established mini font.
+ * Fixed frame dimensions preserve the existing responsive strip's layout.
  *
  * The miniFont table intentionally mirrors the Contact ASCII renderer's
  * alphabet (kept in sync by convention); the hero variant renders pure type —
@@ -89,12 +84,9 @@ function buildFrame(title: string): string {
   return rows.map((row) => row.padEnd(ASCII_COLS, ' ')).join('\n');
 }
 
-/** Owner-approved rotating role titles (2026-08-19); canonical headline stays in meta. */
+/** Consistent public role headline (owner request, 2026-11-08). */
 export const ROLE_TITLES = [
   'FULL STACK ENGINEER',
-  'MERN STACK ENGINEER',
-  'PRODUCT ENGINEER',
-  'FRONTEND ENGINEER',
 ] as const;
 
 export const ROLE_FRAMES: string[] = ROLE_TITLES.map(buildFrame);

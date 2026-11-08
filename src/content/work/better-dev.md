@@ -6,7 +6,7 @@ status: 'Live'
 summary: 'An AI chat app that shows its work — live tool calls with cited sources, smart model routing, and file uploads that reach the model.'
 repo: 'https://github.com/Kashif-Rezwi/better-dev-ui'
 demo: 'https://better-dev-ui.vercel.app'
-tech: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vercel AI SDK', 'TanStack Query', 'NestJS', 'SSE', 'PostgreSQL', 'TypeORM', 'Object Storage', 'Tavily', 'Groq']
+tech: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vercel AI SDK', 'React Query', 'NestJS', 'SSE', 'PostgreSQL', 'TypeORM', 'Object Storage', 'Tavily', 'Groq']
 order: 3
 draft: false
 cover: 'better-dev.png'
