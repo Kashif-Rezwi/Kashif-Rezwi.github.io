@@ -20,43 +20,96 @@ import SectionHeader from '../components/SectionHeader.astro';
               <h3 class="exp-title">Full Stack Developer</h3>
               <p class="exp-company">
                 Brand Exponents Creatives Pvt Ltd
-                <span class="exp-badge">Swipe Pages · Swipe One</span>
+                <span class="exp-badge">Swipe One · Swipe Pages</span>
               </p>
             </div>
             <p class="exp-period">Oct 2023 – Aug 2025</p>
           </div>
-          <ul class="exp-bullets">
-            <li>
-              <p class="exp-group-label">Integrations</p>
-              <p class="exp-group-text">
-                Contributed to the Workflow Builder's integration layer on Swipe Pages: shared configuration, property selection, field-mapping, and auto-matching patterns reused across several providers, including SendFox, ActiveCampaign, AWeber, Moosend, Salesflare, and EngageBay.
-              </p>
-            </li>
-            <li>
-              <p class="exp-group-label">CRM</p>
-              <p class="exp-group-text">
-                Helped build Swipe One's CRM features, including contacts, leads, contact properties, and email & WhatsApp campaigns, and contributed to redesigning the workflow builder from blank-canvas drag-and-drop into a guided, template-led flow.
-              </p>
-            </li>
-            <li>
-              <p class="exp-group-label">AI-assisted features</p>
-              <p class="exp-group-text">
-                Contributed to AI-assisted features including natural-language workflow generation, an AI assistant that auto-configures workflow nodes and auto-drafts email nodes from the user's profile context, and the original Swipe Genie guided page-generation experience.
-              </p>
-            </li>
-            <li>
-              <p class="exp-group-label">Workflow builder &amp; analytics</p>
-              <p class="exp-group-text">
-                Contributed to workflow-related dashboards and reusable workflow templates on Swipe Pages, and helped build the Swipe One workflow-templates dashboard and workflow analytics so users could discover templates and monitor automation performance. Also contributed to shared page-builder systems including global responsive typography, named solid and gradient colour systems, and a responsive video module across landing pages and funnels.
-              </p>
-            </li>
-            <li>
-              <p class="exp-group-label">Platform, launches &amp; reliability</p>
-              <p class="exp-group-text">
-                Worked with background jobs, queues, and webhooks; contributed to the shared Template Library; built a reusable infinite-pagination system used across four product surfaces; and helped keep production stable through launches and debugging. Participated in two AppSumo launch periods, resolving customer queries, fixing live issues, shipping hotfixes, and iterating on product feedback across Discord, Facebook, and AppSumo.
-              </p>
-            </li>
-          </ul>
+          <div class="exp-product">
+            <h4 class="exp-product-title">Swipe One</h4>
+            <ul class="exp-bullets">
+              <li>
+                <p class="exp-group-label">Guided workflow creation</p>
+                <p class="exp-group-text">
+                  Built guided workflow creation with use-case templates, sequential click-to-add nodes,
+                  and a MongoDB workflow-template schema, replacing blank-canvas setup with a structured starting point.
+                </p>
+              </li>
+              <li>
+                <p class="exp-group-label">Workflow analytics</p>
+                <p class="exp-group-text">
+                  Built workflow analytics with Recharts visualizations, a Node.js backend, and a ClickHouse database layer, displaying metrics to the interface for monitoring workflow activity and performance.
+                </p>
+              </li>
+              <li>
+                <p class="exp-group-label">AI workflow configuration</p>
+                <p class="exp-group-text">
+                  Integrated AI workflow configuration by mapping natural-language requests to valid nodes
+                  and using profile context to draft email-node content, supporting refinement through follow-up input.
+                </p>
+              </li>
+              <li>
+                <p class="exp-group-label">CRM &amp; campaign interfaces</p>
+                <p class="exp-group-text">
+                  Implemented React and TypeScript interfaces for contacts, leads, contact properties,
+                  and email/WhatsApp campaign dashboards.
+                </p>
+              </li>
+              <li>
+                <p class="exp-group-label">Launch &amp; production support</p>
+                <p class="exp-group-text">
+                  Diagnosed customer issues, shipped hotfixes, and supported deployments for the initial
+                  release and two AppSumo campaigns. The first campaign onboarded 4,000+ users.
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="exp-product">
+            <h4 class="exp-product-title">Swipe Pages</h4>
+            <ul class="exp-bullets">
+              <li>
+                <p class="exp-group-label">Shared Template Library</p>
+                <p class="exp-group-text">
+                  Delivered the shared Landing Page/Funnel Template Library across frontend, backend,
+                  and REST APIs, with screenshot browsing and iframe device previews. Loaded HTML
+                  and builder data from S3-compatible storage on demand to initialize selected templates.
+                </p>
+              </li>
+              <li>
+                <p class="exp-group-label">Reusable integrations</p>
+                <p class="exp-group-text">
+                  Refactored Workflow Builder integrations around shared configuration, property selection,
+                  field mapping, and field-name matching while isolating provider-specific behavior.
+                  Reused these patterns across SendFox, ActiveCampaign, AWeber, and other connectors,
+                  reducing repeated mapping logic.
+                </p>
+              </li>
+              <li>
+                <p class="exp-group-label">Cross-product infinite pagination</p>
+                <p class="exp-group-text">
+                  Built template/media infinite pagination across Swipe Pages and Swipe One with
+                  IntersectionObserver and React Query request guards, appending pages without
+                  overlapping requests and preserving loaded results during loading and errors.
+                </p>
+              </li>
+              <li>
+                <p class="exp-group-label">Responsive builder controls</p>
+                <p class="exp-group-text">
+                  Contributed typography and named-color controls to the shared Landing Page/Funnel
+                  builder, binding breakpoint-specific settings to an isolated iframe canvas so users
+                  could adjust styles across device views.
+                </p>
+              </li>
+              <li>
+                <p class="exp-group-label">Swipe Genie</p>
+                <p class="exp-group-text">
+                  Built the original Swipe Genie orchestration that routed business-specific answers to
+                  asynchronous builder functions, preserving conversation context and limiting failed
+                  executions to three attempts to support guided page generation.
+                </p>
+              </li>
+            </ul>
+          </div>
           <div class="exp-tech">
             {[
               'React',
@@ -64,21 +117,27 @@ import SectionHeader from '../components/SectionHeader.astro';
               'TypeScript',
               'Tailwind CSS',
               'Redux',
-              'TanStack Query',
+              'React Query',
               'React Flow',
+              'Recharts',
               'Ant Design',
               'Radix UI',
               'Node.js',
               'Express',
               'REST APIs',
+              'Background Jobs',
+              'Webhooks',
               'MongoDB',
               'ClickHouse',
               'Redis',
               'RabbitMQ',
               'DigitalOcean S3',
+              'Vercel AI SDK',
+              'LLM Integration',
+              'Tool Calling',
               'Docker',
-              'Jest',
-              'Cypress',
+              'GitHub Actions',
+              'CI/CD',
               'Sentry',
             ].map((t) => (
               <span class="tech-tag">{t}</span>
@@ -103,32 +162,32 @@ import SectionHeader from '../components/SectionHeader.astro';
           </div>
           <ul class="exp-bullets">
             <li>
-              <p class="exp-group-label">Event-management product</p>
+              <p class="exp-group-label">Calendar &amp; timezone handling</p>
               <p class="exp-group-text">
-                Contributed responsive React UI (hooks + Redux) across 2–3 client-facing applications, primarily UBMe, an event-management platform. WebSocket real-time features included in-product chat.
+                Built a reusable calendar wrapper that centralized styling and configuration.
+                Implemented timezone-aware event and booking displays with Day.js and Moment.js,
+                including UTC/local conversion and date changes across regions.
               </p>
             </li>
             <li>
-              <p class="exp-group-label">Features &amp; integration</p>
+              <p class="exp-group-label">React interfaces &amp; real-time features</p>
               <p class="exp-group-text">
-                Integrated APIs (Axios/Fetch) and common CRUD interactions across booking and scheduling flows. Worked with designers and senior engineers on reusable components, UI libraries, and consistent interface patterns.
+                Built responsive React interfaces with hooks and Redux for client-facing applications,
+                including UBMe, an event-management platform. Collaborated on WebSocket-based chat
+                that displayed live messages without manual refresh.
               </p>
             </li>
             <li>
-              <p class="exp-group-label">Timezone-aware scheduling</p>
+              <p class="exp-group-label">API integration</p>
               <p class="exp-group-text">
-                Implemented timezone-aware scheduling with Day.js and Moment.js. Built a reusable custom calendar component, removing duplicated styling and configuration.
-              </p>
-            </li>
-            <li>
-              <p class="exp-group-label">Code quality</p>
-              <p class="exp-group-text">
-                Refactored existing frontend code for readability, maintainability, and performance.
+                Integrated REST APIs with Axios/Fetch and implemented CRUD interactions for booking
+                and scheduling flows, collaborating with designers and engineers on reusable components
+                and consistent interface behavior.
               </p>
             </li>
           </ul>
           <div class="exp-tech">
-            {['React', 'Redux', 'WebSocket', 'JavaScript', 'Day.js', 'Moment.js', 'Axios'].map((t) => (
+            {['React', 'MUI', 'Redux', 'WebSocket', 'JavaScript', 'Day.js', 'Moment.js', 'Axios'].map((t) => (
               <span class="tech-tag">{t}</span>
             ))}
           </div>
@@ -244,7 +303,7 @@ import SectionHeader from '../components/SectionHeader.astro';
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     background: var(--color-accent-soft);
-    color: var(--color-accent-light);
+    color: var(--color-accent-text);
     padding: 0.1rem 0.5rem;
     border-radius: var(--radius-control);
     border: 0;
@@ -260,6 +319,21 @@ import SectionHeader from '../components/SectionHeader.astro';
     border: 1px solid var(--glass-surface-border);
     border-radius: var(--radius-control);
     background: var(--glass-surface-bg);
+  }
+
+  .exp-product {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .exp-product + .exp-product {
+    margin-top: 0.5rem;
+  }
+  .exp-product-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0;
   }
 
   .exp-bullets {
