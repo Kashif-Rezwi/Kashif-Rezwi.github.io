@@ -2,7 +2,7 @@
 
 - **Purpose:** The single log of everything unresolved. Anything not verified or not clear lives here — never a guess.
 - **Authority:** Entries are created during verified work; each has an owner and an explicit resolution path.
-- **Last updated:** 2026-09-13 (OQ-16)
+- **Last updated:** 2026-11-08 (OQ-17–19; Home/About/Experience review)
 - **Related:** [AGENTS.md](../AGENTS.md) · [source-register.md](./source-register.md) · [project-status.md](./project-status.md)
 
 | ID | Question | Source / context | Owner | What's needed to resolve | Status |
@@ -24,3 +24,27 @@
 | OQ-14 | Better DEV card cover: a thumbnail screenshot is now committed (`src/assets/work/better-dev.png`, updated `ac09d18`/`332cf1f`). Should it be replaced with a fresh live capture of the running app at some point? | `mandatory-changes` review (DL-074 T4); DL-081/DL-082 | Kashif (owner) | Capture the live demo at `https://better-dev-ui.vercel.app` and prefer it, or confirm shipping with the thumbnail deliberately. | Open — owner |
 | OQ-15 | The most persuasive visual asset for the Better DEV case study is a short screen recording of the tool-call flow (pending → "searching the web…" → "found N sources" → cited summary). Will the owner record/provide one? | Case-study research session 2026-08-22 (DL-082) | Kashif (owner) | Provide a recording (can be embedded on the page, README, or a dev.to article later) — or decide text + thumbnail only. | Open — owner |
 | OQ-16 | Interactive Lessons has no case-study file — the home-page "More projects" row (position 5, owner-ordered map DL-093) links to its repo only. Should it get a full case study (and cover), and as which tier (it read as a "more" project at slot 5)? | DL-093, 2026-09-13; repo `Kashif-Rezwi/interactive-lessons` (Stage 2 "Learning OS", no live demo, no license selected) | Kashif (owner) | Decision + verified source work; if approved, follow the server-active-indicator pattern (README-verified body, cover sourced from repo or owner). | Closed — 2026-09-13 (DL-094), owner decision: **every project gets a full case study**; `src/content/work/interactive-lessons.md` created; More row links to it; no cover (repo has no screenshot — optional later) |
+
+## OQ-17 — Workflow analytics implementation detail
+
+- **Label:** OPEN QUESTION
+- **Owner:** Kashif
+- **Context:** 2026-11-08 owner confirmations establish Recharts, multiple Node.js analytics endpoints, ClickHouse and database → server → client reads. Specific displayed metrics and ingestion architecture are unconfirmed; aggregation logic is not recalled.
+- **Resolution:** Record authoritative feature evidence if later available. No new metric request is needed for the current copy, which uses the owner's selected sentence without these details.
+- **Status:** Open; does not block the bounded copy update (DL-108).
+
+## OQ-18 — Education date differs between resume and portfolio
+
+- **Label:** OPEN QUESTION
+- **Owner:** Kashif
+- **Context:** The manifest-selected v3 master resumes and current linked public MERN PDF display BCA starting Jul 2025. The portfolio displays Apr 2025 following the explicit correction recorded in DL-105.
+- **Resolution:** Owner can reconcile the resume date separately. This request excludes Education and resume edits; the portfolio's owner-confirmed Apr 2025 date is preserved.
+- **Status:** Open; unrelated to the requested implementation and not a blocker.
+
+## OQ-19 — Current Focus heading hierarchy
+
+- **Label:** VERIFIED
+- **Owner:** Kashif / future UI maintenance
+- **Context:** Final mobile and desktop Lighthouse accessibility scores are 98 because `src/sections/Now.astro` uses level-four row headings directly below its level-two section title. Source is unchanged by DL-108; Home, About and Experience have a coherent hierarchy and zero scoped axe violations.
+- **Resolution:** Adjust the Current Focus heading levels in a separately authorized change while retaining their visual styles.
+- **Status:** Open; outside this task's editing scope. Performance, best practices and SEO score 100 in the final serial runs.

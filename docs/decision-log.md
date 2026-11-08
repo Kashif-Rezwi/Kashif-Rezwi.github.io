@@ -998,3 +998,76 @@
 - **Decision:** Changed `<h3 class="exp-title">Frontend Developer Intern</h3>` → `Frontend Developer` in `src/sections/Experience.astro` (line 96). No other public-facing source files (`src/`) contained the word "intern". Internal working docs (`docs/`) updated for consistency: `docs/strategy/home-copy-claim-map.md` and `docs/strategy/product-and-design-brief.md`.
 - **Build:** Clean (`npm run build` ✓, 9 pages, 654 ms).
 - **Scope:** Source-only change. No deployment action taken — owner to approve and merge/deploy per standard gate.
+
+
+## DL-108 — Home, About and Experience evidence-backed copy update
+
+- **Date:** 2026-11-08
+- **Authority:** Owner explicitly requested implementation, authorized routine editorial decisions, and excluded resume changes, commits, pushes, publication and deployment. This authorizes the bounded source work without another wording gate.
+- **VERIFIED — Git truth:** Started clean on `develop` at `0e0650b`, matching `origin/develop` and `git ls-remote`; remote `main` at `113e3ef`, `gh-pages` at `b04e6e0`. Reused the existing checkout; no branch movement or merge. Live Home/About/Experience copy matched the initial source despite older branch-state prose.
+- **VERIFIED — Evidence:** Owner-confirmed facts were corroborated against accessible core career facts, contribution evidence, proof points, feature boundaries and manifest-selected 2026-11-08 v3 master resumes. Private evidence was read in place; only owner-authorized public copy is reproduced here.
+- **Decision:** Use one static “FULL STACK ENGINEER” ASCII headline, frontend-focused SaaS/workflow supporting copy and concise React/Next.js/TypeScript/Node.js introduction. About expands delivery style and team collaboration, replaces vague architecture/async language with concrete APIs/data/integration work, and explicitly separates personal AI applications and developer tools. Remove the internal credibility footer. Experience groups five Swipe One contributions before five Swipe Pages contributions, followed by Nexus calendar/timezones, React/live UI and API integration. Retain the exact selected Recharts/Node.js/ClickHouse analytics wording; no unconfirmed metrics, aggregation or ingestion details. Attribute 4,000+ users to the first campaign in a separate sentence. Clearly bound Swipe Genie to its original Swipe Pages version and pagination to both products. Shorten employer technology tags.
+- **Alternatives:** Simple sentence replacement would preserve confusing mixed-product paragraphs. Product grouping with short feature labels was selected without introducing disclosure UI. Static ASCII keeps the visual identity while avoiding conflicting rotating titles. The existing component filename is retained to minimize integration churn.
+- **Nexus correction:** The owner explicitly confirmed canonical internship employment while preserving the existing public “Frontend Developer” display. This supersedes DL-107's full-time implication; no official title correction or full-time claim is made.
+- **Small scoped accessibility changes:** About capability cards are sibling level-three headings; product headings are level four under the role. Experience badges and About hover headings use the existing accessible accent-text token after the light-theme audit exposed insufficient badge contrast. Other section markup and Education are unchanged.
+- **Resume status:** Existing viewer returns HTTP 200; export redirects to a valid attachment and is SHA-256 identical to the supplied active MERN v3 master. Shared link target unchanged; no resume files edited or added to tracked files.
+- **Verification:** Nine-page build; standard contrast 19/19 and glass contrast 30/30; final scoped axe 0 violations across five widths (320/390/768/1024/1440) × two themes; zero horizontal overflow or clipped inspected text; visual review of Home/About/product groups/Nexus. Serial Lighthouse mobile-dark and desktop-light: performance 100, accessibility 98, best practices 100, SEO 100, TBT 0 ms, CLS 0. The sole Lighthouse accessibility finding is the unchanged Current Focus H2→H4 heading order, reported separately. SSR copy, employer dates, product/technology attribution, personal-project wording, shared resume actions and byte-identical Education checked. Detailed navigation results are in the review artifact.
+- **Records:** [Plan, full before/after copy and verification](./rebuild-02/32-home-about-experience-copy-review.md); current claim map and status updated. OQ-17 retains analytics unknowns; OQ-18 records the out-of-scope BCA start-date discrepancy; OQ-19 records the unchanged Current Focus heading hierarchy.
+- **Status:** Implemented locally for owner review. No commit, push, merge, deployment or publication performed or authorized by this task. Build-generated contribution-data changes were restored to the initial bytes to keep unrelated content unchanged.
+
+
+## DL-109 — Restore and order Brand Exponents technology tags
+
+- **Date / Authority:** 2026-11-08, owner follow-up explicitly requests a fuller employer technology list and any supported omissions.
+- **VERIFIED:** Owner's direct request confirms Brand attribution for GitHub Actions, CI/CD, Vercel AI SDK and LLM/tool-call integration. Earlier records established these broadly or for personal projects; the present confirmation supplies the employer context. No pipeline ownership or ML-training claim is introduced.
+- **Decision:** Expand nine tags to 27 in the existing wrapping component. Order frontend, backend/API, data/storage, AI integration, then delivery/monitoring. Restore requested frontend libraries; add documented background jobs, webhooks and Sentry. Use professional capitalization and “LLM Integration” / “Tool Calling”; omit vague “etc.” and unconfirmed employer-specific testing tools. This supersedes DL-108's reduced-tag choice only.
+- **Scope:** `src/sections/Experience.astro` and canonical review/claim/status documentation. Preserve all existing staged changes; no staging, commits, pushes or deployment.
+- **Plan/evidence:** [Copy review follow-up](./rebuild-02/32-home-about-experience-copy-review.md#employer-technology-tags--owner-follow-up-2026-11-08).
+
+- **Verification:** `npx astro build` passed (9 pages); `git diff --check` clean. Browser and screenshot checks at 320px and 1440px confirm all 27 tags, natural wrapping, zero page overflow and zero clipped tags. Existing staged changes preserved; follow-up edits remain unstaged. No commit, push or deployment.
+
+
+## DL-110 — Add owner-confirmed MUI to Nexus
+
+- **Date / Authority:** 2026-11-08, direct owner request confirms Nexus MUI attribution.
+- **VERIFIED — Decision:** Add “MUI” after React in Nexus technology tags, preserving all employer prose, dates and title. Reuse existing tag markup/styles; no dependencies added.
+- **Naming review:** Official TanStack React documentation still uses React Query and `@tanstack/react-query`; recommend the dual label “TanStack Query (React Query)” for visible technology labels in a later requested pass. Query wording remains unchanged because the owner asked for a recommendation, not an immediate portfolio-wide replacement.
+- **Scope:** Experience source plus canonical review, claim map and status. Existing staged/unstaged work preserved. No staging, commit, push or deployment.
+
+- **Verification:** Nine-page Astro build and `git diff --check` pass. At 320px the eight Nexus tags include MUI after React, with zero overflow or clipped tags; screenshot inspected. No Query labels changed, no staging/commit/push/deployment.
+
+
+## DL-111 — Use React Query throughout visitor-facing copy
+
+- **Date / authority:** 2026-11-08, owner explicitly chose “React Query” across the portfolio, superseding DL-110's dual-label recommendation.
+- **VERIFIED:** Updated the Skills label, About and Brand tags, pagination contribution, and Better DEV/Perplexity shared project technology lists. Updated the Contact source comment for consistency. Internal icon identifiers and actual package names are unchanged. The official React documentation uses React Query for this library.
+- **Scope:** Copy and the canonical claim/status/review records only. Existing staged changes are preserved; no staging, commit, push or deployment.
+
+- **Verification:** Nine-page Astro build, both contrast checks and `git diff --check` pass. Rendered Home, Better DEV and Perplexity contain “React Query” and no old label; source audit found no remaining “TanStack Query”. At 320px the visible tags have no clipping and the page has no horizontal overflow. No staging, commit, push or deployment.
+
+
+## DL-112 — Clarify the hero introduction
+
+- **Date / authority:** 2026-11-08, owner-provided hero wording and request for grammatical review.
+- **VERIFIED:** Preserve the owner-listed CRM, email/WhatsApp campaigns, workflow and landing-page builders, workflow analytics, API work and production support; capitalize WhatsApp and use parallel phrasing. These topics match the previously confirmed professional evidence.
+- **Decision:** Use “With 2+ years of professional experience, I’ve worked on CRM, email and WhatsApp campaigns, workflow and landing-page builders, and workflow analytics—from product UI and APIs to production support.” Existing staged work is preserved.
+
+- **Verification:** Nine-page Astro build passed; final hero text checked in rendered HTML; `git diff --check` passed. No staging, commit, push or deployment.
+
+
+## DL-113 — Refine hero hierarchy and spacing
+
+- **Date / authority:** 2026-11-08, owner approved the proposed hero hierarchy and copy refinement.
+- **VERIFIED — Decision:** Retain the name, ASCII role and existing palette; use the shorter “Frontend-focused SaaS & workflow engineering” line and a concise introduction covering confirmed frontend, CRM, campaign, workflow, API and production-support work. Increase spacing after the role and before actions, narrow and brighten the bio with existing color tokens, and give the desktop social rail more space. A nonbreaking space keeps the ampersand with SaaS on mobile.
+- **Alternatives:** A forced desktop line break was rejected for responsive layout; the shorter, naturally balanced line was selected. No changes to contact actions, experience detail or the underlying visual system.
+- **Verification:** Nine-page Astro build, standard and glass contrast checks, and `git diff --check` pass. Browser checks at 320/390/768/1024/1440 in light and dark found no overflow or clipped hero text. Desktop and mobile screenshots inspected; final 390px wrap rechecked after the spacing fix. Existing staged work preserved; no commit, push or deployment.
+
+
+## DL-114 — Expand the hero introduction with approved detail
+
+- **Date / authority:** 2026-11-08, owner approved the revised hero introduction.
+- **VERIFIED — Decision:** Add MongoDB and specify CRM, email and WhatsApp campaigns, workflow and landing-page builders, analytics, and AI-assisted features, using “contributed” to preserve collaboration. Product interfaces, APIs and production support remain the delivery range. AI-assisted features refer to confirmed Swipe One work; the original Swipe Genie is described separately in Experience.
+- **Alternatives:** Enumerating every feature and Genie by name would make the hero denser and require context; the approved grouped wording retains specifics while remaining readable.
+- **Scope:** Hero copy and canonical claim, status and review documentation. Preserve all pre-existing staged changes; no staging, commit, push or deployment.
+
+- **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 390 and 1440px found no horizontal overflow or clipped hero text; mobile screenshot inspected. Existing staged changes preserved; no commit, push or deployment.

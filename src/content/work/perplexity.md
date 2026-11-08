@@ -6,7 +6,7 @@ status: 'Live'
 summary: 'A from-scratch implementation of the cited-answer-engine pattern: query rewriting, web search, SSE streaming, citation linking, and thread persistence — built solo across a NestJS backend and Next.js frontend.'
 repo: 'https://github.com/Kashif-Rezwi/perplexity'
 demo: 'https://perplexity-lilac.vercel.app'
-tech: ['Next.js', 'NestJS', 'TypeScript', 'Vercel AI SDK', 'TanStack Query', 'Zustand', 'PostgreSQL', 'Prisma', 'Tavily', 'Groq', 'Docker', 'Vercel']
+tech: ['Next.js', 'NestJS', 'TypeScript', 'Vercel AI SDK', 'React Query', 'Zustand', 'PostgreSQL', 'Prisma', 'Tavily', 'Groq', 'Docker', 'Vercel']
 order: 2
 draft: false
 cover: 'perplexity.png'
