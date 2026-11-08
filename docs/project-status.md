@@ -3,6 +3,7 @@
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
 - **Last updated:** 2026-11-08 (DL-108–111: section copy, employer technology tags and React Query naming implemented locally; no commit, push or deployment).
+- **Working tree note (DL-122, 2026-11-09):** React Flow's resting icon is now a neutral current-color SVG, independent of image filters; the official multicolor asset appears on hover. Build, contrast and targeted browser checks pass. Uncommitted; no deployment.
 - **Working tree note (DL-102, 2026-09-14):** "AI Journey" section restructured into "Current Focus" (`src/sections/Now.astro`, `src/pages/index.astro`) with methodology frame sentence, Interactive Lessons in Row 1 (Building), `server-active-indicator` in Row 2 (Recently shipped), and AI evaluation methodology in Row 3 (Studying); dead links removed; build clean, contrast 19/19 + 30/30. Prior uncommitted work: DL-101 Nexus internship reconciliation. **PENDING OWNER — uncommitted.**
 - **Working tree note (DL-105, 2026-09-23):** Education block in `src/sections/Experience.astro` gained a new first entry: **Bosscoder Academy — Advanced AI & ML Engineering Program · Jun 2026 – present** (owner-enrolled upskilling course; official name and 9-month duration cross-checked against bosscoderacademy.com; Learning classification, VERIFIED). Same-day owner revisions: no projected end date shown; Amity BCA start corrected to **Apr 2025** (evidence ledger updated). **PENDING OWNER — uncommitted on `develop`.**
 
@@ -36,6 +37,12 @@ Plan, complete before/after copy, material editorial departures and verification
 **VERIFIED — DL-117:** Applied the owner-approved six-group technical skills review, including testing and delivery, async and AI application work; ClickHouse, RabbitMQ and Python retain working-knowledge qualifiers. Responsive, build, contrast and scoped accessibility checks completed.
 
 **VERIFIED — DL-118:** Technical skill groups now use the full existing section width before wrapping. Owner-edited labels and removals are preserved; the added AI labels and removed supported skills were reviewed without asserting model-serving ownership.
+
+**VERIFIED — DL-119:** Replaced the 13 generic skill glyphs with official local brand marks or distinct concept symbols, using official colors where applicable. Dark/light responsive, contrast, accessibility and preview-base checks completed.
+
+**VERIFIED — DL-120:** Owner-corrected skill icons match existing neutral-at-rest badges and show brand/accent colors only on hover; responsive and both-theme hover checks passed.
+
+**VERIFIED — DL-121:** Removed the CSS icon’s white backing, consolidated named icons through `TechIcon`, and corrected the clipped pre-existing BullMQ vector; full responsive, hover, geometry, source and contrast audit completed.
 
 **Next action:** Owner review of this local source diff. No commit, push, merge, deployment or publication is authorized by this task. Older working-tree and phase notes below describe their dated historical state; current Git truth is recorded above.
 
