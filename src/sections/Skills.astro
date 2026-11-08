@@ -15,6 +15,8 @@ interface TechItem {
   color?: string;
   colorLight?: string;
   icon?: string;
+  identified?: boolean;
+  iconPlate?: 'dark';
 }
 
 interface TechGroup {
@@ -53,8 +55,9 @@ const softItems =
               <ul class="tech-group-items" role="list">
                 {group.items.map((item) => (
                   <li
-                    class="tech-item"
-                    style={`--brand: ${item.color || 'var(--color-accent)'}; --brand-on-dark: ${item.colorLight || item.color || 'var(--color-accent)'}`}
+                    class:list={['tech-item', { 'tech-item--identified': item.identified }]}
+                    data-icon-plate={item.iconPlate}
+                    style={`--brand: ${item.color || (item.identified ? 'var(--color-accent-text)' : 'var(--color-accent)')}; --brand-on-dark: ${item.colorLight || item.color || (item.identified ? 'var(--color-accent-text)' : 'var(--color-accent)')}`}
                   >
                     {item.icon ? <TechIcon name={item.icon} size={13} /> : (
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
@@ -270,6 +273,25 @@ const softItems =
     opacity: 0.75;
     transition: opacity 0.2s ease, color 0.2s ease;
   }
+
+  /* Component-rendered marks follow the same neutral-to-brand hover behavior. */
+  .tech-item--identified :global(svg) {
+    flex-shrink: 0;
+    opacity: 0.75;
+    transition: opacity 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+  }
+  .tech-item--identified[data-icon-plate='dark'] :global(svg) {
+    box-sizing: content-box;
+    border-radius: 2px;
+    padding: 2px;
+  }
+  .tech-item--identified:hover :global(svg) {
+    color: var(--active-brand);
+    opacity: 1;
+  }
+  .tech-item--identified[data-icon-plate='dark']:hover :global(svg) { background: #17231e; }
+  .tech-item--identified:hover :global(.react-flow-neutral) { visibility: hidden; }
+  .tech-item--identified:hover :global(.react-flow-brand) { visibility: visible; }
 
   .tech-item:hover {
     color: var(--hover-text);
