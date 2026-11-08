@@ -1071,3 +1071,13 @@
 - **Scope:** Hero copy and canonical claim, status and review documentation. Preserve all pre-existing staged changes; no staging, commit, push or deployment.
 
 - **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 390 and 1440px found no horizontal overflow or clipped hero text; mobile screenshot inspected. Existing staged changes preserved; no commit, push or deployment.
+
+
+## DL-115 — Add evidence-backed context to Swipe One contributions
+
+- **Date / authority:** 2026-11-08, owner requested a less visually sparse Swipe One section while retaining the existing contributions and avoiding forced padding.
+- **VERIFIED — Decision:** Add the centralized template dashboard, chat-based assistant, customer-record and outreach context, and answering product questions during launch support. These are supported by the existing owner-confirmed career evidence; no metrics or implementation details were invented. The owner-selected analytics sentence remains unchanged.
+- **Alternatives:** Padding every entry to three lines would vary across viewports and weaken clarity. Selective meaningful detail preserves scanability and lets wrapping respond naturally.
+- **Scope:** Swipe One contribution wording and canonical review, status and claim records. No deployment, commit or push.
+
+- **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 390, 768 and 1440px show no horizontal overflow or clipped contribution text. At desktop width, three of five entries occupy three lines; the exact selected analytics sentence and the concise launch entry remain two. No commit, push or deployment.

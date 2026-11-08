@@ -197,3 +197,9 @@ The owner requested explicit CRM, email and WhatsApp campaigns, workflow and lan
 The owner approved a revised introduction adding MongoDB, email and WhatsApp campaigns, workflow and landing-page builders, analytics and AI-assisted features. Grouping the builders and referring to AI-assisted features keeps the hero readable; Experience retains the specific product context. This supersedes the DL-113 introduction without changing its layout. Build and check mobile/desktop wrapping; retain existing staged changes and do not deploy.
 
 - **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 390 and 1440px found no horizontal overflow or clipped hero text; mobile screenshot inspected. Existing staged changes preserved; no commit, push or deployment.
+
+## Swipe One contribution density — owner request (2026-11-08)
+
+Add useful, corroborated context to the guided workflow, AI configuration, CRM/campaign and launch-support entries without forcing equal line counts. Preserve the selected analytics sentence and all Swipe Pages content. The selected additions are the centralized template dashboard, chat-based assistant, customer-record management and campaign outreach, and answering product questions. Verify the build and responsive wrapping; no commit, push or deployment.
+
+- **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 390, 768 and 1440px show no horizontal overflow or clipped contribution text. At desktop width, three of five entries occupy three lines; the exact selected analytics sentence and the concise launch entry remain two. No commit, push or deployment.
