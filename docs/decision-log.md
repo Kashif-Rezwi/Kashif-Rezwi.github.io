@@ -1081,3 +1081,33 @@
 - **Scope:** Swipe One contribution wording and canonical review, status and claim records. No deployment, commit or push.
 
 - **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 390, 768 and 1440px show no horizontal overflow or clipped contribution text. At desktop width, three of five entries occupy three lines; the exact selected analytics sentence and the concise launch entry remain two. No commit, push or deployment.
+
+
+## DL-116 — Refresh soft skills
+
+- **Date / authority:** 2026-11-09, owner asked to remove Dependability and adopt the discussed alternatives.
+- **Decision:** Keep Ownership, Collaboration and Communication; replace Dependability, Solution-oriented and Willingness to learn with Problem-solving, Adaptability and Prioritization. The latter was among the alternatives offered and preserves a concise six-chip list after Dependability was explicitly removed. Use matching decorative icons in the existing component.
+- **Evidence / boundaries:** Problem-solving is supported by the existing solution-oriented testimonial and production-debugging record. Adaptability and prioritization are owner-selected professional qualities informed by the described cross-functional and launch-support work; no specific unverified incidents or seniority claims were added.
+- **Alternatives:** Keeping five chips would omit Prioritization, one of the proposed relevant alternatives. Restoring Dependability would conflict with the owner's explicit request.
+- **Scope:** Soft-skill labels/icons and canonical task records; preserve technical skills, current work, staging and deployment state.
+
+- **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 768 and 1440px confirmed all six labels have icons, with no clipped chips or horizontal overflow; mobile screenshot inspected. No commit, push or deployment.
+
+
+## DL-117 — Regroup technical skills around engineering work
+
+- **Date / authority:** 2026-11-09, owner approved the technical-skills review and requested implementation.
+- **VERIFIED — Decision:** Replace the prior five categories with Frontend & UI, Backend & APIs, Data & Storage, Async & Messaging, AI Applications, and Testing & Delivery. Add the owner-approved, evidence-backed UI, testing, integration, async and delivery skills; move Prisma and BullMQ to meaningful categories. Keep the established React Query wording and retain Python as working knowledge based on verification scripts. Clearly label ClickHouse and RabbitMQ as working knowledge.
+- **Evidence / boundaries:** Manifest-selected master resumes, canonical skills inventory, owner-confirmed employer details, contribution evidence and personal-project records underpin the groups. Technologies are general skills across professional and personal work; this update does not assign personal-project details to employers or imply infrastructure ownership, ML training or invented proficiency. pgvector remains in the existing personal project case study rather than the overview, per the approved review.
+- **Design:** Preserve the existing alternating chip layout and soft skills. Reuse existing brand glyphs where available and a neutral decorative code glyph elsewhere; no dependencies or new logo assets.
+- **Alternatives:** Keeping the previous five categories leaves tests missing and places data/queue tools in AI. The approved six-group structure makes use and delivery responsibilities easier to scan.
+- **Verification:** Nine-page Astro build, standard contrast (19/19), glass contrast (30/30), and `git diff --check` pass. Browser checks across 320/390/768/1024/1440px in light and dark found six groups, all icons present, and zero clipped chips or horizontal overflow. Scoped axe on Skills reports zero violations in both themes; color-contrast has incomplete items, supplemented by the contrast scripts and visual inspection. Desktop and mobile screenshots inspected. Existing soft-skills and other prior changes preserved; no commit, push or deployment.
+
+
+## DL-118 — Use full skill-row width and review owner edits
+
+- **Date / authority:** 2026-11-09, owner requested full use of the existing Skills-section width and a review of their additions and removals.
+- **VERIFIED — Decision:** Replace the 900px technical-group cap with full available container width. Keep flex wrapping, left/right category alignment, the existing design system and all owner edits intact. The global site container remains unchanged.
+- **VERIFIED — Inventory review:** Relative to the previously approved proposal, MUI, Jest, Cypress and Sentry were removed from the Skills overview; the owner’s choice is preserved, and their prior evidence is not erased. “Context Management” and the revised “LLM Inference integration” label reflect the owner’s additions. Personal-project records support conversation context, retrieval and integration with model providers; they do not establish model-serving infrastructure ownership. More precise optional labels are “Conversation context” and “LLM API integration.”
+- **Alternatives:** Widening the shared site container would affect unrelated sections; changing only each category’s width meets the request while preserving other layouts. Skill labels were reviewed rather than silently rewritten or restored.
+- **Verification:** Nine-page Astro build, standard contrast (19/19), glass contrast (30/30), and `git diff --check` pass. Browser checks at 320/390/768/1024/1440px in both themes confirmed no clipped chips, no horizontal overflow and no premature wrapping (within half-pixel tolerance); desktop row width exceeds the prior 900px cap. Desktop and mobile screenshots inspected. No staging, commit, push or deployment.

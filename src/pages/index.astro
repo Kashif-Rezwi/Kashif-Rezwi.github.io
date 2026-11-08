@@ -36,66 +36,83 @@ const links = {
 // Skills data (technical skills by category + verified soft skills)
 const technicalSkills = [
   {
-    category: 'Languages',
+    category: 'Frontend & UI',
     items: [
-      { name: 'JavaScript', color: '#F7DF1E', icon: 'javascript' },
       { name: 'TypeScript', color: '#3178C6', icon: 'typescript' },
-      { name: 'Python', color: '#3776AB', icon: 'python' },
-    ],
-  },
-  {
-    category: 'Frontend',
-    items: [
+      { name: 'JavaScript', color: '#F7DF1E', icon: 'javascript' },
+      { name: 'HTML' },
+      { name: 'CSS' },
       { name: 'React', color: '#61DAFB', icon: 'react' },
       { name: 'Next.js', color: '#000000', colorLight: '#ffffff', icon: 'nextdotjs' },
       { name: 'Tailwind CSS', color: '#06B6D4', icon: 'tailwindcss' },
       { name: 'Redux', color: '#764ABC', icon: 'redux' },
       { name: 'React Query', color: '#FF4154', icon: 'reactquery' },
+      { name: 'React Flow' },
     ],
   },
   {
-    category: 'Backend',
+    category: 'Backend & APIs',
     items: [
       { name: 'Node.js', color: '#5FA04E', icon: 'nodedotjs' },
       { name: 'Express', color: '#0A0A0A', colorLight: '#ffffff', icon: 'express' },
-      { name: 'REST APIs', color: '#58a6ff', icon: 'rest' },
       { name: 'NestJS', color: '#E0234E', icon: 'nestjs' },
+      { name: 'REST APIs', color: '#58a6ff', icon: 'rest' },
       { name: 'WebSockets', color: '#58a6ff', icon: 'websocket' },
-      { name: 'RabbitMQ', color: '#FF6600', icon: 'rabbitmq' },
+      { name: 'SSE' },
+      { name: 'Webhooks' },
     ],
   },
   {
-    category: 'Databases & Infra',
+    category: 'Data & Storage',
     items: [
-      { name: 'PostgreSQL', color: '#4169E1', icon: 'postgresql' },
       { name: 'MongoDB', color: '#47A248', icon: 'mongodb' },
-      { name: 'ClickHouse', color: '#FFCC01', icon: 'clickhouse' },
+      { name: 'PostgreSQL', color: '#4169E1', icon: 'postgresql' },
+      { name: 'Prisma', color: '#2D3748', colorLight: '#D3D9E0', icon: 'prisma' },
       { name: 'Redis', color: '#FF4438', icon: 'redis' },
-      { name: 'Docker', color: '#2496ED', icon: 'docker' },
-      { name: 'Git', color: '#F03C2E', icon: 'git' },
-      { name: 'GitHub Actions', color: '#2088FF', icon: 'githubactions' },
+      { name: 'ClickHouse (working knowledge)', color: '#FFCC01', icon: 'clickhouse' },
+      { name: 'S3-compatible storage' },
     ],
   },
   {
-    category: 'AI & Tools',
+    category: 'Async & Messaging',
+    items: [
+      { name: 'Background jobs' },
+      { name: 'BullMQ', color: '#e0234e', icon: 'bullmq' },
+      { name: 'RabbitMQ (working knowledge)', color: '#FF6600', icon: 'rabbitmq' },
+    ],
+  },
+  {
+    category: 'AI Applications',
     items: [
       { name: 'Vercel AI SDK', color: '#000000', colorLight: '#ffffff', icon: 'vercel' },
-      { name: 'Prisma', color: '#2D3748', colorLight: '#D3D9E0', icon: 'prisma' },
-      { name: 'pgvector', color: '#7b61ff', icon: 'pgvector' },
-      { name: 'BullMQ', color: '#e0234e', icon: 'bullmq' },
+      { name: 'LLM Inference integration' },
+      { name: 'Context Management' },
+      { name: 'Tool calling' },
+      { name: 'RAG' },
+    ],
+  },
+  {
+    category: 'Testing & Delivery',
+    items: [
+      { name: 'Vitest' },
+      { name: 'React Testing Library' },
+      { name: 'Git', color: '#F03C2E', icon: 'git' },
+      { name: 'GitHub Actions', color: '#2088FF', icon: 'githubactions' },
+      { name: 'Docker', color: '#2496ED', icon: 'docker' },
+      { name: 'Python (working knowledge)', color: '#3776AB', icon: 'python' },
     ],
   },
 ];
 
-// Soft skills — every label is backed by the owner-verified LinkedIn
-// testimonials on this page (claim safety, AGENTS.md §3).
+// Soft skills — owner-selected labels grounded in professional contributions
+// and the testimonials on this page (claim safety, AGENTS.md §3).
 const softSkills = [
   { name: 'Ownership', color: '#6495ed' },
   { name: 'Collaboration', color: '#6495ed' },
   { name: 'Communication', color: '#6495ed' },
-  { name: 'Dependability', color: '#6495ed' },
-  { name: 'Solution-oriented', color: '#6495ed' },
-  { name: 'Willingness to learn', color: '#6495ed' },
+  { name: 'Problem-solving', color: '#6495ed' },
+  { name: 'Adaptability', color: '#6495ed' },
+  { name: 'Prioritization', color: '#6495ed' },
 ];
 ---
 

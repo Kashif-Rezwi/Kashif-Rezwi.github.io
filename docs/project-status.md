@@ -31,6 +31,12 @@ Plan, complete before/after copy, material editorial departures and verification
 
 **VERIFIED — DL-115:** Swipe One contribution entries gained selective evidence-backed context for the template dashboard, chat assistant, CRM/outreach and launch support; the owner-selected analytics sentence remains unchanged.
 
+**VERIFIED — DL-116:** Soft skills updated to Ownership, Collaboration, Communication, Problem-solving, Adaptability and Prioritization at the owner’s request; existing chip styling retained.
+
+**VERIFIED — DL-117:** Applied the owner-approved six-group technical skills review, including testing and delivery, async and AI application work; ClickHouse, RabbitMQ and Python retain working-knowledge qualifiers. Responsive, build, contrast and scoped accessibility checks completed.
+
+**VERIFIED — DL-118:** Technical skill groups now use the full existing section width before wrapping. Owner-edited labels and removals are preserved; the added AI labels and removed supported skills were reviewed without asserting model-serving ownership.
+
 **Next action:** Owner review of this local source diff. No commit, push, merge, deployment or publication is authorized by this task. Older working-tree and phase notes below describe their dated historical state; current Git truth is recorded above.
 
 ## Current Signal Field status

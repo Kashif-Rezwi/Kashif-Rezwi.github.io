@@ -56,7 +56,11 @@ const softItems =
                     class="tech-item"
                     style={`--brand: ${item.color || 'var(--color-accent)'}; --brand-on-dark: ${item.colorLight || item.color || 'var(--color-accent)'}`}
                   >
-                    {item.icon && <TechIcon name={item.icon} size={13} />}
+                    {item.icon ? <TechIcon name={item.icon} size={13} /> : (
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" />
+                      </svg>
+                    )}
                     {item.name}
                   </li>
                 ))}
@@ -99,27 +103,28 @@ const softItems =
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
                 )}
-                {/* 4. Dependability: Shield Check icon */}
-                {item.name.toLowerCase().includes('dependability') && (
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    <path d="m9 12 2 2 4-4" />
-                  </svg>
-                )}
-                {/* 5. Solution-oriented: Lightbulb icon */}
-                {item.name.toLowerCase().includes('solution') && (
+                {/* 4. Problem-solving: Lightbulb icon */}
+                {item.name.toLowerCase().includes('problem-solving') && (
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
                     <path d="M9 18h6" />
                     <path d="M10 22h4" />
                   </svg>
                 )}
-                {/* 6. Willingness to learn: Book Open icon */}
-                {item.name.toLowerCase().includes('learn') && (
+                {/* 5. Adaptability: Arrows icon */}
+                {item.name.toLowerCase().includes('adaptability') && (
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
-                    <path d="M6 6h10" />
-                    <path d="M6 10h10" />
+                    <path d="M20 7h-9a5 5 0 0 0-5 5v1" />
+                    <path d="m16 3 4 4-4 4" />
+                    <path d="M4 17h9a5 5 0 0 0 5-5v-1" />
+                    <path d="m8 21-4-4 4-4" />
+                  </svg>
+                )}
+                {/* 6. Prioritization: Ordered list icon */}
+                {item.name.toLowerCase().includes('prioritization') && (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M10 6h10M10 12h7M10 18h4" />
+                    <path d="M4 6h2M4 12h2M4 18h2" />
                   </svg>
                 )}
                 {item.name}
@@ -177,9 +182,8 @@ const softItems =
     opacity: 0.35;
   }
 
-  /* Alternating left/right staggered layout: the offset gives Skills a
-     measured rhythm on wide screens without turning every category into a
-     full-width banner. Narrow screens retain a single calm reading edge. */
+  /* Full-width groups use the available section space before wrapping.
+     Alternating alignment retains the existing rhythm on wider screens. */
   .tech-grid {
     display: flex;
     flex-direction: column;
@@ -191,7 +195,7 @@ const softItems =
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    max-width: min(100%, 900px);
+    width: 100%;
     align-self: flex-start;
   }
 

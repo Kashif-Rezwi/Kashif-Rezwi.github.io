@@ -38,6 +38,11 @@ All current findings below are **VERIFIED**, using the owner's 2026-11-08 confir
 - **AI Applications & DevTools card:** personal streamed reviews/cited answers and the published TypeScript library/React adapter — project proofs above. Tags identify the three personal projects.
 - **Facts:** professional tenure and specialization derive from the same evidence. Location/status and Education facts are outside this update. Internal provenance footer removed; resume and Experience navigation retained.
 
+## Technical skills (DL-117/118)
+
+- **VERIFIED:** Frontend & UI, Backend & APIs, Data & Storage, Async & Messaging, AI Applications, and Testing & Delivery reflect owner-confirmed skills and the reviewed professional and personal-project evidence. Existing project case studies provide specific implementation context; tags do not attribute all technologies to employers.
+- **VERIFIED:** The owner-added AI context and inference-integration labels are supported by personal projects involving conversation context and model API integration; these do not imply model-serving infrastructure ownership. ClickHouse, RabbitMQ and Python are explicitly labeled working knowledge. Testing lists Vitest and React Testing Library; GitHub Actions and Docker reflect documented delivery work. The owner removed Jest, Cypress and Sentry from the overview, without changing their documented evidence. No infrastructure ownership or model-training seniority is implied.
+
 ## Selected work
 
 | Sentence | Claim | Notes |

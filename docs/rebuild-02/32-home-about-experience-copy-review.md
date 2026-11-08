@@ -203,3 +203,27 @@ The owner approved a revised introduction adding MongoDB, email and WhatsApp cam
 Add useful, corroborated context to the guided workflow, AI configuration, CRM/campaign and launch-support entries without forcing equal line counts. Preserve the selected analytics sentence and all Swipe Pages content. The selected additions are the centralized template dashboard, chat-based assistant, customer-record management and campaign outreach, and answering product questions. Verify the build and responsive wrapping; no commit, push or deployment.
 
 - **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 390, 768 and 1440px show no horizontal overflow or clipped contribution text. At desktop width, three of five entries occupy three lines; the exact selected analytics sentence and the concise launch entry remain two. No commit, push or deployment.
+
+## Soft skills — owner-requested update (2026-11-09)
+
+Remove Dependability, replace Solution-oriented and Willingness to learn with the discussed Problem-solving, Adaptability and Prioritization, and retain Ownership, Collaboration and Communication. Keep six chips and existing styling; update decorative icons and verify build and responsive wrapping. No technical-skill or deployment changes. See DL-116 for evidence boundaries.
+
+- **Verification:** Nine-page Astro build and `git diff --check` pass. Browser checks at 320, 768 and 1440px confirmed all six labels have icons, with no clipped chips or horizontal overflow; mobile screenshot inspected. No commit, push or deployment.
+
+## Technical skills regrouping — owner-approved review (2026-11-09)
+
+- **Objective:** Apply the six-group technical skills proposal while preserving the existing chip layout and prior soft-skill changes. Bring React/TypeScript, APIs, data, async work, AI applications and testing/delivery into clear groups.
+- **Approaches:** Keeping five current groups minimizes change but leaves testing absent and data/queue tools under AI. Six purpose-based groups match the approved review and make the frontend-to-delivery story clearer; selected.
+- **Boundaries:** Use prior owner-confirmed professional contributions, manifest-selected resumes, personal project records and skills inventory. Mark ClickHouse and RabbitMQ as working knowledge; retain existing Python with that qualifier in Testing & Delivery, reflecting verified Python verification scripts. No employment attribution, metrics or model-training claim is added.
+- **Plan:** Update the existing `technicalSkills` data and use a neutral decorative code glyph for items without an existing brand icon. Preserve the current alternating layout, semantic lists and all soft-skill modifications. Build, check contrast, and inspect mobile/desktop widths in both themes; record verification. No commit, push or deployment.
+
+- **Verification:** Nine-page Astro build, standard contrast 19/19, glass contrast 30/30 and `git diff --check` pass. All six technical groups and their decorative icons were checked at 320/390/768/1024/1440px in light and dark, with zero overflow or clipped chips; desktop/mobile screenshots inspected. Scoped axe reported zero violations in both themes, with color-contrast incomplete items supplemented by contrast scripts and visual review. Existing soft-skill changes are preserved. No staging, commit, push or deployment.
+
+## Skills full-width layout and owner-edited inventory (2026-11-09)
+
+- **Objective:** Use all available width in each technical category before wrapping, while retaining the established alternating alignment, responsive chip styling, and the owner's uncommitted skill edits.
+- **Alternatives:** Globally widen the site container (rejected: changes unrelated sections), or remove the 900px group cap and let each skill row fill the existing container (selected). Natural flex wrapping preserves reading order and accommodates smaller screens.
+- **Inventory review:** Compared with the approved six-group proposal, the owner removed MUI, Jest, Cypress and Sentry from the Skills overview; these remain supported skills and MUI/Sentry have employer evidence. The owner added “Context Management” and changed “LLM integration” to “LLM Inference integration”; personal-project evidence supports conversation context, retrieval and model API integration, but not a standalone claim of inference infrastructure ownership. Do not silently restore removed labels or change the owner's new wording.
+- **Plan:** Update only the relevant group-width CSS in `Skills.astro`, retain the owner's `index.astro` edits, and update canonical decision/status/claim records. Build, check contrast and compare wrapping/overflow at mobile and desktop widths in both themes. Do not stage, commit, push or deploy.
+
+- **Verification:** Nine-page Astro build, standard contrast 19/19, glass contrast 30/30 and `git diff --check` pass. Browser checks at 320/390/768/1024/1440px in both themes confirmed no premature wrapping, horizontal overflow or clipped chips; screenshots inspected at desktop and mobile sizes. Owner-edited inventory was preserved. No staging, commit, push or deployment.
