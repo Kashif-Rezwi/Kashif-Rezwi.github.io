@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'nanodes/styles.css';
 
 /* ===========================================================================
    REBUILD-03: "Responsive Engineering Field"
@@ -77,6 +78,9 @@
    Theme tokens — system is the default; explicit user preference wins.
 --------------------------------------------------------------------------- */
 :root {
+  --nanodes-font-mono: var(--font-mono);
+  --nanodes-accent-text: var(--color-accent-text);
+  --nanodes-accent: var(--color-accent);
   --radius-control: 0.375rem;
   --radius-card: 0.75rem;
   --radius-pill: 999px;
