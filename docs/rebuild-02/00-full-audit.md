@@ -291,7 +291,7 @@
 ### 4.7 Social Profiles
 
 - GitHub: https://github.com/Kashif-Rezwi
-- LinkedIn: https://www.linkedin.com/in/kashif-rezwi-149372216/
+- LinkedIn: https://www.linkedin.com/in/kashif-rezwi/
 - dev.to: https://dev.to/kashifrezwi
 - Email: kashifrezwi850@gmail.com
 - Phone: 9883909187
