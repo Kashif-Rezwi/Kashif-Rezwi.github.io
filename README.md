@@ -195,7 +195,7 @@ npm ci
 
 The Contact renderer imports `prepareImageFrames` and `mountDisplay` from `nanodes`; the static hero imports `prepareTextFrame`. Shared artwork styles come from `nanodes/styles.css`. The portfolio keeps only technology data, section layout, theme variables and a small sizing adapter. Background dot fields and static case-study diagrams remain separate portfolio features.
 
-`npm ci` installs the exact published `nanodes@0.1.0` release from npm, verified by the integrity entry in the lockfile. The former vendor tarball has been removed. Update this dependency only after a new Nanodes release has been published and reviewed. See [the integration record](docs/rebuild-02/33-nanodes-integration.md).
+`npm ci` installs the exact published [`nanodes@0.1.1`](https://www.npmjs.com/package/nanodes/v/0.1.1) release from npm, verified by the integrity entry in the lockfile. The former vendor tarball has been removed. Update this dependency only after a new Nanodes release has been published and reviewed. See [the integration record](docs/rebuild-02/33-nanodes-integration.md).
 
 ### Environment Variables
 

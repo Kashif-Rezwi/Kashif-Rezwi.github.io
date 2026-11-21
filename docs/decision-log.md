@@ -1164,3 +1164,13 @@
 - **Decision:** Pin `nanodes` to exact registry version `0.1.0`, retain the integrity-locked install, and remove the local vendor archive. Keep the existing host integration, artwork and presentation unchanged. The registry runtime/types/CSS match the previously verified vendor build byte for byte.
 - **VERIFIED — Checks:** Nine-page production build, original static hero output, single mounted Contact display/click advance, no-outline/no-pause appearance, and 19 standard/30 glass contrast checks pass. No browser errors. The current checkout remains `feat/nanodes-integration` based on the owner's `fe13b47` commit; this dependency transition is uncommitted and undeployed.
 - **Evidence:** [Nanodes integration](./rebuild-02/33-nanodes-integration.md). No staging, Git commit/tag/push, merge or deployment was performed by the agent.
+
+
+## DL-125 — Integrate the current public Nanodes release
+
+- **Date / authority:** 2026-11-21, owner requested proper portfolio integration after the Nanodes website launch and `0.1.1` publication.
+- **VERIFIED — Git truth:** The owner committed/pushed the prior `0.1.0` registry transition as `5925700`; this follow-up began clean on `feat/nanodes-integration`.
+- **Decision:** Pin exact `nanodes@0.1.1` from npm and keep the existing Contact renderer, server-prepared hero, CSS import and host-owned technology definitions. The 21 runtime/CSS/declaration files match installed `0.1.0` byte for byte; this patch updates public documentation and metadata.
+- **Alternatives:** Re-extracting or rewriting the integration would add duplication without a functional benefit. Continuing on `0.1.0` works but omits the current package documentation and homepage metadata.
+- **Plan and evidence:** [Nanodes integration](./rebuild-02/33-nanodes-integration.md), published `0.1.1` follow-up.
+- **VERIFIED — Result:** All original 25 technology frames and hero output match; production/preview-base builds, eight preview asset references, 19 standard/30 glass contrast checks and ten responsive theme/width states pass. Click/keyboard advance, pointer cursor, requested no-outline/no-pause appearance and reduced motion pass with no browser errors. Runtime source and technology definitions remain unchanged. No staging, commit, push, merge or deployment; full evidence and compatibility limits are in the integration record.

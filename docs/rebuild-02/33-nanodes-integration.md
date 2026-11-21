@@ -1,6 +1,6 @@
 # Nanodes integration
 
-- **Purpose:** Plan and verification record for replacing duplicated portfolio glyph rendering with the locally packed Nanodes library.
+- **Purpose:** Plan and verification record for replacing duplicated portfolio glyph rendering with Nanodes and consuming its published npm release.
 - **Authority:** Owner-authorized Nanodes Phase 4 integration, 2026-11-21; subordinate to `AGENTS.md`.
 - **Last updated:** 2026-11-21.
 - **Related:** [Project status](../project-status.md), [decision log](../decision-log.md), [original hero treatment](30-hero-role-ascii-plan.md), [Nanodes roadmap](https://github.com/Kashif-Rezwi/nanodes/blob/main/docs/roadmap.md).
@@ -60,3 +60,21 @@ Browser review used local Chromium. This task does not establish Safari/iOS supp
 **VERIFIED:** The owner committed Phase 4 as `fe13b47`. After owner-completed npm authentication and publishing verification, `nanodes@0.1.0` was published under `kashif-rezwi` and became the registry's `latest` release. A clean registry install matched all published files and the reviewed tarball integrity.
 
 **VERIFIED:** The portfolio now pins `nanodes: "0.1.0"` and the public registry tarball/integrity in its lockfile. Removed `vendor/nanodes-0.0.0.tgz`; the published runtime, declarations and CSS match that verified vendor runtime byte for byte. The nine-page production build, unchanged static hero output, single mounted Contact display, click advance and requested no-outline/no-pause appearance pass. Standard contrast checks pass 19/19 and glass checks 30/30. No browser errors were reported. Registry-transition changes remain unstaged, uncommitted and undeployed; no staging, commits, tags or pushes were performed by the agent.
+
+
+### Published 0.1.1 integration — 2026-11-21 (DL-125)
+
+**VERIFIED — Git truth:** The owner committed and pushed the initial registry switch as `5925700` on `feat/nanodes-integration`. This follow-up began with a clean working tree and updates the exact dependency to published `nanodes@0.1.1`.
+
+**Decision and scope:** Reuse the existing Contact/hero integration and one shared stylesheet. The alternative, re-extracting or rewriting the components, would duplicate already verified rendering without changing behavior. Keep all 25 technology definitions, original glyph output, timing, themes and the requested no-outline/no-pause appearance.
+
+**Plan:** Verify the registry artifact and lockfile, compare installed runtime files and original frames, audit source for removed embedded rendering, run production/preview-base builds and both contrast checks, then review browser interactions and responsive layouts. Complete when the published package is the sole glyph implementation, original output matches, and these checks pass. Commit, push and deployment remain separate owner actions.
+
+
+**VERIFIED — Published artifact:** The manifest and lockfile pin `0.1.1` to `https://registry.npmjs.org/nanodes/-/nanodes-0.1.1.tgz`, with SHA-512 `sha512-a2X9mZQ5PhfWBVp2NmvJYdDQveo154CSt/J8cfI2+pU4kcnUUGE6MOJOmfVHqvaO8Ck3qpaPDhaKs/4SaKFxlg==`. All 21 installed runtime/CSS/declaration files are byte-identical to the previous installed `0.1.0` release. `npm ls nanodes` resolves one direct `0.1.1` installation.
+
+**VERIFIED — Output and ownership:** The published helper reproduces all 25 original SVG/label frames, colors and ordering, plus the exact original hero string. The hero is already present in production HTML. Tracked `src/` files are unchanged by this follow-up; Contact imports `prepareImageFrames`/`mountDisplay`, the hero imports `prepareTextFrame`, and global CSS imports `nanodes/styles.css` once. No old sampler, alphabet, morph palette, duplicated playback engine, `ascii-roles.ts` or vendor archive remains in executable portfolio source. Host technology data, background dots and static case-study diagrams remain separate.
+
+**VERIFIED — Checks:** Nine-page production and `/portfolio-preview` builds pass; all eight preview JS/CSS references resolve. Standard contrast passes 19/19 and glass contrast 30/30. Chromium review at 320/390/768/1024/1440 px in dark and light themes finds one mounted Contact display, no horizontal overflow and no glyph clipping. Click, Enter and Space advance; the display has a pointer cursor, no rectangular outline and no portfolio pause button. Reduced motion suspends autoplay and keeps manual selection immediate; no browser errors were reported. Representative desktop/mobile captures were inspected. Temporary fixtures/captures are outside the repository; no permanent tests or reference directory were added. This targeted review does not establish Safari/iOS support or repeat a full-site Lighthouse/axe audit.
+
+README and current status now reference `0.1.1`; dated `0.1.0` records remain historical. Unrelated build-time contribution snapshot changes were restored. This follow-up remains unstaged and uncommitted; no Git commit, push, merge or deployment was performed.
