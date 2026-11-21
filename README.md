@@ -23,7 +23,7 @@ It showcases deep, evidence-based case studies of production and personal system
 
 ## Key Engineering Characteristics
 
-- **Zero-JS Core with Progressive Enhancement**: The entire site renders pure, semantic HTML and CSS by default. JavaScript is strictly isolated to opt-in progressive enhancements: an instant theme initialization script in `<head>` (eliminating flash of unstyled content), an interactive canvas dot matrix (`HeroDotMatrix.astro`), a 320ms diagonal wavefront morphing ASCII role cycler (`HeroRoleCycler.astro`), and an interactive 38×17 ASCII logo canvas in the contact section.
+- **Zero-JS Core with Progressive Enhancement**: The entire site renders pure, semantic HTML and CSS by default. JavaScript is strictly isolated to opt-in progressive enhancements: an instant theme initialization script in `<head>` (eliminating flash of unstyled content), an interactive canvas dot matrix (`HeroDotMatrix.astro`), a Nanodes-powered 320ms glyph transition in the Contact section (`ContactTech.astro`). The hero role (`HeroRoleCycler.astro`) is static text prepared by Nanodes during server rendering and needs no client JavaScript.
 - **CSS-First Design Tokens (Tailwind v4)**: Configured via `@theme` in `src/styles/global.css`, driving a unified "Calm Engineering Ledger" aesthetic with dark and light themes, layered glass materials (`.glass`, `.glass-panel`, `.glass-card`), ambient glow fields, and hardware-accelerated transitions.
 - **Automated Dual-Suite WCAG Contrast Enforcement**: Two dedicated test suites (`scripts/check-contrast.mjs` and `scripts/check-glass-contrast.mjs`) mathematically verify 49 contrast scenarios across base canvases, semi-transparent glass layers, and radiant ambient glow bands in both dark and light modes, blocking any regression below WCAG 2.2 AA (4.5:1 for text, 3:1 for UI elements).
 - **Build-Time GraphQL Data Harvesting**: Instead of shipping client-side API calls that leak access tokens or trigger third-party rate limits, `scripts/fetch-github-contributions.mjs` queries GitHub's GraphQL API at compile time to snapshot the last 52 weeks of contributions into `src/data/github-contributions.json`. The calendar renders as pure static inline SVG.
@@ -86,7 +86,7 @@ The system compiles static markdown documents, typed collections, and reactive C
 │    Runs contrast check + test build     │  • Zero-JS Server-Rendered Core  │
 │  • .github/workflows/deploy.yml         │  • Head Theme Script (zero FOUC) │
 │    Deploys dist/ to GitHub Pages        │  • Progressive Canvas Overlays:  │
-│    on merge to main branch              │    Hero Matrix, ASCII Cyclers    │
+│    on merge to main branch              │    Hero Matrix, Nanodes display    │
 └─────────────────────────────────────────┴──────────────────────────────────┘
 ```
 
@@ -147,13 +147,15 @@ The portfolio features deep-dive engineering case studies located under `/work/<
 │   ├── components/                   # Modular UI components (Header, Footer, Cards, Canvas)
 │   │   ├── GitHubContributions.astro # Static SVG GitHub activity calendar
 │   │   ├── HeroDotMatrix.astro       # Pointer-reactive interactive canvas dot matrix
-│   │   ├── HeroRoleCycler.astro      # 320ms diagonal wavefront ASCII role cycler
+│   │   ├── HeroRoleCycler.astro      # Static hero text prepared by Nanodes during SSR
+│   │   ├── ContactTech.astro         # Mounts Nanodes for interactive technology glyphs
 │   │   ├── TechIcon.astro            # Scalable inline tech stack iconography
 │   │   └── ThemeControl.astro        # Dark/Light/System theme selector
 │   ├── content/                      # Content collections markdown files
 │   │   ├── testimonials/             # Verbatim LinkedIn recommendations
 │   │   └── work/                     # Technical case study markdown files
 │   ├── content.config.ts             # Zod collection schema definitions
+│   ├── lib/contact-tech.ts           # Portfolio-owned technology paths, labels and colors
 │   ├── layouts/
 │   │   └── Base.astro                # Root HTML document layout with SEO & theme script
 │   ├── pages/
@@ -165,6 +167,7 @@ The portfolio features deep-dive engineering case studies located under `/work/<
 │   ├── sections/                     # Home page section modules (Hero, About, Work, etc.)
 │   └── styles/
 │       └── global.css                # Tailwind v4 @theme tokens and glassmorphism styles
+├── vendor/nanodes-0.0.0.tgz           # Local Nanodes dependency installed by npm ci
 ├── astro.config.mjs                  # Astro configuration with Tailwind & Sitemap plugins
 ├── package.json                      # Project scripts and dependencies
 └── tsconfig.json                     # Strict TypeScript configuration
@@ -188,6 +191,12 @@ git clone https://github.com/Kashif-Rezwi/Kashif-Rezwi.github.io.git
 cd Kashif-Rezwi.github.io
 npm ci
 ```
+
+### Nanodes integration
+
+The Contact renderer imports `prepareImageFrames` and `mountDisplay` from `nanodes`; the static hero imports `prepareTextFrame`. Shared artwork styles come from `nanodes/styles.css`. The portfolio keeps only technology data, section layout, theme variables and a small sizing adapter. Background dot fields and static case-study diagrams remain separate portfolio features.
+
+`npm ci` installs the reviewed `vendor/nanodes-0.0.0.tgz` through the relative file dependency. This is a packed snapshot, not a source link: after changing Nanodes, rebuild/repack it, replace the vendor tarball and run `npm install ./vendor/nanodes-0.0.0.tgz` before rebuilding the portfolio. See [the integration record](docs/rebuild-02/33-nanodes-integration.md).
 
 ### Environment Variables
 
