@@ -5,47 +5,15 @@
  * The decorative frame has a plain-text equivalent for assistive technology;
  * no JavaScript or motion is needed for the single consistent role.
  */
-import { ROLE_FRAMES } from '../lib/ascii-roles';
+import { prepareTextFrame } from 'nanodes';
+
+const role = prepareTextFrame('FULL STACK ENGINEER');
 ---
 
 <div
-  class="hero-role-cycler delay-300 animate-fade-up"
+  class="hero-role-cycler nanodes-text delay-300 animate-fade-up"
   id="hero-role-cycler"
 >
-  <pre id="hero-role-display" class="hero-role-ascii" aria-hidden="true">{ROLE_FRAMES[0]}</pre>
+  <pre id="hero-role-display" class="nanodes-text-art" aria-hidden="true">{role}</pre>
   <span class="visually-hidden">Full Stack Engineer</span>
 </div>
-
-<style>
-  .hero-role-cycler {
-    margin: 0.85rem 0 0;
-    user-select: none;
-    /* Container-driven sizing: the strip's font scales with the inline space
-       actually available, so the 76ch single-line role never overflows at any
-       viewport (see the cqw font-size below). */
-    container-type: inline-size;
-  }
-
-  .hero-role-ascii {
-    margin: 0;
-    font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: clamp(0.42rem, 1.1vw, 0.95rem); /* fallback where cqw is unsupported */
-    font-size: min(0.95rem, 2.1cqw); /* 76ch ≈ 45.6em ⇒ 100/45.6 ≈ 2.19cqw fills the container */
-    line-height: 1.05;
-    letter-spacing: 0;
-    font-weight: 900;
-    color: var(--color-accent-text);
-    text-align: left;
-    white-space: pre;
-    user-select: none;
-    width: 76ch;
-    max-width: 100%;
-    height: calc(3 * 1.05em);
-    display: block;
-    overflow: hidden;
-    box-sizing: content-box;
-    pointer-events: none;
-    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-accent) 32%, transparent));
-  }
-</style>
-

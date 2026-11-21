@@ -1,0 +1,46 @@
+---
+import { contactTech } from '../lib/contact-tech';
+---
+
+<div class="contact-tech">
+  <div id="ascii-interactive-zone" title="Click to cycle tech stack"></div>
+  <noscript><p>{contactTech.map(tech => tech.name).join(' · ')}</p></noscript>
+</div>
+
+<script>
+  import { mountDisplay, prepareImageFrames } from 'nanodes';
+  import { contactTech } from '../lib/contact-tech';
+
+  const host = document.getElementById('ascii-interactive-zone');
+  if (host) {
+    try {
+      const display = mountDisplay(host, prepareImageFrames(contactTech));
+      // Full-page navigation releases the instance; preserve it for browser Back/Forward cache.
+      window.addEventListener('pagehide', event => {
+        if (!event.persisted) display.destroy();
+      });
+    } catch (error) {
+      host.textContent = contactTech.map(tech => tech.name).join(' · ');
+      console.error('The tech stack visualization could not be rendered.', error);
+    }
+  }
+</script>
+
+<style>
+  .contact-tech {
+    position: relative;
+    font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: clamp(0.58rem, 2.5vw, 0.92rem);
+    width: calc(38ch + 2rem);
+    max-width: 100%;
+  }
+
+  /* Preserve the original glyph size inside the portfolio's fixed 38-column slot. */
+  .contact-tech :global(.nanodes-art) {
+    font-size: inherit;
+  }
+
+  @media (max-width: 480px) {
+    .contact-tech { width: calc(38ch + 0.5rem); }
+  }
+</style>

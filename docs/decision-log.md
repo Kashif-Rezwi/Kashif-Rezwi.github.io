@@ -1143,3 +1143,34 @@
 - **Date / authority:** 2026-11-09, owner reported the React Flow icon appearing colored without hover.
 - **Decision:** Replace the filter-dependent resting image with a current-color SVG based on the official mark's geometry; the original local multicolor mark is hidden by default and shown only on badge hover. Keep rendering in `TechIcon` and use the existing Skills hover treatment. This supersedes DL-120's grayscale-image approach.
 - **Verification:** Production build and both contrast checks pass. Browser checks on the built site confirmed the neutral and brand layers switch correctly at rest and hover in dark desktop and light mobile views; mobile had no horizontal overflow. No staging, commit, push or deployment.
+
+
+## DL-123 — Integrate the locally packed Nanodes library
+
+- **Date / authority:** 2026-11-21, owner authorized Nanodes Phase 4 portfolio integration while retaining the standing no-stage/no-commit/no-push instruction.
+- **VERIFIED — Git truth:** Portfolio source began clean on `main` at `cb8d321`, matching the existing `origin/main` ref. Work is isolated on `feat/nanodes-integration`; old rebuild branch notes are historical.
+- **Decision:** Install the private `0.0.0` tarball from `vendor/`, replace Contact rendering/playback with Nanodes, and prepare the static hero text during SSR. Keep brand paths and technology metadata in the portfolio. Use the existing theme variables and retain layout, dot fields and entrance effects.
+- **Alternatives:** A workspace/source link bypasses package-content verification. The selected relative tarball dependency verifies real imports and remains portable for review. Publication and final registry versioning remain separate tasks.
+- **Plan and evidence:** [Nanodes integration](./rebuild-02/33-nanodes-integration.md).
+- **VERIFIED — Result:** All 25 technology frames and the static hero glyph output match the original. Production/preview-base builds, dark/light responsive review (320–1440 px), keyboard/pause/reduced-motion checks and both contrast scripts pass. A clean tarball consumer resolves ESM/CSS/types; the package remains private. Browser review was Chromium only. No staging, commits, pushes, publication or deployment. Full details are in the linked integration evidence.
+
+- **Owner follow-up — 2026-11-21:** Removed the portfolio pause/resume button and the Nanodes display outline on both websites as requested. Kept the library website's pause control. Updated the packed dependency; production build and browser checks pass. The adjustment is unstaged; prior staging is preserved.
+
+
+## DL-124 — Use the published Nanodes release
+
+- **Date / authority:** 2026-11-21, owner authorized Nanodes Phase 5 and completed npm login/publishing verification. The standing no-stage/no-commit/no-push instruction remains in effect.
+- **VERIFIED — Release:** Published `nanodes@0.1.0` to npm under `kashif-rezwi`; verified registry metadata, integrity and a clean registry install before changing the portfolio.
+- **Decision:** Pin `nanodes` to exact registry version `0.1.0`, retain the integrity-locked install, and remove the local vendor archive. Keep the existing host integration, artwork and presentation unchanged. The registry runtime/types/CSS match the previously verified vendor build byte for byte.
+- **VERIFIED — Checks:** Nine-page production build, original static hero output, single mounted Contact display/click advance, no-outline/no-pause appearance, and 19 standard/30 glass contrast checks pass. No browser errors. The current checkout remains `feat/nanodes-integration` based on the owner's `fe13b47` commit; this dependency transition is uncommitted and undeployed.
+- **Evidence:** [Nanodes integration](./rebuild-02/33-nanodes-integration.md). No staging, Git commit/tag/push, merge or deployment was performed by the agent.
+
+
+## DL-125 — Integrate the current public Nanodes release
+
+- **Date / authority:** 2026-11-21, owner requested proper portfolio integration after the Nanodes website launch and `0.1.1` publication.
+- **VERIFIED — Git truth:** The owner committed/pushed the prior `0.1.0` registry transition as `5925700`; this follow-up began clean on `feat/nanodes-integration`.
+- **Decision:** Pin exact `nanodes@0.1.1` from npm and keep the existing Contact renderer, server-prepared hero, CSS import and host-owned technology definitions. The 21 runtime/CSS/declaration files match installed `0.1.0` byte for byte; this patch updates public documentation and metadata.
+- **Alternatives:** Re-extracting or rewriting the integration would add duplication without a functional benefit. Continuing on `0.1.0` works but omits the current package documentation and homepage metadata.
+- **Plan and evidence:** [Nanodes integration](./rebuild-02/33-nanodes-integration.md), published `0.1.1` follow-up.
+- **VERIFIED — Result:** All original 25 technology frames and hero output match; production/preview-base builds, eight preview asset references, 19 standard/30 glass contrast checks and ten responsive theme/width states pass. Click/keyboard advance, pointer cursor, requested no-outline/no-pause appearance and reduced motion pass with no browser errors. Runtime source and technology definitions remain unchanged. No staging, commit, push, merge or deployment; full evidence and compatibility limits are in the integration record.
