@@ -1155,3 +1155,12 @@
 - **VERIFIED — Result:** All 25 technology frames and the static hero glyph output match the original. Production/preview-base builds, dark/light responsive review (320–1440 px), keyboard/pause/reduced-motion checks and both contrast scripts pass. A clean tarball consumer resolves ESM/CSS/types; the package remains private. Browser review was Chromium only. No staging, commits, pushes, publication or deployment. Full details are in the linked integration evidence.
 
 - **Owner follow-up — 2026-11-21:** Removed the portfolio pause/resume button and the Nanodes display outline on both websites as requested. Kept the library website's pause control. Updated the packed dependency; production build and browser checks pass. The adjustment is unstaged; prior staging is preserved.
+
+
+## DL-124 — Use the published Nanodes release
+
+- **Date / authority:** 2026-11-21, owner authorized Nanodes Phase 5 and completed npm login/publishing verification. The standing no-stage/no-commit/no-push instruction remains in effect.
+- **VERIFIED — Release:** Published `nanodes@0.1.0` to npm under `kashif-rezwi`; verified registry metadata, integrity and a clean registry install before changing the portfolio.
+- **Decision:** Pin `nanodes` to exact registry version `0.1.0`, retain the integrity-locked install, and remove the local vendor archive. Keep the existing host integration, artwork and presentation unchanged. The registry runtime/types/CSS match the previously verified vendor build byte for byte.
+- **VERIFIED — Checks:** Nine-page production build, original static hero output, single mounted Contact display/click advance, no-outline/no-pause appearance, and 19 standard/30 glass contrast checks pass. No browser errors. The current checkout remains `feat/nanodes-integration` based on the owner's `fe13b47` commit; this dependency transition is uncommitted and undeployed.
+- **Evidence:** [Nanodes integration](./rebuild-02/33-nanodes-integration.md). No staging, Git commit/tag/push, merge or deployment was performed by the agent.

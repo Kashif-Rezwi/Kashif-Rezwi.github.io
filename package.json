@@ -20,7 +20,7 @@
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.2",
-    "nanodes": "file:vendor/nanodes-0.0.0.tgz",
+    "nanodes": "0.1.0",
     "tailwindcss": "^4.3.3"
   }
 }

@@ -2,7 +2,7 @@
 
 - **Purpose:** Live snapshot of where the portfolio rebuild stands. Updated at the end of every bounded task.
 - **Authority:** Maintained per `AGENTS.md` (loop-based operating model); reflects verified state only.
-- **Last updated:** 2026-11-21 (DL-123: local Nanodes integration on `feat/nanodes-integration`; no staging, commit, push or deployment).
+- **Last updated:** 2026-11-21 (DL-124: verified npm release dependency on `feat/nanodes-integration`; registry switch is uncommitted and undeployed).
 - **Working tree note (DL-122, 2026-11-09):** React Flow's resting icon is now a neutral current-color SVG, independent of image filters; the official multicolor asset appears on hover. Build, contrast and targeted browser checks pass. Uncommitted; no deployment.
 - **Working tree note (DL-102, 2026-09-14):** "AI Journey" section restructured into "Current Focus" (`src/sections/Now.astro`, `src/pages/index.astro`) with methodology frame sentence, Interactive Lessons in Row 1 (Building), `server-active-indicator` in Row 2 (Recently shipped), and AI evaluation methodology in Row 3 (Studying); dead links removed; build clean, contrast 19/19 + 30/30. Prior uncommitted work: DL-101 Nexus internship reconciliation. **PENDING OWNER — uncommitted.**
 - **Working tree note (DL-105, 2026-09-23):** Education block in `src/sections/Experience.astro` gained a new first entry: **Bosscoder Academy — Advanced AI & ML Engineering Program · Jun 2026 – present** (owner-enrolled upskilling course; official name and 9-month duration cross-checked against bosscoderacademy.com; Learning classification, VERIFIED). Same-day owner revisions: no projected end date shown; Amity BCA start corrected to **Apr 2025** (evidence ledger updated). **PENDING OWNER — uncommitted on `develop`.**
@@ -14,11 +14,11 @@
 
 ## Current Nanodes integration — 2026-11-21 (DL-123)
 
-**VERIFIED:** The portfolio was clean on `main` at `cb8d321` before this task. Owner-authorized integration now lives in the uncommitted `feat/nanodes-integration` working tree. Contact consumes the local `vendor/nanodes-0.0.0.tgz` package; the hero uses its server-side text helper. Technology data, page layout, dot fields, themes and entrance effects remain host-owned. The owner subsequently removed the portfolio pause control and display outline; click and keyboard advance remain available.
+**VERIFIED:** The portfolio was clean on `main` at `cb8d321` before this task. The owner committed the Phase 4 integration as `fe13b47`. The current `feat/nanodes-integration` working tree now pins the published `nanodes@0.1.0` package from npm; the hero uses its server-side text helper. Technology data, page layout, dot fields, themes and entrance effects remain host-owned. The owner subsequently removed the portfolio pause control and display outline; click and keyboard advance remain available.
 
 All 25 original technology frames and the static hero output match exactly. The nine-page production and preview-base builds, 19 standard and 30 glass contrast checks, dark/light responsive review at five widths, keyboard/pause controls, and reduced-motion checks pass. See [the integration plan and evidence](./rebuild-02/33-nanodes-integration.md) for scope, artifact details and verification limits.
 
-**Next action:** Owner review of both repositories' local changes. Nothing is staged, committed, pushed, merged, published, or deployed. The older status sections below describe their dated historical state and do not describe this task's branch.
+**Next action:** Owner review and commit/tag/push decisions for the release changes. Nanodes `0.1.0` is published and verified on npm; this portfolio registry switch remains unstaged, uncommitted and undeployed. No Git commits, tags, pushes or deployment were performed by the agent. The older status sections below describe their dated historical state and do not describe this task's branch.
 
 ## Current copy update — 2026-11-08 (DL-108)
 
